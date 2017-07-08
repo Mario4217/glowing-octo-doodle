@@ -45,6 +45,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_achievement_secret</sprite>
+    <sprite>sprites\spr_player</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -168,6 +169,7 @@
       <script>scripts\lang_init.gml</script>
     </scripts>
     <script>scripts\string_trim.gml</script>
+    <script>scripts\move.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>

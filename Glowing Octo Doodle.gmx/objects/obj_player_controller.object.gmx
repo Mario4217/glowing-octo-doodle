@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>player_pawn = instance_create(0, 0, obj_player_pawn);
 
+move_spd = 400;
+
 bind_create("player_horizontal");
 bind_create("player_vertical");
 
@@ -35,10 +37,10 @@ bind_add("player_horizontal", "K", ord("A"), -1);
 bind_add("player_horizontal", "K", vk_right, 1);
 bind_add("player_horizontal", "K", vk_left, -1);
 
-bind_add("player_vertical", "K", ord("W"), 1);
-bind_add("player_vertical", "K", ord("S"), -1);
-bind_add("player_vertical", "K", vk_up, 1);
-bind_add("player_vertical", "K", vk_down, -1);
+bind_add("player_vertical", "K", ord("W"), -1);
+bind_add("player_vertical", "K", ord("S"), 1);
+bind_add("player_vertical", "K", vk_up, -1);
+bind_add("player_vertical", "K", vk_down, 1);
 
 </string>
           </argument>
@@ -62,33 +64,15 @@ bind_add("player_vertical", "K", vk_down, -1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var xmov = bind_check("player_horizontal");
-var ymov = bind_check("player_vertical");
+            <string>
+var spd = game_delta_time * move_spd;
 
-var spd = game_delta_time * 60;
+var xmov = bind_check("player_horizontal");
+var ymov = bind_check("player_vertical");
 var dir = point_direction(0, 0, xmov, ymov);
 
-var xtarg = player_pawn.x+lengthdir_x(spd,dir);
-var ytarg = player_pawn.y+lengthdir_y(spd,dir);
-
-if place_free(xtarg,ytarg) {
-    player_pawn.x = xtarg;
-    player_pawn.y = ytarg;
-} else {
-    var sweep_interval = 10;
-    
-    for (var angle = sweep_interval; angle &lt;= 80; angle += sweep_interval) {
-        for (var multiplier = -1; multiplier &lt;= 1; multiplier += 2) {      
-            var angle_to_check = dir+angle*multiplier;
-            xtarg = player_pawn.x+lengthdir_x(spd, angle_to_check);
-            ytarg = player_pawn.y+lengthdir_y(spd, angle_to_check);     
-            if (place_free(xtarg,ytarg)) {
-                player_pawn.x = xtarg;
-                player_pawn.y = ytarg;  
-                exit;       
-            }   
-        }
-    }
+if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {
+    move(spd, dir, player_pawn);
 }
 </string>
           </argument>
