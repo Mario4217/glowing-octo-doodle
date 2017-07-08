@@ -175,10 +175,12 @@
     <object>objects\obj_init</object>
     <object>objects\obj_menu</object>
     <object>objects\obj_console</object>
+    <object>objects\obj_camera</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
     <room>rooms\rm_game</room>
+    <room>rooms\rm_editor</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
