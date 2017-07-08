@@ -28,6 +28,18 @@ if (room == rm_editor){
       ds_list_add(entlist, inst);
     };
     
+    var index = buffer_read(buff, buffer_u32);
+    while (index < ent_number){
+      var inst = entlist[| index];
+      var attr = buffer_read(buff, buffer_string);
+      var src_attr = gp_objects[? inst.gp_obj_index];
+      var src_attr_list = src_attr[? "attr"];
+      var src_attr_attr = src_attr_list[? attr];
+      var val = buffer_read(buff,src_attr_attr[? "type"]);
+      inst.overwrite_attr[? attr] = val;
+      index = buffer_read(buff, buffer_u32);
+    }
+    
     ds_list_destroy(entlist);
     buffer_delete(buff);
   }

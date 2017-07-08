@@ -32,6 +32,7 @@ drag = false;
 drag_x = 0;
 drag_y = 0;
 attr = ds_map_create();
+overwrite_attr = ds_map_create();
 </string>
           </argument>
         </arguments>
@@ -94,6 +95,15 @@ ds_map_destroy(attr);
      key = ds_map_find_next(attr_map,key);
   };
 }
+if (ds_map_size(overwrite_attr) &gt; 0){
+  var key = ds_map_find_first(overwrite_attr);
+  for (var i=0; i&lt;ds_map_size(overwrite_attr); i+=1)
+  {
+    attr[? key] = overwrite_attr[? key];
+    var key = ds_map_find_next(overwrite_attr, key);
+  };
+}
+ds_map_destroy(overwrite_attr);
 </string>
           </argument>
         </arguments>

@@ -14,6 +14,7 @@ if (room == rm_editor){
   buffer_write(buff, buffer_u32, obj_editor.world_height);
   buffer_write(buff, buffer_u8, obj_editor.world_players);
   
+  //basic entities
   buffer_write(buff, buffer_u32, instance_number(obj_editor_ent));
   for(var i=0; i<instance_number(obj_editor_ent); i++){
     var inst = instance_find(obj_editor_ent,i);
@@ -21,6 +22,24 @@ if (room == rm_editor){
     buffer_write(buff, buffer_u16,inst.x);
     buffer_write(buff, buffer_u16,inst.y);
     buffer_write(buff, buffer_u16,inst.gp_obj_index);
+  }
+  
+  //special entity attributes
+  for(var i=0; i<instance_number(obj_editor_ent); i++){
+    var inst = instance_find(obj_editor_ent,i);
+    var key = ds_map_find_first(obj_editor_ent);
+    var src_map = gp_objects[? inst.gp_obj_index];
+    src_map = src_map[? "attr"];
+    var key = ds_map_find_first(inst.attr)
+    for (var j=0; j<ds_map_size(inst.attr); j++)
+    {
+      var src_attr = src_map[? key];
+      buffer_write(buff, buffer_u32, i);
+      buffer_write(buff, buffer_string, key);
+      buffer_write(buff, src_attr[? "type"], inst.attr[? key]);
+      key = ds_map_find_next(inst.attr, key);
+    };
+    buffer_write(buff, buffer_u32, i+1);
   }
   
   buffer_save(buff,"editor/"+string(name)+".puz");
