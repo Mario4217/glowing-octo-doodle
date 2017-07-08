@@ -1,5 +1,5 @@
 ///lang_format(string, p1, p2...)
-var str = argument[0];
+var str = string(argument[0]);
 
 var mode = 0;
 var out = "";

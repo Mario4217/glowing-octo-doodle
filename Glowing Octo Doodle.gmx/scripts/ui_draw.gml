@@ -27,7 +27,7 @@ if (element[? "visible"]){
   ui_current_class = element[? "class"];
   
   if (window_mouse_get_x() > x1 && window_mouse_get_x() < x2 && window_mouse_get_y() > y1 && window_mouse_get_y() < y2){
-    if (element[? "type"] != "container" || ui_draw_debug)
+    if ((element[? "type"] != "container" && element[? "type"] != "sprite") || ui_draw_debug)
     ui_mouseHover = element;
   }
   
@@ -35,9 +35,9 @@ if (element[? "visible"]){
     element[? "pressed"] = false;
   }
   if (ui_gamepad_active){
-    var hover = (element == ui_gamepad_position);
+    var hover = real(element == ui_gamepad_position);
   }else{
-    var hover = (element == ui_hover);
+    var hover = real(element == ui_hover);
   }
   var pressed = false;
   var click_start = false;
@@ -122,8 +122,8 @@ if (element[? "visible"]){
         }
       }
       if (v != element[? "value"]){
-        ui_element_fire(element,"onchange");
         element[? "value"] = v;
+        ui_element_fire(element,"onchange");
       }
       ui_draw_element_slider(x1,y1,x2,y2,state,element);
     break;
@@ -199,16 +199,21 @@ if (element[? "visible"]){
         if (keyboard_check_pressed(vk_anykey)){
           bind_set(element[? "bind-group"], element[? "bind-index"], "K", keyboard_lastkey, element[? "bind-val"]);
           element[? "active"] = false;
+          ui_element_fire(element,"onchange");
         }
         if (mouse_check_button_pressed(mb_any)){
           bind_set(element[? "bind-group"], element[? "bind-index"], "M", mouse_lastbutton, element[? "bind-val"]);
           element[? "active"] = false;
+          ui_element_fire(element,"onchange");
         }
       }
       ui_draw_element_binding(x1,y1,x2,y2,state,text);
     break;
     case "progress":
       ui_draw_element_progress(x1,y1,x2,y2,state,element);
+    break;
+    case "sprite":
+      ui_draw_element_sprite(x1,y1,x2,y2,element);
     break;
   }
   

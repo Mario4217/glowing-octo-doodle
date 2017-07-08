@@ -10,12 +10,12 @@ if (ui_style_get(argument4,"animation","",ui_current_class) && (argument5 == "ho
   var bg_alpha_h = ui_style_get(argument4,"background-alpha","hover",ui_current_class);
   var bo_color_h = ui_style_get(argument4,"border-color","hover",ui_current_class);
   var bo_alpha_h = ui_style_get(argument4,"border-alpha","hover",ui_current_class);
-  var bo_radius_h = ui_style_get(argument4,"border-radius","hover",ui_current_class);
+  var bo_radius_h = real(ui_style_get(argument4,"border-radius","hover",ui_current_class));
   var bg_color_d = ui_style_get(argument4,"background-color","",ui_current_class);
-  var bg_alpha_d = ui_style_get(argument4,"background-alpha","",ui_current_class);
+  var bg_alpha_d = real(ui_style_get(argument4,"background-alpha","",ui_current_class));
   var bo_color_d = ui_style_get(argument4,"border-color","",ui_current_class);
-  var bo_alpha_d = ui_style_get(argument4,"border-alpha","",ui_current_class);
-  var bo_radius_d = ui_style_get(argument4,"border-radius","",ui_current_class);
+  var bo_alpha_d = real(ui_style_get(argument4,"border-alpha","",ui_current_class));
+  var bo_radius_d = real(ui_style_get(argument4,"border-radius","",ui_current_class));
   bg_color = merge_color(bg_color_d,bg_color_h,ui_current_hover);
   bo_color = merge_color(bo_color_d,bo_color_h,ui_current_hover);
   bg_alpha = lerp(bg_alpha_d, bg_alpha_h,ui_current_hover);

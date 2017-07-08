@@ -29,16 +29,55 @@
 lang_extern("language/english.txt");
 
 bind_init();
+bind_create("player_horizontal");
+bind_create("player_vertical");
+bind_create("menu");
+
+bind_add("menu", "K", vk_escape, 1);
+bind_add("menu", "G", gp_start, 1);
+
+bind_add("player_horizontal", "K", ord("D"), 1);
+bind_add("player_horizontal", "K", ord("A"), -1);
+bind_add("player_horizontal", "K", vk_right, 1);
+bind_add("player_horizontal", "K", vk_left, -1);
+bind_add("player_horizontal", "A", gp_axisrh);
+
+bind_add("player_vertical", "K", ord("W"), -1);
+bind_add("player_vertical", "K", ord("S"), 1);
+bind_add("player_vertical", "K", vk_up, -1);
+bind_add("player_vertical", "K", vk_down, 1);
+bind_add("player_vertical", "A", gp_axisrv);
 
 globalvar settings_map;
 settings_map = ds_map_create();
 settings_map[? "aa"] = 0;
-settings_map[? "vsync"] = 0;
+settings_map[? "vsync"] = 1;
+settings_map[? "res_width"] = 1280;
+settings_map[? "res_height"] = 720;
+settings_map[? "fullscreen"] = 0;
 
-room = rm_game
+display_reset(settings_map[? "aa"], settings_map[? "vsync"]);
+
+globalvar gp_objects, gp_editor; //a ds map with every gameplay object. (buttons, cubes, spawnpoint... entities)
+gp_objects = ds_map_create();
+gp_editor = ds_list_create();
+
+register_gameplay_object(1,"{gp.floor_button}",obj_gp_floor_button);
+gameplay_object_add_output(1, "onPress");
+gameplay_object_add_output(1, "onRelease");
+
+register_gameplay_object(2,"{gp.spawn}",obj_gp_spawn);
+gameplay_object_add_output(2, "onSpawn");
+gameplay_object_add_attribute(2, "player_index",0,buffer_u8,0,15);
+
+ds_list_add(gp_editor, 2, 1);
 
 instance_create(0,0,obj_console);
 instance_create(0,0,obj_menu);
+instance_create(0,0,obj_camera);
+
+global.toLoad = "";
+room = rm_game;
 </string>
           </argument>
         </arguments>

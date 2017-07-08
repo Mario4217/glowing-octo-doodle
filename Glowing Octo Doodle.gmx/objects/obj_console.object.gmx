@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-10</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -29,7 +29,7 @@
 
 console_command_add("print",cmd_print,1,"Prints a message to the console","print &lt;text&gt;");
 console_command_add("exit",cmd_exit,0,"Closes the console");
-console_command_add("help",cmd_help,0,"Shows this help","help &lt;command&gt;");
+console_command_add("help",cmd_help,0,"Shows this help","help [&lt;command&gt;]");
 console_command_add("?",cmd_help,0,"Same as help");
 console_command_add("restart",cmd_restart,0,"Restarts the application");
 console_command_add("quit",cmd_quit,0,"Ends the game");
@@ -38,12 +38,43 @@ console_command_add("set",cmd_set,2,"Sets an interface value","set &lt;key&gt; &
 console_command_add("get",cmd_get,1,"Prints an interface value to the console","get &lt;key&gt;");
 console_command_add("interface",cmd_interface,0,"Lists all values, that are changable with set");
 console_command_add("fullscreen",cmd_fullscreen,1,"Set fullscreen on or off","fullscreen &lt;0/1&gt;");
-console_command_add("room",cmd_room,1,"GoTo a room with an index","room &lt;index&gt;");
 console_command_add("debug_ui",cmd_ui_draw_debug,0,"Enables debug mode for ui","debug_ui &lt;0/1&gt;");
 console_command_add("console",cmd_console,0,"Open the console","console");
 console_command_add("debug_overlay",cmd_debug_overlay,0,"Shows the debug overlay (or not)","debug_overlay &lt;0/1&gt;");
 console_command_add("set_aa",cmd_set_aa,1,"Sets the level of anti-aliasing","set_aa &lt;0/2/4/8&gt;");
 console_command_add("set_vsync",cmd_set_vsync,1,"Enables or disables V-Sync","set_vsync &lt;0/1&gt;");
+console_command_add("set_resolution",cmd_set_resolution,2,"Sets the window size", "set_resolution &lt;width&gt; &lt;height&gt;");
+console_command_add("editor",cmd_editor,0,"Opens the map editor","editor [&lt;mapname&gt;]");
+console_command_add("editor_exit",cmd_editor_exit,0,"Exists the editor");
+console_command_add("editor_save",cmd_editor_save,0,"Saves the current map, when in editor");
+console_command_add("editor_update",cmd_editor_update,0,"Updates some values in the editor from UI inputs");
+console_command_add("refresh_editor_level",cmd_refresh_editor_levels,0,"Refreshes the lists of level to edit in the editor");
+console_command_add("editor_destroy",cmd_editor_destroy,0,"Destroys the selected instance in the editor");
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (keyboard_check_pressed(vk_f12)){
+  console_command_execute("console");
+}
 </string>
           </argument>
         </arguments>

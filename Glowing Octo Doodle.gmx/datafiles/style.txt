@@ -1,0 +1,6 @@
+.editor-panel.text-valign:=0
+.editor-panel.text-valign:hover=0
+.editor-panel.text-valign:pressed=0
+.editor-error.background-color:=$ff0000
+.editor-error.background-color:hover=$FF5300
+.editor-error.background-color:pressed=$FFA000

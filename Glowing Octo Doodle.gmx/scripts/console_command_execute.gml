@@ -1,4 +1,7 @@
 ///console_command_execute(string)
+if (argument0 == ""){
+  return true;
+}
 var args = console_split(argument0," ");
 if (array_length_1d(args)>0){
   if (ds_map_exists(command_map, args[0])){

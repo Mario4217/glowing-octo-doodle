@@ -1,18 +1,37 @@
-menu.play:	Play
-menu.profile:	Profile
-menu.settings:	Settings
-menu.editor:	Editor
-menu.quit:	Quit
-menu.back:	Back
-menu.main:	Yay! A cool game :D
+menu.play:			Play
+menu.profile:			Profile
+menu.settings:			Settings
+menu.editor:			Editor
+menu.quit:			Quit
+menu.back:			Back
+menu.main:			Yay! A cool game :D
 menu.settings.fullscreen:	Fullscreen
 menu.settings.volume_music:	Music Volume
 menu.settings.volume_sfx:	Effect Volume
 menu.settings.anti-aliasing:	Anti-Aliasing
 menu.settings.vsync:		Enable V-Sync
-menu.play.new:	New Game
-menu.play.load:	Load a saved game
-menu.editor.new_map:	New Map
-menu.editor.new_pack:	New Pack
-menu.editor.edit_map:	Edit Map
-menu.editor.edit_pack:	Edit Pack
+menu.play.new:			New Game
+menu.play.load:			Load a saved game
+menu.play.join:			Join a game
+menu.editor.new_map:		New Map
+menu.editor.new_pack:		New Pack
+menu.editor.edit_map:		Edit Map
+menu.editor.edit_pack:		Edit Pack
+editor.exit:			Exit the editor
+editor.save:			Save
+editor.open:			Open
+editor.objects:			Objects
+editor.tiles:			Tiles
+editor.map:			Map
+editor.map.name:		Map name:
+editor.map.width:		Map Width: [1]
+editor.map.height:		Map Height: [1]
+editor.map.players:		Playernumber: [1]
+editor.error.noname:		You need to give this level a name to save it!
+editor.test:			Test
+editor.selected_entity:		Selected Object
+editor.entity.type:		Type: [1]
+editor.entity.destroy:		Destroy
+editor.attribute.player_index:	Player Index
+gp.floor_button:		Floor Button
+gp.spawn:			Spawnpoint

@@ -6,3 +6,4 @@ if (element[? "children"] != undefined){
   ds_list_mark_as_map(element[? "children"], ds_list_find_index(element[? "children"], child))
   child[? "parent"] = element;
 }
+return child;

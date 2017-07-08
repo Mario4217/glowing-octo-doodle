@@ -44,10 +44,19 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprites name="gameplay">
+      <sprite>sprites\spr_gp_floor_button</sprite>
+      <sprite>sprites\spr_gp_spawn</sprite>
+    </sprites>
     <sprite>sprites\spr_achievement_secret</sprite>
     <sprite>sprites\spr_player</sprite>
+    <sprites name="ui">
+      <sprite>sprites\spr_ui_trash</sprite>
+    </sprites>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_test</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="ui">
@@ -55,6 +64,7 @@
         <script>scripts\ui_draw_element_binding.gml</script>
         <script>scripts\ui_draw_element_draggable.gml</script>
         <script>scripts\ui_draw_element_label.gml</script>
+        <script>scripts\ui_draw_element_sprite.gml</script>
         <script>scripts\ui_draw_element_radio.gml</script>
         <script>scripts\ui_draw_element_slider.gml</script>
         <script>scripts\ui_draw_element_textbox.gml</script>
@@ -73,6 +83,7 @@
         <script>scripts\ui_create_textbox.gml</script>
         <script>scripts\ui_create_toggle.gml</script>
         <script>scripts\ui_create_binding.gml</script>
+        <script>scripts\ui_create_sprite.gml</script>
       </scripts>
       <scripts name="style">
         <script>scripts\ui_style_draw_rectangle.gml</script>
@@ -83,6 +94,8 @@
       <scripts name="convert">
         <script>scripts\ui_string_to_color.gml</script>
         <script>scripts\ui_hex_to_dec.gml</script>
+        <script>scripts\ui_world_to_ui_space_x.gml</script>
+        <script>scripts\ui_world_to_ui_space_y.gml</script>
       </scripts>
       <script>scripts\ui_add_child.gml</script>
       <script>scripts\ui_draw.gml</script>
@@ -135,12 +148,18 @@
       <script>scripts\cmd_print.gml</script>
       <script>scripts\cmd_quit.gml</script>
       <script>scripts\cmd_restart.gml</script>
-      <script>scripts\cmd_room.gml</script>
       <script>scripts\cmd_set.gml</script>
       <script>scripts\cmd_ui_draw_debug.gml</script>
       <script>scripts\cmd_version.gml</script>
       <script>scripts\cmd_set_aa.gml</script>
       <script>scripts\cmd_set_vsync.gml</script>
+      <script>scripts\cmd_editor.gml</script>
+      <script>scripts\cmd_editor_exit.gml</script>
+      <script>scripts\cmd_set_resolution.gml</script>
+      <script>scripts\cmd_editor_save.gml</script>
+      <script>scripts\cmd_refresh_editor_levels.gml</script>
+      <script>scripts\cmd_editor_update.gml</script>
+      <script>scripts\cmd_editor_destroy.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -170,6 +189,17 @@
       <script>scripts\lang_get.gml</script>
       <script>scripts\lang_init.gml</script>
     </scripts>
+    <scripts name="gameplay">
+      <script>scripts\register_gameplay_object.gml</script>
+      <script>scripts\gameplay_object_add_output.gml</script>
+      <script>scripts\gameplay_object_add_input.gml</script>
+      <script>scripts\gameplay_object_add_attribute.gml</script>
+    </scripts>
+    <scripts name="editor">
+      <script>scripts\refresh_editor_level.gml</script>
+      <script>scripts\editor_load.gml</script>
+      <script>scripts\editor_save.gml</script>
+    </scripts>
     <script>scripts\string_trim.gml</script>
     <script>scripts\move.gml</script>
   </scripts>
@@ -180,11 +210,18 @@
   <objects name="objects">
     <object>objects\obj_init</object>
     <object>objects\obj_menu</object>
+    <object>objects\obj_editor</object>
     <object>objects\obj_console</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_player_controller</object>
     <object>objects\obj_player_pawn</object>
     <object>objects\obj_time_controll</object>
+    <object>objects\obj_world</object>
+    <objects name="gameplay">
+      <object>objects\obj_gp_floor_button</object>
+      <object>objects\obj_gp_spawn</object>
+    </objects>
+    <object>objects\obj_editor_ent</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>

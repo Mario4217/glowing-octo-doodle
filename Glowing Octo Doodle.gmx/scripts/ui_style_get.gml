@@ -2,7 +2,7 @@
 var query = argument[0]+"."+string(argument[1])+":"+string(argument[2]);
 if (argument_count > 3){
   if (argument[3] != ""){
-    var query = "."+argument[3]+"."+string(argument[1])+":"+string(argument[2]);
+    var query = "."+string(argument[3])+"."+string(argument[1])+":"+string(argument[2]);
   }
 }
 var val = ui_style[? query];

@@ -6,12 +6,14 @@ if (file_exists(argument0)){
     {
       str=file_text_read_string(file)
       var blocks = ui_split(str,"=");
-      var val = string_trim(blocks[1]);
-      if (string_char_at(val,1) == "$"){
-        val = ui_string_to_color(val);
+      if (array_length_1d(blocks) > 1){
+        var val = string_trim(blocks[1]);
+        if (string_char_at(val,1) == "$"){
+          val = ui_string_to_color(val);
+        }
+        ui_style[? blocks[0]] = real(val);
+        file_text_readln(file);
       }
-      ui_style[? blocks[0]] = real(val);
-      file_text_readln(file)
     };
     file_text_close(file)
   }
