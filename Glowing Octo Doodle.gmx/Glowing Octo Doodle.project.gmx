@@ -129,6 +129,13 @@
     </scripts>
     <script>scripts\string_trim.gml</script>
   </scripts>
+  <objects name="objects">
+    <object>objects\obj_init</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rm_init</room>
+    <room>rooms\rm_game</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
