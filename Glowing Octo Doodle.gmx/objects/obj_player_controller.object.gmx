@@ -52,12 +52,11 @@ move_spd = 400;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-var spd = game_delta_time * move_spd;
-
-var xmov = bind_check("player_horizontal");
+            <string>var xmov = bind_check("player_horizontal");
 var ymov = bind_check("player_vertical");
 var dir = point_direction(0, 0, xmov, ymov);
+
+var spd = game_delta_time * move_spd * 1.11111111111 * min(point_distance(0, 0, xmov, ymov), 0.9);
 
 if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {
     move(spd, dir, player_pawn);
