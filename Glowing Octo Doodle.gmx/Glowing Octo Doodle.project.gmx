@@ -178,6 +178,9 @@
     <object>objects\obj_menu</object>
     <object>objects\obj_console</object>
     <object>objects\obj_camera</object>
+    <object>objects\obj_player_controller</object>
+    <object>objects\obj_player_pawn</object>
+    <object>objects\obj_time_controll</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
