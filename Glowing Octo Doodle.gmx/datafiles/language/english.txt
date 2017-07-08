@@ -1,0 +1,18 @@
+menu.play:	Play
+menu.profile:	Profile
+menu.settings:	Settings
+menu.editor:	Editor
+menu.quit:	Quit
+menu.back:	Back
+menu.main:	Yay! A cool game :D
+menu.settings.fullscreen:	Fullscreen
+menu.settings.volume_music:	Music Volume
+menu.settings.volume_sfx:	Effect Volume
+menu.settings.anti-aliasing:	Anti-Aliasing
+menu.settings.vsync:		Enable V-Sync
+menu.play.new:	New Game
+menu.play.load:	Load a saved game
+menu.editor.new_map:	New Map
+menu.editor.new_pack:	New Pack
+menu.editor.edit_map:	Edit Map
+menu.editor.edit_pack:	Edit Pack

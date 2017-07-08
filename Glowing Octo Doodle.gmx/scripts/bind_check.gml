@@ -1,6 +1,7 @@
-///bind_check(key)
+///bind_check(group)
 //check for a bind
 var key = argument0;
+var sum = 0;
 if (bind[? key] != undefined){
   for (i=0; i<ds_list_size(bind[? key]); i+=1){
     var F = string(ds_list_find_value(bind[? key],i));
@@ -10,19 +11,19 @@ if (bind[? key] != undefined){
     var V = real(a[2]);
     if (T == "K"){ //Keyboard
       if (keyboard_check(N)){
-        return V;
+        sum += V;
       }
     }else if(T == "G"){ //Gamepad
       if (gamepad_button_check(0,N)){
-        return V;
+        sum += V;
       }
     }else if(T == "M"){ //Mouse
       if (mouse_check_button(N)){
-        return V;
+        sum += V;
       }
     }else if(T == "A"){ //axis on Gamepad
-      return gamepad_axis_value(0, N)*V;
+      sum += gamepad_axis_value(0, N)*V;
     }
   };
 }
-return false;
+return clamp(sum,-1,1);

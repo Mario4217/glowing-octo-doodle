@@ -42,6 +42,8 @@ console_command_add("room",cmd_room,1,"GoTo a room with an index","room &lt;inde
 console_command_add("debug_ui",cmd_ui_draw_debug,0,"Enables debug mode for ui","debug_ui &lt;0/1&gt;");
 console_command_add("console",cmd_console,0,"Open the console","console");
 console_command_add("debug_overlay",cmd_debug_overlay,0,"Shows the debug overlay (or not)","debug_overlay &lt;0/1&gt;");
+console_command_add("set_aa",cmd_set_aa,1,"Sets the level of anti-aliasing","set_aa &lt;0/2/4/8&gt;");
+console_command_add("set_vsync",cmd_set_vsync,1,"Enables or disables V-Sync","set_vsync &lt;0/1&gt;");
 </string>
           </argument>
         </arguments>

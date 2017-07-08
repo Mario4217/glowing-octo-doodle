@@ -1,4 +1,4 @@
-///bind_check_pressed(key)
+///bind_check_pressed(group)
 var key = argument0;
 if (bind[? key] != undefined){
   for (i=0; i<ds_list_size(bind[? key]); i+=1){

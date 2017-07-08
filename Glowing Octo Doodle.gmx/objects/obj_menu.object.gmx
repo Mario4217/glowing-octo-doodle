@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>ui_init();
-interface[? "menu"] = 1;
+interface[? "menu"] = "1";
 
 menu_container = ui_create_container(0,0,1,1);
 menu_main = ui_create_container(0,0,1,1);
@@ -40,24 +40,107 @@ ui_add_child(menu_container, menu_profile);
 ui_add_child(menu_container, menu_editor);
 ui_add_child(menu_container, menu_settings);
 
-ui_add_child(menu_main,ui_create_label(0.1,0.2,0.4,0.28,"{menu.main}"))
-ui_add_child(menu_main,ui_create_button(0.1,0.3,0.4,0.35,"{menu.play}","set menu 2"));
-ui_add_child(menu_main,ui_create_button(0.1,0.4,0.4,0.45,"{menu.profile}","set menu 3"));
-ui_add_child(menu_main,ui_create_button(0.1,0.5,0.4,0.55,"{menu.settings}","set menu 4"));
-ui_add_child(menu_main,ui_create_button(0.1,0.6,0.4,0.65,"{menu.editor}","set menu 5"));
+var btn_play = ui_create_button(0.1,0.3,0.4,0.35,"{menu.play}","set menu 2");
+var btn_profile = ui_create_button(0.1,0.4,0.4,0.45,"{menu.profile}","set menu 3");
+var btn_settings = ui_create_button(0.1,0.5,0.4,0.55,"{menu.settings}","set menu 4");
+var btn_editor = ui_create_button(0.1,0.6,0.4,0.65,"{menu.editor}","set menu 5");
+
+ui_add_child(menu_main,ui_create_label(0.1,0.2,0.4,0.28,"{menu.main}"));
+ui_add_child(menu_main,btn_play);
+ui_add_child(menu_main,btn_profile);
+ui_add_child(menu_main,btn_settings);
+ui_add_child(menu_main,btn_editor);
 ui_add_child(menu_main,ui_create_button(0.1,0.7,0.4,0.75,"{menu.quit}","quit"));
 
-ui_add_child(menu_play,ui_create_label(0.1,0.2,0.4,0.28,"{menu.play}"))
-ui_add_child(menu_play,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set menu 1"));
+ui_add_child(menu_play,ui_create_label(0.1,0.2,0.4,0.28,"{menu.play}"));
+ui_add_child(menu_play,ui_create_button(0.1,0.3,0.4,0.35,"{menu.play.new}",""));
+ui_add_child(menu_play,ui_create_button(0.1,0.4,0.4,0.45,"{menu.play.load}",""));
 
-ui_add_child(menu_profile,ui_create_label(0.1,0.2,0.4,0.28,"{menu.profile}"))
-ui_add_child(menu_profile,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set menu 1"));
+var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
+ui_add_child(menu_play,btn_back);
+btn_back[? "gp_port"] = btn_play;
 
-ui_add_child(menu_editor,ui_create_label(0.1,0.2,0.4,0.28,"{menu.editor}"))
-ui_add_child(menu_editor,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set menu 1"));
+ui_add_child(menu_profile,ui_create_label(0.1,0.2,0.4,0.28,"{menu.profile}"));
+var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
+ui_add_child(menu_profile,btn_back);
+btn_back[? "gp_port"] = btn_profile;
 
-ui_add_child(menu_settings,ui_create_label(0.1,0.2,0.4,0.28,"{menu.settings}"))
-ui_add_child(menu_settings,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set menu 1"));
+ui_add_child(menu_editor,ui_create_label(0.1,0.2,0.4,0.28,"{menu.editor}"));
+ui_add_child(menu_editor,ui_create_button(0.1,0.3,0.4,0.35,"{menu.editor.new_map}",""));
+ui_add_child(menu_editor,ui_create_button(0.1,0.4,0.4,0.45,"{menu.editor.edit_map}",""));
+ui_add_child(menu_editor,ui_create_button(0.1,0.5,0.4,0.55,"{menu.editor.new_pack}",""));
+ui_add_child(menu_editor,ui_create_button(0.1,0.6,0.4,0.65,"{menu.editor.edit_pack}",""));
+var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
+ui_add_child(menu_editor,btn_back);
+btn_back[? "gp_port"] = btn_editor;
+
+ui_add_child(menu_settings,ui_create_label(0.1,0.2,0.4,0.28,"{menu.settings}"));
+var set_label = ui_create_label(0.2,0.3,0.8,0.8,"");
+ui_add_child(menu_settings,set_label);
+
+var set_fullscreen = ui_create_toggle(0.05,0.2,0.45,0.28,"{menu.settings.fullscreen}");
+ui_set_event(set_fullscreen, "onchange", "fullscreen !value");
+ui_add_child(set_label,set_fullscreen);
+
+var set = ui_create_toggle(0.05,0.3,0.45,0.38,"{menu.settings.vsync}");
+ui_set_event(set, "onchange", "set_vsync !value");
+ui_add_child(set_label,set);
+
+var label = ui_create_label(0.05,0.4,0.45,0.48,"{menu.settings.anti-aliasing}");
+ui_add_child(set_label, label);
+ui_set_value(label, 0);
+var r0 = ui_create_radio(0,1,0.25,2,"x0",0);
+var r2 = ui_create_radio(0.25,1,0.5,2,"x2",2);
+var r4 = ui_create_radio(0.5,1,0.75,2,"x4",4);
+var r8 = ui_create_radio(0.75,1,1,2,"x8",8);
+r0[? "gp_right"] = r2;
+r2[? "gp_right"] = r4;
+r4[? "gp_right"] = r8;
+r8[? "gp_right"] = r0;
+r0[? "gp_left"] = r8;
+r2[? "gp_left"] = r0;
+r4[? "gp_left"] = r2;
+r8[? "gp_left"] = r4;
+r0[? "gp_up"] = set;
+r2[? "gp_up"] = set;
+r4[? "gp_up"] = set;
+r8[? "gp_up"] = set;
+ui_add_child(label, r0);
+ui_add_child(label, r2);
+ui_add_child(label, r4);
+ui_add_child(label, r8);
+ui_set_event(label, "onchange", "set_aa !value");
+set[? "gp_down"] = r2;
+
+var set = ui_create_slider(0.05,0.6,0.45,0.68,"{menu.settings.volume_music}",0,1,0.01);
+ui_set_event(set, "onchange", "");
+ui_add_child(set_label,set);
+set[? "gp_up"] = r0;
+r0[? "gp_down"] = set;
+r2[? "gp_down"] = set;
+r4[? "gp_down"] = set;
+r8[? "gp_down"] = set;
+
+var set = ui_create_slider(0.05,0.7,0.45,0.78,"{menu.settings.volume_sfx}",0,1,0.01);
+ui_set_event(set, "onchange", "");
+ui_add_child(set_label,set);
+
+var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1")
+ui_add_child(menu_settings,btn_back);
+
+btn_back[? "gp_port"] = btn_settings;
+btn_back[? "gp_up"] = set;
+set[? "gp_down"] = btn_back;
+btn_back[? "gp_down"] = set_fullscreen;
+set_fullscreen[? "gp_up"] = btn_back;
+
+var children = menu_main[? "children"];
+ui_gamepad_position = children[| 1];
+
+btn_play[? "gp_port"] = ds_list_find_value(ds_map_find_value(menu_play,"children"), 1);
+btn_profile[? "gp_port"] = ds_list_find_value(ds_map_find_value(menu_profile,"children"), 1);
+btn_editor[? "gp_port"] = ds_list_find_value(ds_map_find_value(menu_editor,"children"), 1);
+btn_settings[? "gp_port"] = ds_list_find_value(set_label[? "children"], 0);
 </string>
           </argument>
         </arguments>
@@ -80,7 +163,7 @@ ui_add_child(menu_settings,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set 
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ui_set_position(menu_main,ui_interpolate(1, menu_main[? "u1"], (interface[? "menu"]=="1")-1, 0.3),0);
+            <string>ui_set_position(menu_main,ui_interpolate(1, menu_main[? "u1"],(interface[? "menu"]!="1")*-1, 0.3),0);
 ui_set_position(menu_play,ui_interpolate(1, menu_play[? "u1"], -1+(interface[? "menu"]=="2"), 0.3),0);
 ui_set_position(menu_profile,ui_interpolate(1, menu_profile[? "u1"], -1+(interface[? "menu"]=="3"), 0.3),0);
 ui_set_position(menu_settings,ui_interpolate(1, menu_settings[? "u1"], -1+(interface[? "menu"]=="4"), 0.3),0);

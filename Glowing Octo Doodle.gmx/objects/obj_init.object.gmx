@@ -30,6 +30,11 @@ lang_extern("language/english.txt");
 
 bind_init();
 
+globalvar settings_map;
+settings_map = ds_map_create();
+settings_map[? "aa"] = 0;
+settings_map[? "vsync"] = 0;
+
 room = rm_game
 
 instance_create(0,0,obj_console);

@@ -34,7 +34,11 @@ if (element[? "visible"]){
   if (element[? "pressed"] == undefined){
     element[? "pressed"] = false;
   }
-  var hover = (element == ui_hover);
+  if (ui_gamepad_active){
+    var hover = (element == ui_gamepad_position);
+  }else{
+    var hover = (element == ui_hover);
+  }
   var pressed = false;
   var click_start = false;
   
@@ -44,18 +48,21 @@ if (element[? "visible"]){
   }
   
   if (hover){
-    if (mouse_check_button_pressed(mb_left)){
+    if (mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0, gp_face1)){
       element[? "pressed"] = true;
       click_start = true;
     }
-    if (mouse_check_button_released(mb_left) && element[? "pressed"]){
+    if ((mouse_check_button_released(mb_left) || gamepad_button_check_released(0, gp_face1)) && element[? "pressed"]){
       element[? "pressed"] = false;
       ui_element_fire(element,"onclick");
       pressed = true;
+      if (element[? "gp_port"] != undefined){
+        ui_gamepad_position = element[? "gp_port"];
+      }
     }
   }
   if (element[? "pressed"]){
-    if (mouse_check_button_released(mb_left)){
+    if (mouse_check_button_released(mb_left) || gamepad_button_check_released(0, gp_face1)){
       element[? "pressed"] = false;
     }
   }
@@ -82,6 +89,14 @@ if (element[? "visible"]){
         element[? "value"] = 1-element[? "value"];
         ui_element_fire(element,"onchange");
       }
+      if (ui_gamepad_active && hover){
+        if (gamepad_button_check(0, gp_padr)){
+          element[? "value"] = 1;
+        }
+        if (gamepad_button_check(0, gp_padl)){
+          element[? "value"] = 0;
+        }
+      }
       ui_draw_element_toggle(x1,y1,x2,y2,state,element);
     break;
     case "radio":
@@ -92,14 +107,23 @@ if (element[? "visible"]){
       ui_draw_element_radio(x1,y1,x2,y2,state,element);   
     break;
     case "slider":
-      if (element[? "pressed"]){
+      var v = element[? "value"]
+      if (element[? "pressed"] && !ui_gamepad_active){
         var w = (x2-x1);
-        var v = element[? "value"]
         v = round((clamp((window_mouse_get_x()-x1)/w,0,1) * (element[? "max"] - element[? "min"]) + element[? "min"])/element[? "snap"])*element[? "snap"];
-        if (v != element[? "value"]){
-          ui_element_fire(element,"onchange");
-          element[? "value"] = v;
+      }
+      if (ui_gamepad_active && hover){
+        var r = element[? "max"] - element[? "min"]; //range
+        if (gamepad_button_check(0, gp_padr)){
+          v = clamp(element[? "value"] + max(r*0.05, element[? "snap"]), element[? "min"], element[? "max"]);
         }
+        if (gamepad_button_check(0, gp_padl)){
+          v = clamp(element[? "value"] - max(r*0.05, element[? "snap"]), element[? "min"], element[? "max"]);
+        }
+      }
+      if (v != element[? "value"]){
+        ui_element_fire(element,"onchange");
+        element[? "value"] = v;
       }
       ui_draw_element_slider(x1,y1,x2,y2,state,element);
     break;

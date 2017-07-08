@@ -139,6 +139,8 @@
       <script>scripts\cmd_set.gml</script>
       <script>scripts\cmd_ui_draw_debug.gml</script>
       <script>scripts\cmd_version.gml</script>
+      <script>scripts\cmd_set_aa.gml</script>
+      <script>scripts\cmd_set_vsync.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
