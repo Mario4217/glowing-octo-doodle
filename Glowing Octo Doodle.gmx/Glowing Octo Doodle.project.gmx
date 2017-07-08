@@ -98,6 +98,7 @@
       <script>scripts\ui_set_value.gml</script>
       <script>scripts\ui_split.gml</script>
       <script>scripts\ui_step.gml</script>
+      <script>scripts\ui_set_position.gml</script>
     </scripts>
     <scripts name="bind">
       <script>scripts\bind_add.gml</script>
@@ -170,6 +171,7 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>
+    <font>fonts\ft_ui</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_init</object>

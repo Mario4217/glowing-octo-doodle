@@ -1,5 +1,5 @@
 ///console_init()
-globalvar console_is_open, console_scroll, console_line_number, console_lines, console_last_cmd, console_string, command_map, console_last_key;
+globalvar console_is_open, console_scroll, console_line_number, console_lines, console_last_cmd, console_string, command_map, console_last_key, interface;
 console_is_open = false;
 console_scroll = 0;
 console_line_number = 8;

@@ -33,6 +33,7 @@ bind_init();
 room = rm_game
 
 instance_create(0,0,obj_console);
+instance_create(0,0,obj_menu);
 </string>
           </argument>
         </arguments>

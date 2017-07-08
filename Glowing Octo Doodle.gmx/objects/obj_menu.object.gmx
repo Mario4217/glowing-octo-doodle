@@ -25,17 +25,92 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>menu_container = ui_create_container(0,0,1,1);
-menu_main = ui_create_container(0,0,1,1);
-menu_play = ui_create_container(0,0,1,1);
-menu_profile = ui_create_container(0,0,1,1);
-menu_settings = ui_create_container(0,0,1,1);
+            <string>ui_init();
+interface[? "menu"] = 1;
 
-ui_create_button(0.1,0.3,0.4,0.35,"{menu.play}","set menu 2");
-ui_create_button(0.1,0.4,0.4,0.45,"{menu.profile}","set menu 3");
-ui_create_button(0.1,0.5,0.4,0.55,"{menu.settings}","set menu 4");
-ui_create_button(0.1,0.6,0.4,0.65,"{menu.editor}","set menu 5");
-ui_create_button(0.1,0.7,0.4,0.75,"{menu.quit}","quit");
+menu_container = ui_create_container(0,0,1,1);
+menu_main = ui_create_container(0,0,1,1);
+menu_play = ui_create_container(1,0,2,1);
+menu_profile = ui_create_container(1,0,2,1);
+menu_editor = ui_create_container(1,0,2,1);
+menu_settings = ui_create_container(1,0,2,1);
+ui_add_child(menu_container, menu_main);
+ui_add_child(menu_container, menu_play);
+ui_add_child(menu_container, menu_profile);
+ui_add_child(menu_container, menu_editor);
+ui_add_child(menu_container, menu_settings);
+
+ui_add_child(menu_main,ui_create_label(0.1,0.2,0.4,0.28,"{menu.main}"))
+ui_add_child(menu_main,ui_create_button(0.1,0.3,0.4,0.35,"{menu.play}","set menu 2"));
+ui_add_child(menu_main,ui_create_button(0.1,0.4,0.4,0.45,"{menu.profile}","set menu 3"));
+ui_add_child(menu_main,ui_create_button(0.1,0.5,0.4,0.55,"{menu.settings}","set menu 4"));
+ui_add_child(menu_main,ui_create_button(0.1,0.6,0.4,0.65,"{menu.editor}","set menu 5"));
+ui_add_child(menu_main,ui_create_button(0.1,0.7,0.4,0.75,"{menu.quit}","quit"));
+
+ui_add_child(menu_play,ui_create_label(0.1,0.2,0.4,0.28,"{menu.play}"))
+ui_add_child(menu_play,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set menu 1"));
+
+ui_add_child(menu_profile,ui_create_label(0.1,0.2,0.4,0.28,"{menu.profile}"))
+ui_add_child(menu_profile,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set menu 1"));
+
+ui_add_child(menu_editor,ui_create_label(0.1,0.2,0.4,0.28,"{menu.editor}"))
+ui_add_child(menu_editor,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set menu 1"));
+
+ui_add_child(menu_settings,ui_create_label(0.1,0.2,0.4,0.28,"{menu.settings}"))
+ui_add_child(menu_settings,ui_create_button(0.1,0.3,0.4,0.35,"{menu.back}","set menu 1"));
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ui_set_position(menu_main,ui_interpolate(1, menu_main[? "u1"], (interface[? "menu"]=="1")-1, 0.3),0);
+ui_set_position(menu_play,ui_interpolate(1, menu_play[? "u1"], -1+(interface[? "menu"]=="2"), 0.3),0);
+ui_set_position(menu_profile,ui_interpolate(1, menu_profile[? "u1"], -1+(interface[? "menu"]=="3"), 0.3),0);
+ui_set_position(menu_settings,ui_interpolate(1, menu_settings[? "u1"], -1+(interface[? "menu"]=="4"), 0.3),0);
+ui_set_position(menu_editor,ui_interpolate(1, menu_editor[? "u1"], -1+(interface[? "menu"]=="5"), 0.3),0);
+
+ui_step();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_set_font(ft_ui);
+ui_draw(menu_container);
 </string>
           </argument>
         </arguments>
