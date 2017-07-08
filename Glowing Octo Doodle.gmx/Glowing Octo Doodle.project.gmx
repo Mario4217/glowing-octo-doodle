@@ -8,6 +8,127 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <scripts name="ui">
+      <scripts name="draw">
+        <script>scripts\ui_draw_element_binding.gml</script>
+        <script>scripts\ui_draw_element_draggable.gml</script>
+        <script>scripts\ui_draw_element_label.gml</script>
+        <script>scripts\ui_draw_element_radio.gml</script>
+        <script>scripts\ui_draw_element_slider.gml</script>
+        <script>scripts\ui_draw_element_textbox.gml</script>
+        <script>scripts\ui_draw_element_toggle.gml</script>
+        <script>scripts\ui_draw_element_button.gml</script>
+        <script>scripts\ui_draw_element_progress.gml</script>
+      </scripts>
+      <scripts name="create">
+        <script>scripts\ui_create_button.gml</script>
+        <script>scripts\ui_create_container.gml</script>
+        <script>scripts\ui_create_draggable.gml</script>
+        <script>scripts\ui_create_radio.gml</script>
+        <script>scripts\ui_create_label.gml</script>
+        <script>scripts\ui_create_progress.gml</script>
+        <script>scripts\ui_create_slider.gml</script>
+        <script>scripts\ui_create_textbox.gml</script>
+        <script>scripts\ui_create_toggle.gml</script>
+        <script>scripts\ui_create_binding.gml</script>
+      </scripts>
+      <scripts name="style">
+        <script>scripts\ui_style_draw_rectangle.gml</script>
+        <script>scripts\ui_style_draw_text.gml</script>
+        <script>scripts\ui_style_get.gml</script>
+        <script>scripts\ui_style_load.gml</script>
+      </scripts>
+      <scripts name="convert">
+        <script>scripts\ui_string_to_color.gml</script>
+        <script>scripts\ui_hex_to_dec.gml</script>
+      </scripts>
+      <script>scripts\ui_add_child.gml</script>
+      <script>scripts\ui_draw.gml</script>
+      <script>scripts\ui_draw_list.gml</script>
+      <script>scripts\ui_ease.gml</script>
+      <script>scripts\ui_element_fire.gml</script>
+      <script>scripts\ui_get_value.gml</script>
+      <script>scripts\ui_init.gml</script>
+      <script>scripts\ui_interpolate.gml</script>
+      <script>scripts\ui_set_class.gml</script>
+      <script>scripts\ui_set_event.gml</script>
+      <script>scripts\ui_set_progress.gml</script>
+      <script>scripts\ui_set_text.gml</script>
+      <script>scripts\ui_set_value.gml</script>
+      <script>scripts\ui_split.gml</script>
+      <script>scripts\ui_step.gml</script>
+    </scripts>
+    <scripts name="bind">
+      <script>scripts\bind_add.gml</script>
+      <script>scripts\bind_check.gml</script>
+      <script>scripts\bind_check_pressed.gml</script>
+      <script>scripts\bind_check_released.gml</script>
+      <script>scripts\bind_create.gml</script>
+      <script>scripts\bind_get.gml</script>
+      <script>scripts\bind_init.gml</script>
+      <script>scripts\bind_load.gml</script>
+      <script>scripts\bind_save.gml</script>
+      <script>scripts\bind_set.gml</script>
+      <script>scripts\bind_split.gml</script>
+      <script>scripts\bind_string.gml</script>
+    </scripts>
+    <scripts name="console">
+      <script>scripts\console_command_add.gml</script>
+      <script>scripts\console_command_execute.gml</script>
+      <script>scripts\console_draw.gml</script>
+      <script>scripts\console_init.gml</script>
+      <script>scripts\console_print.gml</script>
+      <script>scripts\console_split.gml</script>
+    </scripts>
+    <scripts name="commands">
+      <script>scripts\cmd_console.gml</script>
+      <script>scripts\cmd_console_lines.gml</script>
+      <script>scripts\cmd_debug_overlay.gml</script>
+      <script>scripts\cmd_exit.gml</script>
+      <script>scripts\cmd_fullscreen.gml</script>
+      <script>scripts\cmd_get.gml</script>
+      <script>scripts\cmd_help.gml</script>
+      <script>scripts\cmd_interface.gml</script>
+      <script>scripts\cmd_print.gml</script>
+      <script>scripts\cmd_quit.gml</script>
+      <script>scripts\cmd_restart.gml</script>
+      <script>scripts\cmd_retry.gml</script>
+      <script>scripts\cmd_room.gml</script>
+      <script>scripts\cmd_set.gml</script>
+      <script>scripts\cmd_ui_draw_debug.gml</script>
+      <script>scripts\cmd_version.gml</script>
+    </scripts>
+    <scripts name="stats">
+      <script>scripts\statistic_add.gml</script>
+      <script>scripts\statistic_add_avg.gml</script>
+      <script>scripts\statistic_get.gml</script>
+      <script>scripts\statistic_init.gml</script>
+      <script>scripts\statistic_load.gml</script>
+      <script>scripts\statistic_save.gml</script>
+      <script>scripts\statistic_set.gml</script>
+      <script>scripts\statistic_set_avg.gml</script>
+    </scripts>
+    <scripts name="achievment">
+      <script>scripts\achievement_add.gml</script>
+      <script>scripts\achievement_collect.gml</script>
+      <script>scripts\achievement_get.gml</script>
+      <script>scripts\achievement_init.gml</script>
+      <script>scripts\achievement_load.gml</script>
+      <script>scripts\achievement_remove.gml</script>
+      <script>scripts\achievement_reset_all.gml</script>
+      <script>scripts\achievement_reset_id.gml</script>
+      <script>scripts\achievement_save.gml</script>
+    </scripts>
+    <scripts name="language">
+      <script>scripts\lang_add.gml</script>
+      <script>scripts\lang_extern.gml</script>
+      <script>scripts\lang_format.gml</script>
+      <script>scripts\lang_get.gml</script>
+      <script>scripts\lang_init.gml</script>
+    </scripts>
+    <script>scripts\string_trim.gml</script>
+  </scripts>
   <help>
     <rtf>help.rtf</rtf>
   </help>

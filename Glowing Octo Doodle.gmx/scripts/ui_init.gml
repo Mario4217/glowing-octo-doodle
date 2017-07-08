@@ -1,0 +1,36 @@
+///ui_init()
+globalvar ui_mouseHover, ui_hover, ui_style, ui_draw_debug, ui_current_class, ui_current_hover;
+ui_hover = -1;
+ui_mouseHover = -1;
+ui_draw_debug = false;
+ui_current_class = "";
+ui_current_hover = 0;
+
+ui_style = ds_map_create();
+ui_style[? "button.background-color:hover"] = c_ltgray;
+ui_style[? "button.background-color:pressed"] = c_dkgray;
+ui_style[? "button.animation:"] = 1;
+ui_style[? "button.text-color:pressed"] = c_white;
+ui_style[? "label.background-alpha:"] = 0.4;
+ui_style[? "toggle.dot.background-color:"] = c_lime;
+ui_style[? "toggle.background-color:hover"] = c_ltgray;
+ui_style[? "toggle.dot.border-radius:"] = 10;
+ui_style[? "radio.dot.background-color:"] = c_lime;
+ui_style[? "radio.background-color:hover"] = c_ltgray;
+ui_style[? "slider.dot.background-color:"] = c_lime;
+ui_style[? "slider.background-color:hover"] = c_ltgray;
+ui_style[? "textbox.text-halign:"] = fa_left;
+ui_style[? "textbox.background-color:hover"] = c_ltgray;
+ui_style[? "textbox.background-color:active"] = c_navy;
+ui_style[? "textbox.text-color:active"] = c_white;
+ui_style[? "textbox.placeholder.text-color:"] = c_ltgray;
+ui_style[? "textbox.placeholder.text-color:hover"] = c_white;
+ui_style[? "draggable.text-halign:"] = fa_left;
+ui_style[? "draggable.text-valign:"] = fa_top;
+ui_style[? "draggable.text-color:"] = c_white;
+ui_style[? "draggable.background-color:"] = c_dkgray;
+ui_style[? "binding.background-color:hover"] = c_ltgray;
+ui_style[? "binding.background-color:active"] = c_navy;
+ui_style[? "binding.text-color:active"] = c_white;
+ui_style[? "binding.text-color:hover"] = c_white;
+ui_style[? "progress.fill.background-color:"] = c_lime;
