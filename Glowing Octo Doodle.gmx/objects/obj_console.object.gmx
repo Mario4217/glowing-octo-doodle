@@ -50,6 +50,7 @@ console_command_add("editor_save",cmd_editor_save,0,"Saves the current map, when
 console_command_add("editor_update",cmd_editor_update,0,"Updates some values in the editor from UI inputs");
 console_command_add("refresh_editor_level",cmd_refresh_editor_levels,0,"Refreshes the lists of level to edit in the editor");
 console_command_add("editor_destroy",cmd_editor_destroy,0,"Destroys the selected instance in the editor");
+console_command_add("editor_update_ent",cmd_editor_update_ent,2,"Updates an attribute of the selected entity","editor_update_ent &lt;attribute&gt; &lt;value&gt;");
 </string>
           </argument>
         </arguments>

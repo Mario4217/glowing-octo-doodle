@@ -185,6 +185,12 @@ if (bind_check_pressed("menu")){
     ui_gamepad_position = ds_list_find_value(menu_main[? "children"],1);
   }
 }
+if (gamepad_button_check_pressed(0, gp_face2) &amp;&amp; room == rm_game){
+  if (real(interface[? "menu"]) &gt; 1){
+    ui_gamepad_position = ds_list_find_value(menu_main[? "children"],real(interface[? "menu"])-1);
+    interface[? "menu"] = "1";
+  }
+}
 </string>
           </argument>
         </arguments>

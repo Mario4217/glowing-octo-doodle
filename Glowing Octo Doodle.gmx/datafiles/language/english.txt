@@ -32,6 +32,9 @@ editor.test:			Test
 editor.selected_entity:		Selected Object
 editor.entity.type:		Type: [1]
 editor.entity.destroy:		Destroy
-editor.attribute.player_index:	Player Index
+editor.attribute.player_index:	Player ID
+editor.attribute.skin:		Skin
+editor.attribute.size:		Size
 gp.floor_button:		Floor Button
 gp.spawn:			Spawnpoint
+gp.wall:			Wall

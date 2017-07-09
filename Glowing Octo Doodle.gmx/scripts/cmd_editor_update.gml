@@ -1,4 +1,4 @@
-///editor_update(args);
+///cmd_editor_update(args);
 if (room == rm_editor){
   obj_editor.world_width = ui_get_value(obj_editor.input_width);
   obj_editor.world_height = ui_get_value(obj_editor.input_height);

@@ -43,11 +43,13 @@ if (element[? "visible"]){
   var click_start = false;
   
   var deselect = false;
-  if (mouse_check_button_pressed(mb_left)){
-    var deselect = true;
+  if (element[? "active"]){
+    if (mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0, gp_face1)){
+      var deselect = true;
+    }
   }
   
-  if (hover){
+  if (hover && !deselect){
     if (mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0, gp_face1)){
       element[? "pressed"] = true;
       click_start = true;
@@ -61,6 +63,7 @@ if (element[? "visible"]){
       }
     }
   }
+  
   if (element[? "pressed"]){
     if (mouse_check_button_released(mb_left) || gamepad_button_check_released(0, gp_face1)){
       element[? "pressed"] = false;
@@ -90,11 +93,13 @@ if (element[? "visible"]){
         ui_element_fire(element,"onchange");
       }
       if (ui_gamepad_active && hover){
-        if (gamepad_button_check(0, gp_padr)){
+        if (gamepad_button_check(0, gp_padr) || gamepad_axis_value(0, gp_axislh) > 0.9){
           element[? "value"] = 1;
+          ui_element_fire(element,"onchange");
         }
-        if (gamepad_button_check(0, gp_padl)){
+        if (gamepad_button_check(0, gp_padl) || gamepad_axis_value(0, gp_axislh) < -0.9){
           element[? "value"] = 0;
+          ui_element_fire(element,"onchange");
         }
       }
       ui_draw_element_toggle(x1,y1,x2,y2,state,element);
@@ -114,26 +119,22 @@ if (element[? "visible"]){
       }
       if (ui_gamepad_active && hover){
         var r = element[? "max"] - element[? "min"]; //range
-        if (gamepad_button_check(0, gp_padr)){
-          v = clamp(element[? "value"] + max(r*0.05, element[? "snap"]), element[? "min"], element[? "max"]);
+        if (gamepad_button_check_pressed(0, gp_padr)){
+          v = clamp(element[? "value"] + element[? "snap"], element[? "min"], element[? "max"]);
         }
-        if (gamepad_button_check(0, gp_padl)){
-          v = clamp(element[? "value"] - max(r*0.05, element[? "snap"]), element[? "min"], element[? "max"]);
+        if (gamepad_button_check_pressed(0, gp_padl)){
+          v = clamp(element[? "value"] - element[? "snap"], element[? "min"], element[? "max"]);
         }
+        v = clamp(element[? "value"] + max(r*0.05, element[? "snap"])*gamepad_axis_value(0,gp_axislh), element[? "min"], element[? "max"]);
       }
       if (v != element[? "value"]){
-        element[? "value"] = v;
+        element[? "value"] = round(v/element[? "snap"])*element[? "snap"];
         ui_element_fire(element,"onchange");
       }
       ui_draw_element_slider(x1,y1,x2,y2,state,element);
     break;
     case "textbox":
-      if (deselect){
-        element[? "active"] = false;
-        keyboard_string = "";
-        ui_element_fire(element,"onchange");
-      }
-      if (pressed){
+      if (pressed && !deselect){
         element[? "active"] = true;
         keyboard_string = element[? "value"];
       }
@@ -154,13 +155,47 @@ if (element[? "visible"]){
         }
         element[? "value"] = string_copy(keyboard_string,1,element[? "max"]);
         state = "active"
-        if (keyboard_check_pressed(vk_enter)){
+        if (keyboard_check_pressed(vk_enter) || deselect){
           element[? "active"] = false;
           ui_element_fire(element,"onchange");
           keyboard_string = "";
         }
       }
       ui_draw_element_textbox(x1,y1,x2,y2,state,element);
+    break;
+    case "spinner":
+      if (pressed && !deselect){
+        element[? "active"] = true;
+        keyboard_string = string(element[? "value"]);
+      }
+      if (element[? "active"]){
+        if (keyboard_check(vk_control)){
+          if (keyboard_check_pressed(ord('V'))){
+            if (clipboard_has_text()){
+              keyboard_string += clipboard_get_text();
+            }
+          }
+          if (keyboard_check_pressed(ord('C'))){
+            clipboard_set_text(keyboard_string);
+          }
+          if (keyboard_check_pressed(ord('X'))){
+            clipboard_set_text(keyboard_string);
+            keyboard_string = "";
+          }
+        }
+        element[? "value"] = real(keyboard_string);
+        keyboard_string = string(element[? "value"]);
+        state = "active";
+        
+        if (keyboard_check_pressed(vk_enter) || deselect){
+          element[? "active"] = false;
+          ui_element_fire(element,"onchange");
+          keyboard_string = "";
+          element[? "value"] = round(clamp(real(string_digits(keyboard_string)),element[? "min"],element[? "max"])) * element[? "step"]
+        }
+        
+      }
+      ui_draw_element_spinner(x1,y1,x2,y2,state,element);
     break;
     case "draggable":
       var mU = window_mouse_get_x() / view_wport[0];
@@ -221,6 +256,11 @@ if (element[? "visible"]){
     var index = ds_list_find_index(element[? "children"],element[? "top"]);
     ds_list_delete(element[? "children"],index);
     ds_list_add(element[? "children"],element[? "top"]);
+  }
+  
+  if (ui_gamepad_active && hover){
+    draw_set_color(c_blue);
+    draw_rectangle(x1,y1,x2,y2,true);
   }
   
   if (ui_draw_debug){

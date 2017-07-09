@@ -8,6 +8,9 @@ if (room == rm_editor){
       console_print("Error file not found: "+path, c_red);
       return false;
     }
+    var ver = buffer_read(buff, buffer_u8); //load the save version
+    var id_type = buffer_read(buff, buffer_u8); //type that is used here to index objects
+    
     obj_editor.world_name =  base64_decode(buffer_read(buff, buffer_string));
     obj_editor.world_width = buffer_read(buff, buffer_u32);
     obj_editor.world_height = buffer_read(buff, buffer_u32);
@@ -28,16 +31,16 @@ if (room == rm_editor){
       ds_list_add(entlist, inst);
     };
     
-    var index = buffer_read(buff, buffer_u32);
+    //special entity attributes
+    var index = buffer_read(buff, id_type);
     while (index < ent_number){
       var inst = entlist[| index];
       var attr = buffer_read(buff, buffer_string);
-      var src_attr = gp_objects[? inst.gp_obj_index];
-      var src_attr_list = src_attr[? "attr"];
-      var src_attr_attr = src_attr_list[? attr];
-      var val = buffer_read(buff,src_attr_attr[? "type"]);
+      show_debug_message("Read '"+attr+"'");
+      var type = buffer_read(buff, buffer_u8);
+      var val = buffer_read(buff,type);
       inst.overwrite_attr[? attr] = val;
-      index = buffer_read(buff, buffer_u32);
+      index = buffer_read(buff, id_type);
     }
     
     ds_list_destroy(entlist);

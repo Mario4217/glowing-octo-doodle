@@ -33,6 +33,7 @@ drag_x = 0;
 drag_y = 0;
 attr = ds_map_create();
 overwrite_attr = ds_map_create();
+src_map = -1;
 </string>
           </argument>
         </arguments>
@@ -83,6 +84,7 @@ ds_map_destroy(attr);
   instance_destroy();
 }else{
   var map = gp_objects[? gp_obj_index];
+  src_map = map;
   sprite_index = map[? "sprite"];
   image_index = 0;
   image_speed = 0;
@@ -155,9 +157,28 @@ if (drag){
     drag = false;
   }
 }
+
 if (ui_hover == id &amp;&amp; obj_editor.inst_selected != id){
   if (mouse_check_button_pressed(mb_left)){
     obj_editor.inst_selected = id;
+    ds_list_clear(obj_editor.ent_label_attributes[? "children"]);
+    var src_attr = src_map[? "attr"];
+    var key = ds_map_find_first(src_attr)
+    for (var i=0; i&lt;ds_map_size(src_attr); i+=1)
+    {
+      var line = 0.4;
+      var map = src_attr[? key];
+      if (map[? "type"] == buffer_u8 || map[? "type"] == buffer_u16 || map[? "type"] == buffer_u32){
+        var element = ui_create_spinner(line,i*0.2,1,i*0.2+0.2,map[? "min"],map[? "max"],1); 
+      }else if(map[? "type"] == buffer_string){
+        var element = ui_create_textbox(line,i*0.2,1,i*0.2+0.2,map[? "max"],"",false); 
+      }
+      ui_set_event(element,"onchange","editor_update_ent "+string(key)+" !value");
+      ui_set_value(element, attr[? key]);
+      ui_add_child(obj_editor.ent_label_attributes, ui_create_label(0,i*0.2,line,i*0.2+0.2,"{editor.attribute."+key+"}"));
+      ui_add_child(obj_editor.ent_label_attributes, element);
+      key = ds_map_find_next(src_attr, key); 
+    };
   }
 }
 

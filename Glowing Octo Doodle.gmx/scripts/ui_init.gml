@@ -8,6 +8,7 @@ ui_current_class = "";
 ui_current_hover = 0;
 ui_gamepad_position = -1;
 ui_gamepad_active = false;
+ui_gamepad_stick_moved = false;
 ui_m_pre_x = window_mouse_get_x();
 ui_m_pre_y = window_mouse_get_y();
 ui_mouse_moved = true;

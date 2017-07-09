@@ -47,6 +47,7 @@
     <sprites name="gameplay">
       <sprite>sprites\spr_gp_floor_button</sprite>
       <sprite>sprites\spr_gp_spawn</sprite>
+      <sprite>sprites\spr_gp_wall</sprite>
     </sprites>
     <sprite>sprites\spr_achievement_secret</sprite>
     <sprite>sprites\spr_player</sprite>
@@ -68,6 +69,7 @@
         <script>scripts\ui_draw_element_radio.gml</script>
         <script>scripts\ui_draw_element_slider.gml</script>
         <script>scripts\ui_draw_element_textbox.gml</script>
+        <script>scripts\ui_draw_element_spinner.gml</script>
         <script>scripts\ui_draw_element_toggle.gml</script>
         <script>scripts\ui_draw_element_button.gml</script>
         <script>scripts\ui_draw_element_progress.gml</script>
@@ -81,6 +83,7 @@
         <script>scripts\ui_create_progress.gml</script>
         <script>scripts\ui_create_slider.gml</script>
         <script>scripts\ui_create_textbox.gml</script>
+        <script>scripts\ui_create_spinner.gml</script>
         <script>scripts\ui_create_toggle.gml</script>
         <script>scripts\ui_create_binding.gml</script>
         <script>scripts\ui_create_sprite.gml</script>
@@ -160,6 +163,7 @@
       <script>scripts\cmd_refresh_editor_levels.gml</script>
       <script>scripts\cmd_editor_update.gml</script>
       <script>scripts\cmd_editor_destroy.gml</script>
+      <script>scripts\cmd_editor_update_ent.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -220,6 +224,7 @@
     <objects name="gameplay">
       <object>objects\obj_gp_floor_button</object>
       <object>objects\obj_gp_spawn</object>
+      <object>objects\obj_gp_wall</object>
     </objects>
     <object>objects\obj_editor_ent</object>
   </objects>

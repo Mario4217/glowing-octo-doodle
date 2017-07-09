@@ -106,10 +106,15 @@ rad_t1[? "gp_port"] = ds_list_find_value(maps_container[? "children"],1);
 rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"],0);
 rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"],0);
 
-world_width = 128;
-world_height = 128;
-world_name = "";
+world_width = 64;
+world_height = 64;
+world_name = "unnamed";
 world_players = 1;
+
+ui_set_value(input_name, world_name);
+ui_set_value(input_width, world_width);
+ui_set_value(input_height, world_height);
+ui_set_value(input_players, world_players);
 
 for (var i=0; i&lt;ds_list_size(gp_editor); i++){
   var map = gp_objects[? gp_editor[| i]];
@@ -226,19 +231,8 @@ if (interface[? "editor_menu"] == "2"){
 ent_label[? "visible"] = (inst_selected != -1);
 if (instance_exists(inst_selected) &amp;&amp; inst_selected != -1){
   var map = gp_objects[? inst_selected.gp_obj_index];
-  if (map != undefined){
-  
-    var text = "";
-    var key = ds_map_find_first(inst_selected.attr)
-    for (var i=0; i&lt;ds_map_size(inst_selected.attr); i+=1)
-    {
-      text += "{editor.attribute."+string(key)+"}: "+string(inst_selected.attr[? key])+"#";
-      key = ds_map_find_next(inst_selected.attr, key);
-    };
-    
-  
+  if (map != undefined){  
     ui_set_text(ent_label_type, lang_format("{editor.entity.type}", map[? "name"]));
-    ui_set_text(ent_label_attributes, text);
   }
 }
 </string>

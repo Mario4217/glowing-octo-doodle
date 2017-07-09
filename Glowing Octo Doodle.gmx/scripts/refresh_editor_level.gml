@@ -1,8 +1,7 @@
 ///refresh_editor_level()
 with (obj_menu){
   var parent = menu_editor_level;
-  ds_list_destroy(parent[? "children"]); //remove instead of clear because of nested structure
-  parent[? "children"] = ds_list_create();
+  ds_list_clear(parent[? "children"]);
   filename = file_find_first("editor\*.puz", 0);
   var i = 0;
   while(filename != ""){

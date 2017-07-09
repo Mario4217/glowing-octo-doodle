@@ -5,10 +5,13 @@ if (room == rm_editor){
     interface[? "editor_error"] = "{editor.error.noname}";
     return false;
   }
+  var id_type = buffer_u16; //type that is used to write ids
   
   var buff = buffer_create(1,buffer_grow,1);
   
   buffer_write(buff, buffer_u8,143); //143 is a random id I now set for maps!
+  buffer_write(buff, buffer_u8,1); //loader version!
+  buffer_write(buff, buffer_u8,id_type); //id byte size
   buffer_write(buff, buffer_string, name);
   buffer_write(buff, buffer_u32, obj_editor.world_width);
   buffer_write(buff, buffer_u32, obj_editor.world_height);
@@ -34,13 +37,17 @@ if (room == rm_editor){
     for (var j=0; j<ds_map_size(inst.attr); j++)
     {
       var src_attr = src_map[? key];
-      buffer_write(buff, buffer_u32, i);
-      buffer_write(buff, buffer_string, key);
-      buffer_write(buff, src_attr[? "type"], inst.attr[? key]);
+      if (src_attr != undefined){
+        var type = src_attr[? "type"]
+        buffer_write(buff, id_type, i);
+        buffer_write(buff, buffer_string, key);
+        buffer_write(buff, buffer_u8, type);
+        buffer_write(buff, type, inst.attr[? key]);
+      }
       key = ds_map_find_next(inst.attr, key);
     };
-    buffer_write(buff, buffer_u32, i+1);
   }
+  buffer_write(buff, id_type, i+1);
   
   buffer_save(buff,"editor/"+string(name)+".puz");
   buffer_delete(buff);  

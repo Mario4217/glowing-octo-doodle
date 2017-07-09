@@ -70,7 +70,11 @@ register_gameplay_object(2,"{gp.spawn}",obj_gp_spawn);
 gameplay_object_add_output(2, "onSpawn");
 gameplay_object_add_attribute(2, "player_index",0,buffer_u8,0,15);
 
-ds_list_add(gp_editor, 2, 1);
+register_gameplay_object(3,"{gp.wall}",obj_gp_wall);
+gameplay_object_add_attribute(3,"skin",0,buffer_u8,0,sprite_get_number(spr_gp_wall));
+gameplay_object_add_attribute(3,"size",64,buffer_u16,16,1024);
+
+ds_list_add(gp_editor, 2, 1, 3);
 
 instance_create(0,0,obj_console);
 instance_create(0,0,obj_menu);

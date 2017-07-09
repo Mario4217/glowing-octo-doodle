@@ -15,9 +15,10 @@
 *   These scripts return the value of the key specified in "bind_add()"
 */
 
-globalvar bind, keymap;
+globalvar bind, keymap, bind_gp_upper_deadzone;
 bind = ds_map_create();
 keymap = ds_map_create();
+bind_gp_upper_deadzone = 0.9;
 
 keymap[? vk_add] = "key.add";
 keymap[? vk_alt] = "key.alt";
