@@ -7,6 +7,7 @@ if (ui_m_pre_x != window_mouse_get_x() || ui_m_pre_y != window_mouse_get_y()){ /
   ui_gamepad_active = 0;
   ui_mouse_moved = true;
 }
+
 ui_m_pre_x = window_mouse_get_x();
 ui_m_pre_y = window_mouse_get_y();
 
