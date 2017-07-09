@@ -93,11 +93,11 @@ if (element[? "visible"]){
         ui_element_fire(element,"onchange");
       }
       if (ui_gamepad_active && hover){
-        if (gamepad_button_check(0, gp_padr) || gamepad_axis_value(0, gp_axislh) > 0.9){
+        if (gamepad_button_check_pressed(0, gp_padr) || gamepad_axis_value(0, gp_axislh) > 0.75){
           element[? "value"] = 1;
           ui_element_fire(element,"onchange");
         }
-        if (gamepad_button_check(0, gp_padl) || gamepad_axis_value(0, gp_axislh) < -0.9){
+        if (gamepad_button_check_pressed(0, gp_padl) || gamepad_axis_value(0, gp_axislh) < -0.75){
           element[? "value"] = 0;
           ui_element_fire(element,"onchange");
         }
@@ -125,7 +125,9 @@ if (element[? "visible"]){
         if (gamepad_button_check_pressed(0, gp_padl)){
           v = clamp(element[? "value"] - element[? "snap"], element[? "min"], element[? "max"]);
         }
-        v = clamp(element[? "value"] + max(r*0.05, element[? "snap"])*gamepad_axis_value(0,gp_axislh), element[? "min"], element[? "max"]);
+        if (abs(gamepad_axis_value(0,gp_axislh))>0.8){
+          v = clamp(element[? "value"] + max(r*0.05, element[? "snap"])*gamepad_axis_value(0,gp_axislh), element[? "min"], element[? "max"])
+        }
       }
       if (v != element[? "value"]){
         element[? "value"] = round(v/element[? "snap"])*element[? "snap"];
@@ -190,8 +192,8 @@ if (element[? "visible"]){
         if (keyboard_check_pressed(vk_enter) || deselect){
           element[? "active"] = false;
           ui_element_fire(element,"onchange");
+          element[? "value"] = round(clamp(real(keyboard_string),element[? "min"],element[? "max"])) * element[? "step"];
           keyboard_string = "";
-          element[? "value"] = round(clamp(real(string_digits(keyboard_string)),element[? "min"],element[? "max"])) * element[? "step"]
         }
         
       }

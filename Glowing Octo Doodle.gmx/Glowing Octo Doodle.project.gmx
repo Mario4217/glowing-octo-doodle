@@ -164,6 +164,7 @@
       <script>scripts\cmd_editor_update.gml</script>
       <script>scripts\cmd_editor_destroy.gml</script>
       <script>scripts\cmd_editor_update_ent.gml</script>
+      <script>scripts\cmd_teleport.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>

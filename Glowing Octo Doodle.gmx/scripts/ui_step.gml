@@ -15,25 +15,25 @@ gp_right = gamepad_button_check_pressed(0,gp_padr);
 gp_down = gamepad_button_check_pressed(0,gp_padd);
 gp_left = gamepad_button_check_pressed(0,gp_padl);
 
-if (gamepad_axis_value(0, gp_axislh) > 0.9){
+if (gamepad_axis_value(0, gp_axislh) > 0.7){
   if (ui_gamepad_stick_moved == false){
     ui_gamepad_stick_moved = true;
     gp_right = true;
   }
 }
-if (gamepad_axis_value(0, gp_axislh) < -0.9){
+if (gamepad_axis_value(0, gp_axislh) < -0.7){
   if (ui_gamepad_stick_moved == false){
     ui_gamepad_stick_moved = true;
     gp_left = true;
   }
 }
-if (gamepad_axis_value(0, gp_axislv) > 0.9){
+if (gamepad_axis_value(0, gp_axislv) > 0.7){
   if (ui_gamepad_stick_moved == false){
     ui_gamepad_stick_moved = true;
     gp_down = true;
   }
 }
-if (gamepad_axis_value(0, gp_axislv) < -0.9){
+if (gamepad_axis_value(0, gp_axislv) < -0.7){
   if (ui_gamepad_stick_moved == false){
     ui_gamepad_stick_moved = true;
     gp_up = true;
