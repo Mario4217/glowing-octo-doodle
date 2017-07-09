@@ -7,13 +7,14 @@ if (ui_m_pre_x != window_mouse_get_x() || ui_m_pre_y != window_mouse_get_y()){ /
   ui_gamepad_active = 0;
   ui_mouse_moved = true;
 }
-ui_m_pre_x = window_mouse_get_x();
-ui_m_pre_y = window_mouse_get_y();
 
 gp_up = gamepad_button_check_pressed(0,gp_padu);
 gp_right = gamepad_button_check_pressed(0,gp_padr);
 gp_down = gamepad_button_check_pressed(0,gp_padd);
 gp_left = gamepad_button_check_pressed(0,gp_padl);
+
+show_debug_message(gamepad_axis_value(0, gp_axislv));
+show_debug_message(gamepad_axis_value(0, gp_axislh));
 
 if (gamepad_axis_value(0, gp_axislh) > 0.7){
   if (ui_gamepad_stick_moved == false){
