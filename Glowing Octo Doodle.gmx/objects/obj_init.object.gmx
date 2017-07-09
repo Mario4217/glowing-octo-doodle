@@ -78,7 +78,10 @@ ds_list_add(gp_editor, 2, 1, 3);
 
 instance_create(0,0,obj_console);
 instance_create(0,0,obj_menu);
-instance_create(0,0,obj_camera);
+instance_create(0,0,obj_time_control);
+
+globalvar camera;
+camera = instance_create(0,0,obj_camera);
 
 global.toLoad = "";
 room = rm_game;

@@ -217,9 +217,9 @@
     <object>objects\obj_editor</object>
     <object>objects\obj_console</object>
     <object>objects\obj_camera</object>
-    <object>objects\obj_player_controller</object>
+    <object>objects\obj_player_controler</object>
     <object>objects\obj_player_pawn</object>
-    <object>objects\obj_time_controll</object>
+    <object>objects\obj_time_control</object>
     <object>objects\obj_world</object>
     <objects name="gameplay">
       <object>objects\obj_gp_floor_button</object>
