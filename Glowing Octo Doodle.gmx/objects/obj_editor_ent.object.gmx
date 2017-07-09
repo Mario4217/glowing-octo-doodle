@@ -248,11 +248,12 @@ if (ds_list_find_index(src_map[? "tags"], "wall")&gt;-1){
   image_xscale = width / 64;
   image_yscale = height / 64;
   
-  if (obj_editor.inst_selected == id){
-    draw_sprite(spr_scaleable, 0, bbox_right-32, bbox_bottom-32);
-  }
+  var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; ui_hover == id);
   
-  if (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; ui_hover == id){
+  if (obj_editor.inst_selected == id){
+    draw_sprite(spr_scaleable, ho, bbox_right-32, bbox_bottom-32);
+  }
+  if (ho){
     if (mouse_check_button_pressed(mb_left)){
       drag = false;
       size_drag = true;
