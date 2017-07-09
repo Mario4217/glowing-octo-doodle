@@ -52,6 +52,8 @@ console_command_add("refresh_editor_level",cmd_refresh_editor_levels,0,"Refreshe
 console_command_add("editor_destroy",cmd_editor_destroy,0,"Destroys the selected instance in the editor");
 console_command_add("editor_update_ent",cmd_editor_update_ent,2,"Updates an attribute of the selected entity","editor_update_ent &lt;attribute&gt; &lt;value&gt;");
 console_command_add("teleport",cmd_teleport,2,"Teleports the player to a specific location", "teleport &lt;x&gt; &lt;y&gt;");
+console_command_add("set_inner_deadzone",cmd_set_inner_deadzone,1,"Sets the inner deadzone of the controller","set_inner_deadzone &lt;value&gt;");
+console_command_add("set_outer_deadzone",cmd_set_outer_deadzone,1,"Sets the outer deadzone of the controller","set_outer_deadzone &lt;value&gt;");
 </string>
           </argument>
         </arguments>

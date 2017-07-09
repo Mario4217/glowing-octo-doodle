@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>player_pawn = instance_create(0, 0, obj_player_pawn);
+            <string>player_pawn = instance_create(100, 100, obj_player_pawn);
 
 move_spd = 400;
 
@@ -56,7 +56,11 @@ move_spd = 400;
 var ymov = bind_check("player_vertical");
 var dir = point_direction(0, 0, xmov, ymov);
 
-var spd = game_delta_time * move_spd * 1.11111111111 * min(point_distance(0, 0, xmov, ymov), 0.9);
+show_debug_message(xmov);
+show_debug_message(ymov);
+show_debug_message(point_distance(0, 0, xmov, ymov));
+
+var spd = game_delta_time * move_spd * point_distance(0, 0, xmov, ymov);
 
 if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {
     move(spd, dir, player_pawn);

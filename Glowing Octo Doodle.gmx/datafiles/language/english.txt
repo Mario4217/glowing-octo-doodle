@@ -10,6 +10,8 @@ menu.settings.volume_music:	Music Volume
 menu.settings.volume_sfx:	Effect Volume
 menu.settings.anti-aliasing:	Anti-Aliasing
 menu.settings.vsync:		Enable V-Sync
+menu.settings.inner_deadzone:		Inner deadzone: [1]%
+menu.settings.outer_deadzone:		Outer deadzone: [1]%
 menu.play.new:			New Game
 menu.play.load:			Load a saved game
 menu.play.join:			Join a game

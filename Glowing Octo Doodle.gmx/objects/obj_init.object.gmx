@@ -55,6 +55,8 @@ settings_map[? "vsync"] = 1;
 settings_map[? "res_width"] = 1280;
 settings_map[? "res_height"] = 720;
 settings_map[? "fullscreen"] = 0;
+settings_map[? "inner_deadzone"] = 10;
+settings_map[? "outer_deadzone"] = 10;
 
 display_reset(settings_map[? "aa"], settings_map[? "vsync"]);
 
@@ -78,7 +80,10 @@ ds_list_add(gp_editor, 2, 1, 3);
 
 instance_create(0,0,obj_console);
 instance_create(0,0,obj_menu);
-instance_create(0,0,obj_camera);
+instance_create(0,0,obj_time_control);
+
+globalvar camera;
+camera = instance_create(0,0,obj_camera);
 
 global.toLoad = "";
 room = rm_game;
