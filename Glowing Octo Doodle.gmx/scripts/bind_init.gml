@@ -90,5 +90,3 @@ keymap[? 191] = "#";
 keymap[? 189] = "-";
 
 show_debug_message("Using Adel Bindings");
-
-gamepad_set_axis_deadzone(0, 0.1);

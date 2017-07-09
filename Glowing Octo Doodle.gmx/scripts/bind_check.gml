@@ -24,7 +24,7 @@ if (bind[? key] != undefined){
     }else if(T == "A"){ //axis on Gamepad
       var v = gamepad_axis_value(0, N);
       if (v > bind_gp_upper_deadzone){v = 1;}else
-      if (v < bind_gp_upper_deadzone){v = -1}
+      if (v < -bind_gp_upper_deadzone){v = -1}
       sum += v*V;
     }
   };

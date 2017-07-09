@@ -55,6 +55,8 @@ settings_map[? "vsync"] = 1;
 settings_map[? "res_width"] = 1280;
 settings_map[? "res_height"] = 720;
 settings_map[? "fullscreen"] = 0;
+settings_map[? "inner_deadzone"] = 10;
+settings_map[? "outer_deadzone"] = 10;
 
 display_reset(settings_map[? "aa"], settings_map[? "vsync"]);
 
