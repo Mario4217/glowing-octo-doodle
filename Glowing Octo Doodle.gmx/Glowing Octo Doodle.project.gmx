@@ -49,11 +49,13 @@
       <sprite>sprites\spr_gp_spawn</sprite>
       <sprite>sprites\spr_gp_wall</sprite>
     </sprites>
-    <sprite>sprites\spr_achievement_secret</sprite>
-    <sprite>sprites\spr_player</sprite>
     <sprites name="ui">
+      <sprite>sprites\spr_achievement_secret</sprite>
       <sprite>sprites\spr_ui_trash</sprite>
     </sprites>
+    <sprite>sprites\spr_player</sprite>
+    <sprite>sprites\spr_wall_top</sprite>
+    <sprite>sprites\spr_scaleable</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
@@ -167,6 +169,7 @@
       <script>scripts\cmd_teleport.gml</script>
       <script>scripts\cmd_set_inner_deadzone.gml</script>
       <script>scripts\cmd_set_outer_deadzone.gml</script>
+      <script>scripts\cmd_editor_test.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -201,14 +204,20 @@
       <script>scripts\gameplay_object_add_output.gml</script>
       <script>scripts\gameplay_object_add_input.gml</script>
       <script>scripts\gameplay_object_add_attribute.gml</script>
+      <script>scripts\gameplay_object_add_tag.gml</script>
     </scripts>
     <scripts name="editor">
       <script>scripts\refresh_editor_level.gml</script>
-      <script>scripts\editor_load.gml</script>
+      <script>scripts\editor_ent_send_to_ui.gml</script>
       <script>scripts\editor_save.gml</script>
     </scripts>
     <script>scripts\string_trim.gml</script>
     <script>scripts\move.gml</script>
+    <script>scripts\settings_save.gml</script>
+    <script>scripts\settings_load.gml</script>
+    <script>scripts\mouse_over.gml</script>
+    <script>scripts\draw_sprite_area.gml</script>
+    <script>scripts\world_load.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>
@@ -220,7 +229,7 @@
     <object>objects\obj_editor</object>
     <object>objects\obj_console</object>
     <object>objects\obj_camera</object>
-    <object>objects\obj_player_controler</object>
+    <object>objects\obj_player_controller</object>
     <object>objects\obj_player_pawn</object>
     <object>objects\obj_time_control</object>
     <object>objects\obj_world</object>
@@ -228,6 +237,7 @@
       <object>objects\obj_gp_floor_button</object>
       <object>objects\obj_gp_spawn</object>
       <object>objects\obj_gp_wall</object>
+      <object>objects\obj_parent_gameplay</object>
     </objects>
     <object>objects\obj_editor_ent</object>
   </objects>

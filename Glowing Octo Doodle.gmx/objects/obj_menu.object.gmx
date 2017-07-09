@@ -75,19 +75,22 @@ var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
 ui_add_child(menu_editor,btn_back);
 btn_back[? "gp_port"] = btn_editor;
 
+//###############---Settings---#######################
 ui_add_child(menu_settings,ui_create_label(0.1,0.2,0.4,0.28,"{menu.settings}"));
 var set_label = ui_create_label(0.2,0.3,0.8,0.8,"");
 ui_add_child(menu_settings,set_label);
 
-set_fullscreen = ui_create_toggle(0.05,0.2,0.45,0.28,"{menu.settings.fullscreen}");
+var v = 0.1;
+var h = 0.08;
+set_fullscreen = ui_create_toggle(0.05,v,0.45,v+h,"{menu.settings.fullscreen}");
 ui_set_event(set_fullscreen, "onchange", "fullscreen !value");
 ui_add_child(set_label,set_fullscreen);
-
-set_vsync = ui_create_toggle(0.05,0.3,0.45,0.38,"{menu.settings.vsync}");
+v += 0.1;
+set_vsync = ui_create_toggle(0.05,v,0.45,v+h,"{menu.settings.vsync}");
 ui_set_event(set_vsync, "onchange", "set_vsync !value");
 ui_add_child(set_label,set_vsync);
-
-var label = ui_create_label(0.05,0.4,0.45,0.48,"{menu.settings.anti-aliasing}");
+v += 0.1;
+var label = ui_create_label(0.05,v,0.45,v+h,"{menu.settings.anti-aliasing}");
 ui_add_child(set_label, label);
 ui_set_value(label, 0);
 var r0 = ui_create_radio(0,1,0.25,2,"x0",0);
@@ -114,7 +117,10 @@ ui_set_event(label, "onchange", "set_aa !value");
 set_vsync[? "gp_down"] = r2;
 set_aa = label;
 
-var set = ui_create_slider(0.05,0.6,0.45,0.68,"{menu.settings.volume_music}",0,1,0.01);
+v += 0.1+h;
+ui_add_child(set_label, ui_create_label(0.05,v,0.45,v+h,"{menu.settings.audio}"));
+v += h;
+var set = ui_create_slider(0.05,v,0.45,v+h,"{menu.settings.volume_music}",0,100,1);
 ui_set_event(set, "onchange", "");
 ui_add_child(set_label,set);
 set[? "gp_up"] = r0;
@@ -122,20 +128,45 @@ r0[? "gp_down"] = set;
 r2[? "gp_down"] = set;
 r4[? "gp_down"] = set;
 r8[? "gp_down"] = set;
-
-var set = ui_create_slider(0.05,0.7,0.45,0.78,"{menu.settings.volume_sfx}",0,1,0.01);
+var set = ui_create_slider(0.05,v+h,0.45,v+h+h,"{menu.settings.volume_sfx}",0,100,1);
 ui_set_event(set, "onchange", "");
 ui_add_child(set_label,set);
+v += h+0.1;
 
-var set_inner_deadzone = ui_create_slider(0.05, 0.8, 0.45, 0.88, "{menu.settings.inner_deadzone}", 0, 50, 1);
+ui_add_child(set_label, ui_create_label(0.05,v,0.45,v+h,"{menu.settings.gamepad}"));
+v +=h;
+var set_inner_deadzone = ui_create_slider(0.05, v, 0.45, v+h, "{menu.settings.inner_deadzone}", 0, 50, 1);
 ui_set_event(set_inner_deadzone, "onchange", "set_inner_deadzone !value");
 ui_add_child(set_label, set_inner_deadzone);
-
-var set_outer_deadzone = ui_create_slider(0.05, 0.9, 0.45, 0.98, "{menu.settings.outer_deadzone}", 0, 50, 1);
+var set_outer_deadzone = ui_create_slider(0.05, v+h, 0.45, v+h+h, "{menu.settings.outer_deadzone}", 0, 50, 1);
 ui_set_event(set_outer_deadzone, "onchange", "set_outer_deadzone ! value");
 ui_add_child(set_label, set_outer_deadzone);
 
-var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1")
+var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
+
+//bindings
+var v = 0.1;
+var h = 0.08;
+var l = 0.55;
+var r = 0.95;
+var line = 0.8;
+ui_add_child(set_label,ui_create_label(l,v,r,v+h,"{menu.settings.bindings}"));
+v += h;
+ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.walk_up}"));
+ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"player_vertical",0,-1));
+v += h;
+ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.walk_down}"));
+ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"player_vertical",1,1));
+v += h;
+ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.walk_left}"));
+ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"player_horizontal",0,-1));
+v += h;
+ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.walk_right}"));
+ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"player_horizontal",1,1));
+v += h;
+ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.interact}"));
+ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"interact",0,1));
+
 ui_add_child(menu_settings,btn_back);
 
 btn_back[? "gp_port"] = btn_settings;

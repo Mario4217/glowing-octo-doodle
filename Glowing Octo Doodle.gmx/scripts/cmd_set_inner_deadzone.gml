@@ -18,3 +18,4 @@ if(val > 50) {
 }
 settings_map[? "inner_deadzone"] = val;
 gamepad_set_axis_deadzone(0, val/100);
+settings_save();

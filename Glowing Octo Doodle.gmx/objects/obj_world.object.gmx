@@ -27,6 +27,10 @@
             <kind>1</kind>
             <string>width = 128;
 height = 128;
+
+if (global.toLoad != ""){
+  world_load(global.toLoad);
+}
 </string>
           </argument>
         </arguments>

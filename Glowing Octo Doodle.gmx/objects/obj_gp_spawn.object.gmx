@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_parent_gameplay</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>obj_player_pawn.x = x;
+            <string>event_inherited()
+
+obj_player_pawn.x = x;
 obj_player_pawn.y = y;
 </string>
           </argument>

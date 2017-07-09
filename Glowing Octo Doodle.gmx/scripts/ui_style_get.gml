@@ -28,7 +28,7 @@ if (val == undefined){
       case "text-halign": return fa_center; break;
       case "text-valign": return fa_middle; break;
       case "text-alpha": return 1; break;
-      case "text-padding": return 4; break;
+      case "text-padding": return 1; break;
       case "animation": return 1; break;
     }
   }

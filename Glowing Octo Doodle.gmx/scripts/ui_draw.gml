@@ -191,9 +191,9 @@ if (element[? "visible"]){
         
         if (keyboard_check_pressed(vk_enter) || deselect){
           element[? "active"] = false;
-          ui_element_fire(element,"onchange");
           element[? "value"] = round(clamp(real(keyboard_string),element[? "min"],element[? "max"])) * element[? "step"];
           keyboard_string = "";
+          ui_element_fire(element,"onchange");
         }
         
       }

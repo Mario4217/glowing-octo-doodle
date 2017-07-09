@@ -56,10 +56,6 @@ move_spd = 400;
 var ymov = bind_check("player_vertical");
 var dir = point_direction(0, 0, xmov, ymov);
 
-show_debug_message(xmov);
-show_debug_message(ymov);
-show_debug_message(point_distance(0, 0, xmov, ymov));
-
 var spd = game_delta_time * move_spd * point_distance(0, 0, xmov, ymov);
 
 if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {

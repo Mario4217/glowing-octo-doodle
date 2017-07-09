@@ -52,7 +52,7 @@ btn_exit[? "gp_port"] = -1;
 rad_t1 = ui_add_child(topbar, ui_create_radio(0,0,0.2,1,"{editor.map}",1));
 rad_t2 = ui_add_child(topbar, ui_create_radio(0.2,0,0.4,1,"{editor.objects}",2));
 rad_t3 = ui_add_child(topbar, ui_create_radio(0.4,0,0.6,1,"{editor.tiles}",3));
-rad_t4 = ui_add_child(topbar, ui_create_button(0.9,0,1,1,"{editor.test}",""));
+rad_t4 = ui_add_child(topbar, ui_create_button(0.9,0,1,1,"{editor.test}","editor_test"));
 rad_t1[? "gp_right"] = rad_t2;
 rad_t2[? "gp_right"] = rad_t3;
 rad_t3[? "gp_right"] = rad_t4;
@@ -93,7 +93,7 @@ ui_set_class(error, "editor-error");
 ui_add_child(editor_container, error);
 
 //entity stat/setting panel
-ent_label = ui_create_draggable(0.1,0.3,0.4,0.6,"{editor.selected_entity}",true);
+ent_label = ui_create_draggable(0.7,0.7,1,1,"{editor.selected_entity}",true);
 ent_label[? "visible"] = false;
 ui_set_class(ent_label, "editor-panel");
 ent_label_type = ui_add_child(ent_label, ui_create_label(0,0.15,1,0.25,""));
@@ -126,11 +126,34 @@ for (var i=0; i&lt;ds_list_size(gp_editor); i++){
 }
 
 if (global.toLoad != ""){
-  editor_load(global.toLoad);
+  world_load(global.toLoad);
   global.toLoad = "";
 }
 
 inst_selected = -1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>show_grid = false;
 </string>
           </argument>
         </arguments>
@@ -173,8 +196,8 @@ if (mouse_check_button_pressed(mb_middle)){
   drag_y = mouse_y + view_hview[0] / 2;
 }
 if (drag){
-  x = clamp(drag_x - (mouse_x - view_xview[0]),0,world_width*32);
-  y = clamp(drag_y - (mouse_y - view_yview[0]),0,world_height*32);
+  x = round(clamp(drag_x - (mouse_x - view_xview[0]),0,world_width*32));
+  y = round(clamp(drag_y - (mouse_y - view_yview[0]),0,world_height*32));
   if (mouse_check_button_released(mb_middle)){
     drag = false;
   }
@@ -310,6 +333,7 @@ draw_rectangle(0,0,world_width*32, world_height * 32, true);
 if (interface[? "editor_menu"] == "2"){
   var obj_to_place = ui_get_value(objects_container);
   if (obj_to_place != -1){
+    show_grid = true;
     var map = gp_objects[? obj_to_place];
     if (ui_mouse_moved){
       place_x = mouse_x;
@@ -323,7 +347,7 @@ if (interface[? "editor_menu"] == "2"){
     var h = sprite_get_width(map[? "sprite"]);
     var ox = sprite_get_xoffset(map[? "sprite"]);
     var oy = sprite_get_yoffset(map[? "sprite"]);
-    var c = collision_rectangle(place_x-ox, place_y-oy, place_x+w-ox, place_y+h-oy,obj_editor_ent,0,0);
+    var c = (ui_hover != -1)//collision_rectangle(place_x-ox, place_y-oy, place_x+w-ox, place_y+h-oy,obj_editor_ent,0,0);
     if (c){
       var color = c_red;
     }else{
@@ -336,6 +360,24 @@ if (interface[? "editor_menu"] == "2"){
       ui_set_value(objects_container, -1);
     }
   }
+}
+
+if (show_grid){
+  draw_set_color(c_black);
+  for (var i=max(floor(view_xview[0]/32),1); i&lt;min(ceil((view_wview[0]+view_xview[0])/32),world_width); i+=1)
+  {
+    draw_set_color(c_black)
+    if ((i mod 4)==0){draw_set_color(c_blue)}
+    if ((i mod 16)==0){draw_set_color(c_lime)}
+    draw_line(i*32-1,0,i*32-1,world_height*32);
+  };
+  for (var i=max(floor(view_yview[0]/32),1); i&lt;min(ceil((view_hview[0]+view_yview[0])/32),world_height); i+=1)
+  {
+    draw_set_color(c_black)
+    if ((i mod 4)==0){draw_set_color(c_blue)}
+    if ((i mod 16)==0){draw_set_color(c_lime)}
+    draw_line(0,i*32-1,world_width*32,i*32-1);
+  };
 }
 </string>
           </argument>

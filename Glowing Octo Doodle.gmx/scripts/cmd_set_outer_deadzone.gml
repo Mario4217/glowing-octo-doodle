@@ -16,3 +16,4 @@ if(val > 50) {
     return false;
 }
 settings_map[? "outer_deadzone"] = val;
+settings_save();

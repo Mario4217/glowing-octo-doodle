@@ -15,33 +15,55 @@ gp_right = gamepad_button_check_pressed(0,gp_padr);
 gp_down = gamepad_button_check_pressed(0,gp_padd);
 gp_left = gamepad_button_check_pressed(0,gp_padl);
 
+if (ui_gamepad_stick_moved){
+  ui_gamepad_hold_time ++;
+  if (ui_gamepad_hold_time > 25){
+    ui_gamepad_hold_time = 20;
+    switch (ui_gamepad_hold_direction){
+      case 1: gp_right=true; break;
+      case 2: gp_left=true; break;
+      case 3: gp_down=true; break;
+      case 4: gp_up=true; break;
+    }
+  }
+}
+
 if (gamepad_axis_value(0, gp_axislh) > 0.7){
   if (ui_gamepad_stick_moved == false){
     ui_gamepad_stick_moved = true;
+    ui_gamepad_hold_time = 0;
+    ui_gamepad_hold_direction = 1;
     gp_right = true;
   }
 }
 if (gamepad_axis_value(0, gp_axislh) < -0.7){
   if (ui_gamepad_stick_moved == false){
     ui_gamepad_stick_moved = true;
+    ui_gamepad_hold_time = 0;
+    ui_gamepad_hold_direction = 2;
     gp_left = true;
   }
 }
 if (gamepad_axis_value(0, gp_axislv) > 0.7){
   if (ui_gamepad_stick_moved == false){
     ui_gamepad_stick_moved = true;
+    ui_gamepad_hold_time = 0;
+    ui_gamepad_hold_direction = 3;
     gp_down = true;
   }
 }
 if (gamepad_axis_value(0, gp_axislv) < -0.7){
   if (ui_gamepad_stick_moved == false){
     ui_gamepad_stick_moved = true;
+    ui_gamepad_hold_time = 0;
+    ui_gamepad_hold_direction = 4;
     gp_up = true;
   }
 }
 if (ui_gamepad_stick_moved == true){
-  if (abs(gamepad_axis_value(0, gp_axislv)+gamepad_axis_value(0,gp_axislh))==0){
+  if (abs(gamepad_axis_value(0, gp_axislv)+gamepad_axis_value(0,gp_axislh))<0.3){
     ui_gamepad_stick_moved = false;
+    ui_gamepad_hold_time = 0;
   }
 }
 
