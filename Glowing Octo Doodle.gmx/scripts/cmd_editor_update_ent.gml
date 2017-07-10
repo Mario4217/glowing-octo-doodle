@@ -2,11 +2,11 @@
 if (room == rm_editor){
   if (obj_editor.inst_selected != -1){
     if (instance_exists(obj_editor.inst_selected)){
-      if (obj_editor.inst_selected.attr[? argument0[1]] != undefined){
-        if (is_real(obj_editor.inst_selected.attr[? argument0[1]])){
-          obj_editor.inst_selected.attr[? argument0[1]] = real(argument0[2]);
+      if (obj_editor.inst_selected.attr[? real(argument0[1])] != undefined){
+        if (is_real(obj_editor.inst_selected.attr[? real(argument0[1])])){
+          obj_editor.inst_selected.attr[? real(argument0[1])] = real(argument0[2]);
         }else{
-          obj_editor.inst_selected.attr[? argument0[1]] = argument0[2];
+          obj_editor.inst_selected.attr[? real(argument0[1])] = argument0[2];
         }
       }
     }

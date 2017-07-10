@@ -25,8 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>width = 128;
-height = 128;
+            <string>world_width = 128;
+world_height = 128;
+world_name = "uninitiliazed"
 
 if (global.toLoad != ""){
   world_load(global.toLoad);

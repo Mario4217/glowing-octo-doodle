@@ -40,7 +40,7 @@ if (room == rm_editor){
       if (src_attr != undefined){
         var type = src_attr[? "type"]
         buffer_write(buff, id_type, i);
-        buffer_write(buff, buffer_string, key);
+        buffer_write(buff, buffer_u16, key);
         buffer_write(buff, buffer_u8, type);
         buffer_write(buff, type, inst.attr[? key]);
       }

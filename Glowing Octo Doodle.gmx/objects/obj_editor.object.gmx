@@ -362,6 +362,17 @@ if (interface[? "editor_menu"] == "2"){
   }
 }
 
+if (inst_selected != -1){
+  draw_set_color(c_red);
+  draw_rectangle(inst_selected.bbox_left-2, inst_selected.bbox_top-2, inst_selected.bbox_right+1, inst_selected.bbox_bottom+1, true);
+}
+if (instance_exists(ui_hover)){
+  if (ui_hover.object_index == obj_editor_ent){
+    draw_set_color(c_lime);
+    draw_rectangle(ui_hover.bbox_left-3, ui_hover.bbox_top-3, ui_hover.bbox_right+2, ui_hover.bbox_bottom+2, true);
+  }
+}
+
 if (show_grid){
   draw_set_color(c_black);
   for (var i=max(floor(view_xview[0]/32),1); i&lt;min(ceil((view_wview[0]+view_xview[0])/32),world_width); i+=1)

@@ -214,8 +214,6 @@ depth = obj_editor.world_height*32 - y
           <argument>
             <kind>1</kind>
             <string>if (ui_hover == id &amp;&amp; obj_editor.inst_selected != id){
-  draw_set_color(c_red);
-  draw_rectangle(bbox_left-1, bbox_top-1, bbox_right, bbox_bottom,true)
   if (mouse_check_button_pressed(mb_left)){
     drag = true;
     drag_x = mouse_x - x;
@@ -223,56 +221,102 @@ depth = obj_editor.world_height*32 - y
   }
 }
 
-if (obj_editor.inst_selected == id){
-  draw_set_color(c_lime);
-  draw_rectangle(bbox_left-1, bbox_top-1, bbox_right, bbox_bottom,true);
-  draw_set_color(c_red);
-  draw_rectangle(bbox_left-2, bbox_top-2, bbox_right+1, bbox_bottom+1,true);
+if (attr[? ATTRIBUTE.skin] != undefined){
+  image_index = attr[? ATTRIBUTE.skin];
 }
 
-if (attr[? "skin"] != undefined){
-  image_index = attr[? "skin"];
-}
-
-if (ds_list_find_index(src_map[? "tags"], "wall")&gt;-1){
-  var width = attr[? "width"];
-  var height = attr[? "height"];
-  var yy = height + y - 64;
-  for (var i=0; i&lt;floor(width/64); i+=1){
-    draw_sprite(sprite_index, image_index, x+i*64, yy);
-  };
-  draw_sprite_part(sprite_index, image_index, 0, 0, width mod 64, sprite_height, x+i*64, yy);
-  
-  draw_sprite_area(spr_wall_top, image_index, x, y, x+width, yy);
-  
-  image_xscale = width / 64;
-  image_yscale = height / 64;
-  
-  var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; ui_hover == id);
-  
-  if (obj_editor.inst_selected == id){
-    draw_sprite(spr_scaleable, ho, bbox_right-32, bbox_bottom-32);
-  }
-  if (ho){
-    if (mouse_check_button_pressed(mb_left)){
-      drag = false;
-      size_drag = true;
-      size_drag_x = attr[? "width"] - mouse_x;
-      size_drag_y = attr[? "height"] - mouse_y;
+switch (gp_obj_index){
+  case 3: //wall
+    var width = attr[? ATTRIBUTE.width];
+    var height = attr[? ATTRIBUTE.height];
+    var yy = height + y - 64;
+    for (var i=0; i&lt;floor(width/64); i+=1){
+      draw_sprite(sprite_index, image_index, x+i*64, yy);
+    };
+    draw_sprite_part(sprite_index, image_index, 0, 0, width mod 64, sprite_height, x+i*64, yy);
+    
+    draw_sprite_area(spr_wall_top, image_index, x, y, x+width, yy);
+    
+    image_xscale = width / 64;
+    image_yscale = height / 64;
+    
+    var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; ui_hover == id);
+    
+    if (obj_editor.inst_selected == id){
+      draw_sprite(spr_scaleable, ho, bbox_right-32, bbox_bottom-32);
     }
-  }
-  if (size_drag){
-    obj_editor.show_grid = true;
-    attr[? "width"] = floor(clamp(size_drag_x + mouse_x,16,1024)/16)*16;
-    attr[? "height"] = floor(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
-    if (mouse_check_button_released(mb_left)){
-      size_drag = false;
-      editor_ent_send_to_ui();
+    if (ho){
+      if (mouse_check_button_pressed(mb_left)){
+        drag = false;
+        size_drag = true;
+        size_drag_x = attr[? ATTRIBUTE.width] - mouse_x;
+        size_drag_y = attr[? ATTRIBUTE.height] - mouse_y;
+      }
     }
-  }
-
-}else{
-  draw_self();
+    if (size_drag){
+      obj_editor.show_grid = true;
+      attr[? ATTRIBUTE.width] = floor(clamp(size_drag_x + mouse_x,16,1024)/16)*16;
+      attr[? ATTRIBUTE.height] = floor(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
+      if (mouse_check_button_released(mb_left)){
+        size_drag = false;
+        editor_ent_send_to_ui();
+      }
+    }
+  break;
+  case 4: //light wall
+    var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; ui_hover == id);
+    if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
+      image_xscale = attr[? ATTRIBUTE.size] / 64;
+      image_yscale = 1;
+      draw_sprite_area(spr_gp_barricade, image_index, x, y, x+attr[? ATTRIBUTE.size], y+64);
+      draw_sprite(spr_gp_barricade_left, image_index, x, y);
+      draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
+      if (obj_editor.inst_selected == id){
+        draw_sprite(spr_scaleable, ho, bbox_right-32, bbox_bottom-32);
+      }
+      if (ho){
+        if (mouse_check_button_pressed(mb_left)){
+          drag = false;
+          size_drag = true;
+          size_drag_x = attr[? ATTRIBUTE.size] - mouse_x;
+        }
+      }
+      if (size_drag){
+        obj_editor.show_grid = true;
+        attr[? ATTRIBUTE.size] = floor(clamp(size_drag_x + mouse_x,64,1024)/16)*16;
+        if (mouse_check_button_released(mb_left)){
+          size_drag = false;
+          editor_ent_send_to_ui();
+        }
+      }
+    }else{ //vertical
+      image_yscale = attr[? ATTRIBUTE.size] / 64;
+      image_xscale = 0.5;
+      draw_sprite_area(spr_gp_barricade, image_index, x+4, y, x+12, y+attr[? ATTRIBUTE.size]);
+      draw_sprite(spr_gp_barricade_top, image_index, x, y);
+      draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
+      if (obj_editor.inst_selected == id){
+        draw_sprite(spr_scaleable, ho, bbox_right-32, bbox_bottom-32);
+      }
+      if (ho){
+        if (mouse_check_button_pressed(mb_left)){
+          drag = false;
+          size_drag = true;
+          size_drag_y = attr[? ATTRIBUTE.size] - mouse_y;
+        }
+      }
+      if (size_drag){
+        obj_editor.show_grid = true;
+        attr[? ATTRIBUTE.size] = floor(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
+        if (mouse_check_button_released(mb_left)){
+          size_drag = false;
+          editor_ent_send_to_ui();
+        }
+      }
+    }
+  break;
+  default:
+    draw_self();
 }
 </string>
           </argument>

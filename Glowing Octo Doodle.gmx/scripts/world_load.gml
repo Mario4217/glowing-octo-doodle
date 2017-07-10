@@ -20,6 +20,13 @@ if (file_exists(path)){
   world_object.world_height = buffer_read(buff, buffer_u32);
   world_object.world_players = buffer_read(buff, buffer_u8);
   
+  if (room == rm_editor){
+    ui_set_value(obj_editor.input_name, obj_editor.world_name);
+    ui_set_value(obj_editor.input_width, obj_editor.world_width);
+    ui_set_value(obj_editor.input_height, obj_editor.world_height);
+    ui_set_value(obj_editor.input_players, obj_editor.world_players);
+  }
+  
   var entlist = ds_list_create();
   var ent_number = buffer_read(buff, buffer_u32);
   for (i=0; i<ent_number; i+=1)
@@ -44,8 +51,7 @@ if (file_exists(path)){
   var index = buffer_read(buff, id_type);
   while (index < ent_number){
     var inst = entlist[| index];
-    var attr = buffer_read(buff, buffer_string);
-    show_debug_message("Read '"+attr+"'");
+    var attr = buffer_read(buff, buffer_u16);
     var type = buffer_read(buff, buffer_u8);
     var val = buffer_read(buff,type);
     inst.overwrite_attr[? attr] = val;

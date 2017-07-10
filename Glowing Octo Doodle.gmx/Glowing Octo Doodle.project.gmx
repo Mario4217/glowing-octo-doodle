@@ -48,6 +48,11 @@
       <sprite>sprites\spr_gp_floor_button</sprite>
       <sprite>sprites\spr_gp_spawn</sprite>
       <sprite>sprites\spr_gp_wall</sprite>
+      <sprite>sprites\spr_gp_light_wall</sprite>
+      <sprite>sprites\spr_gp_barricade_left</sprite>
+      <sprite>sprites\spr_gp_barricade_top</sprite>
+      <sprite>sprites\spr_gp_barricade_bottom</sprite>
+      <sprite>sprites\spr_gp_barricade</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_achievement_secret</sprite>
@@ -237,6 +242,7 @@
       <object>objects\obj_gp_floor_button</object>
       <object>objects\obj_gp_spawn</object>
       <object>objects\obj_gp_wall</object>
+      <object>objects\obj_gp_light_wall</object>
       <object>objects\obj_parent_gameplay</object>
     </objects>
     <object>objects\obj_editor_ent</object>

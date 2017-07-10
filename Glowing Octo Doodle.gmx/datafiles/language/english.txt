@@ -47,6 +47,8 @@ editor.attribute.skin:			Skin
 editor.attribute.size:			Size
 editor.attribute.width:			Width
 editor.attribute.height:		Height
+editor.attribute.orientation:	Vertical
 gp.floor_button:				Floor Button
 gp.spawn:						Spawnpoint
 gp.wall:						Wall
+gp.light_wall:					Light Wall
