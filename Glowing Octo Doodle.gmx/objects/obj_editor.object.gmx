@@ -96,15 +96,11 @@ ui_add_child(editor_container, error);
 ent_label = ui_create_draggable(0.7,0.7,1,1,"{editor.selected_entity}",true);
 ent_label[? "visible"] = false;
 ui_set_class(ent_label, "editor-panel");
-ent_label_type = ui_add_child(ent_label, ui_create_label(0,0.15,1,0.25,""));
+//ent_label_type = ui_add_child(ent_label, ui_create_label(0,0.15,1,0.25,""));
 ui_add_child(ent_label,ui_create_button(0,0.9,1,1,"{editor.entity.destroy}","editor_destroy"));
-ent_label_attributes = ui_create_label(0,0.25,1,0.9,"");
+ent_label_attributes = ui_create_label(0,0.15,1,0.9,"");
 ui_add_child(ent_label, ent_label_attributes);
 ui_add_child(editor_container, ent_label);
-
-rad_t1[? "gp_port"] = ds_list_find_value(maps_container[? "children"],1);
-rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"],0);
-rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"],0);
 
 world_width = 64;
 world_height = 64;
@@ -120,7 +116,7 @@ for (var i=0; i&lt;ds_list_size(gp_editor); i++){
   var map = gp_objects[? gp_editor[| i]];
   var u = (i % 2) * 0.5;
   var v = floor(i/2)*0.1+0.1;
-  var btn = ui_create_radio(u,v,u+0.5,v+0.1,map[? "name"],map[? "id"]);
+  var btn = ui_create_radio(u,v,u+0.5,v+0.1,""/*map[? "name"]*/,map[? "id"]);
   ui_add_child(btn,ui_create_sprite(0.01,0.01,0.99,0.99,map[? "sprite"],0));
   ui_add_child(objects_container,btn);
 }
@@ -129,6 +125,10 @@ if (global.toLoad != ""){
   world_load(global.toLoad);
   global.toLoad = "";
 }
+
+rad_t1[? "gp_port"] = ds_list_find_value(maps_container[? "children"],1);
+rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"],0);
+rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"],0);
 
 inst_selected = -1;
 </string>
@@ -255,7 +255,7 @@ ent_label[? "visible"] = (inst_selected != -1);
 if (instance_exists(inst_selected) &amp;&amp; inst_selected != -1){
   var map = gp_objects[? inst_selected.gp_obj_index];
   if (map != undefined){  
-    ui_set_text(ent_label_type, lang_format("{editor.entity.type}", map[? "name"]));
+    //ui_set_text(ent_label_type, lang_format("{editor.entity.type}", map[? "name"]));
   }
 }
 </string>
@@ -339,6 +339,8 @@ if (interface[? "editor_menu"] == "2"){
       place_x = mouse_x;
       place_y = mouse_y;
     }
+    place_x += gamepad_axis_value(0, gp_axislh);
+    place_y += gamepad_axis_value(0, gp_axisrh);
     if (!keyboard_check(vk_alt)){
       place_x = round(place_x/16)*16;
       place_y = round(place_y/16)*16;

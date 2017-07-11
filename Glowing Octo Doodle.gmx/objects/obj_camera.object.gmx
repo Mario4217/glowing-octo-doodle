@@ -29,10 +29,13 @@
 view_visible[0] = true;
 var w = window_get_width();
 var h = window_get_height();
-view_wview[0] = w;
-view_hview[0] = h;
 view_wport[0] = w;
 view_hport[0] = h;
+
+var ratio =view_hport[0] / view_wport[0];
+
+view_wview[0] = 720;
+view_hview[0] = ratio * 720;
 
 room_speed = 60;
 </string>

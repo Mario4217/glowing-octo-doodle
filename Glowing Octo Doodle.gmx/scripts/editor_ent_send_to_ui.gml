@@ -17,5 +17,6 @@ for (var i=0; i<ds_map_size(src_attr); i+=1)
   ui_set_value(element, attr[? key]);
   ui_add_child(obj_editor.ent_label_attributes, ui_create_label(0,i*0.2,line,i*0.2+0.2,"{editor.attribute."+map[? "name"]+"}"));
   ui_add_child(obj_editor.ent_label_attributes, element);
-  key = ds_map_find_next(src_attr, key); 
+  key = ds_map_find_next(src_attr, key);
 };
+ui_set_text(obj_editor.ent_label, lang_format("{editor.selected_entity}",src_map[? "name"]));

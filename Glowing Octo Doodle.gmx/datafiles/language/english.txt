@@ -39,7 +39,7 @@ editor.map.height:				Map Height: [1]
 editor.map.players:				Playernumber: [1]
 editor.error.noname:			You need to give this level a name to save it!
 editor.test:					Test
-editor.selected_entity:			Selected Object
+editor.selected_entity:			Selected Object ([1])
 editor.entity.type:				Type: [1]
 editor.entity.destroy:			Destroy
 editor.attribute.player_index:	Player ID

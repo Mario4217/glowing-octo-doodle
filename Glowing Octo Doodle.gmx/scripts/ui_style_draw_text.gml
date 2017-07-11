@@ -36,7 +36,7 @@ draw_set_alpha(text_alpha);
 draw_set_halign(halign);
 draw_set_valign(valign);
 draw_set_color(text_color);
-draw_text_ext_transformed(x1+ox,y1+oy,argument6,string_height("|"),x2-x1,scale,scale,0);
+draw_text_ext_transformed(x1+ox,y1+oy,argument6,string_height("|"),(x2-x1)/scale,scale,scale,0);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_alpha(1);
