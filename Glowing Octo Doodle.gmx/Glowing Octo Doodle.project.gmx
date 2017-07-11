@@ -62,6 +62,14 @@
       <sprite>sprites\spr_player_front</sprite>
       <sprite>sprites\spr_player_right</sprite>
       <sprite>sprites\spr_player_left</sprite>
+      <sprites name="ballbot">
+        <sprite>sprites\spr_ballbot_front</sprite>
+        <sprite>sprites\spr_ballbot_right</sprite>
+        <sprite>sprites\spr_ballbot_back</sprite>
+        <sprite>sprites\spr_ballbot_front_secondary</sprite>
+        <sprite>sprites\spr_ballbot_right_secondary</sprite>
+        <sprite>sprites\spr_ballbot_back_secondary</sprite>
+      </sprites>
     </sprites>
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_wall_top</sprite>

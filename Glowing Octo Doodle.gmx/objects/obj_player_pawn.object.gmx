@@ -29,10 +29,17 @@
 walking = false;
 dir = 0;
 
-sprites[0] = spr_player_right;
-sprites[1] = spr_player_front;
-sprites[2] = spr_player_right;
-sprites[3] = spr_player_front;
+sprites[0,0] = spr_ballbot_right;
+sprites[1,0] = spr_ballbot_back;
+sprites[2,0] = spr_ballbot_right;
+sprites[3,0] = spr_ballbot_front;
+
+sprites[0,1] = spr_ballbot_right_secondary;
+sprites[1,1] = spr_ballbot_back_secondary;
+sprites[2,1] = spr_ballbot_right_secondary;
+sprites[3,1] = spr_ballbot_front_secondary;
+
+secondary_color = c_red;
 </string>
           </argument>
         </arguments>
@@ -57,12 +64,41 @@ sprites[3] = spr_player_front;
             <kind>1</kind>
             <string>depth = real(obj_world.world_height) * 32 - y
 
-sprite_index = sprites[dir];
+sprite_index = sprites[dir,0];
 if (walking){
-  image_index = (image_index + 0.2) % image_number;
+  image_index = (image_index + 0.2) % (image_number-1);
 }else{
-  image_index = 0;
+  image_index = 6;
 }
+if (dir == 2){
+  image_xscale = -1;
+}else{
+  image_xscale = 1;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_sprite_ext(sprites[dir,0], image_index, x , y, image_xscale, image_yscale, 0, c_white, 1);
+draw_sprite_ext(sprites[dir,1], image_index, x , y, image_xscale, image_yscale, 0, secondary_color, 1);
 </string>
           </argument>
         </arguments>
