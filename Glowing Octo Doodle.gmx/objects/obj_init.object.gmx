@@ -86,10 +86,12 @@ gp_editor = ds_list_create();
 register_gameplay_object(1,"{gp.floor_button}",obj_gp_floor_button);
 gameplay_object_add_output(1, "onPress");
 gameplay_object_add_output(1, "onRelease");
+gameplay_object_set_depth_anchor(1,1);
 
 register_gameplay_object(2,"{gp.spawn}",obj_gp_spawn);
 gameplay_object_add_output(2, "onSpawn");
 gameplay_object_add_attribute(2, ATTRIBUTE.player_index, "player_index",0,buffer_u8,0,15);
+gameplay_object_set_depth_anchor(2, 1);
 
 register_gameplay_object(3,"{gp.wall}",obj_gp_wall);
 gameplay_object_add_attribute(3,ATTRIBUTE.skin,"skin",0,buffer_u8,0,sprite_get_number(spr_gp_wall)-1);

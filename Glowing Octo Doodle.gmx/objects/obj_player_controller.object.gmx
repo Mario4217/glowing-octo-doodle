@@ -54,6 +54,24 @@ move_spd = 400;
             <kind>1</kind>
             <string>var xmov = bind_check("player_horizontal");
 var ymov = bind_check("player_vertical");
+
+//player_pawn.dir = 3;
+player_pawn.walking = false;
+
+if (xmov &gt; 0){
+  player_pawn.dir = 0;
+  player_pawn.walking = true;
+}else if (xmov &lt; 0){
+  player_pawn.dir = 2;
+  player_pawn.walking = true;
+}else if(ymov &gt; 0){
+  player_pawn.dir = 3;
+  player_pawn.walking = true;
+}else if(ymov &lt; 0){
+  player_pawn.dir = 1;
+  player_pawn.walking = true;
+}
+
 var dir = point_direction(0, 0, xmov, ymov);
 
 var spd = game_delta_time * move_spd * point_distance(0, 0, xmov, ymov);

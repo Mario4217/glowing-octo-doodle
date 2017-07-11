@@ -28,6 +28,7 @@
             <string>attr = ds_map_create();
 overwrite_attr = ds_map_create();
 gp_object_index = -1;
+init = false;
 alarm[0] = 1;
 </string>
           </argument>
@@ -102,6 +103,8 @@ if (attr[? ATTRIBUTE.skin] != undefined){
 }
 
 ds_map_destroy(overwrite_attr);
+
+init = true;
 </string>
           </argument>
         </arguments>
@@ -124,7 +127,13 @@ ds_map_destroy(overwrite_attr);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = obj_world.world_height*32 - bbox_bottom;
+            <string>if (init){
+  if (src_map[? "yanchor"] == 0){
+    depth = obj_world.world_height*32 - bbox_bottom;
+  }else{
+    depth = obj_world.world_height*32 - bbox_top;
+  }
+}
 </string>
           </argument>
         </arguments>
