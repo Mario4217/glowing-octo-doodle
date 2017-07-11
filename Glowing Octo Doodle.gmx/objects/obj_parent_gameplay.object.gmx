@@ -124,7 +124,7 @@ ds_map_destroy(overwrite_attr);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = obj_world.world_height*32 - y;
+            <string>depth = obj_world.world_height*32 - bbox_bottom;
 </string>
           </argument>
         </arguments>

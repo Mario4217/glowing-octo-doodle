@@ -34,8 +34,8 @@
 }else{ //vertical
   image_yscale = attr[? ATTRIBUTE.size] / 64;
   image_xscale = 0.5;
-  draw_sprite_area(spr_gp_barricade, image_index, x+4, y, x+12, y+attr[? ATTRIBUTE.size]);
   draw_sprite(spr_gp_barricade_top, image_index, x, y);
+  draw_sprite_area(spr_gp_barricade, image_index, x+4, y+4, x+12, y+attr[? ATTRIBUTE.size]);
   draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
 }
 </string>

@@ -61,6 +61,7 @@
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_wall_top</sprite>
     <sprite>sprites\spr_scaleable</sprite>
+    <sprite>sprites\spr_rotatable</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>

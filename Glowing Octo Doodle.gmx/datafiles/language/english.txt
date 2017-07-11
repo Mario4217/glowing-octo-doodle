@@ -42,6 +42,8 @@ editor.test:					Test
 editor.selected_entity:			Selected Object ([1])
 editor.entity.type:				Type: [1]
 editor.entity.destroy:			Destroy
+editor.attributes:				Attributes
+editor.logic:					Logic
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin
 editor.attribute.size:			Size
