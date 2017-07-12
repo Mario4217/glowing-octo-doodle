@@ -11,7 +11,7 @@ switch (blocks[0]){
       if (k == undefined){
         return "{key.k_"+string(code)+"}";
       }else{
-        return k;
+        return "{"+string(k)+"}";
       }
     }
   break;

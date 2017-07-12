@@ -27,6 +27,7 @@ menu.editor.new_map:			New Map
 menu.editor.new_pack:			New Pack
 menu.editor.edit_map:			Edit Map
 menu.editor.edit_pack:			Edit Pack
+
 editor.exit:					Exit the editor
 editor.save:					Save
 editor.open:					Open
@@ -45,13 +46,78 @@ editor.entity.type:				Type: [1]
 editor.entity.destroy:			Destroy
 editor.attributes:				Attributes
 editor.logic:					Logic
+
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin
 editor.attribute.size:			Size
 editor.attribute.width:			Width
 editor.attribute.height:		Height
 editor.attribute.orientation:	Vertical
+
 gp.floor_button:				Floor Button
 gp.spawn:						Spawnpoint
 gp.wall:						Wall
 gp.light_wall:					Light Wall
+
+key.add:						Add
+key.alt:						Alt
+key.anykey:						Anykey
+key.backspace:					Backspace
+key.control:					Control
+key.decimal:					Decimal
+key.delete:						Delete
+key.divide:						Divide
+key.down:						Down
+key.end:						End
+key.enter:						Enter
+key.escape:						Escape
+key.f1:							F1
+key.f2:							F2
+key.f3:							F3
+key.f4:							F4
+key.f5:							F5
+key.f6:							F6
+key.f7:							F7
+key.f8:							F8
+key.f9:							F9
+key.f10:						F10
+key.f11:						F11
+key.f12:						F12
+key.home:						Home
+key.insert:						Insert
+key.lalt:						Left Alt
+key.lcontrol:					Left Control
+key.left:						Left
+key.lshift:						Left Shift
+key.multiply:					Multiply
+key.nokey:						No Key
+key.numpad0:					Numpad 0
+key.numpad1:					Numpad 1
+key.numpad2:					Numpad 2
+key.numpad3:					Numpad 3
+key,numpad4:					Numpad 4
+key.numpad5:					Numpad 5
+key.numpad6:					Numpad 6
+key.numpad7:					Numpad 7
+key.numpad8:					Numpad 8
+key.numpad9:					Numpad 9
+key.pagedown:					Page Down
+key.pageup:						Page Up
+key.pause:						Pause
+key.printscreen:				Print
+key.ralt:						Right Alt
+key.rcontrol:					Right Control
+key.return:						Return
+key.right:						Righ
+key.rshift:						Right Shift
+key.shift:						Shift
+ley.space:						Space
+key.subtract:					Subtract
+key.tab:						Tab
+key.up:							Up
+key.start:						Start
+key.caps:						Caps
+key.numlock:					Numlock
+key.mb_right:					Right Mousebutton
+key.mb_left:					Left Mousebutton
+key.mb_middle:					Middle Mousebutton

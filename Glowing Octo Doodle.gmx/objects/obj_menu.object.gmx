@@ -149,7 +149,7 @@ var v = 0.1;
 var h = 0.08;
 var l = 0.55;
 var r = 0.95;
-var line = 0.8;
+var line = 0.7;
 ui_add_child(set_label,ui_create_label(l,v,r,v+h,"{menu.settings.bindings}"));
 v += h;
 ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.walk_up}"));
