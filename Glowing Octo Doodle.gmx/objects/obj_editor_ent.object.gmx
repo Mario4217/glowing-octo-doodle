@@ -268,7 +268,8 @@ switch (gp_obj_index){
     var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; ui_hover == id);
     
     if (obj_editor.inst_selected == id){
-      draw_sprite(spr_scaleable, ho, bbox_right-32, bbox_bottom-32);
+      var o = min(32, attr[? ATTRIBUTE.width]);
+      draw_sprite_part(spr_scaleable, ho, 0, 0, o, attr[? ATTRIBUTE.height], bbox_right-o, bbox_bottom-32);
     }
     if (ho){
       if (mouse_check_button_pressed(mb_left)){
@@ -297,7 +298,7 @@ switch (gp_obj_index){
       draw_sprite(spr_gp_barricade_left, image_index, x, y);
       draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
       if (obj_editor.inst_selected == id){
-        draw_sprite(spr_scaleable, ho, bbox_right-32, bbox_bottom-32);
+        draw_sprite_part(spr_scaleable, ho, 0, 0, min(32, attr[? ATTRIBUTE.size]), 32, bbox_right-32, bbox_bottom-32);
       }
       if (ho){
         if (mouse_check_button_pressed(mb_left)){
@@ -321,7 +322,7 @@ switch (gp_obj_index){
       draw_sprite_area(spr_gp_barricade, image_index, x+4, y+4, x+12, y+attr[? ATTRIBUTE.size]);
       draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
       if (obj_editor.inst_selected == id){
-        draw_sprite(spr_scaleable, ho, bbox_right-32, bbox_bottom-32);
+        draw_sprite_part(spr_scaleable, ho, 0, 0, min(32, attr[? ATTRIBUTE.size]), 32, bbox_right-32, bbox_bottom-32,);
       }
       if (ho){
         if (mouse_check_button_pressed(mb_left)){
