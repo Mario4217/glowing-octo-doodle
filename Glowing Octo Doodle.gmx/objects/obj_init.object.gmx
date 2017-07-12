@@ -115,8 +115,9 @@ globalvar is_server, in_network;
 in_network = false;
 is_server = true;
 
-globalvar camera;
+globalvar camera, testmode;
 camera = instance_create(0,0,obj_camera);
+testmode = ""; //if not empty than map name
 
 globalvar particle_map;
 particle_map = ds_map_create();

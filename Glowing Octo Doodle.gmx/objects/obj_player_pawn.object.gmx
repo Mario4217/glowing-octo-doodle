@@ -62,7 +62,7 @@ secondary_color = c_red;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = real(obj_world.world_height) * 32 - y
+            <string>depth = real(obj_world.world_height) * 32 - bbox_bottom;
 
 sprite_index = sprites[dir,0];
 if (walking){

@@ -131,6 +131,7 @@ rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"],0);
 rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"],0);
 
 inst_selected = -1;
+testmode = "";
 </string>
           </argument>
         </arguments>

@@ -78,6 +78,7 @@
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
+    <background>background\bg_testmode</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -242,6 +243,7 @@
   <fonts name="fonts">
     <font>fonts\ft_console</font>
     <font>fonts\ft_ui</font>
+    <font>fonts\ft_testmode</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_init</object>
