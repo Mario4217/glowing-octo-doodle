@@ -1,4 +1,6 @@
 ///ui_draw(element)
+texture_set_interpolation(true);
+
 var element = argument0;
 if (element[? "visible"]){
   
@@ -288,3 +290,5 @@ if (element[? "visible"]){
   
   ui_draw_list(element[? "children"]);
 }
+
+texture_set_interpolation(false);
