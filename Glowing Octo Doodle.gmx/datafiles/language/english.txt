@@ -54,6 +54,13 @@ editor.attribute.width:			Width
 editor.attribute.height:		Height
 editor.attribute.orientation:	Vertical
 
+editor.action.open:				Open
+editor.action.close:			Close
+
+editor.event.onPress:			OnPress
+editor.event.onRelease:			OnRelease
+editor.event.onSpawn:			OnSpawn
+
 gp.floor_button:				Floor Button
 gp.spawn:						Spawnpoint
 gp.wall:						Wall

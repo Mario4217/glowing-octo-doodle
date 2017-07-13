@@ -356,6 +356,21 @@ if (attr[? ATTRIBUTE.orientation] != undefined){
     }
   }
 }
+
+/*
+if (obj_editor.inst_selected == id){
+  draw_set_font(ft_editor_io);
+  var outputlist = src_map[? "outputs"];
+  var yy = bbox_top;
+  var xx = bbox_right;
+  for (i=0; i&lt;ds_list_size(outputlist); i+=1)
+  {
+    var outid = outputlist[| i];
+    draw_text(xx,yy,lang_format(dictionary_event[? outid]));
+    yy += 16;
+  };
+}
+*/
 </string>
           </argument>
         </arguments>

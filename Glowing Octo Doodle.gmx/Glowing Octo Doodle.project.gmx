@@ -244,6 +244,7 @@
     <font>fonts\ft_console</font>
     <font>fonts\ft_ui</font>
     <font>fonts\ft_testmode</font>
+    <font>fonts\ft_editor_io</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_init</object>
