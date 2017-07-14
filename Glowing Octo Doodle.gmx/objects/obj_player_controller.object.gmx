@@ -68,10 +68,10 @@ if (xmov &gt; 0){
 }else if (xmov &lt; 0){
   player_pawn.dir = 2;
   player_pawn.walking = true;
-}else if(ymov &gt; 0){
+}else if (ymov &gt; 0){
   player_pawn.dir = 3;
   player_pawn.walking = true;
-}else if(ymov &lt; 0){
+}else if (ymov &lt; 0){
   player_pawn.dir = 1;
   player_pawn.walking = true;
 }
@@ -80,9 +80,17 @@ var dir = point_direction(0, 0, xmov, ymov);
 
 var spd = game_delta_time * move_spd * point_distance(0, 0, xmov, ymov);
 
+if (!collision_rectangle(player_pawn.x-16+xmov*spd, player_pawn.y-16, player_pawn.x+16+xmov*spd, player_pawn.y, obj_clip, 0, 0)){
+  player_pawn.x += xmov*spd;
+}
+if (!collision_rectangle(player_pawn.x-16, player_pawn.y-16+ymov*spd, player_pawn.x+16, player_pawn.y+ymov*spd, obj_clip, 0, 0)){
+  player_pawn.y += ymov*spd;
+}
+/*
 if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {
     move(spd, dir, player_pawn);
 }
+*/
 
 view_xview[0] = floor(player_pawn.x - view_wview[0]/2);
 view_yview[0] = floor(player_pawn.y - view_hview[0]/2);

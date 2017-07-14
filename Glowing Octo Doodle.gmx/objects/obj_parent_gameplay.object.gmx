@@ -60,6 +60,11 @@ alarm[0] = 1;
 ds_list_destroy(outputs);
 ds_map_destroy(attr);
 ds_map_destroy(input);
+if (gameplay_object_have_tag(gp_object_index,"clip")){
+  with (clip){
+    instance_destroy();
+  }
+}
 </string>
           </argument>
         </arguments>
@@ -107,6 +112,16 @@ if (ds_map_size(overwrite_attr) &gt; 0){
 
 if (attr[? ATTRIBUTE.skin] != undefined){
   image_index = attr[? ATTRIBUTE.skin];
+}
+
+if (gameplay_object_have_tag(src_map[? "id"],"clip")){
+  clip = instance_create(x,y,obj_clip);
+  if (attr[? ATTRIBUTE.width] != undefined){
+    clip.image_xscale = attr[? ATTRIBUTE.width]/32;
+  }
+  if (attr[? ATTRIBUTE.height] != undefined){
+    clip.image_yscale = attr[? ATTRIBUTE.height]/32;
+  }
 }
 
 ds_map_destroy(overwrite_attr);

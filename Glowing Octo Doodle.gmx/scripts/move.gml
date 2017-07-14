@@ -4,10 +4,10 @@ var spd = argument0;
 var dir = argument1;
 var obj = argument2;
     
-var xtarg = player_pawn.x+lengthdir_x(spd,dir);
-var ytarg = player_pawn.y+lengthdir_y(spd,dir);
+var xtarg = obj.x+lengthdir_x(spd,dir);
+var ytarg = obj.y+lengthdir_y(spd,dir);
 
-if (place_free(xtarg,ytarg)) {
+if (!collision_point(xtarg,ytarg, obj_clip, 0, 0)) {
     obj.x = xtarg;
     obj.y = ytarg;
 } else {
@@ -18,10 +18,10 @@ if (place_free(xtarg,ytarg)) {
             var angle_to_check = dir+angle*multiplier;
             xtarg = obj.x+lengthdir_x(spd, angle_to_check);
             ytarg = obj.y+lengthdir_y(spd, angle_to_check);     
-            if (place_free(xtarg,ytarg)) {
+            if (!collision_point(xtarg,ytarg, obj_clip, 0, 0)){
                 obj.x = xtarg;
                 obj.y = ytarg;  
-                exit;       
+                exit;
             }   
         }
     }

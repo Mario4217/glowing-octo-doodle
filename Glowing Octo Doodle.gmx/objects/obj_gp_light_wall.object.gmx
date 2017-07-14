@@ -33,6 +33,37 @@ is_open = false;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+
+if (attr[? ATTRIBUTE.orientation] == 0){
+  clip.image_xscale = attr[? ATTRIBUTE.size] / 32;
+  clip.image_yscale = 2;
+}else{
+  clip.image_xscale = 1;
+  clip.image_yscale = attr[? ATTRIBUTE.size] / 32;;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
@@ -53,9 +84,11 @@ is_open = false;
             <string>switch (input[? "action"]){
   case ACTION.open:
     is_open = true;
+    clip.x = -attr[? ATTRIBUTE.size];
   break;
   case ACTION.close:
     is_open = false;
+    clip.x = x;
   break;
 }
 </string>
