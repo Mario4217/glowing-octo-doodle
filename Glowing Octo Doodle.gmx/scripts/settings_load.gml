@@ -13,7 +13,7 @@ if (file_exists("settings.ini")){
   ini_close();
   console_command_execute("set_resolution "+string(w)+" "+string(h));
   console_command_execute("set_vsync "+string(vsync));
-  console_command_execute("fullscreen"+string(fullscreen));
+  console_command_execute("fullscreen "+string(fullscreen));
   console_command_execute("set_inner_deadzone "+string(inner_deadzone));
   console_command_execute("set_outer_deadzone "+string(outer_deadzone));
 }

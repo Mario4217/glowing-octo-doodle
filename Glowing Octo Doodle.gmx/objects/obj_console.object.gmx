@@ -55,6 +55,10 @@ console_command_add("teleport",cmd_teleport,2,"Teleports the player to a specifi
 console_command_add("set_inner_deadzone",cmd_set_inner_deadzone,1,"Sets the inner deadzone of the controller","set_inner_deadzone &lt;value&gt;");
 console_command_add("set_outer_deadzone",cmd_set_outer_deadzone,1,"Sets the outer deadzone of the controller","set_outer_deadzone &lt;value&gt;");
 console_command_add("editor_test",cmd_editor_test,0,"Test the map");
+console_command_add("editor_logic",cmd_editor_logic,0,"Opens the logic window of the selected entity in the editor");
+console_command_add("editor_start_link",cmd_editor_start_link,1,"Starts the process of linking an event of some object to the action of another object","editor_start_link &lt;event id&gt;");
+console_command_add("editor_end_link",cmd_editor_end_link,1,"Ends the process of linking an event to an action","editor_end_link &lt;action id&gt;");
+console_command_add("editor_cut_link",cmd_editor_cut_link,1,"Removes an output on the selected object", "editor_cut_link &lt;link index&gt;");
 </string>
           </argument>
         </arguments>

@@ -58,6 +58,26 @@ if (file_exists(path)){
     index = buffer_read(buff, id_type);
   }
   
+  //events
+  var index = buffer_read(buff, id_type);
+  while (index < ent_number){
+    var inst = entlist[| index];
+    var event = buffer_read(buff, buffer_u16);
+    var target = buffer_read(buff, id_type);
+    var action = buffer_read(buff, buffer_u16);
+    var map = ds_map_create();
+    map[? "event"] = event;
+    map[? "source"] = inst;
+    map[? "action"] = action;
+    map[? "target"] = entlist[| target];
+    ds_list_add(inst.outputs, map);
+    if (room == rm_editor){
+      ds_list_add(inst.inputs, map);
+    }
+    
+    index = buffer_read(buff, id_type);
+  }
+  
   ds_list_destroy(entlist);
   buffer_delete(buff);
 }

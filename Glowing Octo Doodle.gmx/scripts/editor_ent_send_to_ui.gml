@@ -2,8 +2,7 @@
 ds_list_clear(obj_editor.ent_label_attributes[? "children"]);
 var src_attr = src_map[? "attr"];
 var key = ds_map_find_first(src_attr)
-for (var i=0; i<ds_map_size(src_attr); i+=1)
-{
+for (var i=0; i<ds_map_size(src_attr); i+=1){
   var name = dictionary_attribute[? key];
   var line = 0.4;
   var map = src_attr[? key];

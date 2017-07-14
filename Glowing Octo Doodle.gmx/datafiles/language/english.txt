@@ -46,6 +46,8 @@ editor.entity.type:				Type: [1]
 editor.entity.destroy:			Destroy
 editor.attributes:				Attributes
 editor.logic:					Logic
+editor.io:						IO
+editor.link:					[1] -> [2] in [3]
 
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin

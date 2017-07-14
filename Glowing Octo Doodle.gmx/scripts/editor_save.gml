@@ -49,6 +49,21 @@ if (room == rm_editor){
   }
   buffer_write(buff, id_type, i+1);
   
+  //events
+  for(var i=0; i<instance_number(obj_editor_ent); i++){
+    var inst = instance_find(obj_editor_ent,i);
+    for (j=0; j<ds_list_size(inst.outputs); j++)
+    {
+      var map = inst.outputs[| j];
+      buffer_write(buff, id_type, i);
+      buffer_write(buff, buffer_u16, map[? "event"]);
+      buffer_write(buff, id_type, map[? "target"].index);
+      buffer_write(buff, buffer_u16, map[? "action"]);
+    };
+  }
+  buffer_write(buff, id_type, i+1);
+  
+  
   buffer_save(buff,"editor/"+string(name)+".puz");
-  buffer_delete(buff);  
+  buffer_delete(buff);
 }

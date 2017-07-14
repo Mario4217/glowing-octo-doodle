@@ -28,6 +28,7 @@
             <string>gp_obj_index = -1;
 alarm[0] = 1;
 outputs = ds_list_create();
+inputs = ds_list_create();
 drag = false;
 drag_x = 0;
 drag_y = 0;
@@ -58,7 +59,19 @@ yet_selected = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ds_list_destroy(outputs);
+            <string>for (var i=0; i&lt;ds_list_size(inputs); i++){
+  var map = inputs[| i];
+  ds_list_delete(map[? "source"].outputs, ds_list_find_index(map[? "source"].outputs, map));
+  ds_map_destroy(map);
+}
+for (i=0; i&lt;ds_list_size(outputs); i+=1){
+  var map = outputs[| i];
+  ds_list_delete(map[? "target"].inputs, ds_list_find_index(map[? "target"].inputs, map));
+  ds_map_destroy(map);
+};
+
+ds_list_destroy(inputs);
+ds_list_destroy(outputs);
 ds_map_destroy(attr);
 </string>
           </argument>
@@ -159,9 +172,6 @@ ds_map_destroy(overwrite_attr);
 
 if (obj_editor.inst_selected == id){
   draw_set_color(c_lime);
-  if (mouse_check_button_pressed(mb_right)){
-    obj_editor.inst_selected = -1;
-  }
   if (keyboard_check_pressed(vk_delete)){
     console_command_execute("editor_destroy");
   }
@@ -173,7 +183,8 @@ if (obj_editor.inst_selected == id){
     }
   }
 }
-if (drag){
+
+if (drag &amp;&amp; obj_editor.inst_selected == id){
   obj_editor.show_grid = true;
   var snap = 16;
   if (keyboard_check(vk_alt)){snap = 1;}
@@ -181,14 +192,6 @@ if (drag){
   y = round((mouse_y + drag_y)/snap)*snap;
   if (mouse_check_button_released(mb_left)){
     drag = false;
-  }
-}
-
-if (ui_hover == id &amp;&amp; obj_editor.inst_selected != id){
-  if (mouse_check_button_pressed(mb_left)){
-    obj_editor.inst_selected = id;
-    editor_ent_send_to_ui();
-    yet_selected = true;
   }
 }
 
@@ -357,20 +360,12 @@ if (attr[? ATTRIBUTE.orientation] != undefined){
   }
 }
 
-/*
-if (obj_editor.inst_selected == id){
-  draw_set_font(ft_editor_io);
-  var outputlist = src_map[? "outputs"];
-  var yy = bbox_top;
-  var xx = bbox_right;
-  for (i=0; i&lt;ds_list_size(outputlist); i+=1)
-  {
-    var outid = outputlist[| i];
-    draw_text(xx,yy,lang_format(dictionary_event[? outid]));
-    yy += 16;
-  };
-}
-*/
+for (var i=0; i&lt;ds_list_size(outputs); i+=1){
+  var map = outputs[| i];
+  draw_set_color(c_lime);
+  draw_arrow(x,y+i*5,map[? "target"].x, map[? "target"].y, 8);
+};
+
 </string>
           </argument>
         </arguments>

@@ -255,7 +255,6 @@ if (element[? "visible"]){
       ui_draw_element_sprite(x1,y1,x2,y2,element);
     break;
   }
-  
   if (element[? "top"] != undefined){
     var index = ds_list_find_index(element[? "children"],element[? "top"]);
     ds_list_delete(element[? "children"],index);

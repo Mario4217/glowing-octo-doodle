@@ -57,6 +57,7 @@
     <sprites name="ui">
       <sprite>sprites\spr_achievement_secret</sprite>
       <sprite>sprites\spr_ui_trash</sprite>
+      <sprite>sprites\spr_ui_io</sprite>
     </sprites>
     <sprites name="player">
       <sprite>sprites\spr_player_front</sprite>
@@ -75,6 +76,7 @@
     <sprite>sprites\spr_wall_top</sprite>
     <sprite>sprites\spr_scaleable</sprite>
     <sprite>sprites\spr_rotatable</sprite>
+    <sprite>sprites\spr_io</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
@@ -190,6 +192,10 @@
       <script>scripts\cmd_set_inner_deadzone.gml</script>
       <script>scripts\cmd_set_outer_deadzone.gml</script>
       <script>scripts\cmd_editor_test.gml</script>
+      <script>scripts\cmd_editor_logic.gml</script>
+      <script>scripts\cmd_editor_start_link.gml</script>
+      <script>scripts\cmd_editor_end_link.gml</script>
+      <script>scripts\cmd_editor_cut_link.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -239,6 +245,8 @@
     <script>scripts\mouse_over.gml</script>
     <script>scripts\draw_sprite_area.gml</script>
     <script>scripts\world_load.gml</script>
+    <script>scripts\global_mouse_over_ui.gml</script>
+    <script>scripts\mouse_over_ui.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>

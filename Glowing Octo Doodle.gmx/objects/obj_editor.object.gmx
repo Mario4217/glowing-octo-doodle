@@ -101,6 +101,13 @@ ui_add_child(ent_label,ui_create_button(0,0.9,1,1,"{editor.entity.destroy}","edi
 ent_label_attributes = ui_create_label(0,0.15,1,0.9,"");
 ui_add_child(ent_label, ent_label_attributes);
 ui_add_child(editor_container, ent_label);
+ui_add_child(ent_label, ui_create_button(0.9,0,1,0.1,"{editor.io}","editor_logic"));
+
+//entity logic
+show_io = false;
+
+logic_window = ui_add_child(editor_container,ui_create_draggable(0.4,0.7,0.7,0.725,"{editor.logic}",true));
+logic_window[? "visible"] = false;
 
 world_width = 64;
 world_height = 64;
@@ -132,6 +139,11 @@ rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"],0);
 
 inst_selected = -1;
 testmode = "";
+
+linkmode = false
+linksource = -1;
+linkevent = 0;
+linktarget = 0;
 </string>
           </argument>
         </arguments>
@@ -177,7 +189,64 @@ testmode = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_wview[0] = view_wport[0] / zoom;
+            <string>///entity handling
+if (instance_exists(ui_hover)){
+  if (ui_hover.object_index == obj_editor_ent){
+    if (linkmode == false){
+      if (mouse_check_button_pressed(mb_left) &amp;&amp; inst_selected != ui_hover){
+        inst_selected = ui_hover;
+        logic_window[? "visible"] = false;
+        with (inst_selected){
+          editor_ent_send_to_ui();
+          yet_selected = true;
+        }
+      }
+    }else{
+      if (mouse_check_button_pressed(mb_left)){
+        ds_list_clear(obj_editor.logic_window[? "children"]);
+        linktarget = ui_hover;
+        v = 1;
+        var inputs = ui_hover.src_map[? "inputs"];
+        for (var i=0; i&lt;ds_list_size(inputs); i+=1){
+          var iid = inputs[| i];
+          var label = ui_add_child(obj_editor.logic_window, ui_create_label(0,v,1,v+1,dictionary_action[? iid]));
+          ui_add_child(label, ui_create_button(0,0,0.1,1,"+","editor_end_link "+string(iid)));
+          v += 1;
+        }
+      }
+    }
+  }
+}
+
+if (inst_selected != -1){
+  if (mouse_check_button_pressed(mb_right)){
+    inst_selected = -1;
+    logic_window[? "visible"] = false;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///view and UI
+
+view_wview[0] = view_wport[0] / zoom;
 view_hview[0] = view_hport[0] / zoom;
 
 if ((mouse_wheel_up() || gamepad_button_check_pressed(0,gp_shoulderrb)) &amp;&amp; tzoom &lt; 16){
@@ -188,8 +257,14 @@ if ((mouse_wheel_down() || gamepad_button_check_pressed(0,gp_shoulderlb)) &amp;&
 }
 zoom += (tzoom-zoom)/4;
 
+var px = x;
+var py = y;
 x = clamp(x+gamepad_axis_value(0,gp_axisrh)*10/zoom,0,world_width*32);
 y = clamp(y+gamepad_axis_value(0,gp_axisrv)*10/zoom,0,world_height*32);
+if (x != px || y != py){
+  place_x = x;
+  place_y = y;
+}
 
 if (mouse_check_button_pressed(mb_middle)){
   drag = true;
@@ -223,7 +298,7 @@ if (bind_check_pressed("menu")){
   inst_selected = -1;
 }
 if (gamepad_button_check_pressed(0,gp_face2)){
-  if (interface[? "editor_menu"] != 0){
+  if (interface[? "editor_menu"] != "0"){
     if (interface[? "editor_menu"] == "2"){
       ui_gamepad_position = rad_t2; 
     }else if (interface[? "editor_menu"] == "3"){
@@ -231,7 +306,7 @@ if (gamepad_button_check_pressed(0,gp_face2)){
     }else{
       ui_gamepad_position = rad_t1;
     }
-    interface[? "editor_menu"] = 0;
+    interface[? "editor_menu"] = "0";
     ui_set_value(topbar, 0);
   }
 }
@@ -304,8 +379,51 @@ if (instance_exists(inst_selected) &amp;&amp; inst_selected != -1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(ft_ui);
+            <string>/*
+if (inst_selected != -1 &amp;&amp; show_io &amp;&amp; connect_mode == false){
+  var ent = inst_selected;
+  draw_set_font(ft_editor_io);
+  var outputlist = ent.src_map[? "outputs"];
+  var xx = ui_world_to_ui_space_x(ent.bbox_right) * view_wport[0];
+  var yy = ui_world_to_ui_space_y(ent.bbox_top) *  view_hport[0];
+  var w = 256;
+  var h = 64;
+  var hover = global_mouse_over_ui(xx,yy,xx+w,yy+h, string(id)+string("IO"));
+  draw_set_color(c_white)
+  draw_rectangle(xx,yy,xx+w,yy+h,false);
+  draw_set_color(c_black)
+  draw_rectangle(xx,yy,xx+w,yy+h,true);
+  draw_set_halign(fa_right);
+  for (i=0; i&lt;ds_list_size(outputlist); i+=1)
+  {
+    var ho = mouse_over_ui(xx+w-16,yy,xx+w,yy+16);
+    draw_sprite(spr_ui_io, ho, xx+w-16, yy);
+    if (mouse_check_button_pressed(mb_left) &amp;&amp; ho &amp;&amp; hover){
+      connect_mode = true;
+    }
+    var outid = outputlist[| i];
+    draw_text(xx+w-16,yy,lang_format(dictionary_event[? outid]));
+    yy += 16;
+  };
+  draw_set_halign(fa_left)
+}
+
+if (show_io == true){
+  if (mouse_check_button_pressed(mb_right) &amp;&amp; connect_mode == false){
+    show_io = false;
+  }
+}
+if (connect_mode == true){
+  if (mouse_check_button_pressed(mb_right)){
+    connect_mode = false;
+  }
+}
+*/
+
+draw_set_font(ft_ui);
 ui_draw(editor_container);
+
+
 </string>
           </argument>
         </arguments>
@@ -392,6 +510,16 @@ if (show_grid){
     if ((i mod 16)==0){draw_set_color(c_lime)}
     draw_line(0,i*32-1,world_width*32,i*32-1);
   };
+}
+
+if (linkmode){
+  if (instance_exists(inst_selected) &amp;&amp; inst_selected != -1){
+    draw_set_color(c_lime);
+    var ent = inst_selected;
+    draw_arrow(ent.x,ent.y,mouse_x,mouse_y,8);
+  }else{
+    linkmode = false;
+  }
 }
 </string>
           </argument>
