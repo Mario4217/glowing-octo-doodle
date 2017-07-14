@@ -190,7 +190,7 @@ gameplay_object_add_attribute(3,ATTRIBUTE.width,64,buffer_u16,16,1024);
 gameplay_object_add_attribute(3,ATTRIBUTE.height,64,buffer_u16,64,1024);
 gameplay_object_add_tag(3,"wall");
 
-register_gameplay_object(4,"{gp.wall}",obj_gp_light_wall);
+register_gameplay_object(4,"{gp.light_gate}",obj_gp_light_wall);
 //gameplay_object_add_attribute(4,ATTRIBUTE.skin,"skin",0,buffer_u8,0,sprite_get_number(spr_gp_light_wall)-1);
 gameplay_object_add_attribute(4,ATTRIBUTE.orientation,0,buffer_bool,0,1);
 gameplay_object_add_attribute(4,ATTRIBUTE.size,64,buffer_u16,64,256);

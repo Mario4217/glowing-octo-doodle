@@ -40,7 +40,8 @@ editor.map.height:				Map Height: [1]
 editor.map.players:				Playernumber: [1]
 editor.error.noname:			You need to give this level a name to save it!
 editor.test:					Test
-editor.testmode:				Testmode
+editor.testmode:				Testmode! Testing: [1]
+editor.testmode.back:			Back to editor!
 editor.selected_entity:			Selected Object ([1])
 editor.entity.type:				Type: [1]
 editor.entity.destroy:			Destroy
@@ -66,7 +67,7 @@ editor.event.onSpawn:			OnSpawn
 gp.floor_button:				Floor Button
 gp.spawn:						Spawnpoint
 gp.wall:						Wall
-gp.light_wall:					Light Wall
+gp.light_gate:					Light Wall
 
 key.add:						Add
 key.alt:						Alt

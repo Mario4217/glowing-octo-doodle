@@ -29,6 +29,10 @@
 
 move_spd = 400;
 
+if (testmode != ""){
+  btn_back_to_editor = ui_create_button(0.8,0,1,0.04,"{editor.testmode.back}","editor "+string(testmode))
+}
+
 //moved bind stuff to the init object
 </string>
           </argument>
@@ -80,8 +84,8 @@ if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {
     move(spd, dir, player_pawn);
 }
 
-view_xview[0] = player_pawn.x - view_wview[0]/2;
-view_yview[0] = player_pawn.y - view_hview[0]/2;
+view_xview[0] = floor(player_pawn.x - view_wview[0]/2);
+view_yview[0] = floor(player_pawn.y - view_hview[0]/2);
 </string>
           </argument>
         </arguments>
@@ -114,9 +118,11 @@ view_yview[0] = player_pawn.y - view_hview[0]/2;
   draw_set_font(ft_testmode);
   draw_set_color(c_white);
   draw_set_valign(fa_middle);
-  draw_text(0,16,lang_format("{editor.testmode}"));
+  draw_text(0,16,lang_format("{editor.testmode}",testmode));
   draw_set_valign(fa_top);
+  ui_draw(btn_back_to_editor);
 }
+
 </string>
           </argument>
         </arguments>

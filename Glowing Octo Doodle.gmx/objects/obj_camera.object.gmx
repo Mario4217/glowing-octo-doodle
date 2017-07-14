@@ -32,10 +32,12 @@ var h = window_get_height();
 view_wport[0] = w;
 view_hport[0] = h;
 
+var zoom = floor(1080 / h);
+
 var ratio =view_hport[0] / view_wport[0];
 
-view_wview[0] = 720;
-view_hview[0] = ratio * 720;
+view_wview[0] = zoom*view_wport[0];
+view_hview[0] = ratio * zoom * view_wport[0];
 
 room_speed = 60;
 </string>

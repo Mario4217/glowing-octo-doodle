@@ -247,6 +247,7 @@
     <script>scripts\world_load.gml</script>
     <script>scripts\global_mouse_over_ui.gml</script>
     <script>scripts\mouse_over_ui.gml</script>
+    <script>scripts\event_trigger.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>

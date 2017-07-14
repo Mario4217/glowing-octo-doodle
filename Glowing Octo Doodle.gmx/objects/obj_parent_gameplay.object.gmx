@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>attr = ds_map_create();
 overwrite_attr = ds_map_create();
+outputs = ds_list_create();
+input = ds_map_create();
 gp_object_index = -1;
 init = false;
 alarm[0] = 1;
@@ -52,7 +54,12 @@ alarm[0] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ds_map_destroy(attr);
+            <string>for (i=0; i&lt;ds_list_size(outputs); i+=1){
+  ds_map_destroy(outputs[| i]);
+};
+ds_list_destroy(outputs);
+ds_map_destroy(attr);
+ds_map_destroy(input);
 </string>
           </argument>
         </arguments>
