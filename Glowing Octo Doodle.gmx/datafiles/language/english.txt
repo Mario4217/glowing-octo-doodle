@@ -5,6 +5,10 @@ menu.editor:					Editor
 menu.quit:						Quit
 menu.back:						Back
 menu.main:						Yay! A cool game :D
+menu.profile.color:				Color
+menu.profile.red:				Red
+menu.profile.green:				Green
+menu.profile.blue:				Blue
 menu.settings.fullscreen:		Fullscreen
 menu.settings.volume_music:		Music Volume
 menu.settings.volume_sfx:		Effect Volume
@@ -19,6 +23,8 @@ menu.settings.walk_right:		Walk Right
 menu.settings.walk_down:		Walk Down
 menu.settings.walk_left:		Walk Left
 menu.settings.interact:			Interact
+menu.settings.pickup:			Pickup
+menu.settings.putdown:			Put Down
 menu.settings.bindings:			Bindings
 menu.play.new:					New Game
 menu.play.load:					Load a saved game
@@ -48,7 +54,7 @@ editor.entity.destroy:			Destroy
 editor.attributes:				Attributes
 editor.logic:					Logic
 editor.io:						IO
-editor.link:					[1] -> [2] in [3]
+editor.link:					[1] -> [2] [3]
 
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin
@@ -68,6 +74,8 @@ gp.floor_button:				Floor Button
 gp.spawn:						Spawnpoint
 gp.wall:						Wall
 gp.light_gate:					Light Wall
+gp.a3:							a³
+gp.goalzone:					Goalzone
 
 key.add:						Add
 key.alt:						Alt

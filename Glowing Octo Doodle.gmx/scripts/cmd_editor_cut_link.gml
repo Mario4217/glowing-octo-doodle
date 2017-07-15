@@ -9,6 +9,6 @@ if (room == rm_editor){
       ds_list_delete(map[? "target"].inputs, ds_list_find_index(map[? "target"].inputs, map));
       ds_map_destroy(map);
     }
-    console_command_execute("editor_logic");
+    obj_editor.alarm[1] = 1;
   }
 }

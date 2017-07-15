@@ -62,11 +62,6 @@ var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
 ui_add_child(menu_play,btn_back);
 btn_back[? "gp_port"] = btn_play;
 
-ui_add_child(menu_profile,ui_create_label(0.1,0.2,0.4,0.28,"{menu.profile}"));
-var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
-ui_add_child(menu_profile,btn_back);
-btn_back[? "gp_port"] = btn_profile;
-
 ui_add_child(menu_editor,ui_create_label(0.1,0.2,0.4,0.28,"{menu.editor}"));
 ui_add_child(menu_editor,ui_create_button(0.1,0.3,0.4,0.35,"{menu.editor.new_map}","editor"));
 ui_add_child(menu_editor,ui_create_button(0.1,0.4,0.4,0.45,"{menu.editor.new_pack}",""));
@@ -75,6 +70,26 @@ var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
 ui_add_child(menu_editor,btn_back);
 btn_back[? "gp_port"] = btn_editor;
 
+//###############---Profile---#######################
+ui_add_child(menu_profile,ui_create_label(0.1,0.2,0.4,0.28,"{menu.profile}"));
+var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
+ui_add_child(menu_profile,btn_back);
+btn_back[? "gp_port"] = btn_profile;
+
+var profile_label = ui_create_label(0.1,0.3,0.4,0.8,"");
+ui_add_child(menu_profile,profile_label);
+ui_add_child(profile_label,ui_create_sprite(0.5, 0.1, 0.9, 0.3, spr_ballbot_front, 6));
+profile_sprite_secondary = ui_add_child(profile_label,ui_create_sprite(0.5, 0.1, 0.9, 0.3, spr_ballbot_front_secondary, 6));
+profile_sprite_secondary_white = ui_add_child(profile_label,ui_create_sprite(0.1, 0.1, 0.5, 0.3, spr_white, 0));
+
+var sli_red = ui_set_value(ui_set_event(ui_add_child(profile_label,ui_create_slider(0.1, 0.4, 0.9, 0.5, "{menu.profile.red}", 0, 255, 1)), "onchange", "edit_profile red !value"), profile_map[? "red"]);
+ui_set_value(ui_set_event(ui_add_child(profile_label,ui_create_slider(0.1, 0.5, 0.9, 0.6, "{menu.profile.green}", 0, 255, 1)), "onchange", "edit_profile green !value"), profile_map[? "green"]);
+var sli_blue = ui_set_value(ui_set_event(ui_add_child(profile_label,ui_create_slider(0.1, 0.6, 0.9, 0.7, "{menu.profile.blue}", 0, 255, 1)), "onchange", "edit_profile blue !value"), profile_map[? "blue"]);
+
+btn_back[? "gp_up"] = sli_blue;
+sli_blue[? "gp_down"] = btn_back;
+btn_back[? "gp_down"] = sli_red;
+sli_red[? "gp_up"] = btn_back;
 //###############---Settings---#######################
 ui_add_child(menu_settings,ui_create_label(0.1,0.2,0.4,0.28,"{menu.settings}"));
 var set_label = ui_create_label(0.2,0.3,0.8,0.8,"");
@@ -166,6 +181,12 @@ ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"player_horizontal",1,1));
 v += h;
 ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.interact}"));
 ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"interact",0,1));
+v += h;
+ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.pickup}"));
+ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"pickup",0,1));
+v += h;
+ui_add_child(set_label,ui_create_label(l,v,line,v+h,"{menu.settings.putdown}"));
+ui_add_child(set_label,ui_create_binding(line,v,r,v+h,"putdown",0,1));
 
 ui_add_child(menu_settings,btn_back);
 
@@ -232,6 +253,9 @@ if (gamepad_button_check_pressed(0, gp_face2) &amp;&amp; room == rm_game){
     interface[? "menu"] = "1";
   }
 }
+
+profile_sprite_secondary[? "blend"] = make_color_rgb(profile_map[? "red"], profile_map[? "green"], profile_map[? "blue"]);
+profile_sprite_secondary_white[? "blend"] = make_color_rgb(profile_map[? "red"], profile_map[? "green"], profile_map[? "blue"]);
 </string>
           </argument>
         </arguments>
@@ -281,7 +305,7 @@ if (gamepad_button_check_pressed(0, gp_face2) &amp;&amp; room == rm_game){
           <argument>
             <kind>1</kind>
             <string>draw_set_font(ft_ui);
-if (room != rm_editor){
+if (room != rm_editor &amp;&amp; interface[? "menu"]!="0"){
   ui_draw(menu_container);
 }
 </string>

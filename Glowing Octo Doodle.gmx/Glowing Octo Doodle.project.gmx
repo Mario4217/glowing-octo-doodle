@@ -54,6 +54,7 @@
       <sprite>sprites\spr_gp_barricade_bottom</sprite>
       <sprite>sprites\spr_gp_cube</sprite>
       <sprite>sprites\spr_gp_barricade</sprite>
+      <sprite>sprites\spr_gp_goalzone</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_achievement_secret</sprite>
@@ -79,6 +80,7 @@
     <sprite>sprites\spr_rotatable</sprite>
     <sprite>sprites\spr_io</sprite>
     <sprite>sprites\spr_clip</sprite>
+    <sprite>sprites\spr_white</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
@@ -198,6 +200,7 @@
       <script>scripts\cmd_editor_start_link.gml</script>
       <script>scripts\cmd_editor_end_link.gml</script>
       <script>scripts\cmd_editor_cut_link.gml</script>
+      <script>scripts\cmd_edit_profile.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -271,6 +274,7 @@
     <object>objects\obj_world</object>
     <objects name="gameplay">
       <object>objects\obj_gp_floor_button</object>
+      <object>objects\obj_gp_goalzone</object>
       <object>objects\obj_gp_cube</object>
       <object>objects\obj_gp_spawn</object>
       <object>objects\obj_gp_wall</object>

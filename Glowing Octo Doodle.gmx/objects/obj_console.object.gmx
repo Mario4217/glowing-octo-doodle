@@ -59,6 +59,7 @@ console_command_add("editor_logic",cmd_editor_logic,0,"Opens the logic window of
 console_command_add("editor_start_link",cmd_editor_start_link,1,"Starts the process of linking an event of some object to the action of another object","editor_start_link &lt;event id&gt;");
 console_command_add("editor_end_link",cmd_editor_end_link,1,"Ends the process of linking an event to an action","editor_end_link &lt;action id&gt;");
 console_command_add("editor_cut_link",cmd_editor_cut_link,1,"Removes an output on the selected object", "editor_cut_link &lt;link index&gt;");
+console_command_add("edit_profile",cmd_edit_profile,2,"Edits the players profile","edit_profile &lt;key&gt; &lt;value&gt;");
 </string>
           </argument>
         </arguments>
