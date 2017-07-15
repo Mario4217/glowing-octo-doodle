@@ -52,6 +52,7 @@
       <sprite>sprites\spr_gp_barricade_left</sprite>
       <sprite>sprites\spr_gp_barricade_top</sprite>
       <sprite>sprites\spr_gp_barricade_bottom</sprite>
+      <sprite>sprites\spr_gp_cube</sprite>
       <sprite>sprites\spr_gp_barricade</sprite>
     </sprites>
     <sprites name="ui">
@@ -234,6 +235,7 @@
       <script>scripts\gameplay_object_add_tag.gml</script>
       <script>scripts\gameplay_object_set_depth_anchor.gml</script>
       <script>scripts\gameplay_object_have_tag.gml</script>
+      <script>scripts\gameplay_object_make_pickup.gml</script>
     </scripts>
     <scripts name="editor">
       <script>scripts\refresh_editor_level.gml</script>
@@ -269,6 +271,7 @@
     <object>objects\obj_world</object>
     <objects name="gameplay">
       <object>objects\obj_gp_floor_button</object>
+      <object>objects\obj_gp_cube</object>
       <object>objects\obj_gp_spawn</object>
       <object>objects\obj_gp_wall</object>
       <object>objects\obj_gp_light_wall</object>

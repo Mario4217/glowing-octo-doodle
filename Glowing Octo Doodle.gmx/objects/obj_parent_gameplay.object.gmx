@@ -115,7 +115,7 @@ if (attr[? ATTRIBUTE.skin] != undefined){
 }
 
 if (gameplay_object_have_tag(src_map[? "id"],"clip")){
-  clip = instance_create(x,y,obj_clip);
+  clip = instance_create(x-sprite_xoffset,y-sprite_yoffset,obj_clip);
   if (attr[? ATTRIBUTE.width] != undefined){
     clip.image_xscale = attr[? ATTRIBUTE.width]/32;
   }
@@ -154,6 +154,20 @@ init = true;
     depth = obj_world.world_height*32 - bbox_bottom;
   }else{
     depth = obj_world.world_height*32 - bbox_top;
+  }
+  
+  if (gameplay_object_have_tag(src_map[? "id"], "pickup")){
+    if (mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom)){
+      var pawn = obj_player_controller.player_pawn; //own pawn of the current player you are controlling
+      if (bind_check_pressed('pickup') &amp;&amp; point_distance(x, y, pawn.x, pawn.y) &lt; obj_player_controller.pickup_distance &amp;&amp; obj_player_controller.pickup == -1){
+        obj_player_controller.pickup = id;
+        x = -32;
+        visible = false;
+        if (gameplay_object_have_tag(src_map[? "id"],"clip")){
+          clip.x = x;
+        }
+      }
+    }
   }
 }
 </string>

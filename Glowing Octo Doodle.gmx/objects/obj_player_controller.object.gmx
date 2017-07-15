@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_clip</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,6 +28,8 @@
             <string>player_pawn = instance_create(100, 100, obj_player_pawn);
 
 move_spd = 400;
+pickup_distance = 100;
+pickup = -1;
 
 if (testmode != ""){
   btn_back_to_editor = ui_create_button(0.8,0,1,0.04,"{editor.testmode.back}","editor "+string(testmode))
@@ -94,6 +96,23 @@ if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {
 
 view_xview[0] = floor(player_pawn.x - view_wview[0]/2);
 view_yview[0] = floor(player_pawn.y - view_hview[0]/2);
+
+if (pickup != -1){
+  if (bind_check_pressed('putdown') &amp;&amp; point_distance(player_pawn.x, player_pawn.y, mouse_x, mouse_y) &lt; pickup_distance
+  &amp;&amp; !collision_rectangle(mouse_x-pickup.sprite_xoffset, mouse_y-pickup.sprite_yoffset, mouse_x-pickup.sprite_xoffset+pickup.sprite_width, mouse_y-pickup.sprite_yoffset+pickup.sprite_height, obj_clip, 0, 1)
+  ){
+    pickup.x = mouse_x;
+    pickup.y = mouse_y;
+    pickup.visible = true;
+    if (gameplay_object_have_tag(pickup.src_map[? "id"],"clip")){
+      pickup.clip.x = pickup.x - pickup.sprite_xoffset;
+      pickup.clip.y = pickup.y - pickup.sprite_yoffset;
+    }
+    pickup = -1;
+  }
+}
+player_pawn.pickup = pickup;
+
 </string>
           </argument>
         </arguments>
