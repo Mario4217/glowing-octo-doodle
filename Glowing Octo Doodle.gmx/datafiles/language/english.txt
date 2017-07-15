@@ -5,10 +5,12 @@ menu.editor:					Editor
 menu.quit:						Quit
 menu.back:						Back
 menu.main:						Yay! A cool game :D
+menu.delete:					Delete
 menu.profile.color:				Color
 menu.profile.red:				Red
 menu.profile.green:				Green
 menu.profile.blue:				Blue
+menu.profile.playername:		Playername
 menu.settings.fullscreen:		Fullscreen
 menu.settings.volume_music:		Music Volume
 menu.settings.volume_sfx:		Effect Volume
@@ -23,7 +25,7 @@ menu.settings.walk_right:		Walk Right
 menu.settings.walk_down:		Walk Down
 menu.settings.walk_left:		Walk Left
 menu.settings.interact:			Interact
-menu.settings.pickup:			Pickup
+menu.settings.pickup:			Pick Up
 menu.settings.putdown:			Put Down
 menu.settings.bindings:			Bindings
 menu.play.new:					New Game
@@ -33,6 +35,8 @@ menu.editor.new_map:			New Map
 menu.editor.new_pack:			New Pack
 menu.editor.edit_map:			Edit Map
 menu.editor.edit_pack:			Edit Pack
+menu.editor.maps:				Maps
+menu.editor.packs:				Packs
 
 editor.exit:					Exit the editor
 editor.save:					Save
@@ -55,6 +59,15 @@ editor.attributes:				Attributes
 editor.logic:					Logic
 editor.io:						IO
 editor.link:					[1] -> [2] [3]
+editor.packname:				Packname
+editor.description:				Description
+editor.hub:						Hub map (empty for none)
+editor.add_map:					Add Map
+editor.choose_map:				Choose a map to add!
+editor.cancel:					Cancel
+editor.up:						Up
+editor.down:					Down
+editor.remove:					Remove
 
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin
@@ -62,13 +75,22 @@ editor.attribute.size:			Size
 editor.attribute.width:			Width
 editor.attribute.height:		Height
 editor.attribute.orientation:	Vertical
+editor.attribute.map_index:		Map Index
+editor.attribute.auto_test:		Auto Test
 
 editor.action.open:				Open
 editor.action.close:			Close
+editor.action.setA:				Set A
+editor.action.setB:				Set B
+editor.action.unsetA:			Unset A
+editor.action.unsetB:			Unset B
+editor.action.test:				Test
 
 editor.event.onPress:			OnPress
 editor.event.onRelease:			OnRelease
 editor.event.onSpawn:			OnSpawn
+editor.event.onTrue:			OnTrue
+editor.event.onFalse:			OnFalse
 
 gp.floor_button:				Floor Button
 gp.spawn:						Spawnpoint
@@ -76,6 +98,7 @@ gp.wall:						Wall
 gp.light_gate:					Light Wall
 gp.a3:							a³
 gp.goalzone:					Goalzone
+gp.logic_or:					Logic OR
 
 key.add:						Add
 key.alt:						Alt

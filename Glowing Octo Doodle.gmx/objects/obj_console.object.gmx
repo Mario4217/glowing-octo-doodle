@@ -60,6 +60,14 @@ console_command_add("editor_start_link",cmd_editor_start_link,1,"Starts the proc
 console_command_add("editor_end_link",cmd_editor_end_link,1,"Ends the process of linking an event to an action","editor_end_link &lt;action id&gt;");
 console_command_add("editor_cut_link",cmd_editor_cut_link,1,"Removes an output on the selected object", "editor_cut_link &lt;link index&gt;");
 console_command_add("edit_profile",cmd_edit_profile,2,"Edits the players profile","edit_profile &lt;key&gt; &lt;value&gt;");
+console_command_add("map_delete",cmd_map_delete,1,"Deleted a map by its name","map_delete &lt;mapname&gt;");
+console_command_add("pack_editor",cmd_pack_editor,0,"Edit a map pack in the pack editor","pack_editor [&lt;packname&gt;]");
+console_command_add("pack_delete",cmd_pack_delete,1,"Deletes a map pack","pack_delete &lt;packname&gt;");
+console_command_add("pack_save",cmd_pack_save,0,"Saves the current pack in the pack editor");
+console_command_add("pack_add_map",cmd_pack_add_map,1,"Adds a map to the current pack","pack_add_map &lt;mapname&gt;");
+console_command_add("pack_show_maps",cmd_pack_show_maps,1,"Shows or hides the add map menu in the pack editor","pack_show_maps &lt;0/1&gt;");
+console_command_add("pack_rem_map",cmd_pack_rem_map,1,"Removes a map from the current pack","pack_rem_map &lt;mapname&gt;");
+console_command_add("pack_switch_maps",cmd_pack_switch_maps,2,"Switch the places of two maps in the pack editor","pack_switch_maps &lt;index1&gt; &lt;index2&gt;")
 </string>
           </argument>
         </arguments>

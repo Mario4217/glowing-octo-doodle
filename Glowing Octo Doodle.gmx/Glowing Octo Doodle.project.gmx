@@ -3,8 +3,27 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="3" name="datafiles">
-    <datafiles number="3" name="language">
+  <datafiles number="4" name="datafiles">
+    <datafiles number="4" name="editor">
+      <datafile>
+        <name>dGVzdG1hcA==.puz</name>
+        <exists>-1</exists>
+        <size>1024</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>dGVzdG1hcA==.puz</filename>
+      </datafile>
+    </datafiles>
+    <datafiles number="4" name="language">
       <datafile>
         <name>english.txt</name>
         <exists>-1</exists>
@@ -55,6 +74,7 @@
       <sprite>sprites\spr_gp_cube</sprite>
       <sprite>sprites\spr_gp_barricade</sprite>
       <sprite>sprites\spr_gp_goalzone</sprite>
+      <sprite>sprites\spr_gp_logic_or</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_achievement_secret</sprite>
@@ -201,6 +221,14 @@
       <script>scripts\cmd_editor_end_link.gml</script>
       <script>scripts\cmd_editor_cut_link.gml</script>
       <script>scripts\cmd_edit_profile.gml</script>
+      <script>scripts\cmd_map_delete.gml</script>
+      <script>scripts\cmd_pack_editor.gml</script>
+      <script>scripts\cmd_pack_delete.gml</script>
+      <script>scripts\cmd_pack_save.gml</script>
+      <script>scripts\cmd_pack_add_map.gml</script>
+      <script>scripts\cmd_pack_rem_map.gml</script>
+      <script>scripts\cmd_pack_switch_maps.gml</script>
+      <script>scripts\cmd_pack_show_maps.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -242,19 +270,25 @@
     </scripts>
     <scripts name="editor">
       <script>scripts\refresh_editor_level.gml</script>
+      <script>scripts\refresh_packs.gml</script>
       <script>scripts\editor_ent_send_to_ui.gml</script>
       <script>scripts\editor_save.gml</script>
+      <script>scripts\pack_save.gml</script>
+      <script>scripts\pack_load.gml</script>
+      <script>scripts\pack_editor_reload_maps.gml</script>
     </scripts>
     <script>scripts\string_trim.gml</script>
     <script>scripts\move.gml</script>
     <script>scripts\settings_save.gml</script>
     <script>scripts\settings_load.gml</script>
-    <script>scripts\mouse_over.gml</script>
     <script>scripts\draw_sprite_area.gml</script>
     <script>scripts\world_load.gml</script>
+    <script>scripts\event_trigger.gml</script>
     <script>scripts\global_mouse_over_ui.gml</script>
     <script>scripts\mouse_over_ui.gml</script>
-    <script>scripts\event_trigger.gml</script>
+    <script>scripts\mouse_over.gml</script>
+    <script>scripts\ds_list_add_map.gml</script>
+    <script>scripts\get_level_data.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>
@@ -272,6 +306,9 @@
     <object>objects\obj_player_pawn</object>
     <object>objects\obj_time_control</object>
     <object>objects\obj_world</object>
+    <object>objects\obj_editor_ent</object>
+    <object>objects\obj_clip</object>
+    <object>objects\obj_pack_editor</object>
     <objects name="gameplay">
       <object>objects\obj_gp_floor_button</object>
       <object>objects\obj_gp_goalzone</object>
@@ -280,14 +317,14 @@
       <object>objects\obj_gp_wall</object>
       <object>objects\obj_gp_light_wall</object>
       <object>objects\obj_parent_gameplay</object>
+      <object>objects\obj_gp_logic_or</object>
     </objects>
-    <object>objects\obj_editor_ent</object>
-    <object>objects\obj_clip</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
     <room>rooms\rm_game</room>
     <room>rooms\rm_editor</room>
+    <room>rooms\rm_pack_editor</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -4,3 +4,4 @@
 .editor-error.background-color:=$ff0000
 .editor-error.background-color:hover=$FF5300
 .editor-error.background-color:pressed=$FFA000
+.delete.background-color:=$ff0000

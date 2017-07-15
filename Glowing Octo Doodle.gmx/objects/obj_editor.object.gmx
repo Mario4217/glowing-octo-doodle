@@ -119,6 +119,8 @@ ui_set_value(input_width, world_width);
 ui_set_value(input_height, world_height);
 ui_set_value(input_players, world_players);
 
+lb_selcted_object = ui_add_child(objects_container, ui_create_label(0,0.05,1,0.1,""));
+
 for (var i=0; i&lt;ds_list_size(gp_editor); i++){
   var map = gp_objects[? gp_editor[| i]];
   var u = (i % 2) * 0.5;
@@ -345,9 +347,13 @@ if (interface[? "editor_error"] != ""){
 if (interface[? "editor_menu"] == "2"){
   var obj_to_place = ui_get_value(objects_container);
   if (obj_to_place != -1){
+    var obj = gp_objects[? obj_to_place];
+    ui_set_text(lb_selcted_object, lang_format(obj[? "name"]));
     if (mouse_check_button_pressed(mb_right)){
       ui_set_value(objects_container, -1);
     }
+  }else{
+    ui_set_text(lb_selcted_object, "");
   }
 }
 

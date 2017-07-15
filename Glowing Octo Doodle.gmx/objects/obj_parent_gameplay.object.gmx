@@ -94,8 +94,7 @@ image_speed = 0;
 var attr_map = map[? "attr"];
 
 var key = ds_map_find_first(attr_map);
-for (var i=0; i&lt;ds_map_size(attr_map); i+=1)
-{
+for (var i=0; i&lt;ds_map_size(attr_map); i+=1){
    var src_attr = attr_map[? key];
    attr[? key] = src_attr[? "default"];
    key = ds_map_find_next(attr_map,key);
@@ -103,8 +102,7 @@ for (var i=0; i&lt;ds_map_size(attr_map); i+=1)
 
 if (ds_map_size(overwrite_attr) &gt; 0){
   var key = ds_map_find_first(overwrite_attr);
-  for (var i=0; i&lt;ds_map_size(overwrite_attr); i+=1)
-  {
+  for (var i=0; i&lt;ds_map_size(overwrite_attr); i+=1){
     attr[? key] = overwrite_attr[? key];
     var key = ds_map_find_next(overwrite_attr, key);
   };
@@ -159,7 +157,7 @@ init = true;
   if (gameplay_object_have_tag(src_map[? "id"], "pickup")){
     if (mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom)){
       var pawn = obj_player_controller.player_pawn; //own pawn of the current player you are controlling
-      if (bind_check_pressed('pickup') &amp;&amp; point_distance(x, y, pawn.x, pawn.y) &lt; obj_player_controller.pickup_distance &amp;&amp; obj_player_controller.pickup == -1){
+      if (bind_check_pressed('interact') &amp;&amp; point_distance(x, y, pawn.x, pawn.y) &lt; obj_player_controller.pickup_distance &amp;&amp; obj_player_controller.pickup == -1){
         obj_player_controller.pickup = id;
         x = -32;
         visible = false;
