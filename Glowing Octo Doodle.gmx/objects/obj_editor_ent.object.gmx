@@ -37,6 +37,8 @@ overwrite_attr = ds_map_create();
 src_map = -1;
 size_drag = false;
 yet_selected = false;
+
+init = false;
 </string>
           </argument>
         </arguments>
@@ -121,6 +123,8 @@ if (ds_map_size(overwrite_attr) &gt; 0){
   };
 }
 ds_map_destroy(overwrite_attr);
+
+init = true;
 </string>
           </argument>
         </arguments>

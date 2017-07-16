@@ -186,10 +186,8 @@ linkevent = 0;
 linktarget = 0;
 
 sun_direction = 45;
-sun_length = 32;
+sun_length = 1;
 sun_intensity = 0.8;
-
-light_surf = surface_create();
 </string>
           </argument>
         </arguments>

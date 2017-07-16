@@ -286,6 +286,9 @@
     <script>scripts\current_pack_goto_level.gml</script>
     <script>scripts\grid_from_buffer.gml</script>
     <script>scripts\grid_to_buffer.gml</script>
+    <script>scripts\draw_shadow.gml</script>
+    <script>scripts\shadow_line.gml</script>
+    <script>scripts\shadow_line_sun.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>

@@ -32,6 +32,8 @@ if (room == rm_game){
   grid = obj_world.grid_floor;
 }
 chunk_size = 16;
+
+light_surf = surface_create(1,1);
 </string>
           </argument>
         </arguments>
@@ -67,13 +69,31 @@ for (var i=max(floor(view_xview[0]/32),0); i&lt;min(ceil((view_wview[0]+view_xvi
     var h = floorlist[index, 2];
     draw_primitive_begin_texture(pr_trianglestrip, tex);
     draw_vertex_texture(xx, yy, (xx % w)/w, (yy % h)/h);
-    draw_vertex_texture(xx+32, yy, ((xx+32) % w)/w, (yy % h)/h);
-    draw_vertex_texture(xx, yy+32, (xx % w)/w, ((yy+32) % h)/h);
-    draw_vertex_texture(xx+32, yy+32, ((xx+32) % w)/w, ((yy+32) % h)/h);
+    draw_vertex_texture(xx+32, yy, ((xx % w)+32)/w, (yy % h)/h);
+    draw_vertex_texture(xx, yy+32, (xx % w)/w, ((yy % h)+32)/h);
+    draw_vertex_texture(xx+32, yy+32, ((xx % w) + 32)/w, ((yy % h)+32)/h);
     draw_primitive_end();
   };
 };
 
+
+draw_set_color(c_black)
+draw_set_alpha(1);
+if (surface_exists(light_surf)){
+  surface_resize(light_surf, view_wview[0], view_hview[0]);
+}else{
+  light_surf = surface_create(view_wview[0], view_hview[0]);
+}
+surface_set_target(light_surf)
+draw_clear_alpha(0, 0);
+with (obj_editor_ent){
+  draw_shadow();
+}
+with (obj_parent_gameplay){
+  draw_shadow();
+}
+surface_reset_target();
+draw_surface_ext(light_surf, view_xview[0], view_yview[0], 1, 1, 0, c_black, 1-sun_intensity)
 </string>
           </argument>
         </arguments>

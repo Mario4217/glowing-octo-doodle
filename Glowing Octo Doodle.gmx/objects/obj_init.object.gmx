@@ -369,6 +369,12 @@ floorlist[1,3] = "{editor.floor.concrete}"
 
 global.toLoad = "title";
 room = rm_game;
+
+globalvar sun_direction, sun_length, sun_intensity;
+sun_direction = 45;
+sun_length = 1;
+sun_intensity = 0.8;
+
 </string>
           </argument>
         </arguments>
