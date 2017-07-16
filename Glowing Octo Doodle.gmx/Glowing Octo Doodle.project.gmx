@@ -56,6 +56,7 @@
       <sprite>sprites\spr_gp_barricade</sprite>
       <sprite>sprites\spr_gp_goalzone</sprite>
       <sprite>sprites\spr_gp_logic_or</sprite>
+      <sprite>sprites\spr_gp_logic_and</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -84,6 +85,7 @@
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_wall_top</sprite>
     <sprite>sprites\spr_clip</sprite>
+    <sprite>sprites\spr_tiles</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
@@ -101,6 +103,7 @@
         <script>scripts\ui_draw_element_draggable.gml</script>
         <script>scripts\ui_draw_element_label.gml</script>
         <script>scripts\ui_draw_element_sprite.gml</script>
+        <script>scripts\ui_draw_element_texture.gml</script>
         <script>scripts\ui_draw_element_radio.gml</script>
         <script>scripts\ui_draw_element_slider.gml</script>
         <script>scripts\ui_draw_element_textbox.gml</script>
@@ -122,6 +125,7 @@
         <script>scripts\ui_create_toggle.gml</script>
         <script>scripts\ui_create_binding.gml</script>
         <script>scripts\ui_create_sprite.gml</script>
+        <script>scripts\ui_create_texture.gml</script>
       </scripts>
       <scripts name="style">
         <script>scripts\ui_style_draw_rectangle.gml</script>
@@ -217,6 +221,7 @@
       <script>scripts\cmd_pack_switch_maps.gml</script>
       <script>scripts\cmd_pack_show_maps.gml</script>
       <script>scripts\cmd_pack_start.gml</script>
+      <script>scripts\cmd_editor_tile_dialog.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -309,8 +314,10 @@
       <object>objects\obj_gp_spawn</object>
       <object>objects\obj_gp_wall</object>
       <object>objects\obj_gp_light_wall</object>
-      <object>objects\obj_parent_gameplay</object>
+      <object>objects\obj_gp_tile</object>
       <object>objects\obj_gp_logic_or</object>
+      <object>objects\obj_gp_logic_and</object>
+      <object>objects\obj_parent_gameplay</object>
     </objects>
   </objects>
   <rooms name="rooms">

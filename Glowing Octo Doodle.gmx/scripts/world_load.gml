@@ -7,6 +7,7 @@ if (room == rm_game){
 }else{
   var world_object = obj_editor;
 }
+ds_grid_clear(world_object.grid_floor, 0);
 var path = "maps/"+string(base64_encode(argument0))+".puz";
 if (file_exists(path)){
   var buff = buffer_load(path);

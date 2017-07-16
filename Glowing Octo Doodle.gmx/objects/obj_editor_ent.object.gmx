@@ -166,7 +166,8 @@ ds_map_destroy(overwrite_attr);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (mouse_x &gt; x-sprite_xoffset &amp;&amp; mouse_x &lt; x+sprite_width-sprite_xoffset &amp;&amp; mouse_y &gt; y-sprite_yoffset &amp;&amp; mouse_y &lt; y+sprite_height-sprite_yoffset &amp;&amp; interface[? "editor_menu"] == "2"){
+            <string>if (interface[? "editor_menu"] == "2" || interface[? "editor_menu"] == "3" &amp;&amp; src_map[? "id"] == 9)
+if (mouse_x &gt; x-sprite_xoffset &amp;&amp; mouse_x &lt; x+sprite_width-sprite_xoffset &amp;&amp; mouse_y &gt; y-sprite_yoffset &amp;&amp; mouse_y &lt; y+sprite_height-sprite_yoffset){
   ui_mouseHover = id;
 }
 
@@ -371,6 +372,11 @@ switch (gp_obj_index){
         }
       }
     }
+  break;
+  case 9: //tile
+    image_xscale = attr[? ATTRIBUTE.width] / 32;
+    image_yscale = attr[? ATTRIBUTE.height] / 32;
+    draw_sprite_part(spr_tiles, image_index, attr[? ATTRIBUTE.left], attr[? ATTRIBUTE.top], attr[? ATTRIBUTE.width], attr[? ATTRIBUTE.height], x, y);
   break;
   default:
     draw_self();

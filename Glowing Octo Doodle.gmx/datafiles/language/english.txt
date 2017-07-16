@@ -71,6 +71,7 @@ editor.up:						Up
 editor.down:					Down
 editor.remove:					Remove
 editor.brush_size:				Brush Size: [1]
+editor.choose_tile:				Choose Tile
 
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin
@@ -81,6 +82,9 @@ editor.attribute.orientation:	Vertical
 editor.attribute.map_index:		Map Index
 editor.attribute.auto_test:		Auto Test
 editor.attribute.relative:		Relative
+editor.attribute.top:			Top
+editor.attribute.left:			Left
+editor.attribute.collision:		Collisions
 
 editor.action.open:				Open
 editor.action.close:			Close
@@ -96,6 +100,9 @@ editor.event.onSpawn:			OnSpawn
 editor.event.onTrue:			OnTrue
 editor.event.onFalse:			OnFalse
 
+editor.tileset.enviroment:		Enviroment
+editor.tileset.mark:			Mark
+
 editor.floor.grass:				Grass
 editor.floor.concrete:			Concrete
 
@@ -106,6 +113,8 @@ gp.light_gate:					Light Wall
 gp.a3:							a³
 gp.goalzone:					Goalzone
 gp.logic_or:					Logic OR
+gp.logic_and:					Logic AND
+gp.tile:						Tile
 
 key.add:						Add
 key.alt:						Alt

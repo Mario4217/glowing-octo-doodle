@@ -85,6 +85,7 @@ ui_add_child(editor_container, tiles_container);
 ui_add_child(editor_container, maps_container);
 ui_add_child(editor_container, floors_container);
 
+//map panel
 ui_add_child(maps_container, ui_create_label(0,0.1,1,0.15,"{editor.map.name}"));
 input_name = ui_add_child(maps_container, ui_create_textbox(0,0.15,1,0.2,64,"",false));
 input_width = ui_add_child(maps_container, ui_create_slider(0,0.2,1,0.25,"{editor.map.width}",32,512,32));
@@ -95,6 +96,7 @@ ui_set_event(input_width,"onchange","editor_update");
 ui_set_event(input_height,"onchange","editor_update");
 ui_set_event(input_players,"onchange","editor_update");
 
+//error popup thing
 error = ui_create_button(0.3,0.3,0.7,0.7,"",'set editor_error ""');
 ui_set_class(error, "editor-error");
 ui_add_child(editor_container, error);
@@ -127,8 +129,8 @@ ui_set_value(input_width, world_width);
 ui_set_value(input_height, world_height);
 ui_set_value(input_players, world_players);
 
+//objects panel
 lb_selcted_object = ui_add_child(objects_container, ui_create_label(0,0.05,1,0.1,""));
-
 for (var i=0; i&lt;ds_list_size(gp_editor); i++){
   var map = gp_objects[? gp_editor[| i]];
   var u = (i % 2) * 0.5;
@@ -138,6 +140,7 @@ for (var i=0; i&lt;ds_list_size(gp_editor); i++){
   ui_add_child(objects_container,btn);
 }
 
+//floors panel
 var v = 0.1;
 sli_brush_size = ui_add_child(floors_container, ui_create_slider(0,0,1,0.05,"{editor.brush_size}",1,8,1));
 for (i=0; i&lt;array_height_2d(floorlist); i+=1)
@@ -145,6 +148,25 @@ for (i=0; i&lt;array_height_2d(floorlist); i+=1)
   var btn = ui_add_child(floors_container, ui_create_radio(0,v+i*0.05,1,v+i*0.05+0.05,floorlist[i,3],i));
 };
 
+//tiles panel
+tile_x1 = 0;
+tile_y1 = 0;
+tile_x2 = 32;
+tile_y2 = 32;
+
+tile_dialog = false;
+tile_preview = ui_add_child(tiles_container, ui_create_texture(0,0.05,1,0.2,sprite_get_texture(spr_tiles,0),512,512));
+//tiles_preview = ui_create_texture(0,0,1,0.2,sprite_get_texture(spr_tiles,0));
+
+ui_add_child(tiles_container, ui_create_button(0,0.2,1,0.25,"{editor.choose_tile}","editor_tile_dialog"));
+var v = 0.25;
+ui_add_child(tiles_container, ui_create_toggle(0,v,1,v+0.05,"{editor.attribute.collision}"));
+ui_set_value(tiles_container, 0);
+
+v+=0.1;
+ui_add_child(tiles_container, ui_create_radio(0,v,1,v+0.05,"{editor.tileset.enviroment}",0));
+v+=0.05;
+ui_add_child(tiles_container, ui_create_radio(0,v,1,v+0.05,"{editor.tileset.mark}",1));
 
 if (global.toLoad != ""){
   world_load(global.toLoad);
@@ -162,6 +184,12 @@ linkmode = false
 linksource = -1;
 linkevent = 0;
 linktarget = 0;
+
+sun_direction = 45;
+sun_length = 32;
+sun_intensity = 0.8;
+
+light_surf = surface_create();
 </string>
           </argument>
         </arguments>
@@ -381,6 +409,13 @@ if (instance_exists(inst_selected) &amp;&amp; inst_selected != -1){
     //ui_set_text(ent_label_type, lang_format("{editor.entity.type}", map[? "name"]));
   }
 }
+
+///tiles
+tile_preview[? "texture"] = sprite_get_texture(spr_tiles, ui_get_value(tiles_container));
+tile_preview[? "tex_top"] = tile_y1;
+tile_preview[? "tex_left"] = tile_x1;
+tile_preview[? "tex_width"] = tile_x2 - tile_x1;
+tile_preview[? "tex_height"] = tile_y2 - tile_y1;
 </string>
           </argument>
         </arguments>
@@ -427,51 +462,34 @@ ds_grid_destroy(grid_floor);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*
-if (inst_selected != -1 &amp;&amp; show_io &amp;&amp; connect_mode == false){
-  var ent = inst_selected;
-  draw_set_font(ft_editor_io);
-  var outputlist = ent.src_map[? "outputs"];
-  var xx = ui_world_to_ui_space_x(ent.bbox_right) * view_wport[0];
-  var yy = ui_world_to_ui_space_y(ent.bbox_top) *  view_hport[0];
-  var w = 256;
-  var h = 64;
-  var hover = global_mouse_over_ui(xx,yy,xx+w,yy+h, string(id)+string("IO"));
-  draw_set_color(c_white)
-  draw_rectangle(xx,yy,xx+w,yy+h,false);
-  draw_set_color(c_black)
-  draw_rectangle(xx,yy,xx+w,yy+h,true);
-  draw_set_halign(fa_right);
-  for (i=0; i&lt;ds_list_size(outputlist); i+=1)
-  {
-    var ho = mouse_over_ui(xx+w-16,yy,xx+w,yy+16);
-    draw_sprite(spr_ui_io, ho, xx+w-16, yy);
-    if (mouse_check_button_pressed(mb_left) &amp;&amp; ho &amp;&amp; hover){
-      connect_mode = true;
-    }
-    var outid = outputlist[| i];
-    draw_text(xx+w-16,yy,lang_format(dictionary_event[? outid]));
-    yy += 16;
-  };
-  draw_set_halign(fa_left)
-}
-
-if (show_io == true){
-  if (mouse_check_button_pressed(mb_right) &amp;&amp; connect_mode == false){
-    show_io = false;
-  }
-}
-if (connect_mode == true){
-  if (mouse_check_button_pressed(mb_right)){
-    connect_mode = false;
-  }
-}
-*/
-
-draw_set_font(ft_ui);
+            <string>draw_set_font(ft_ui);
 ui_draw(editor_container);
 
-
+if (tile_dialog){
+  var scale = 1;
+  var xx = view_wport[0] / 2 - (256*scale);
+  var yy = view_hport[0] / 2 - (256*scale);
+  draw_set_color(c_white);
+  draw_set_alpha(0.3);
+  draw_rectangle(xx,yy,xx+512*scale,yy+512*scale, false);
+  draw_set_alpha(1);
+  draw_sprite_ext(spr_tiles, ui_get_value(tiles_container), xx, yy, scale, scale, 0, c_white, 1);
+  draw_set_color(c_red);
+  draw_rectangle(xx+tile_x1*scale, yy+tile_y1*scale, xx+tile_x2*scale, yy+tile_y2*scale, true);
+  if (global_mouse_over_ui(xx,yy,xx+512*scale,yy+512*scale,"tile_dialog")){
+    if (mouse_check_button_pressed(mb_left)){
+      tile_x1 = floor(((window_mouse_get_x() - xx)*scale)/32)*32;
+      tile_y1 = floor(((window_mouse_get_y() - yy)*scale)/32)*32;
+    }
+    if (mouse_check_button(mb_left)){
+      tile_x2 = ceil(((window_mouse_get_x() - xx)*scale)/32)*32;
+      tile_y2 = ceil(((window_mouse_get_y() - yy)*scale)/32)*32;
+    }
+    if (mouse_check_button_released(mb_left)){
+      tile_dialog = false;
+    }
+  }
+}
 </string>
           </argument>
         </arguments>
@@ -497,21 +515,22 @@ ui_draw(editor_container);
             <string>draw_set_color(c_red);
 draw_rectangle(0,0,world_width*32, world_height * 32, true);
 
+if (ui_mouse_moved){
+  place_x = mouse_x;
+  place_y = mouse_y;
+}
+place_x += gamepad_axis_value(0, gp_axislh);
+place_y += gamepad_axis_value(0, gp_axisrh);
+if (!keyboard_check(vk_alt)){
+  place_x = round(place_x/16)*16;
+  place_y = round(place_y/16)*16;
+}
+
 if (interface[? "editor_menu"] == "2"){
   var obj_to_place = ui_get_value(objects_container);
   if (obj_to_place != -1){
     show_grid = true;
     var map = gp_objects[? obj_to_place];
-    if (ui_mouse_moved){
-      place_x = mouse_x;
-      place_y = mouse_y;
-    }
-    place_x += gamepad_axis_value(0, gp_axislh);
-    place_y += gamepad_axis_value(0, gp_axisrh);
-    if (!keyboard_check(vk_alt)){
-      place_x = round(place_x/16)*16;
-      place_y = round(place_y/16)*16;
-    }
     var w = sprite_get_width(map[? "sprite"]);
     var h = sprite_get_width(map[? "sprite"]);
     var ox = sprite_get_xoffset(map[? "sprite"]);
@@ -528,6 +547,20 @@ if (interface[? "editor_menu"] == "2"){
       inst.gp_obj_index = obj_to_place;
       ui_set_value(objects_container, -1);
     }
+  }
+}
+
+if (interface[? "editor_menu"] == "3"){
+  var c = (ui_hover != -1)
+  draw_sprite_part_ext(spr_tiles, ui_get_value(tiles_container), tile_x1, tile_y1, tile_x2-tile_x1, tile_y2-tile_y1, place_x, place_y, 1, 1, c_white, 0.4);
+  if (mouse_check_button_pressed(mb_left) &amp;&amp; !c){
+    var inst = instance_create(place_x,place_y,obj_editor_ent);
+    inst.gp_obj_index = 9;
+    inst.overwrite_attr[? ATTRIBUTE.skin] = ui_get_value(tiles_container);
+    inst.overwrite_attr[? ATTRIBUTE.left] = tile_x1;
+    inst.overwrite_attr[? ATTRIBUTE.top] = tile_y1;
+    inst.overwrite_attr[? ATTRIBUTE.width] = tile_x2 - tile_x1;
+    inst.overwrite_attr[? ATTRIBUTE.height] = tile_y2 - tile_y1;
   }
 }
 

@@ -67,8 +67,9 @@ console_command_add("pack_save",cmd_pack_save,0,"Saves the current pack in the p
 console_command_add("pack_add_map",cmd_pack_add_map,1,"Adds a map to the current pack","pack_add_map &lt;mapname&gt;");
 console_command_add("pack_show_maps",cmd_pack_show_maps,1,"Shows or hides the add map menu in the pack editor","pack_show_maps &lt;0/1&gt;");
 console_command_add("pack_rem_map",cmd_pack_rem_map,1,"Removes a map from the current pack","pack_rem_map &lt;mapname&gt;");
-console_command_add("pack_switch_maps",cmd_pack_switch_maps,2,"Switch the places of two maps in the pack editor","pack_switch_maps &lt;index1&gt; &lt;index2&gt;")
-console_command_add("pack_start",cmd_pack_start,1,"Loads and starts a levelpack","pack_start &lt;packname&gt;")
+console_command_add("pack_switch_maps",cmd_pack_switch_maps,2,"Switch the places of two maps in the pack editor","pack_switch_maps &lt;index1&gt; &lt;index2&gt;");
+console_command_add("pack_start",cmd_pack_start,1,"Loads and starts a levelpack","pack_start &lt;packname&gt;");
+console_command_add("editor_tile_dialog",cmd_editor_tile_dialog,0,"Opens the tile dialog in the editor");
 </string>
           </argument>
         </arguments>

@@ -89,9 +89,6 @@ if (!collision_rectangle(player_pawn.x-16+xmov*spd, player_pawn.y-16, player_paw
 if (!collision_rectangle(player_pawn.x-16, player_pawn.y-16+ymov*spd, player_pawn.x+16, player_pawn.y+ymov*spd, obj_clip, 0, 0)){
   player_pawn.y += ymov*spd;
 }
-if (collision_rectangle(player_pawn.x-16, player_pawn.y-16, player_pawn.x+16, player_pawn.y+16, obj_clip, 0, 1)){
-  player_pawn.x -= 1;
-}
 /*
 if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {
     move(spd, dir, player_pawn);

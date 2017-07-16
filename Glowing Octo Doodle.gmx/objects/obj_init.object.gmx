@@ -145,7 +145,10 @@ enum ATTRIBUTE {
   player_index = 5,
   map_index = 6,
   auto_test = 7,
-  relative = 8
+  relative = 8,
+  top = 9,
+  left = 10,
+  collision = 11
 }
 
 enum EVENT {
@@ -185,6 +188,9 @@ dictionary_attribute[? ATTRIBUTE.player_index] = "{editor.attribute.player_index
 dictionary_attribute[? ATTRIBUTE.map_index] = "{editor.attribute.map_index}";
 dictionary_attribute[? ATTRIBUTE.auto_test] = "{editor.attribute.auto_test}";
 dictionary_attribute[? ATTRIBUTE.relative] = "{editor.attribute.relative}";
+dictionary_attribute[? ATTRIBUTE.top] = "{editor.attribute.top}"
+dictionary_attribute[? ATTRIBUTE.left] = "{editor.attribute.left}"
+dictionary_attribute[? ATTRIBUTE.collision] = "{editor.attribute.collision}"
 dictionary_event = ds_map_create();
 dictionary_event[? EVENT.onPress] = "{editor.event.onPress}";
 dictionary_event[? EVENT.onRelease] = "{editor.event.onRelease}";
@@ -240,8 +246,26 @@ gameplay_object_add_output(7, EVENT.onFalse);
 gameplay_object_add_output(7, EVENT.onTrue);
 gameplay_object_add_attribute(7, ATTRIBUTE.auto_test, 0, buffer_bool, 0, 1);
 
+register_gameplay_object(8, "{gp.logic_and}", obj_gp_logic_and);
+gameplay_object_add_input(8, ACTION.setA);
+gameplay_object_add_input(8, ACTION.setB);
+gameplay_object_add_input(8, ACTION.unsetA);
+gameplay_object_add_input(8, ACTION.unsetB);
+gameplay_object_add_input(8, ACTION.test);
+gameplay_object_add_output(8, EVENT.onFalse);
+gameplay_object_add_output(8, EVENT.onTrue);
+gameplay_object_add_attribute(8, ATTRIBUTE.auto_test, 0, buffer_bool, 0, 1);
+
+register_gameplay_object(9, "{gp.tile}", obj_gp_tile);
+gameplay_object_add_attribute(9, ATTRIBUTE.skin, 0, buffer_u8, 0, 1);
+gameplay_object_add_attribute(9, ATTRIBUTE.width, 32, buffer_u16, 0, 1024);
+gameplay_object_add_attribute(9, ATTRIBUTE.height, 32, buffer_u16, 0, 1024);
+gameplay_object_add_attribute(9, ATTRIBUTE.top, 0, buffer_u16, 0, 1024);
+gameplay_object_add_attribute(9, ATTRIBUTE.left, 0, buffer_u16, 0, 1024);
+gameplay_object_add_attribute(9, ATTRIBUTE.collision, 0, buffer_bool, 0, 1);
+
 //make the objects in the ingame editor accsesable
-ds_list_add(gp_editor, 2, 1, 3, 4, 5, 6, 7);
+ds_list_add(gp_editor, 2, 1, 3, 4, 5, 6, 7, 8);
 </string>
           </argument>
         </arguments>
@@ -343,7 +367,7 @@ floorlist[1,1] = background_get_width(bg_floor_concrete);
 floorlist[1,2] = background_get_height(bg_floor_concrete);
 floorlist[1,3] = "{editor.floor.concrete}"
 
-global.toLoad = "";
+global.toLoad = "title";
 room = rm_game;
 </string>
           </argument>
