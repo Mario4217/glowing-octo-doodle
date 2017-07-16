@@ -79,7 +79,7 @@ if (is_server){
             <kind>1</kind>
             <string>event_inherited();
 
-part_particles_create(obj_world.particle_system, x+irandom_range(-10,10),y-48+irandom(10),particle_map[? "spawn"],2);
+part_particles_create_color(obj_world.particle_system, x+irandom_range(-10,10),y-48+irandom(10),particle_map[? "spawn"],obj_player_pawn.secondary_color,2);
 </string>
           </argument>
         </arguments>

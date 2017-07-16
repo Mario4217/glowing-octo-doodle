@@ -113,6 +113,7 @@ world_width = 64;
 world_height = 64;
 world_name = "unnamed";
 world_players = 1;
+grid_floor = ds_grid_create(world_width, world_height);
 
 ui_set_value(input_name, world_name);
 ui_set_value(input_width, world_width);
@@ -387,6 +388,7 @@ if (instance_exists(inst_selected) &amp;&amp; inst_selected != -1){
           <argument>
             <kind>1</kind>
             <string>ds_map_destroy(editor_container);
+ds_grid_destroy(grid_floor);
 </string>
           </argument>
         </arguments>

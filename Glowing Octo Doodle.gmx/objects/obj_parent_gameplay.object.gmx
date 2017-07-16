@@ -60,9 +60,12 @@ alarm[0] = 1;
 ds_list_destroy(outputs);
 ds_map_destroy(attr);
 ds_map_destroy(input);
-if (gameplay_object_have_tag(gp_object_index,"clip")){
-  with (clip){
-    instance_destroy();
+
+if (init){
+  if (gameplay_object_have_tag(src_map[? "id"],"clip")){
+    with (clip){
+      instance_destroy();
+    }
   }
 }
 </string>

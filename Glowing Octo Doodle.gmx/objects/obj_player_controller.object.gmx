@@ -104,6 +104,7 @@ view_yview[0] = floor(player_pawn.y - view_hview[0]/2);
 if (pickup != -1){
   if (bind_check_pressed('putdown') &amp;&amp; point_distance(player_pawn.x, player_pawn.y, mouse_x, mouse_y) &lt; pickup_distance
   &amp;&amp; !collision_rectangle(mouse_x-pickup.sprite_xoffset, mouse_y-pickup.sprite_yoffset, mouse_x-pickup.sprite_xoffset+pickup.sprite_width, mouse_y-pickup.sprite_yoffset+pickup.sprite_height, obj_clip, 0, 1)
+  &amp;&amp; !collision_line(mouse_x, mouse_y, player_pawn.x, player_pawn.y, obj_clip, 0, 1)
   ){
     pickup.x = mouse_x;
     pickup.y = mouse_y;

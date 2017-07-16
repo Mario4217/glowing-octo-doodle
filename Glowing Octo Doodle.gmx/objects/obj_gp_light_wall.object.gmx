@@ -64,6 +64,43 @@ if (attr[? ATTRIBUTE.orientation] == 0){
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+
+if (init){
+  if (is_open == false){ 
+    if (attr[? ATTRIBUTE.orientation] == 0){
+      repeat (floor(attr[? ATTRIBUTE.size] / 32)){
+        part_particles_create(obj_world.particle_system, x+irandom(attr[? ATTRIBUTE.size]),y+irandom(64),particle_map[? "lightwall"],2);
+      }
+    }else{
+      repeat (floor(attr[? ATTRIBUTE.size] / 64)){
+        part_particles_create(obj_world.particle_system, x+irandom(16),y+irandom(attr[? ATTRIBUTE.size]),particle_map[? "lightwall"],2);
+      }
+    }
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
@@ -113,22 +150,24 @@ if (attr[? ATTRIBUTE.orientation] == 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
-  image_xscale = attr[? ATTRIBUTE.size] / 64;
-  image_yscale = 1;
-  if (!is_open){
-    draw_sprite_area(spr_gp_barricade, image_index, x, y, x+attr[? ATTRIBUTE.size], y+64);
+            <string>if (init){
+  if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
+    image_xscale = attr[? ATTRIBUTE.size] / 64;
+    image_yscale = 1;
+    if (!is_open){
+      draw_sprite_area(spr_gp_barricade, image_index, x, y, x+attr[? ATTRIBUTE.size], y+64);
+    }
+    draw_sprite(spr_gp_barricade_left, image_index, x, y);
+    draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
+  }else{ //vertical
+    image_yscale = attr[? ATTRIBUTE.size] / 64;
+    image_xscale = 0.5;
+    draw_sprite(spr_gp_barricade_top, image_index, x, y);
+    if (!is_open){
+      draw_sprite_area(spr_gp_barricade, image_index, x+4, y+4, x+12, y+attr[? ATTRIBUTE.size]);
+    }
+    draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
   }
-  draw_sprite(spr_gp_barricade_left, image_index, x, y);
-  draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
-}else{ //vertical
-  image_yscale = attr[? ATTRIBUTE.size] / 64;
-  image_xscale = 0.5;
-  draw_sprite(spr_gp_barricade_top, image_index, x, y);
-  if (!is_open){
-    draw_sprite_area(spr_gp_barricade, image_index, x+4, y+4, x+12, y+attr[? ATTRIBUTE.size]);
-  }
-  draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
 }
 </string>
           </argument>

@@ -5,7 +5,12 @@ if (room == rm_pack_editor){
   var players = ui_get_value(obj_pack_editor.sli_players);
   var hub = ui_get_value(obj_pack_editor.txt_map_hub);
   
-  ini_open("packs/"+string(base64_encode(name))+".pak");
+  var path = "packs/"+string(base64_encode(name))+".pak";
+  if (file_exists(path)){
+    file_delete(path);
+  }
+  
+  ini_open(path);
   ini_write_string("info","name",name);
   ini_write_string("info","description",description);
   ini_write_string("info","hub",hub);

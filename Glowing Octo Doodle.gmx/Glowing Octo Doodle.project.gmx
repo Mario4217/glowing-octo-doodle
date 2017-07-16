@@ -4,7 +4,7 @@
     <Config>Configs\Default</Config>
   </Configs>
   <datafiles number="4" name="datafiles">
-    <datafiles number="4" name="editor">
+    <datafiles number="4" name="maps">
       <datafile>
         <name>dGVzdG1hcA==.puz</name>
         <exists>-1</exists>
@@ -77,6 +77,7 @@
       <sprite>sprites\spr_gp_logic_or</sprite>
     </sprites>
     <sprites name="ui">
+      <sprite>sprites\spr_white</sprite>
       <sprite>sprites\spr_achievement_secret</sprite>
       <sprite>sprites\spr_ui_trash</sprite>
       <sprite>sprites\spr_ui_io</sprite>
@@ -94,17 +95,21 @@
         <sprite>sprites\spr_ballbot_back_secondary</sprite>
       </sprites>
     </sprites>
+    <sprites name="editor">
+      <sprite>sprites\spr_io</sprite>
+      <sprite>sprites\spr_scaleable</sprite>
+      <sprite>sprites\spr_rotatable</sprite>
+    </sprites>
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_wall_top</sprite>
-    <sprite>sprites\spr_scaleable</sprite>
-    <sprite>sprites\spr_rotatable</sprite>
-    <sprite>sprites\spr_io</sprite>
     <sprite>sprites\spr_clip</sprite>
-    <sprite>sprites\spr_white</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
     <background>background\bg_testmode</background>
+    <backgrounds name="floors">
+      <background>background\bg_floor_grass</background>
+    </backgrounds>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -229,6 +234,7 @@
       <script>scripts\cmd_pack_rem_map.gml</script>
       <script>scripts\cmd_pack_switch_maps.gml</script>
       <script>scripts\cmd_pack_show_maps.gml</script>
+      <script>scripts\cmd_pack_start.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -289,6 +295,10 @@
     <script>scripts\mouse_over.gml</script>
     <script>scripts\ds_list_add_map.gml</script>
     <script>scripts\get_level_data.gml</script>
+    <script>scripts\pack_start.gml</script>
+    <script>scripts\current_pack_goto_level.gml</script>
+    <script>scripts\grid_from_buffer.gml</script>
+    <script>scripts\grid_to_buffer.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>

@@ -25,18 +25,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var width = attr[? ATTRIBUTE.width];
-var height = attr[? ATTRIBUTE.height];
-var yy = height + y - 64;
-for (var i=0; i&lt;floor(width/64); i+=1){
-  draw_sprite(sprite_index, image_index, x+i*64, yy);
-};
-draw_sprite_part(sprite_index, image_index, 0, 0, width mod 64, sprite_height, x+i*64, yy);
-
-draw_sprite_area(spr_wall_top, image_index, x, y, x+width, yy);
-
-image_xscale = width / 64;
-image_yscale = height / 64;
+            <string>if (init){
+  var width = attr[? ATTRIBUTE.width];
+  var height = attr[? ATTRIBUTE.height];
+  var yy = height + y - 64;
+  for (var i=0; i&lt;floor(width/64); i+=1){
+    draw_sprite(sprite_index, image_index, x+i*64, yy);
+  };
+  draw_sprite_part(sprite_index, image_index, 0, 0, width mod 64, sprite_height, x+i*64, yy);
+  
+  draw_sprite_area(spr_wall_top, image_index, x, y, x+width, yy);
+  
+  image_xscale = width / 64;
+  image_yscale = height / 64;
+}
 </string>
           </argument>
         </arguments>

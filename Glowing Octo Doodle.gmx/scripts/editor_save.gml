@@ -64,6 +64,6 @@ if (room == rm_editor){
   buffer_write(buff, id_type, i+1);
   
   
-  buffer_save(buff,"editor/"+string(name)+".puz");
+  buffer_save(buff,"maps/"+string(name)+".puz");
   buffer_delete(buff);
 }

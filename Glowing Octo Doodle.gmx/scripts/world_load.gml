@@ -1,10 +1,13 @@
 ///world_load(puzzle name)
 if (room == rm_game){
   var world_object = obj_world; 
+  with (obj_parent_gameplay){
+    instance_destroy();
+  }
 }else{
   var world_object = obj_editor;
 }
-var path = "editor/"+string(base64_encode(argument0))+".puz";
+var path = "maps/"+string(base64_encode(argument0))+".puz";
 if (file_exists(path)){
   var buff = buffer_load(path);
   if (buffer_read(buff, buffer_u8) != 143){
@@ -19,6 +22,7 @@ if (file_exists(path)){
   world_object.world_width = buffer_read(buff, buffer_u32);
   world_object.world_height = buffer_read(buff, buffer_u32);
   world_object.world_players = buffer_read(buff, buffer_u8);
+  ds_grid_resize(world_object.grid_floor, world_object.world_width, world_object.world_height);
   
   if (room == rm_editor){
     ui_set_value(obj_editor.input_name, obj_editor.world_name);

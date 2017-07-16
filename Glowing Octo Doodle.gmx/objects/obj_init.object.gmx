@@ -72,9 +72,9 @@ bind_add("player_vertical", "K", vk_up, -1);
 bind_add("player_vertical", "K", vk_down, 1);
 bind_add("player_vertical", "A", gp_axisrv);
 
+bind_add("interact", "M", mb_left);
 bind_add("interact", "K", ord("E"));
 bind_add("interact", "K", vk_rcontrol);
-bind_add("interact", "M", mb_left);
 bind_add("interact", "G", gp_face1);
 
 bind_add("putdown", "M", mb_right);
@@ -144,7 +144,8 @@ enum ATTRIBUTE {
   orientation = 4,
   player_index = 5,
   map_index = 6,
-  auto_test = 7
+  auto_test = 7,
+  relative = 8
 }
 
 enum EVENT {
@@ -183,6 +184,7 @@ dictionary_attribute[? ATTRIBUTE.orientation] = "{editor.attribute.orientation}"
 dictionary_attribute[? ATTRIBUTE.player_index] = "{editor.attribute.player_index}";
 dictionary_attribute[? ATTRIBUTE.map_index] = "{editor.attribute.map_index}";
 dictionary_attribute[? ATTRIBUTE.auto_test] = "{editor.attribute.auto_test}";
+dictionary_attribute[? ATTRIBUTE.relative] = "{editor.attribute.relative}";
 dictionary_event = ds_map_create();
 dictionary_event[? EVENT.onPress] = "{editor.event.onPress}";
 dictionary_event[? EVENT.onRelease] = "{editor.event.onRelease}";
@@ -225,7 +227,8 @@ gameplay_object_add_tag(5, "clip");
 gameplay_object_make_pickup(5, 50);
 
 register_gameplay_object(6, "{gp.goalzone}", obj_gp_goalzone);
-gameplay_object_add_attribute(6, ATTRIBUTE.map_index, 0, buffer_u8, 0, 255);
+gameplay_object_add_attribute(6, ATTRIBUTE.map_index, 1, buffer_u8, 0, 255);
+gameplay_object_add_attribute(6, ATTRIBUTE.relative, 1, buffer_bool, 0, 1);
 
 register_gameplay_object(7, "{gp.logic_or}", obj_gp_logic_or);
 gameplay_object_add_input(7, ACTION.setA);
@@ -305,6 +308,7 @@ testmode = ""; //if not empty than map name
 
 globalvar particle_map;
 particle_map = ds_map_create();
+
 var par = part_type_create();
 particle_map[? "spawn"] = par;
 part_type_life(par, 80, 90);
@@ -313,12 +317,24 @@ part_type_scale(par,0.02,0.1);
 part_type_shape(par, pt_shape_circle);
 part_type_alpha2(par, 1,0);
 
+var par = part_type_create();
+particle_map[? "lightwall"] = par;
+part_type_life(par, 30, 60);
+part_type_scale(par, 0.1, 0.1);
+part_type_shape(par, pt_shape_circle);
+part_type_alpha2(par, 1,0);
+part_type_size(par, 1,1,-0.01,0.01);
+part_type_color2(par, c_aqua, c_white);
+
 globalvar map_list, pack_list;
 map_list = ds_list_create();
 pack_list = ds_list_create();
 
 globalvar current_pack;
 current_pack = -1;
+
+globalvar floorlist;
+ds_list_add(floorlist, bg_floor_grass);
 
 global.toLoad = "";
 room = rm_game;

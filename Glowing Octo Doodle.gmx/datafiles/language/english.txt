@@ -77,6 +77,7 @@ editor.attribute.height:		Height
 editor.attribute.orientation:	Vertical
 editor.attribute.map_index:		Map Index
 editor.attribute.auto_test:		Auto Test
+editor.attribute.relative:		Relative
 
 editor.action.open:				Open
 editor.action.close:			Close

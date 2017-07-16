@@ -5,7 +5,7 @@ with (obj_menu){
   ds_list_clear(map_list);
   var btn_new = ui_add_child(parent, ui_create_button(0,0,1,0.1,"{menu.editor.new_map}","editor"));
   btn_maps[? "gp_port"] = btn_new;
-  filename = file_find_first("editor\*.puz", 0);
+  filename = file_find_first("maps\*.puz", 0);
   var i = 0;
   var v = 0.12;
   while(filename != ""){

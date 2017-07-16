@@ -170,7 +170,10 @@ ds_map_destroy(overwrite_attr);
   ui_mouseHover = id;
 }
 
+depth = obj_editor.world_height*32 - bbox_bottom;
+
 if (obj_editor.inst_selected == id){
+  depth = 0;
   draw_set_color(c_lime);
   if (keyboard_check_pressed(vk_delete)){
     console_command_execute("editor_destroy");
@@ -194,8 +197,6 @@ if (drag &amp;&amp; obj_editor.inst_selected == id){
     drag = false;
   }
 }
-
-depth = obj_editor.world_height*32 - bbox_bottom
 </string>
           </argument>
         </arguments>

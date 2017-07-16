@@ -28,9 +28,17 @@
             <string>event_inherited();
 
 var c = collision_rectangle(bbox_left+16, bbox_top+16, bbox_right-16, bbox_bottom-16, obj_player_pawn, 0, 0);
-if (c){
+if (c &amp;&amp; init){
   if (testmode != ""){
     console_command_execute("editor "+string(testmode));
+  }else{
+    if (current_pack != -1){
+      if (attr[? ATTRIBUTE.relative]){
+        current_pack_goto_level(current_pack[? "current_map_index"]+attr[? ATTRIBUTE.map_index]);
+      }else{
+        current_pack_goto_level(attr[? ATTRIBUTE.map_index]);        
+      }
+    }
   }
 }
 </string>
