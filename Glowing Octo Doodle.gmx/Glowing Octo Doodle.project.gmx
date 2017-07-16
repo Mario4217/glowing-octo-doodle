@@ -222,6 +222,8 @@
       <script>scripts\cmd_pack_show_maps.gml</script>
       <script>scripts\cmd_pack_start.gml</script>
       <script>scripts\cmd_editor_tile_dialog.gml</script>
+      <script>scripts\cmd_connect.gml</script>
+      <script>scripts\cmd_disconnect.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -270,6 +272,15 @@
       <script>scripts\pack_load.gml</script>
       <script>scripts\pack_editor_reload_maps.gml</script>
     </scripts>
+    <scripts name="networking">
+      <script>scripts\nw_broadcast.gml</script>
+      <script>scripts\nw_income_server.gml</script>
+      <script>scripts\nw_income_client.gml</script>
+      <script>scripts\nw_host.gml</script>
+      <script>scripts\nw_make_player.gml</script>
+      <script>scripts\nw_connect.gml</script>
+      <script>scripts\nw_end.gml</script>
+    </scripts>
     <script>scripts\string_trim.gml</script>
     <script>scripts\move.gml</script>
     <script>scripts\settings_save.gml</script>
@@ -309,6 +320,7 @@
     <object>objects\obj_world</object>
     <object>objects\obj_editor_ent</object>
     <object>objects\obj_clip</object>
+    <object>objects\obj_controller</object>
     <object>objects\obj_pack_editor</object>
     <objects name="gameplay">
       <object>objects\obj_gp_floor_button</object>

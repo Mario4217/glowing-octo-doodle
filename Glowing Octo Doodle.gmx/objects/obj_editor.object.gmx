@@ -141,7 +141,8 @@ for (var i=0; i&lt;ds_list_size(gp_editor); i++){
 }
 
 //floors panel
-var v = 0.1;
+floor_preview = ui_add_child(floors_container, ui_create_texture(0,0.05,1,0.2,floorlist[0, 0],64,64));
+var v = 0.2;
 sli_brush_size = ui_add_child(floors_container, ui_create_slider(0,0,1,0.05,"{editor.brush_size}",1,8,1));
 for (i=0; i&lt;array_height_2d(floorlist); i+=1)
 {
@@ -414,6 +415,11 @@ tile_preview[? "tex_top"] = tile_y1;
 tile_preview[? "tex_left"] = tile_x1;
 tile_preview[? "tex_width"] = tile_x2 - tile_x1;
 tile_preview[? "tex_height"] = tile_y2 - tile_y1;
+
+var index = ui_get_value(floors_container);
+if (index != -1){
+  floor_preview[? "texture"] = floorlist[index, 0];
+}
 </string>
           </argument>
         </arguments>

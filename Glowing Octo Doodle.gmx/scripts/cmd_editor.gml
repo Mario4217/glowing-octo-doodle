@@ -1,8 +1,12 @@
 ///cmd_editor(args)
-if (array_length_1d(argument0) == 1){
-  room = rm_editor;
+if (!is_network){
+  if (array_length_1d(argument0) == 1){
+    room = rm_editor;
+  }else{
+    room = rm_editor;
+    var name = argument0[1];
+    global.toLoad = name;
+  }
 }else{
-  room = rm_editor;
-  var name = argument0[1];
-  global.toLoad = name;
+  console_print("Can't acces the editor while playing in multiplayer!",c_red);
 }

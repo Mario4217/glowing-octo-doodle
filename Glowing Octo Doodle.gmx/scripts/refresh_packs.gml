@@ -8,6 +8,7 @@ with (obj_menu){
   var i = 0;
   var v = 0.12;
   while(filename != ""){
+    //editor
     var b = ui_split(filename,".");
     var name = base64_decode(b[0]);
     var btn = ui_add_child(parent, ui_create_button(0,v,1,v+0.1,name,'pack_editor "'+string(name)+'"'));
@@ -23,6 +24,11 @@ with (obj_menu){
       last_del[? "gp_down"] = del;
     }
     last_del = del;
+    
+    //play
+    parent = menu_play_packs;
+    var btn = ui_add_child(parent, ui_create_button(0,v-0.12,1,v-0.02,name,'pack_start "'+string(name)+'"'));
+    
     filename = file_find_next();
     i++
     v+=0.1;

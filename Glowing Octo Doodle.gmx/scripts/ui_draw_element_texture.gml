@@ -1,8 +1,9 @@
 ///ui_draw_element_texture(x1,y1,x2,y2,element);
 var element = argument4;
 var texture = element[? "texture"];
-var w = element[? "width"]; //texture_get_width(texture);
-var h = element[? "height"]texture_get_height(texture);
+
+var w = element[? "width"];
+var h = element[? "height"];
 
 var top = element[? "tex_top"] / h;
 var left = element[? "tex_left"] / w;

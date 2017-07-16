@@ -296,6 +296,7 @@ profile_map[? "red"] = ini_read_real("color", "red",255);
 profile_map[? "green"] = ini_read_real("color", "green",0);
 profile_map[? "blue"] = ini_read_real("color", "blue", 0);
 profile_map[? "name"] = ini_read_string("player","name","player");
+profile_map[? "socket"] = -1;
 
 ini_close();
 </string>
@@ -321,10 +322,6 @@ ini_close();
             <string>///other stuff
 instance_create(0,0,obj_menu);
 instance_create(0,0,obj_time_control);
-
-globalvar is_server, in_network;
-in_network = false;
-is_server = true;
 
 globalvar camera, testmode;
 camera = instance_create(0,0,obj_camera);
@@ -375,6 +372,21 @@ sun_direction = 45;
 sun_length = 1;
 sun_intensity = 0.8;
 
+globalvar is_server, is_network, nw_type, nw_port, nw_server, nw_socket, nw_is_connected;
+is_network = false;
+is_server = true;
+nw_type = "TCP";
+nw_port = 24019;
+nw_server = -1;
+nw_socket = -1;
+nw_is_connected = false;
+
+network_set_config(network_config_use_non_blocking_socket, 1);
+network_set_config(network_config_connect_timeout, 1000);
+
+globalvar nw_players;
+nw_players = ds_map_create();
+nw_players[? "-1"] = profile_map;
 </string>
           </argument>
         </arguments>

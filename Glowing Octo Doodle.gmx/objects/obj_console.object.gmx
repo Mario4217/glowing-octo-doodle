@@ -70,6 +70,8 @@ console_command_add("pack_rem_map",cmd_pack_rem_map,1,"Removes a map from the cu
 console_command_add("pack_switch_maps",cmd_pack_switch_maps,2,"Switch the places of two maps in the pack editor","pack_switch_maps &lt;index1&gt; &lt;index2&gt;");
 console_command_add("pack_start",cmd_pack_start,1,"Loads and starts a levelpack","pack_start &lt;packname&gt;");
 console_command_add("editor_tile_dialog",cmd_editor_tile_dialog,0,"Opens the tile dialog in the editor");
+console_command_add("connect",cmd_connect,1,"Connect to a server using TCP","connect &lt;ip&gt;");
+console_command_add("disconnect",cmd_disconnect,0,"Disconnect or closes the current server");
 </string>
           </argument>
         </arguments>

@@ -7,6 +7,7 @@ if (current_pack == -1){
     var map = current_pack;
     map[? "name"] = ini_read_string("info","name","name missing");
     map[? "current_map_index"] = 0;
+    map[? "players"] = ini_read_real("info", "players", 1);
     var list = ds_list_create();
     ds_map_add_list(map, "maps", list);
     
@@ -24,5 +25,11 @@ if (current_pack == -1){
     
     var first = list[| 0];
     world_load(first[? "name"]);
+    
+    if (is_network == false){
+      if (map[? "players"] > 1){
+        nw_host(map[? "players"]-1);
+      }
+    }
   }
 }
