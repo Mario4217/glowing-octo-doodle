@@ -43,6 +43,8 @@ editor.save:					Save
 editor.open:					Open
 editor.objects:					Objects
 editor.tiles:					Tiles
+editor.floor:					Floor
+editor.floors:					Floors
 editor.map:						Map
 editor.map.name:				Map name:
 editor.map.width:				Map Width: [1]
@@ -68,6 +70,7 @@ editor.cancel:					Cancel
 editor.up:						Up
 editor.down:					Down
 editor.remove:					Remove
+editor.brush_size:				Brush Size: [1]
 
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin
@@ -92,6 +95,9 @@ editor.event.onRelease:			OnRelease
 editor.event.onSpawn:			OnSpawn
 editor.event.onTrue:			OnTrue
 editor.event.onFalse:			OnFalse
+
+editor.floor.grass:				Grass
+editor.floor.concrete:			Concrete
 
 gp.floor_button:				Floor Button
 gp.spawn:						Spawnpoint

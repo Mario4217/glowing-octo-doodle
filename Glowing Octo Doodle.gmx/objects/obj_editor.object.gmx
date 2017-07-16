@@ -52,31 +52,38 @@ btn_exit[? "gp_port"] = -1;
 rad_t1 = ui_add_child(topbar, ui_create_radio(0,0,0.2,1,"{editor.map}",1));
 rad_t2 = ui_add_child(topbar, ui_create_radio(0.2,0,0.4,1,"{editor.objects}",2));
 rad_t3 = ui_add_child(topbar, ui_create_radio(0.4,0,0.6,1,"{editor.tiles}",3));
-rad_t4 = ui_add_child(topbar, ui_create_button(0.9,0,1,1,"{editor.test}","editor_test"));
+rad_t4 = ui_add_child(topbar, ui_create_radio(0.6,0,0.8,1,"{editor.floor}",4));
+rad_t5 = ui_add_child(topbar, ui_create_button(0.9,0,1,1,"{editor.test}","editor_test"));
 rad_t1[? "gp_right"] = rad_t2;
 rad_t2[? "gp_right"] = rad_t3;
 rad_t3[? "gp_right"] = rad_t4;
-rad_t4[? "gp_right"] = rad_t1;
-rad_t1[? "gp_left"] = rad_t4;
+rad_t4[? "gp_right"] = rad_t5;
+rad_t5[? "gp_right"] = rad_t1;
+rad_t1[? "gp_left"] = rad_t5;
 rad_t2[? "gp_left"] = rad_t1;
 rad_t3[? "gp_left"] = rad_t2;
 rad_t4[? "gp_left"] = rad_t3;
+rad_t5[? "gp_left"] = rad_t4;
 
 ui_gamepad_position = rad_t1;
 
 objects_container = ui_create_label(0.8,0.05,1,1,"{editor.objects}");
 tiles_container = ui_create_label(0.8,0.05,1,1,"{editor.tiles}");
 maps_container = ui_create_label(0.7,0.05,1,1,"{editor.map}");
+floors_container = ui_create_label(0.8,0.05,1,1,"{editor.floors}");
 
 ui_set_value(objects_container,-1);
+ui_set_value(floors_container,-1);
 
 ui_set_class(objects_container,"editor-panel");
 ui_set_class(tiles_container,"editor-panel");
 ui_set_class(maps_container,"editor-panel");
+ui_set_class(floors_container,"editor-panel");
 
 ui_add_child(editor_container, objects_container);
 ui_add_child(editor_container, tiles_container);
 ui_add_child(editor_container, maps_container);
+ui_add_child(editor_container, floors_container);
 
 ui_add_child(maps_container, ui_create_label(0,0.1,1,0.15,"{editor.map.name}"));
 input_name = ui_add_child(maps_container, ui_create_textbox(0,0.15,1,0.2,64,"",false));
@@ -130,6 +137,14 @@ for (var i=0; i&lt;ds_list_size(gp_editor); i++){
   ui_add_child(btn,ui_create_sprite(0.01,0.01,0.99,0.99,map[? "sprite"],0));
   ui_add_child(objects_container,btn);
 }
+
+var v = 0.1;
+sli_brush_size = ui_add_child(floors_container, ui_create_slider(0,0,1,0.05,"{editor.brush_size}",1,8,1));
+for (i=0; i&lt;array_height_2d(floorlist); i+=1)
+{
+  var btn = ui_add_child(floors_container, ui_create_radio(0,v+i*0.05,1,v+i*0.05+0.05,floorlist[i,3],i));
+};
+
 
 if (global.toLoad != ""){
   world_load(global.toLoad);
@@ -313,6 +328,7 @@ ui_set_position(menu_container,ui_interpolate(1,menu_container[? "u1"], -0.3+men
 ui_set_position(maps_container,ui_interpolate(1,maps_container[? "u1"], 1-real(interface[? "editor_menu"] == "1")*0.3, 0.3),0.05);
 ui_set_position(objects_container,ui_interpolate(1,objects_container[? "u1"], 1-real(interface[? "editor_menu"] == "2")*0.2, 0.3),0.05);
 ui_set_position(tiles_container,ui_interpolate(1,tiles_container[? "u1"], 1-real(interface[? "editor_menu"] == "3")*0.2, 0.3),0.05);
+ui_set_position(floors_container,ui_interpolate(1,floors_container[? "u1"], 1-real(interface[? "editor_menu"] == "4")*0.2, 0.3),0.05);
 
 if (bind_check_pressed("menu")){
   if (menu_is_open == 0){
@@ -511,6 +527,26 @@ if (interface[? "editor_menu"] == "2"){
       var inst = instance_create(place_x,place_y,obj_editor_ent);
       inst.gp_obj_index = obj_to_place;
       ui_set_value(objects_container, -1);
+    }
+  }
+}
+
+if (interface[? "editor_menu"] == "4"){
+  var floor_to_set = ui_get_value(floors_container);
+  if (floor_to_set != -1){
+    var size = ui_get_value(sli_brush_size);
+    var cx = floor(mouse_x/32)-floor(size/2);
+    var cy = floor(mouse_y/32)-floor(size/2);
+    draw_set_color(c_white);
+    draw_set_alpha(0.2);
+    draw_rectangle(cx*32, cy*32, cx*32+size*32, cy*32+size*32, false);
+    draw_set_alpha(1);
+    var c = (ui_hover != -1)
+    if (mouse_check_button(mb_left) &amp;&amp; !c){
+      ds_grid_set_region(grid_floor, cx, cy, cx+size-1, cy+size-1, floor_to_set);
+    }
+    if (mouse_check_button_pressed(mb_right)){
+      ui_set_value(floors_container, -1);
     }
   }
 }

@@ -9,6 +9,7 @@ var bid = grid[# 0, 0];
 
 var blocklist = ds_list_create();
 
+buffer_write(buff,buffer_string,"grid");
 buffer_write(buff,buffer_u8,bn); //first 8bits are for the type of the num
 buffer_write(buff,buffer_u8,bi); //second 8bits are for the type of the id
 buffer_write(buff,buffer_u16, ds_grid_width(grid)); //world width

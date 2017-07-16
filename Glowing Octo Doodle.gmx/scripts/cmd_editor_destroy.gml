@@ -1,4 +1,4 @@
-///cmd_editor_update(args);
+///cmd_editor_destroy(args);
 if (room == rm_editor){
   if (obj_editor.inst_selected != -1){
     if (instance_exists(obj_editor.inst_selected)){

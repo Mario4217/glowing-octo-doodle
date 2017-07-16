@@ -166,7 +166,7 @@ ds_map_destroy(overwrite_attr);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (mouse_x &gt; x-sprite_xoffset &amp;&amp; mouse_x &lt; x+sprite_width-sprite_xoffset &amp;&amp; mouse_y &gt; y-sprite_yoffset &amp;&amp; mouse_y &lt; y+sprite_height-sprite_yoffset){
+            <string>if (mouse_x &gt; x-sprite_xoffset &amp;&amp; mouse_x &lt; x+sprite_width-sprite_xoffset &amp;&amp; mouse_y &gt; y-sprite_yoffset &amp;&amp; mouse_y &lt; y+sprite_height-sprite_yoffset &amp;&amp; interface[? "editor_menu"] == "2"){
   ui_mouseHover = id;
 }
 

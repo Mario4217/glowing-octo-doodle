@@ -25,22 +25,19 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>world_width = 128;
-world_height = 128;
-world_name = "uninitiliazed"
-grid_floor = ds_grid_create(world_width, world_height);
-
-if (global.toLoad != ""){
-  world_load(global.toLoad);
+            <string>if (room == rm_editor){
+  grid = obj_editor.grid_floor;
 }
-
-particle_system = part_system_create();
+if (room == rm_game){
+  grid = obj_world.grid_floor;
+}
+chunk_size = 16;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="5">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -57,8 +54,26 @@ particle_system = part_system_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>part_system_destroy(particle_system);
-ds_grid_destroy(grid_floor);
+            <string>depth = ds_grid_height(grid)*32+1
+draw_set_color(c_white);
+
+for (var i=max(floor(view_xview[0]/32),0); i&lt;min(ceil((view_wview[0]+view_xview[0])/32),ds_grid_width(grid)); i+=1){
+  for (var j=max(floor(view_yview[0]/32),0); j&lt;min(ceil((view_hview[0]+view_yview[0])/32),ds_grid_height(grid)); j+=1){
+    var index = grid[# i, j];
+    var tex = floorlist[index, 0];
+    var xx = i*32;
+    var yy = j*32;
+    var w = floorlist[index, 1];
+    var h = floorlist[index, 2];
+    draw_primitive_begin_texture(pr_trianglestrip, tex);
+    draw_vertex_texture(xx, yy, (xx % w)/w, (yy % h)/h);
+    draw_vertex_texture(xx+32, yy, ((xx+32) % w)/w, (yy % h)/h);
+    draw_vertex_texture(xx, yy+32, (xx % w)/w, ((yy+32) % h)/h);
+    draw_vertex_texture(xx+32, yy+32, ((xx+32) % w)/w, ((yy+32) % h)/h);
+    draw_primitive_end();
+  };
+};
+
 </string>
           </argument>
         </arguments>

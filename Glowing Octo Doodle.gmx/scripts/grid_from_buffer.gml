@@ -2,6 +2,13 @@
 var buff = argument0;
 var grid = argument1;
 
+var pos = buffer_tell(buff);
+var type = buffer_read(buff, buffer_string);
+if (type != "grid"){
+  buffer_seek(buff, buffer_seek_start, pos);
+  return false;
+}
+
 var bn = buffer_read(buff, buffer_u8); //type for blocks len
 var bi = buffer_read(buff, buffer_u8); //type for blocks id
 var w = buffer_read(buff, buffer_u16); //width

@@ -18,7 +18,7 @@ if (file_exists(path)){
   var ver = buffer_read(buff, buffer_u8); //load the save version
   var id_type = buffer_read(buff, buffer_u8); //type that is used here to index objects
   
-  world_object.world_name =  base64_decode(buffer_read(buff, buffer_string));
+  world_object.world_name = base64_decode(buffer_read(buff, buffer_string));
   world_object.world_width = buffer_read(buff, buffer_u32);
   world_object.world_height = buffer_read(buff, buffer_u32);
   world_object.world_players = buffer_read(buff, buffer_u8);
@@ -81,6 +81,9 @@ if (file_exists(path)){
     
     index = buffer_read(buff, id_type);
   }
+  
+  //floor grid
+  grid_from_buffer(buff, world_object.grid_floor);
   
   ds_list_destroy(entlist);
   buffer_delete(buff);

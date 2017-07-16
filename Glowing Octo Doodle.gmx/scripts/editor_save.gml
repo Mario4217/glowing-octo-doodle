@@ -63,6 +63,8 @@ if (room == rm_editor){
   }
   buffer_write(buff, id_type, i+1);
   
+  grid_to_buffer(buff, obj_editor.grid_floor);
+  
   
   buffer_save(buff,"maps/"+string(name)+".puz");
   buffer_delete(buff);

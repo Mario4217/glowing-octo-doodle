@@ -334,7 +334,14 @@ globalvar current_pack;
 current_pack = -1;
 
 globalvar floorlist;
-ds_list_add(floorlist, bg_floor_grass);
+floorlist[0,0] = background_get_texture(bg_floor_grass);
+floorlist[0,1] = background_get_width(bg_floor_grass);
+floorlist[0,2] = background_get_height(bg_floor_grass);
+floorlist[0,3] = "{editor.floor.grass}"
+floorlist[1,0] = background_get_texture(bg_floor_concrete);
+floorlist[1,1] = background_get_width(bg_floor_concrete);
+floorlist[1,2] = background_get_height(bg_floor_concrete);
+floorlist[1,3] = "{editor.floor.concrete}"
 
 global.toLoad = "";
 room = rm_game;
