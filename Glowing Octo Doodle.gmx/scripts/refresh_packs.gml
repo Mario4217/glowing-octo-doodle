@@ -9,6 +9,7 @@ with (obj_menu){
   var v = 0.12;
   while(filename != ""){
     //editor
+    parent = menu_editor_packs;
     var b = ui_split(filename,".");
     var name = base64_decode(b[0]);
     var btn = ui_add_child(parent, ui_create_button(0,v,1,v+0.1,name,'pack_editor "'+string(name)+'"'));

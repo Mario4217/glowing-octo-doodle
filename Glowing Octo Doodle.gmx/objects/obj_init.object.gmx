@@ -56,6 +56,7 @@ bind_create("player_vertical");
 bind_create("menu");
 bind_create("interact");
 bind_create("putdown");
+bind_create("player_swap");
 
 bind_add("menu", "K", vk_escape, 1);
 bind_add("menu", "G", gp_start, 1);
@@ -76,6 +77,8 @@ bind_add("interact", "M", mb_left);
 bind_add("interact", "K", ord("E"));
 bind_add("interact", "K", vk_rcontrol);
 bind_add("interact", "G", gp_face1);
+
+bind_add("player_swap", "K", vk_tab);
 
 bind_add("putdown", "M", mb_right);
 </string>
@@ -157,7 +160,8 @@ enum EVENT {
   onRelease = 2,
   onSpawn = 3,
   onTrue = 4,
-  onFalse = 5
+  onFalse = 5,
+  onTrigger = 6
 }
 
 enum ACTION{
@@ -167,7 +171,8 @@ enum ACTION{
   unsetA = 4,
   setB = 5,
   unsetB = 6,
-  test = 7
+  test = 7,
+  trigger = 8
 }
 
 globalvar dictionary_action, dictionary_attribute, dictionary_event;
@@ -179,6 +184,7 @@ dictionary_action[? ACTION.setB] = "{editor.action.setB}";
 dictionary_action[? ACTION.unsetA] = "{editor.action.unsetA}";
 dictionary_action[? ACTION.unsetB] = "{editor.action.unsetB}";
 dictionary_action[? ACTION.test] = "{editor.action.test}";
+dictionary_action[? ACTION.trigger] = "{editor.action.trigger}";
 dictionary_attribute = ds_map_create();
 dictionary_attribute[? ATTRIBUTE.skin] = "{editor.attribute.skin}";
 dictionary_attribute[? ATTRIBUTE.size] = "{editor.attribute.size}";
@@ -199,6 +205,7 @@ dictionary_event[? EVENT.onRelease] = "{editor.event.onRelease}";
 dictionary_event[? EVENT.onSpawn] = "{editor.event.onSpawn}";
 dictionary_event[? EVENT.onTrue] = "{editor.event.onTrue}";
 dictionary_event[? EVENT.onFalse] = "{editor.event.onFalse}";
+dictionary_event[? EVENT.onTrigger] = "{editor.event.onTrigger}";
 
 
 globalvar gp_objects, gp_editor; //a ds map with every gameplay object. (buttons, cubes, spawnpoint... entities)
@@ -271,8 +278,12 @@ gameplay_object_add_attribute(10, ATTRIBUTE.time, 1, buffer_u8, 0, 255);
 gameplay_object_add_output(10, EVENT.onPress);
 gameplay_object_add_output(10, EVENT.onRelease);
 
+register_gameplay_object(11, "{gp.logic_relay}", obj_gp_logic_relay);
+gameplay_object_add_input(11, ACTION.trigger);
+gameplay_object_add_output(11, EVENT.onTrigger);
+
 //make the objects in the ingame editor accsesable
-ds_list_add(gp_editor, 2, 1, 3, 4, 5, 6, 10, 7, 8);
+ds_list_add(gp_editor, 2, 1, 3, 4, 5, 6, 10, 7, 8, 11);
 </string>
           </argument>
         </arguments>
@@ -305,6 +316,7 @@ profile_map[? "blue"] = ini_read_real("color", "blue", 0);
 profile_map[? "name"] = ini_read_string("player","name","player");
 profile_map[? "socket"] = -1;
 profile_map[? "id"] = 0;
+profile_map[? "color"] = make_color_rgb(profile_map[? "red"], profile_map[? "green"], profile_map[? "blue"]);
 
 ini_close();
 </string>

@@ -46,6 +46,8 @@ switch (buffer_read(argument0, buffer_u8)){
     player[? "blue"] = buffer_read(argument0, buffer_u8);
     player[? "name"] = buffer_read(argument0, buffer_string);
     
+    player[? "color"] = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
+    
     player[? "pawn"].secondary_color = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
     
     buffer_seek(nw_buffer, buffer_seek_start, 0);
@@ -68,5 +70,18 @@ switch (buffer_read(argument0, buffer_u8)){
     buffer_write(nw_buffer, buffer_u8, xx);
     buffer_write(nw_buffer, buffer_u8, yy);
     nw_broadcast(nw_buffer, player);
+  break;
+  case NW.interact:
+    var index = buffer_read(argument0, buffer_u16);
+    var inst = obj_world.inst_by_index[? index];
+    if (inst != undefined){
+      with (inst){
+        event_perform(ev_other, ev_user1);
+      }
+    }
+    buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.interact);
+    buffer_write(nw_buffer, buffer_u16, index);
+    nw_broadcast(nw_buffer);
   break;
 }

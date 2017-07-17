@@ -122,6 +122,7 @@ if (init){
   case ACTION.open:
     is_open = true;
     clip.x = -attr[? ATTRIBUTE.size];
+    audio_play_sound(snd_energy_off, 0, 0);
   break;
   case ACTION.close:
     is_open = false;

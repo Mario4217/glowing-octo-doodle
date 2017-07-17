@@ -75,6 +75,7 @@ console_command_add("disconnect",cmd_disconnect,0,"Disconnect or closes the curr
 console_command_add("noclip",cmd_noclip,0,"Enables / Disables / Toggles noclip","noclip [&lt;1/0&gt;]");
 console_command_add("floor_clear",cmd_floor_clear,0,"Frees all prerendered world parts");
 console_command_add("current_pack",cmd_current_pack,0,"Gives information about the current levelpack");
+console_command_add("current_pack_end",cmd_pack_end,0,"Ends the current levelpack and sends you back into the title screen");
 </string>
           </argument>
         </arguments>

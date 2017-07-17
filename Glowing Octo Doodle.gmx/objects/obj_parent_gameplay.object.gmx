@@ -159,7 +159,15 @@ init = true;
   
   var pawn = obj_player_controller.player_pawn; //own pawn of the current player you are controlling
   if (mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) &amp;&amp; bind_check_pressed('interact') &amp;&amp; point_distance(x, y, pawn.x, pawn.y) &lt; obj_player_controller.pickup_distance){
-    event_perform(ev_other, ev_user1); 
+    if (is_server){
+      event_perform(ev_other, ev_user1);
+    }
+    if (is_network){
+      buffer_seek(nw_buffer, buffer_seek_start, 0);
+      buffer_write(nw_buffer, buffer_u8, NW.interact);
+      buffer_write(nw_buffer, buffer_u16, index);
+      nw_broadcast(nw_buffer);
+    }
     if (gameplay_object_have_tag(src_map[? "id"], "pickup")){
       if (obj_player_controller.pickup == -1){
         obj_player_controller.pickup = id;

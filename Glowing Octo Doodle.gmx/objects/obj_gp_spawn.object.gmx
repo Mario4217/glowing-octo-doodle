@@ -51,9 +51,10 @@ alarm[0] = 2;
             <kind>1</kind>
             <string>event_inherited();
 
-if (is_server){
-  obj_player_pawn.x = x;
-  obj_player_pawn.y = y;
+var player = nw_players[? attr[? ATTRIBUTE.player_index]];
+if (player != undefined){
+  player[? "pawn"].x = x;
+  player[? "pawn"].y = y;
 }
 </string>
           </argument>
@@ -79,7 +80,10 @@ if (is_server){
             <kind>1</kind>
             <string>event_inherited();
 
-part_particles_create_color(obj_world.particle_system, x+irandom_range(-10,10),y-48+irandom(10),particle_map[? "spawn"],obj_player_pawn.secondary_color,2);
+var player = nw_players[? attr[? ATTRIBUTE.player_index]];
+if (player != undefined){
+  part_particles_create_color(obj_world.particle_system, x+irandom_range(-10,10),y-48+irandom(10),particle_map[? "spawn"],player[? "color"],2);
+}
 </string>
           </argument>
         </arguments>

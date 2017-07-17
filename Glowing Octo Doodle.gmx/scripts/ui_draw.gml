@@ -87,6 +87,9 @@ if (element[? "visible"]){
       ui_draw_element_label(x1,y1,x2,y2,state,element[? "text"]);
     break;
     case "button":
+      if (pressed){
+        audio_play_sound(snd_ui_button_click, 0, 0);
+      }
       ui_draw_element_button(x1,y1,x2,y2,state,element[? "text"]);
     break;
     case "toggle":

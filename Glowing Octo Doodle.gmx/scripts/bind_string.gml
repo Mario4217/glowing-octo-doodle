@@ -1,4 +1,4 @@
-///bind_to_string(keycode)
+///bind_string(keycode)
 var str = argument0;
 var blocks = bind_split(str,"|")
 var code = real(blocks[1]);

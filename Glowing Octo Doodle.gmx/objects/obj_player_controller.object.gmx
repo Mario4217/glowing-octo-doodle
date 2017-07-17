@@ -33,12 +33,55 @@ profile_map[? "pawn"] = player_pawn;
 move_spd = 400;
 pickup_distance = 100;
 pickup = -1;
+pawns = -1;
 
 if (testmode != ""){
   btn_back_to_editor = ui_create_button(0.8,0,1,0.04,"{editor.testmode.back}","editor "+string(testmode))
+  pawns = ds_list_create();
+  pawns[| 0] = player_pawn;
+  //wait for spawns to spawn
+  alarm[0] = 5;
 }
 
 //moved bind stuff to the init object
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///spawn other players if in testmode
+if (testmode != ""){
+  for (var i=1; i&lt;obj_world.world_players; i+=1)
+  {
+    var inst = instance_create(i*32, 0, obj_player_pawn);
+    ds_list_add(pawns, inst);
+    for (var j=0; j&lt;instance_number(obj_gp_spawn); j+=1)
+    {
+      var spwn = instance_find(obj_gp_spawn, j);
+      if (spwn.attr[? ATTRIBUTE.player_index] == i){
+        inst.x = spwn.x;
+        inst.y = spwn.y;
+      }
+    };
+  };
+}
 </string>
           </argument>
         </arguments>
@@ -144,6 +187,37 @@ if (pickup != -1){
 }
 player_pawn.pickup = pickup;
 
+if (testmode != ""){
+  if (bind_check_pressed("player_swap")){
+    var index = (ds_list_find_index(pawns, player_pawn) + 1) % ds_list_size(pawns);
+    player_pawn = pawns[| index];
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (testmode != ""){
+  ds_list_destroy(pawns);
+}
 </string>
           </argument>
         </arguments>
@@ -177,10 +251,12 @@ player_pawn.pickup = pickup;
   draw_set_color(c_white);
   draw_set_valign(fa_middle);
   draw_text(0,16,lang_format("{editor.testmode}",testmode));
+  if (ds_list_size(pawns) &gt; 1){
+    draw_text(0,view_hport[0]-16,lang_format("{editor.testmode.current_player}",ds_list_find_index(pawns, player_pawn),ds_list_size(pawns)-1,lang_format(bind_string(bind_get("player_swap",0)))));
+  }
   draw_set_valign(fa_top);
   ui_draw(btn_back_to_editor);
 }
-
 </string>
           </argument>
         </arguments>

@@ -29,7 +29,9 @@ switch (buffer_read(argument0, buffer_u8)){
     pl[? "green"] = buffer_read(argument0, buffer_u8);
     pl[? "blue"] = buffer_read(argument0, buffer_u8);
     
+    pl[? "color"] = make_color_rgb(pl[? "red"], pl[? "green"], pl[? "blue"]);
     pl[? "pawn"].secondary_color = make_color_rgb(pl[? "red"], pl[? "green"], pl[? "blue"]);
+    
     nw_players[? pl[? "id"]] = pl;
     
   break;
@@ -40,6 +42,8 @@ switch (buffer_read(argument0, buffer_u8)){
     player[? "blue"] = buffer_read(argument0, buffer_u8);
     player[? "name"] = buffer_read(argument0, buffer_string);
     player[? "pawn"].secondary_color = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
+    
+    player[? "color"] = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
   break;
   case NW.position:
     var player = nw_players[? buffer_read(argument0, buffer_u8)];
@@ -90,5 +94,14 @@ switch (buffer_read(argument0, buffer_u8)){
     current_pack = ds_map_create();
     current_pack[? "name"] = buffer_read(argument0, buffer_string);
     current_pack[? "players"] = buffer_read(argument0, buffer_u8);
+  break;
+  case NW.interact:
+    var index = buffer_read(argument0, buffer_u16);
+    var inst = obj_world.inst_by_index[? index];
+    if (inst != undefined){
+      with (inst){
+        event_perform(ev_other, ev_user1);
+      }
+    }
   break;
 }

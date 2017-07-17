@@ -8,6 +8,8 @@ if (is_real(profile_map[? key])){
   profile_map[? key] = val;
 }
 
+profile_map[? "color"] = make_color_rgb(profile_map[? "red"], profile_map[? "green"], profile_map[? "blue"]);
+
 if (room == rm_game){
   obj_player_controller.player_pawn.secondary_color = make_color_rgb(profile_map[? "red"], profile_map[? "green"], profile_map[? "blue"]);
 }

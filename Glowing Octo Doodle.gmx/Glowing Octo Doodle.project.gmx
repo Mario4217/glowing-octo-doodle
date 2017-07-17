@@ -114,7 +114,10 @@
     </datafile>
   </datafiles>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_energy_off</sound>
+    <sound>sound\snd_ui_button_click</sound>
+  </sounds>
   <sprites name="sprites">
     <sprites name="gameplay">
       <sprite>sprites\spr_gp_floor_button</sprite>
@@ -131,6 +134,7 @@
       <sprite>sprites\spr_gp_logic_and</sprite>
       <sprite>sprites\spr_gp_button_inactive</sprite>
       <sprite>sprites\spr_gp_button_active</sprite>
+      <sprite>sprites\spr_gp_logic_relay</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -301,6 +305,7 @@
       <script>scripts\cmd_noclip.gml</script>
       <script>scripts\cmd_floor_clear.gml</script>
       <script>scripts\cmd_current_pack.gml</script>
+      <script>scripts\cmd_pack_end.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -419,6 +424,7 @@
       <object>objects\obj_gp_tile</object>
       <object>objects\obj_gp_logic_or</object>
       <object>objects\obj_gp_logic_and</object>
+      <object>objects\obj_gp_logic_relay</object>
       <object>objects\obj_gp_button</object>
       <object>objects\obj_parent_gameplay</object>
     </objects>

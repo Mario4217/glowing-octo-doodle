@@ -57,6 +57,7 @@ editor.map.players:				Playernumber: [1]
 editor.error.noname:			You need to give this level a name to save it!
 editor.test:					Test
 editor.testmode:				Testmode! Testing: [1]
+editor.testmode.current_player:	Current Player: [1]/[2]. Press [3] to switch!
 editor.testmode.back:			Back to editor!
 editor.selected_entity:			Selected Object ([1])
 editor.entity.type:				Type: [1]
@@ -98,12 +99,14 @@ editor.action.setB:				Set B
 editor.action.unsetA:			Unset A
 editor.action.unsetB:			Unset B
 editor.action.test:				Test
+editor.action.trigger:			Trigger
 
 editor.event.onPress:			OnPress
 editor.event.onRelease:			OnRelease
 editor.event.onSpawn:			OnSpawn
 editor.event.onTrue:			OnTrue
 editor.event.onFalse:			OnFalse
+editor.event.onTrigger:			OnTrigger
 
 editor.tileset.enviroment:		Enviroment
 editor.tileset.mark:			Mark
@@ -119,6 +122,7 @@ gp.a3:							a³
 gp.goalzone:					Goalzone
 gp.logic_or:					Logic OR
 gp.logic_and:					Logic AND
+gp.logic_relay:					Logic Relay
 gp.tile:						Tile
 gp.button:						Button
 
