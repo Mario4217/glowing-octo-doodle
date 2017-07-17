@@ -85,10 +85,10 @@ var dir = point_direction(0, 0, xmov, ymov);
 
 var spd = game_delta_time * move_spd * point_distance(0, 0, xmov, ymov);
 
-if (!collision_rectangle(player_pawn.x-16+xmov*spd, player_pawn.y-16, player_pawn.x+16+xmov*spd, player_pawn.y, obj_clip, 0, 0)){
+if (!collision_rectangle(player_pawn.x-16+xmov*spd, player_pawn.y-16, player_pawn.x+16+xmov*spd, player_pawn.y, obj_clip, 0, 0) || cheat_noclip){
   player_pawn.x += xmov*spd;
 }
-if (!collision_rectangle(player_pawn.x-16, player_pawn.y-16+ymov*spd, player_pawn.x+16, player_pawn.y+ymov*spd, obj_clip, 0, 0)){
+if (!collision_rectangle(player_pawn.x-16, player_pawn.y-16+ymov*spd, player_pawn.x+16, player_pawn.y+ymov*spd, obj_clip, 0, 0) || cheat_noclip){
   player_pawn.y += ymov*spd;
 }
 /*

@@ -26,6 +26,15 @@ switch (buffer_read(argument0, buffer_u8)){
         }
       };
       
+      var map_buffer = buffer_load(global.current_map_path);
+      var send_buffer = buffer_create(256, buffer_grow, 1);
+      buffer_seek(send_buffer, buffer_seek_start, 0);
+      buffer_write(send_buffer, buffer_u8, NW.map_data);
+      buffer_copy(map_buffer, 0, buffer_get_size(map_buffer), send_buffer, 1);    
+      nw_send(player, send_buffer);
+      buffer_delete(send_buffer);
+      buffer_delete(map_buffer);
+      
       player[? "connected"] = true;
   break;
   case NW.client_profile:

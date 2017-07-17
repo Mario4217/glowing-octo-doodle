@@ -35,6 +35,8 @@ if (global.toLoad != ""){
 }
 
 particle_system = part_system_create();
+
+inst_by_index = ds_map_create();
 </string>
           </argument>
         </arguments>
@@ -59,6 +61,7 @@ particle_system = part_system_create();
             <kind>1</kind>
             <string>part_system_destroy(particle_system);
 ds_grid_destroy(grid_floor);
+ds_map_destroy(inst_by_index);
 </string>
           </argument>
         </arguments>

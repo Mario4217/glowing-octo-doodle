@@ -366,6 +366,7 @@ floorlist[1,2] = background_get_height(bg_floor_concrete);
 floorlist[1,3] = "{editor.floor.concrete}"
 
 global.toLoad = "title";
+global.current_map_path = "";
 room = rm_game;
 
 globalvar sun_direction, sun_length, sun_intensity;
@@ -389,6 +390,10 @@ network_set_config(network_config_connect_timeout, 1000);
 globalvar nw_players;
 nw_players = ds_map_create();
 nw_players[? 0] = profile_map;
+
+globalvar allow_cheats, cheat_noclip;
+allow_cheats = true;
+cheat_noclip = false;
 </string>
           </argument>
         </arguments>

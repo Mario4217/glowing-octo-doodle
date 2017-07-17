@@ -30,7 +30,9 @@
   client_profile = 2,
   client_connect = 3,
   client_disconnect = 4,
-  position = 5
+  position = 5,
+  map_data = 6,
+  ent_action = 7
 }
 
 globalvar nw_buffer;

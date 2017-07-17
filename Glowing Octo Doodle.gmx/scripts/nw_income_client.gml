@@ -37,4 +37,22 @@ switch (buffer_read(argument0, buffer_u8)){
     pawn.x = buffer_read(argument0, buffer_u16);
     pawn.y = buffer_read(argument0, buffer_u16);
   break;
+  case NW.map_data:
+    world_from_buffer(argument0);
+  break;
+  case NW.ent_action:
+    var target = buffer_read(argument0, buffer_u16);
+    var action = buffer_read(argument0, buffer_u16);
+    var link = ds_map_create();
+    link[? "action"] = action;
+    target = obj_world.inst_by_index[? target];
+    if (instance_exists(target)){
+      target.input = link;
+      with (target){
+        event_perform(ev_other, ev_user0);
+      }
+    }
+    ds_map_destroy(link);
+    
+  break;
 }
