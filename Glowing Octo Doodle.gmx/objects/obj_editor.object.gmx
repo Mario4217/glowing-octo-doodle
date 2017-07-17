@@ -475,7 +475,7 @@ if (tile_dialog){
   var xx = view_wport[0] / 2 - (256*scale);
   var yy = view_hport[0] / 2 - (256*scale);
   draw_set_color(c_white);
-  draw_set_alpha(0.3);
+  draw_set_alpha(0.9);
   draw_rectangle(xx,yy,xx+512*scale,yy+512*scale, false);
   draw_set_alpha(1);
   draw_sprite_ext(spr_tiles, ui_get_value(tiles_container), xx, yy, scale, scale, 0, c_white, 1);
@@ -577,7 +577,7 @@ if (interface[? "editor_menu"] == "4"){
     var cy = floor(mouse_y/32)-floor(size/2);
     draw_set_color(c_white);
     draw_set_alpha(0.2);
-    draw_rectangle(cx*32, cy*32, cx*32+size*32, cy*32+size*32, false);
+    draw_rectangle(cx*32, cy*32, cx*32+size*32-1, cy*32+size*32-1, false);
     draw_set_alpha(1);
     var c = (ui_hover != -1)
     if (mouse_check_button(mb_left) &amp;&amp; !c){

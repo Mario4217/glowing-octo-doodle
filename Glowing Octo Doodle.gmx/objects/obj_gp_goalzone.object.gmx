@@ -28,7 +28,7 @@
             <string>event_inherited();
 
 var c = collision_rectangle(bbox_left+16, bbox_top+16, bbox_right-16, bbox_bottom-16, obj_player_pawn, 0, 0);
-if (c &amp;&amp; init){
+if (c &amp;&amp; init &amp;&amp; is_server){
   if (testmode != ""){
     console_command_execute("editor "+string(testmode));
   }else{

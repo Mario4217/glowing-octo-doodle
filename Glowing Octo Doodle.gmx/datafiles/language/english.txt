@@ -1,4 +1,4 @@
-menu.play:						Play
+﻿menu.play:						Play
 menu.profile:					Profile
 menu.settings:					Settings
 menu.editor:					Editor
@@ -38,6 +38,9 @@ menu.editor.edit_map:			Edit Map
 menu.editor.edit_pack:			Edit Pack
 menu.editor.maps:				Maps
 menu.editor.packs:				Packs
+
+lobby.wait_for_player:			-Empty-
+lobby.players:					Players [1]/[2]
 
 editor.exit:					Exit the editor
 editor.save:					Save

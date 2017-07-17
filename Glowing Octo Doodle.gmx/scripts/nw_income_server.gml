@@ -8,6 +8,8 @@ switch (buffer_read(argument0, buffer_u8)){
       buffer_write(nw_buffer, buffer_u8, NW.server_welcome);
       buffer_write(nw_buffer, buffer_string, GM_version);
       buffer_write(nw_buffer, buffer_u8, player[? "id"]);
+      buffer_write(nw_buffer, buffer_string, current_pack[? "name"]);
+      buffer_write(nw_buffer, buffer_u8, current_pack[? "players"]);
       nw_send(player, nw_buffer);
       
       var key = ds_map_find_first(nw_players); //sending the new one, who there is already
@@ -25,6 +27,7 @@ switch (buffer_read(argument0, buffer_u8)){
           key = ds_map_find_next(nw_players, key);
         }
       };
+      
       
       var map_buffer = buffer_load(global.current_map_path);
       var send_buffer = buffer_create(256, buffer_grow, 1);

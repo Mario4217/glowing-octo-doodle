@@ -8,6 +8,16 @@ switch (buffer_read(argument0, buffer_u8)){
       //return false;
     }
     nw_own_id = buffer_read(argument0, buffer_u8);
+    nw_players[? nw_own_id] = profile_map;
+    
+    if (current_pack != -1){
+      ds_map_clear(current_pack);
+    }else{
+      current_pack = ds_map_create();
+    }
+    current_pack[? "name"] = buffer_read(argument0, buffer_string);
+    current_pack[? "players"] = buffer_read(argument0, buffer_u8);
+    
     console_print("Server is using version "+string(version));
     nw_send_profile();
   break;
@@ -75,5 +85,10 @@ switch (buffer_read(argument0, buffer_u8)){
     }else{
       pawn.pickup = -1;
     }
+  break;
+  case NW.pack:
+    current_pack = ds_map_create();
+    current_pack[? "name"] = buffer_read(argument0, buffer_string);
+    current_pack[? "players"] = buffer_read(argument0, buffer_u8);
   break;
 }
