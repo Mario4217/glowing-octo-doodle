@@ -123,6 +123,7 @@ world_height = 64;
 world_name = "unnamed";
 world_players = 1;
 grid_floor = ds_grid_create(world_width, world_height);
+instance_create(0,0,obj_floor);
 
 ui_set_value(input_name, world_name);
 ui_set_value(input_width, world_width);
@@ -581,6 +582,15 @@ if (interface[? "editor_menu"] == "4"){
     var c = (ui_hover != -1)
     if (mouse_check_button(mb_left) &amp;&amp; !c){
       ds_grid_set_region(grid_floor, cx, cy, cx+size-1, cy+size-1, floor_to_set);
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size)    , floor(cy / obj_floor.chunk_size)    );
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size) + 1, floor(cy / obj_floor.chunk_size)    );
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size) - 1, floor(cy / obj_floor.chunk_size)    );
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size)    , floor(cy / obj_floor.chunk_size) + 1);
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size)    , floor(cy / obj_floor.chunk_size) - 1);
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size) + 1, floor(cy / obj_floor.chunk_size) + 1);
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size) + 1, floor(cy / obj_floor.chunk_size) - 1);
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size) - 1, floor(cy / obj_floor.chunk_size) + 1);
+      world_floor_update_chunk(floor(cx / obj_floor.chunk_size) - 1, floor(cy / obj_floor.chunk_size) - 1);
     }
     if (mouse_check_button_pressed(mb_right)){
       ui_set_value(floors_container, -1);

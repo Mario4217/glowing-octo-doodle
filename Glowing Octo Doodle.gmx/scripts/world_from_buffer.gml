@@ -22,7 +22,7 @@ world_object.world_name = base64_decode(buffer_read(buff, buffer_string));
 world_object.world_width = buffer_read(buff, buffer_u32);
 world_object.world_height = buffer_read(buff, buffer_u32);
 world_object.world_players = buffer_read(buff, buffer_u8);
-ds_grid_resize(world_object.grid_floor, world_object.world_width, world_object.world_height);
+world_resize(world_object.world_width, world_object.world_height);
 
 if (room == rm_editor){
   ui_set_value(obj_editor.input_name, obj_editor.world_name);
@@ -87,5 +87,8 @@ while (index < ent_number){
 
 //floor grid
 grid_from_buffer(buff, world_object.grid_floor);
+
+//world_floor_update_all();
+world_chunk_free_all();
 
 ds_list_destroy(entlist);

@@ -72,7 +72,8 @@ console_command_add("pack_start",cmd_pack_start,1,"Loads and starts a levelpack"
 console_command_add("editor_tile_dialog",cmd_editor_tile_dialog,0,"Opens the tile dialog in the editor");
 console_command_add("connect",cmd_connect,1,"Connect to a server using TCP","connect &lt;ip&gt;");
 console_command_add("disconnect",cmd_disconnect,0,"Disconnect or closes the current server");
-console_command_add("noclip",cmd_noclip,0,"Enables / Disables / Toggles noclip","noclip [&lt;1/0&gt;]")
+console_command_add("noclip",cmd_noclip,0,"Enables / Disables / Toggles noclip","noclip [&lt;1/0&gt;]");
+console_command_add("floor_clear",cmd_floor_clear,0,"Frees all prerendered world parts")
 </string>
           </argument>
         </arguments>

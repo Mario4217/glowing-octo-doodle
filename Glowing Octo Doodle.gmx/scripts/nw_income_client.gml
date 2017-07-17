@@ -46,13 +46,34 @@ switch (buffer_read(argument0, buffer_u8)){
     var link = ds_map_create();
     link[? "action"] = action;
     target = obj_world.inst_by_index[? target];
-    if (instance_exists(target)){
-      target.input = link;
-      with (target){
-        event_perform(ev_other, ev_user0);
+    if (target != undefined){
+      if (instance_exists(target)){
+        target.input = link;
+        with (target){
+          event_perform(ev_other, ev_user0);
+        }
       }
     }
     ds_map_destroy(link);
-    
+  break;
+  case NW.ent_position:
+    var index = buffer_read(argument0, buffer_u16);
+    var inst = obj_world.inst_by_index[? index];
+    if (inst != undefined){
+      if (instance_exists(inst)){
+        inst.x = buffer_read(argument0, buffer_u16);
+        inst.y = buffer_read(argument0, buffer_u16);        
+      }
+    }
+  break;
+  case NW.pawn_pickup:
+    var player = nw_players[? buffer_read(argument0, buffer_u8)];
+    var pawn = player[? "pawn"];
+    var pickup_inst = obj_world.inst_by_index[? buffer_read(argument0, buffer_u16)];
+    if (pickup_inst != undefined){
+      pawn.pickup = pickup_inst;
+    }else{
+      pawn.pickup = -1;
+    }
   break;
 }

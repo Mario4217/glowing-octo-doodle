@@ -33,7 +33,72 @@ if (room == rm_game){
 }
 chunk_size = 16;
 
-light_surf = surface_create(1,1);
+width = ds_grid_width(grid);
+height = ds_grid_height(grid);
+
+//light_surf = surface_create(1,1);
+
+for (var i=0; i&lt;ceil(ds_grid_width(grid)/chunk_size); i+=1){
+  for (var j=0; j&lt;ceil(ds_grid_height(grid) / chunk_size); j+=1){
+    chunk_floor[i, j] = -1;
+    chunk_shadow[i, j] = -1;
+    //world_floor_update_chunk(i, j);
+    //world_shadow_update_chunk(i, j);
+  };
+};
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>world_chunk_free_all();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*
+draw_set_font(ft_console)
+for (i=0; i&lt;width/chunk_size; i+=1){
+  for (j=0; j&lt;height/chunk_size; j+=1){
+    draw_text(i*16,j*16,surface_exists(chunk_floor[i, j]));
+  };
+};
+*/
 </string>
           </argument>
         </arguments>
@@ -59,6 +124,23 @@ light_surf = surface_create(1,1);
             <string>depth = ds_grid_height(grid)*32+1
 draw_set_color(c_white);
 
+
+for (var i=max(floor(view_xview[0]/32/chunk_size),0); i&lt;min(ceil(view_wview[0]+view_xview[0])/32/chunk_size, ds_grid_width(grid)/chunk_size); i+=1){
+  for (var j=max(floor(view_yview[0]/32/chunk_size),0); j&lt;min(ceil(view_hview[0]+view_yview[0])/32/chunk_size, ds_grid_height(grid)/chunk_size); j+=1){
+    if (!surface_exists(chunk_floor[i, j])){
+      world_floor_update_chunk(i, j);
+    }
+    if (!surface_exists(chunk_shadow[i, j])){
+      world_shadow_update_chunk(i, j);
+    }
+    draw_surface(chunk_floor[i, j], i*chunk_size*32, j*chunk_size*32);
+    draw_surface_ext(chunk_shadow[i, j], i*chunk_size*32, j*chunk_size*32, 1, 1, 0, c_black, 1-sun_intensity);
+  };
+};
+
+
+
+/*
 for (var i=max(floor(view_xview[0]/32),0); i&lt;min(ceil((view_wview[0]+view_xview[0])/32),ds_grid_width(grid)); i+=1){
   for (var j=max(floor(view_yview[0]/32),0); j&lt;min(ceil((view_hview[0]+view_yview[0])/32),ds_grid_height(grid)); j+=1){
     var index = grid[# i, j];
@@ -75,8 +157,8 @@ for (var i=max(floor(view_xview[0]/32),0); i&lt;min(ceil((view_wview[0]+view_xvi
     draw_primitive_end();
   };
 };
-
-
+*/
+/*
 draw_set_color(c_black)
 draw_set_alpha(1);
 if (surface_exists(light_surf)){
@@ -94,6 +176,7 @@ with (obj_parent_gameplay){
 }
 surface_reset_target();
 draw_surface_ext(light_surf, view_xview[0], view_yview[0], 1, 1, 0, c_black, 1-sun_intensity)
+*/
 </string>
           </argument>
         </arguments>

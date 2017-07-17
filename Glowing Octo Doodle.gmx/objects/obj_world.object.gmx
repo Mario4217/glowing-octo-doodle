@@ -29,14 +29,15 @@
 world_height = 128;
 world_name = "uninitiliazed"
 grid_floor = ds_grid_create(world_width, world_height);
+inst_by_index = ds_map_create();
+
+instance_create(0,0,obj_floor);
 
 if (global.toLoad != ""){
   world_load(global.toLoad);
 }
 
 particle_system = part_system_create();
-
-inst_by_index = ds_map_create();
 </string>
           </argument>
         </arguments>

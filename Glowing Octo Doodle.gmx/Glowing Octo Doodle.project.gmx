@@ -297,6 +297,7 @@
       <script>scripts\cmd_connect.gml</script>
       <script>scripts\cmd_disconnect.gml</script>
       <script>scripts\cmd_noclip.gml</script>
+      <script>scripts\cmd_floor_clear.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -376,6 +377,11 @@
     <script>scripts\shadow_line.gml</script>
     <script>scripts\shadow_line_sun.gml</script>
     <script>scripts\world_from_buffer.gml</script>
+    <script>scripts\world_resize.gml</script>
+    <script>scripts\world_floor_update_chunk.gml</script>
+    <script>scripts\world_shadow_update_chunk.gml</script>
+    <script>scripts\world_floor_update_all.gml</script>
+    <script>scripts\world_chunk_free_all.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>
