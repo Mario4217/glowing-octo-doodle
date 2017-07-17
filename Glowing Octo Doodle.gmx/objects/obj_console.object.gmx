@@ -60,7 +60,7 @@ console_command_add("editor_start_link",cmd_editor_start_link,1,"Starts the proc
 console_command_add("editor_end_link",cmd_editor_end_link,1,"Ends the process of linking an event to an action","editor_end_link &lt;action id&gt;");
 console_command_add("editor_cut_link",cmd_editor_cut_link,1,"Removes an output on the selected object", "editor_cut_link &lt;link index&gt;");
 console_command_add("edit_profile",cmd_edit_profile,2,"Edits the players profile","edit_profile &lt;key&gt; &lt;value&gt;");
-console_command_add("map_delete",cmd_map_delete,1,"Deleted a map by its name","map_delete &lt;mapname&gt;");
+console_command_add("map_delete",cmd_map_delete,1,"Deletes a map by its name","map_delete &lt;mapname&gt;");
 console_command_add("pack_editor",cmd_pack_editor,0,"Edit a map pack in the pack editor","pack_editor [&lt;packname&gt;]");
 console_command_add("pack_delete",cmd_pack_delete,1,"Deletes a map pack","pack_delete &lt;packname&gt;");
 console_command_add("pack_save",cmd_pack_save,0,"Saves the current pack in the pack editor");
@@ -73,7 +73,8 @@ console_command_add("editor_tile_dialog",cmd_editor_tile_dialog,0,"Opens the til
 console_command_add("connect",cmd_connect,1,"Connect to a server using TCP","connect &lt;ip&gt;");
 console_command_add("disconnect",cmd_disconnect,0,"Disconnect or closes the current server");
 console_command_add("noclip",cmd_noclip,0,"Enables / Disables / Toggles noclip","noclip [&lt;1/0&gt;]");
-console_command_add("floor_clear",cmd_floor_clear,0,"Frees all prerendered world parts")
+console_command_add("floor_clear",cmd_floor_clear,0,"Frees all prerendered world parts");
+console_command_add("current_pack",cmd_current_pack,0,"Gives information about the current levelpack");
 </string>
           </argument>
         </arguments>

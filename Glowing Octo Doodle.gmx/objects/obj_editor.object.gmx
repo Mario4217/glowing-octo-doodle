@@ -555,7 +555,7 @@ if (interface[? "editor_menu"] == "2"){
   }
 }
 
-if (interface[? "editor_menu"] == "3"){
+if (interface[? "editor_menu"] == "3" &amp;&amp; !tile_dialog &amp;&amp; tile_x1 &gt;= 0){
   var c = (ui_hover != -1)
   draw_sprite_part_ext(spr_tiles, ui_get_value(tiles_container), tile_x1, tile_y1, tile_x2-tile_x1, tile_y2-tile_y1, place_x, place_y, 1, 1, c_white, 0.4);
   if (mouse_check_button_pressed(mb_left) &amp;&amp; !c){
@@ -566,6 +566,9 @@ if (interface[? "editor_menu"] == "3"){
     inst.overwrite_attr[? ATTRIBUTE.top] = tile_y1;
     inst.overwrite_attr[? ATTRIBUTE.width] = tile_x2 - tile_x1;
     inst.overwrite_attr[? ATTRIBUTE.height] = tile_y2 - tile_y1;
+  }
+  if (mouse_check_button_pressed(mb_right)){
+    tile_x1 = -1;
   }
 }
 

@@ -148,7 +148,8 @@ enum ATTRIBUTE {
   relative = 8,
   top = 9,
   left = 10,
-  collision = 11
+  collision = 11,
+  time = 12
 }
 
 enum EVENT {
@@ -191,6 +192,7 @@ dictionary_attribute[? ATTRIBUTE.relative] = "{editor.attribute.relative}";
 dictionary_attribute[? ATTRIBUTE.top] = "{editor.attribute.top}"
 dictionary_attribute[? ATTRIBUTE.left] = "{editor.attribute.left}"
 dictionary_attribute[? ATTRIBUTE.collision] = "{editor.attribute.collision}"
+dictionary_attribute[? ATTRIBUTE.time] = "{editor.attribute.time}"
 dictionary_event = ds_map_create();
 dictionary_event[? EVENT.onPress] = "{editor.event.onPress}";
 dictionary_event[? EVENT.onRelease] = "{editor.event.onRelease}";
@@ -264,8 +266,13 @@ gameplay_object_add_attribute(9, ATTRIBUTE.top, 0, buffer_u16, 0, 1024);
 gameplay_object_add_attribute(9, ATTRIBUTE.left, 0, buffer_u16, 0, 1024);
 gameplay_object_add_attribute(9, ATTRIBUTE.collision, 0, buffer_bool, 0, 1);
 
+register_gameplay_object(10, "{gp.button}", obj_gp_button);
+gameplay_object_add_attribute(10, ATTRIBUTE.time, 1, buffer_u8, 0, 255);
+gameplay_object_add_output(10, EVENT.onPress);
+gameplay_object_add_output(10, EVENT.onRelease);
+
 //make the objects in the ingame editor accsesable
-ds_list_add(gp_editor, 2, 1, 3, 4, 5, 6, 7, 8);
+ds_list_add(gp_editor, 2, 1, 3, 4, 5, 6, 10, 7, 8);
 </string>
           </argument>
         </arguments>

@@ -129,6 +129,8 @@
       <sprite>sprites\spr_gp_goalzone</sprite>
       <sprite>sprites\spr_gp_logic_or</sprite>
       <sprite>sprites\spr_gp_logic_and</sprite>
+      <sprite>sprites\spr_gp_button_inactive</sprite>
+      <sprite>sprites\spr_gp_button_active</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -298,6 +300,7 @@
       <script>scripts\cmd_disconnect.gml</script>
       <script>scripts\cmd_noclip.gml</script>
       <script>scripts\cmd_floor_clear.gml</script>
+      <script>scripts\cmd_current_pack.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -357,31 +360,33 @@
       <script>scripts\nw_send_profile.gml</script>
       <script>scripts\nw_send.gml</script>
     </scripts>
+    <scripts name="world">
+      <script>scripts\world_floor_update_all.gml</script>
+      <script>scripts\world_floor_update_chunk.gml</script>
+      <script>scripts\world_chunk_free_all.gml</script>
+      <script>scripts\world_from_buffer.gml</script>
+      <script>scripts\world_shadow_update_chunk.gml</script>
+      <script>scripts\world_load.gml</script>
+      <script>scripts\world_resize.gml</script>
+    </scripts>
+    <script>scripts\current_pack_goto_level.gml</script>
+    <script>scripts\pack_start.gml</script>
     <script>scripts\string_trim.gml</script>
     <script>scripts\move.gml</script>
     <script>scripts\settings_save.gml</script>
     <script>scripts\settings_load.gml</script>
     <script>scripts\draw_sprite_area.gml</script>
-    <script>scripts\world_load.gml</script>
     <script>scripts\event_trigger.gml</script>
     <script>scripts\global_mouse_over_ui.gml</script>
     <script>scripts\mouse_over_ui.gml</script>
     <script>scripts\mouse_over.gml</script>
     <script>scripts\ds_list_add_map.gml</script>
     <script>scripts\get_level_data.gml</script>
-    <script>scripts\pack_start.gml</script>
-    <script>scripts\current_pack_goto_level.gml</script>
     <script>scripts\grid_from_buffer.gml</script>
     <script>scripts\grid_to_buffer.gml</script>
     <script>scripts\draw_shadow.gml</script>
     <script>scripts\shadow_line.gml</script>
     <script>scripts\shadow_line_sun.gml</script>
-    <script>scripts\world_from_buffer.gml</script>
-    <script>scripts\world_resize.gml</script>
-    <script>scripts\world_floor_update_chunk.gml</script>
-    <script>scripts\world_shadow_update_chunk.gml</script>
-    <script>scripts\world_floor_update_all.gml</script>
-    <script>scripts\world_chunk_free_all.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>
@@ -414,6 +419,7 @@
       <object>objects\obj_gp_tile</object>
       <object>objects\obj_gp_logic_or</object>
       <object>objects\obj_gp_logic_and</object>
+      <object>objects\obj_gp_button</object>
       <object>objects\obj_parent_gameplay</object>
     </objects>
   </objects>

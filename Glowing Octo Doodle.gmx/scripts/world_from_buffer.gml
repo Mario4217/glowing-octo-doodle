@@ -90,5 +90,6 @@ grid_from_buffer(buff, world_object.grid_floor);
 
 //world_floor_update_all();
 world_chunk_free_all();
+obj_floor.alarm[0] = 2;
 
 ds_list_destroy(entlist);

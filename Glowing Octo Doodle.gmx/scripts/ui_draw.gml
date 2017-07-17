@@ -188,7 +188,7 @@ if (element[? "visible"]){
           }
         }
         element[? "value"] = real(keyboard_string);
-        keyboard_string = string(element[? "value"]);
+        //keyboard_string = string(element[? "value"]);
         state = "active";
         
         if (keyboard_check_pressed(vk_enter) || deselect){

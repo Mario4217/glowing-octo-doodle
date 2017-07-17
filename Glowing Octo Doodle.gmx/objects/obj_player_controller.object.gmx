@@ -81,6 +81,33 @@ if (xmov &gt; 0){
   player_pawn.walking = true;
 }
 
+var spd = game_delta_time * move_spd * point_distance(0, 0, xmov, ymov);
+
+var dir = point_direction(0,0,xmov, ymov);
+
+var pawn = player_pawn;
+pawn.xdis = lengthdir_x(spd, dir);
+pawn.ydis = lengthdir_y(spd, dir);
+
+with (pawn){
+  if (place_meeting(x + xdis, y, obj_clip)) {
+    while (!place_meeting(x + sign(xdis), y, obj_clip)){
+      x += sign(xdis);
+    }
+    xdis = 0;
+  }
+  x += xdis;
+  
+  if (place_meeting(x, y + ydis, obj_clip)) {
+    while (!place_meeting(x, y + sign(ydis), obj_clip)){
+      y += sign(ydis);
+    }
+    ydis = 0;
+  }
+  y += ydis;
+}
+
+/*
 var dir = point_direction(0, 0, xmov, ymov);
 
 var spd = game_delta_time * move_spd * point_distance(0, 0, xmov, ymov);

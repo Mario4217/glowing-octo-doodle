@@ -89,6 +89,7 @@ editor.attribute.relative:		Relative
 editor.attribute.top:			Top
 editor.attribute.left:			Left
 editor.attribute.collision:		Collisions
+editor.attribute.time:			Time
 
 editor.action.open:				Open
 editor.action.close:			Close
@@ -119,6 +120,7 @@ gp.goalzone:					Goalzone
 gp.logic_or:					Logic OR
 gp.logic_and:					Logic AND
 gp.tile:						Tile
+gp.button:						Button
 
 key.add:						Add
 key.alt:						Alt
