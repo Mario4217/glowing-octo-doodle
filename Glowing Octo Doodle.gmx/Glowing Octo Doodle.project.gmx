@@ -280,6 +280,8 @@
       <script>scripts\nw_make_player.gml</script>
       <script>scripts\nw_connect.gml</script>
       <script>scripts\nw_end.gml</script>
+      <script>scripts\nw_send_profile.gml</script>
+      <script>scripts\nw_send.gml</script>
     </scripts>
     <script>scripts\string_trim.gml</script>
     <script>scripts\move.gml</script>

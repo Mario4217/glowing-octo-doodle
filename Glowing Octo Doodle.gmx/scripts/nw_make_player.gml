@@ -6,5 +6,6 @@ map[? "red"] = 0;
 map[? "green"] = 0;
 map[? "blue"] = 0;
 map[? "pawn"] = instance_create(0,0,obj_player_pawn);
+map[? "connected"] = false;
 
 return map;

@@ -297,6 +297,7 @@ profile_map[? "green"] = ini_read_real("color", "green",0);
 profile_map[? "blue"] = ini_read_real("color", "blue", 0);
 profile_map[? "name"] = ini_read_string("player","name","player");
 profile_map[? "socket"] = -1;
+profile_map[? "id"] = 0;
 
 ini_close();
 </string>
@@ -372,7 +373,7 @@ sun_direction = 45;
 sun_length = 1;
 sun_intensity = 0.8;
 
-globalvar is_server, is_network, nw_type, nw_port, nw_server, nw_socket, nw_is_connected;
+globalvar is_server, is_network, nw_type, nw_port, nw_server, nw_socket, nw_is_connected, nw_own_id;
 is_network = false;
 is_server = true;
 nw_type = "TCP";
@@ -380,13 +381,14 @@ nw_port = 24019;
 nw_server = -1;
 nw_socket = -1;
 nw_is_connected = false;
+nw_own_id = 0;
 
 network_set_config(network_config_use_non_blocking_socket, 1);
 network_set_config(network_config_connect_timeout, 1000);
 
 globalvar nw_players;
 nw_players = ds_map_create();
-nw_players[? "-1"] = profile_map;
+nw_players[? 0] = profile_map;
 </string>
           </argument>
         </arguments>

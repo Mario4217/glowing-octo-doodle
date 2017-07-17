@@ -26,11 +26,51 @@
           <argument>
             <kind>1</kind>
             <string>enum NW{
-  server_welcome = 1
+  server_welcome = 10,
+  client_profile = 2,
+  client_connect = 3,
+  client_disconnect = 4,
+  position = 5
 }
 
 globalvar nw_buffer;
 nw_buffer = -1;
+
+next_player_id = 1;
+idmap = ds_map_create();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (is_network &amp;&amp; nw_is_connected){
+  buffer_seek(nw_buffer, buffer_seek_start, 0);
+  buffer_write(nw_buffer, buffer_u8, NW.position)
+  if (is_server){
+    buffer_write(nw_buffer, buffer_u8, 0);
+  }
+  buffer_write(nw_buffer, buffer_u16, obj_player_controller.player_pawn.x);
+  buffer_write(nw_buffer, buffer_u16, obj_player_controller.player_pawn.y);
+  
+  nw_broadcast(nw_buffer);
+}
 </string>
           </argument>
         </arguments>
@@ -60,37 +100,55 @@ switch (async_load[? "type"]){
       nw_is_connected = true;
       is_server = false;
       console_print("Connected to server!")
-      nw_buffer = buffer_create(1, buffer_grow, 1);
+      nw_buffer = buffer_create(256, buffer_grow, 1);
+      
+      buffer_seek(nw_buffer, buffer_seek_start, 0);
+      buffer_write(nw_buffer, buffer_u8, NW.server_welcome);
+      network_send_packet(nw_socket, nw_buffer, buffer_get_size(nw_buffer));
+      
+      
+      
     }else{
-      nw_is_connected = false;
-      is_server = true;
-      console_print("Connection to server failer!",c_orange);
+      console_print("Connection to server failed!",c_orange);
+      nw_end();        
     }
   break;
   case network_type_connect:
     if (is_server){
-      var player = nw_make_player(async_load[? "id"]);
-      nw_players[? async_load[? "id"]] = player;
+      var socket = async_load[? "socket"];
+      var player = nw_make_player(socket);
+      player[? "id"] = next_player_id;
+      player[? "nid"] = async_load[? "id"];
+      
+      ds_map_add_map(nw_players, next_player_id, player);
+      
       console_print("Someone connected to the server!");
-      buffer_seek(nw_buffer, buffer_seek_start, 0);
-      buffer_write(nw_buffer, buffer_u8, NW.server_welcome);
-      buffer_write(nw_buffer, buffer_string, GM_version);
-      network_send_packet(async_load[? "id"], nw_buffer, buffer_get_size(nw_buffer));
+      
+      idmap[? async_load[? "socket"]] = next_player_id;
+      
+      next_player_id ++;
     }
   break;
   case network_type_data:
     if (is_server){
-      nw_income_server(async_load[? "buffer"]);
+      var nid = async_load[? "id"];
+      var player = nw_players[? idmap[? nid]];
+      if (player != undefined){
+        nw_income_server(async_load[? "buffer"], player);
+      }else{
+        show_debug_message("Gnarf, a non existing player sends a message...");
+      }
     }else{
       nw_income_client(async_load[? "buffer"]);
     }
   break;
   case network_type_disconnect:
-    var map = nw_players[? async_load[? "id"]];
+    var map = nw_players[? idmap[? async_load[? "socket"]]];
     with (map[? "pawn"]){
       instance_destroy();
     }
-    ds_map_delete(nw_players, async_load[? "id"]);
+    ds_map_delete(nw_players, idmap[? async_load[? "socket"]]);
+    ds_map_delete(idmap, async_load[? "id"]);
     console_print("Someone disconnected from the server!")
   break;
 }

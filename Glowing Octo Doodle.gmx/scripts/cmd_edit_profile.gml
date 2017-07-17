@@ -19,3 +19,7 @@ ini_write_real("color","green",profile_map[? "green"]);
 ini_write_real("color","blue",profile_map[? "blue"]);
 ini_write_string("player","name",profile_map[? "name"]);
 ini_close();
+
+if (is_network){
+  nw_send_profile();
+}

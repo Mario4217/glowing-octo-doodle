@@ -28,6 +28,8 @@
             <string>player_pawn = instance_create(100, 100, obj_player_pawn);
 player_pawn.secondary_color = make_color_rgb(profile_map[? "red"], profile_map[? "green"], profile_map[? "blue"]);
 
+profile_map[? "pawn"] = player_pawn;
+
 move_spd = 400;
 pickup_distance = 100;
 pickup = -1;
