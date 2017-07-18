@@ -396,9 +396,48 @@
     <script>scripts\shadow_line_sun.gml</script>
     <script>scripts\world_update_region.gml</script>
   </scripts>
-  <fonts name="fonts"/>
-  <objects name="objects"/>
-  <rooms name="rooms"/>
+  <fonts name="fonts">
+    <font>fonts\ft_console</font>
+    <font>fonts\ft_ui</font>
+    <font>fonts\ft_testmode</font>
+    <font>fonts\ft_editor_io</font>
+  </fonts>
+  <objects name="objects">
+    <object>objects\obj_init</object>
+    <object>objects\obj_menu</object>
+    <object>objects\obj_editor</object>
+    <object>objects\obj_floor</object>
+    <object>objects\obj_camera</object>
+    <object>objects\obj_console</object>
+    <object>objects\obj_player_controller</object>
+    <object>objects\obj_player_pawn</object>
+    <object>objects\obj_time_control</object>
+    <object>objects\obj_world</object>
+    <object>objects\obj_editor_ent</object>
+    <object>objects\obj_clip</object>
+    <object>objects\obj_controller</object>
+    <object>objects\obj_pack_editor</object>
+    <objects name="gameplay">
+      <object>objects\obj_gp_floor_button</object>
+      <object>objects\obj_gp_goalzone</object>
+      <object>objects\obj_gp_cube</object>
+      <object>objects\obj_gp_spawn</object>
+      <object>objects\obj_gp_wall</object>
+      <object>objects\obj_gp_light_wall</object>
+      <object>objects\obj_gp_tile</object>
+      <object>objects\obj_gp_logic_or</object>
+      <object>objects\obj_gp_logic_and</object>
+      <object>objects\obj_gp_logic_relay</object>
+      <object>objects\obj_gp_button</object>
+      <object>objects\obj_parent_gameplay</object>
+    </objects>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rm_init</room>
+    <room>rooms\rm_game</room>
+    <room>rooms\rm_editor</room>
+    <room>rooms\rm_pack_editor</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
