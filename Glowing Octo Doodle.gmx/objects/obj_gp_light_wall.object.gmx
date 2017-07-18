@@ -59,6 +59,7 @@ if (attr[? ATTRIBUTE.orientation] == 0){
   clip.image_xscale = 1;
   clip.image_yscale = attr[? ATTRIBUTE.size] / 32;;
 }
+is_open = !attr[? ATTRIBUTE.start_active];
 </string>
           </argument>
         </arguments>

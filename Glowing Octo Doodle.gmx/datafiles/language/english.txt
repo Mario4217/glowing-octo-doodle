@@ -93,6 +93,7 @@ editor.attribute.top:			Top
 editor.attribute.left:			Left
 editor.attribute.collision:		Collisions
 editor.attribute.time:			Time
+editor.attribute.start_active:	Start Active
 
 editor.action.open:				Open
 editor.action.close:			Close

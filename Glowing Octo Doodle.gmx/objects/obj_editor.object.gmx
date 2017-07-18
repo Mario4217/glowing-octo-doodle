@@ -276,11 +276,11 @@ if (inst_selected != -1){
   }
 }
 
-if (instance_exists(ui_hover)){
-  if (ui_hover.object_index == obj_editor_ent &amp;&amp; inst_hover == 0){
+if (instance_exists(inst_hover)){
+  if (inst_hover.object_index == obj_editor_ent){
     if (linkmode == false){
-      if (mouse_check_button_pressed(mb_left) &amp;&amp; inst_selected != ui_hover){
-        inst_selected = ui_hover;
+      if (mouse_check_button_pressed(mb_left) &amp;&amp; inst_selected != inst_hover){
+        inst_selected = inst_hover;
         logic_window[? "visible"] = false;
         with (inst_selected){
           editor_ent_send_to_ui();
@@ -623,22 +623,15 @@ if (interface[? "editor_menu"] == "4"){
   }
 }
 
+
 if (inst_selected != -1){
   draw_set_color(c_red);
-  draw_rectangle(inst_selected.bbox_left-2, inst_selected.bbox_top-2, inst_selected.bbox_right+1, inst_selected.bbox_bottom+1, true);
+  draw_rectangle(inst_selected.bbox_left-1, inst_selected.bbox_top-1, inst_selected.bbox_right, inst_selected.bbox_bottom, true);
 }
-if (instance_exists(inst_hover)){
-  if (inst_hover.object_index == obj_editor_ent){
+if (inst_hover != -1){
+  if (instance_exists(inst_hover)){
     draw_set_color(c_lime);
-    draw_rectangle(inst_hover.bbox_left-3, inst_hover.bbox_top-3, inst_hover.bbox_right+2, inst_hover.bbox_bottom+2, true);
-    if (inst_hover != inst_selected){
-      if (mouse_check_button_pressed(mb_left)){
-        inst_selected = inst_hover;
-        with (inst_selected){
-          editor_ent_send_to_ui();
-        }
-      }
-    }
+    draw_rectangle(inst_hover.bbox_left-2, inst_hover.bbox_top-2, inst_hover.bbox_right+1, inst_hover.bbox_bottom+1, true);
   }
 }
 

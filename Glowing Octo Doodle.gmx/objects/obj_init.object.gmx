@@ -78,6 +78,7 @@ bind_add("interact", "K", vk_rcontrol);
 bind_add("interact", "G", gp_face1);
 
 bind_add("player_swap", "K", vk_tab);
+bind_add("player_swap","G", gp_face3);
 
 bind_add("putdown", "M", mb_right);
 bind_add("putdown", "G", gp_face2);
@@ -153,7 +154,8 @@ enum ATTRIBUTE {
   top = 9,
   left = 10,
   collision = 11,
-  time = 12
+  time = 12,
+  start_active = 13
 }
 
 enum EVENT {
@@ -196,10 +198,11 @@ dictionary_attribute[? ATTRIBUTE.player_index] = "{editor.attribute.player_index
 dictionary_attribute[? ATTRIBUTE.map_index] = "{editor.attribute.map_index}";
 dictionary_attribute[? ATTRIBUTE.auto_test] = "{editor.attribute.auto_test}";
 dictionary_attribute[? ATTRIBUTE.relative] = "{editor.attribute.relative}";
-dictionary_attribute[? ATTRIBUTE.top] = "{editor.attribute.top}"
-dictionary_attribute[? ATTRIBUTE.left] = "{editor.attribute.left}"
-dictionary_attribute[? ATTRIBUTE.collision] = "{editor.attribute.collision}"
-dictionary_attribute[? ATTRIBUTE.time] = "{editor.attribute.time}"
+dictionary_attribute[? ATTRIBUTE.top] = "{editor.attribute.top}";
+dictionary_attribute[? ATTRIBUTE.left] = "{editor.attribute.left}";
+dictionary_attribute[? ATTRIBUTE.collision] = "{editor.attribute.collision}";
+dictionary_attribute[? ATTRIBUTE.time] = "{editor.attribute.time}";
+dictionary_attribute[? ATTRIBUTE.start_active] = "{editor.attribute.start_active}"
 dictionary_event = ds_map_create();
 dictionary_event[? EVENT.onPress] = "{editor.event.onPress}";
 dictionary_event[? EVENT.onRelease] = "{editor.event.onRelease}";
@@ -234,6 +237,7 @@ register_gameplay_object(4, "{gp.light_gate}",obj_gp_light_wall);
 //gameplay_object_add_attribute(4,ATTRIBUTE.skin,"skin",0,buffer_u8,0,sprite_get_number(spr_gp_light_wall)-1);
 gameplay_object_add_attribute(4, ATTRIBUTE.orientation, 0, buffer_bool, 0, 1);
 gameplay_object_add_attribute(4, ATTRIBUTE.size, 64, buffer_u16, 64, 256);
+gameplay_object_add_attribute(4, ATTRIBUTE.start_active, 1, buffer_bool, 0, 1);
 gameplay_object_add_input(4, ACTION.open);
 gameplay_object_add_input(4, ACTION.close);
 gameplay_object_add_tag(4, "clip");
@@ -255,7 +259,7 @@ gameplay_object_add_input(7, ACTION.unsetB);
 gameplay_object_add_input(7, ACTION.test);
 gameplay_object_add_output(7, EVENT.onFalse);
 gameplay_object_add_output(7, EVENT.onTrue);
-gameplay_object_add_attribute(7, ATTRIBUTE.auto_test, 0, buffer_bool, 0, 1);
+gameplay_object_add_attribute(7, ATTRIBUTE.auto_test, 1, buffer_bool, 0, 1);
 
 register_gameplay_object(8, "{gp.logic_and}", obj_gp_logic_and);
 gameplay_object_add_input(8, ACTION.setA);
@@ -265,7 +269,7 @@ gameplay_object_add_input(8, ACTION.unsetB);
 gameplay_object_add_input(8, ACTION.test);
 gameplay_object_add_output(8, EVENT.onFalse);
 gameplay_object_add_output(8, EVENT.onTrue);
-gameplay_object_add_attribute(8, ATTRIBUTE.auto_test, 0, buffer_bool, 0, 1);
+gameplay_object_add_attribute(8, ATTRIBUTE.auto_test, 1, buffer_bool, 0, 1);
 
 register_gameplay_object(9, "{gp.tile}", obj_gp_tile);
 gameplay_object_add_attribute(9, ATTRIBUTE.skin, 0, buffer_u8, 0, 1);

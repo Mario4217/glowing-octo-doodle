@@ -7,6 +7,9 @@ if (current_pack != -1){
     current_pack[? "current_map_index"] = index;
     world_load(map[? "name"]);
   }else{
+    if (is_network){
+      nw_end();
+    }
     ds_map_destroy(current_pack);
     current_pack = -1;
     world_load("title");

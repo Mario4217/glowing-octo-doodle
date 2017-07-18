@@ -51,8 +51,7 @@ is_down = false;
           <argument>
             <kind>1</kind>
             <string>event_inherited();
-
-var c = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_player_pawn, 0, 0) + collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_parent_gameplay, 0, 1);
+var c = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_player_pawn, 0, 0) + collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_gp_cube, 0, 1);
 if (c){
   if (is_down == false){
     is_down = true;
