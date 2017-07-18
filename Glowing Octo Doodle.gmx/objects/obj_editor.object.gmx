@@ -180,6 +180,7 @@ rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"],0);
 rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"],0);
 
 inst_selected = -1;
+inst_hover = 0;
 testmode = "";
 
 linkmode = false
@@ -260,8 +261,23 @@ console_command_execute("editor_logic");
           <argument>
             <kind>1</kind>
             <string>///entity handling
+inst_hover = -1;
 if (instance_exists(ui_hover)){
-  if (ui_hover.object_index == obj_editor_ent){
+  inst_hover = ui_hover;
+}
+
+if (inst_selected != -1){
+  if (mouse_check_button_pressed(mb_right)){
+    inst_selected = -1;
+    logic_window[? "visible"] = false;
+  }
+  if (mouse_over(inst_selected.bbox_left, inst_selected.bbox_top, inst_selected.bbox_right, inst_selected.bbox_bottom)){
+    inst_hover = inst_selected;
+  }
+}
+
+if (instance_exists(ui_hover)){
+  if (ui_hover.object_index == obj_editor_ent &amp;&amp; inst_hover == 0){
     if (linkmode == false){
       if (mouse_check_button_pressed(mb_left) &amp;&amp; inst_selected != ui_hover){
         inst_selected = ui_hover;
@@ -285,13 +301,6 @@ if (instance_exists(ui_hover)){
         }
       }
     }
-  }
-}
-
-if (inst_selected != -1){
-  if (mouse_check_button_pressed(mb_right)){
-    inst_selected = -1;
-    logic_window[? "visible"] = false;
   }
 }
 </string>
@@ -357,6 +366,10 @@ ui_set_position(maps_container,ui_interpolate(1,maps_container[? "u1"], 1-real(i
 ui_set_position(objects_container,ui_interpolate(1,objects_container[? "u1"], 1-real(interface[? "editor_menu"] == "2")*0.2, 0.3),0.05);
 ui_set_position(tiles_container,ui_interpolate(1,tiles_container[? "u1"], 1-real(interface[? "editor_menu"] == "3")*0.2, 0.3),0.05);
 ui_set_position(floors_container,ui_interpolate(1,floors_container[? "u1"], 1-real(interface[? "editor_menu"] == "4")*0.2, 0.3),0.05);
+maps_container[? "visible"] = (maps_container[? "u1"]&lt;0.99);
+objects_container[? "visible"] = (objects_container[? "u1"]&lt;0.99);
+tiles_container[? "visible"] = (tiles_container[? "u1"]&lt;0.99);
+floors_container[? "visible"] = (floors_container[? "u1"]&lt;0.99);
 
 if (bind_check_pressed("menu")){
   if (menu_is_open == 0){
@@ -614,10 +627,18 @@ if (inst_selected != -1){
   draw_set_color(c_red);
   draw_rectangle(inst_selected.bbox_left-2, inst_selected.bbox_top-2, inst_selected.bbox_right+1, inst_selected.bbox_bottom+1, true);
 }
-if (instance_exists(ui_hover)){
-  if (ui_hover.object_index == obj_editor_ent){
+if (instance_exists(inst_hover)){
+  if (inst_hover.object_index == obj_editor_ent){
     draw_set_color(c_lime);
-    draw_rectangle(ui_hover.bbox_left-3, ui_hover.bbox_top-3, ui_hover.bbox_right+2, ui_hover.bbox_bottom+2, true);
+    draw_rectangle(inst_hover.bbox_left-3, inst_hover.bbox_top-3, inst_hover.bbox_right+2, inst_hover.bbox_bottom+2, true);
+    if (inst_hover != inst_selected){
+      if (mouse_check_button_pressed(mb_left)){
+        inst_selected = inst_hover;
+        with (inst_selected){
+          editor_ent_send_to_ui();
+        }
+      }
+    }
   }
 }
 

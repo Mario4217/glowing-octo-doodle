@@ -29,10 +29,14 @@
 player_pawn.secondary_color = make_color_rgb(profile_map[? "red"], profile_map[? "green"], profile_map[? "blue"]);
 
 profile_map[? "pawn"] = player_pawn;
+is_using_gamepad = false;
+putdown_x = x;
+putdown_y = y;
 
 move_spd = 400;
-pickup_distance = 100;
+pickup_distance = 50;
 pawns = -1;
+interact_inst = -1;
 
 if (testmode != ""){
   btn_back_to_editor = ui_create_button(0.8,0,1,0.04,"{editor.testmode.back}","editor "+string(testmode))
@@ -81,6 +85,29 @@ if (testmode != ""){
     };
   };
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>interact_inst = -1;
 </string>
           </argument>
         </arguments>
@@ -153,21 +180,32 @@ with (pawn){
 view_xview[0] = floor(player_pawn.x - view_wview[0]/2);
 view_yview[0] = floor(player_pawn.y - view_hview[0]/2);
 
+if (is_using_gamepad){
+  var dis = 32;
+  putdown_x = player_pawn.x+lengthdir_x(dis,player_pawn.dir*90);
+  putdown_y = player_pawn.y+lengthdir_y(dis,player_pawn.dir*90);
+}
+
 pickup = player_pawn.pickup;
+if (!is_using_gamepad){
+  putdown_x = mouse_x;
+  putdown_y = mouse_y;
+}
+
 if (pickup != -1){
-  if (bind_check_pressed('putdown') &amp;&amp; can_control &amp;&amp; point_distance(player_pawn.x, player_pawn.y, mouse_x, mouse_y) &lt; pickup_distance
-  &amp;&amp; !collision_rectangle(mouse_x-pickup.sprite_xoffset, mouse_y-pickup.sprite_yoffset, mouse_x-pickup.sprite_xoffset+pickup.sprite_width, mouse_y-pickup.sprite_yoffset+pickup.sprite_height, obj_clip, 0, 1)
-  &amp;&amp; !collision_line(mouse_x, mouse_y, player_pawn.x, player_pawn.y, obj_clip, 0, 1)
+  if (bind_check_pressed('putdown') &amp;&amp; can_control &amp;&amp; point_distance(player_pawn.x, player_pawn.y, putdown_x, putdown_y) &lt; pickup_distance
+  &amp;&amp; !collision_rectangle(putdown_x-pickup.sprite_xoffset, putdown_y-pickup.sprite_yoffset, putdown_x-pickup.sprite_xoffset+pickup.sprite_width, putdown_y-pickup.sprite_yoffset+pickup.sprite_height, obj_clip, 0, 1)
+  &amp;&amp; !collision_line(putdown_x, putdown_y, player_pawn.x, player_pawn.y, obj_clip, 0, 1)
   ){
-    gp_putdown(player_pawn, mouse_x, mouse_y);
+    gp_putdown(player_pawn, putdown_x, putdown_y);
     if (is_network){
       buffer_seek(nw_buffer, buffer_seek_start, 0);
       buffer_write(nw_buffer, buffer_u8, NW.pawn_putdown)
       if (is_server){
         buffer_write(nw_buffer, buffer_u8, 0);
       }
-      buffer_write(nw_buffer, buffer_u16, mouse_x);
-      buffer_write(nw_buffer, buffer_u16, mouse_y);
+      buffer_write(nw_buffer, buffer_u16, putdown_x);
+      buffer_write(nw_buffer, buffer_u16, putdown_y);
       nw_broadcast(nw_buffer);
     }
   }
@@ -242,6 +280,39 @@ if (testmode != ""){
   }
   draw_set_valign(fa_top);
   ui_draw(btn_back_to_editor);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (is_using_gamepad){
+  if (interact_inst != -1){
+    var ent = interact_inst;
+    draw_set_color(c_lime);
+    draw_rectangle(ent.bbox_left, ent.bbox_top, ent.bbox_right, ent.bbox_bottom, true);
+  }
+  if (player_pawn.pickup != -1){
+    var pickup = player_pawn.pickup;
+    draw_sprite_ext(pickup.sprite_index, pickup.image_index, putdown_x,putdown_y, 1, 1, 0, c_lime, 0.3);
+  }
 }
 </string>
           </argument>

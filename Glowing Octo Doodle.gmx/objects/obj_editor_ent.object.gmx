@@ -178,12 +178,12 @@ if (mouse_x &gt; x-sprite_xoffset &amp;&amp; mouse_x &lt; x+sprite_width-sprite_
 depth = obj_editor.world_height*32 - bbox_bottom;
 
 if (obj_editor.inst_selected == id){
-  depth = 0;
+  //depth = 0;
   draw_set_color(c_lime);
   if (keyboard_check_pressed(vk_delete)){
     console_command_execute("editor_destroy");
   }
-  if (ui_hover == id){
+  if (ui_hover &gt; 100000 &amp;&amp; mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom)){
     if (mouse_check_button_pressed(mb_left)){
       drag = true;
       drag_x = x - mouse_x;
@@ -191,6 +191,14 @@ if (obj_editor.inst_selected == id){
     }
   }
 }
+
+/*if (ui_hover == id &amp;&amp; obj_editor.inst_selected != id){
+  if (mouse_check_button_pressed(mb_left)){
+    drag = true;
+    drag_x = mouse_x - x;
+    drag_y = mouse_y - y;
+  }
+}*/
 
 if (drag &amp;&amp; obj_editor.inst_selected == id){
   obj_editor.show_grid = true;
@@ -275,13 +283,7 @@ if (drag &amp;&amp; obj_editor.inst_selected == id){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (ui_hover == id &amp;&amp; obj_editor.inst_selected != id){
-  if (mouse_check_button_pressed(mb_left)){
-    drag = true;
-    drag_x = mouse_x - x;
-    drag_y = mouse_y - y;
-  }
-}
+            <string>var hov = (ui_hover &gt; 100000 &amp;&amp; mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) &amp;&amp; obj_editor.inst_selected == id);
 
 if (attr[? ATTRIBUTE.skin] != undefined){
   image_index = attr[? ATTRIBUTE.skin];
@@ -302,7 +304,7 @@ switch (gp_obj_index){
     image_xscale = width / 64;
     image_yscale = height / 64;
     
-    var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; ui_hover == id);
+    var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; hov);
     
     if (obj_editor.inst_selected == id){
       var o = min(32, attr[? ATTRIBUTE.width]);
@@ -328,7 +330,7 @@ switch (gp_obj_index){
     }
   break;
   case 4: //light wall
-    var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; ui_hover == id);
+    var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; hov);
     if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
       image_xscale = attr[? ATTRIBUTE.size] / 64;
       image_yscale = 1;
@@ -390,7 +392,7 @@ switch (gp_obj_index){
 
 if (attr[? ATTRIBUTE.orientation] != undefined){
   if (obj_editor.inst_selected == id){
-    var ho = (mouse_over(x, y, x+32, y+32) &amp;&amp; ui_hover == id);
+    var ho = (mouse_over(x, y, x+32, y+32) &amp;&amp; hov);
     draw_sprite(spr_rotatable, ho, x, y);
     if (mouse_check_button_pressed(mb_left) &amp;&amp; ho &amp;&amp; !yet_selected){
       attr[? ATTRIBUTE.orientation] = 1-attr[? ATTRIBUTE.orientation];

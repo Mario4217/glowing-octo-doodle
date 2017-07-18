@@ -36,6 +36,7 @@ instance_create(0,0,obj_floor);
 
 if (global.toLoad != ""){
   world_load(global.toLoad);
+  global.toLoad = "";
 }
 
 particle_system = part_system_create();

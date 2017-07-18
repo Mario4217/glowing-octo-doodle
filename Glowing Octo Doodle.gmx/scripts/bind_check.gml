@@ -16,6 +16,9 @@ if (bind[? key] != undefined){
     }else if(T == "G"){ //Gamepad
       if (gamepad_button_check(0,N)){
         sum += V;
+        if (instance_exists(obj_player_controller)){
+          obj_player_controller.is_using_gamepad = true;
+        }
       }
     }else if(T == "M"){ //Mouse
       if (mouse_check_button(N)){
@@ -26,6 +29,11 @@ if (bind[? key] != undefined){
       if (v > bind_gp_upper_deadzone){v = 1;}else
       if (v < -bind_gp_upper_deadzone){v = -1}
       sum += v*V;
+      if (abs(v)>0.1){
+        if (instance_exists(obj_player_controller)){
+          obj_player_controller.is_using_gamepad = true;
+        }
+      }
     }
   };
 }

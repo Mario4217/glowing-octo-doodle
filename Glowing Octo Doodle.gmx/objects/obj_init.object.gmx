@@ -80,6 +80,8 @@ bind_add("interact", "G", gp_face1);
 bind_add("player_swap", "K", vk_tab);
 
 bind_add("putdown", "M", mb_right);
+bind_add("putdown", "G", gp_face2);
+
 </string>
           </argument>
         </arguments>
@@ -243,6 +245,7 @@ gameplay_object_make_pickup(5, 50);
 register_gameplay_object(6, "{gp.goalzone}", obj_gp_goalzone);
 gameplay_object_add_attribute(6, ATTRIBUTE.map_index, 1, buffer_u8, 0, 255);
 gameplay_object_add_attribute(6, ATTRIBUTE.relative, 1, buffer_bool, 0, 1);
+gameplay_object_set_depth_anchor(6, 1);
 
 register_gameplay_object(7, "{gp.logic_or}", obj_gp_logic_or);
 gameplay_object_add_input(7, ACTION.setA);

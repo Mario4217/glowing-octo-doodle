@@ -377,6 +377,7 @@
       <script>scripts\world_from_buffer.gml</script>
       <script>scripts\world_shadow_update_chunk.gml</script>
       <script>scripts\world_load.gml</script>
+      <script>scripts\world_update_region.gml</script>
       <script>scripts\world_resize.gml</script>
     </scripts>
     <script>scripts\current_pack_goto_level.gml</script>
@@ -385,7 +386,6 @@
     <script>scripts\move.gml</script>
     <script>scripts\settings_save.gml</script>
     <script>scripts\settings_load.gml</script>
-    <script>scripts\draw_sprite_area.gml</script>
     <script>scripts\global_mouse_over_ui.gml</script>
     <script>scripts\mouse_over_ui.gml</script>
     <script>scripts\mouse_over.gml</script>
@@ -395,15 +395,15 @@
     <script>scripts\grid_to_buffer.gml</script>
     <script>scripts\draw_shadow.gml</script>
     <script>scripts\draw_shadow_sub.gml</script>
+    <script>scripts\draw_sprite_area.gml</script>
     <script>scripts\shadow_line.gml</script>
     <script>scripts\shadow_line_sun.gml</script>
-    <script>scripts\world_update_region.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>
     <font>fonts\ft_ui</font>
     <font>fonts\ft_testmode</font>
-    <font>fonts\ft_editor_io</font>
+    <font>fonts\ft_info</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_init</object>
