@@ -32,7 +32,6 @@ profile_map[? "pawn"] = player_pawn;
 
 move_spd = 400;
 pickup_distance = 100;
-pickup = -1;
 pawns = -1;
 
 if (testmode != ""){
@@ -154,22 +153,25 @@ with (pawn){
 view_xview[0] = floor(player_pawn.x - view_wview[0]/2);
 view_yview[0] = floor(player_pawn.y - view_hview[0]/2);
 
+pickup = player_pawn.pickup;
 if (pickup != -1){
   if (bind_check_pressed('putdown') &amp;&amp; can_control &amp;&amp; point_distance(player_pawn.x, player_pawn.y, mouse_x, mouse_y) &lt; pickup_distance
   &amp;&amp; !collision_rectangle(mouse_x-pickup.sprite_xoffset, mouse_y-pickup.sprite_yoffset, mouse_x-pickup.sprite_xoffset+pickup.sprite_width, mouse_y-pickup.sprite_yoffset+pickup.sprite_height, obj_clip, 0, 1)
   &amp;&amp; !collision_line(mouse_x, mouse_y, player_pawn.x, player_pawn.y, obj_clip, 0, 1)
   ){
-    pickup.x = mouse_x;
-    pickup.y = mouse_y;
-    pickup.visible = true;
-    if (gameplay_object_have_tag(pickup.src_map[? "id"],"clip")){
-      pickup.clip.x = pickup.x - pickup.sprite_xoffset;
-      pickup.clip.y = pickup.y - pickup.sprite_yoffset;
+    gp_putdown(player_pawn, mouse_x, mouse_y);
+    if (is_network){
+      buffer_seek(nw_buffer, buffer_seek_start, 0);
+      buffer_write(nw_buffer, buffer_u8, NW.pawn_putdown)
+      if (is_server){
+        buffer_write(nw_buffer, buffer_u8, 0);
+      }
+      buffer_write(nw_buffer, buffer_u16, mouse_x);
+      buffer_write(nw_buffer, buffer_u16, mouse_y);
+      nw_broadcast(nw_buffer);
     }
-    pickup = -1;
   }
 }
-player_pawn.pickup = pickup;
 
 if (testmode != ""){
   if (bind_check_pressed("player_swap") &amp;&amp; can_control){

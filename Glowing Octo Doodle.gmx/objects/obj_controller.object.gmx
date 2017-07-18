@@ -36,7 +36,8 @@
   ent_position = 8,
   pawn_pickup = 9,
   pack = 11,
-  interact = 12
+  interact = 12,
+  pawn_putdown = 13
 }
 
 globalvar nw_buffer;

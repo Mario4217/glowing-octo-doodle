@@ -67,8 +67,8 @@ switch (buffer_read(argument0, buffer_u8)){
     
     buffer_seek(nw_buffer, buffer_seek_start, 0);
     buffer_write(nw_buffer, buffer_u8, player[? "id"]);
-    buffer_write(nw_buffer, buffer_u8, xx);
-    buffer_write(nw_buffer, buffer_u8, yy);
+    buffer_write(nw_buffer, buffer_u16, xx);
+    buffer_write(nw_buffer, buffer_u16, yy);
     nw_broadcast(nw_buffer, player);
   break;
   case NW.interact:
@@ -83,5 +83,34 @@ switch (buffer_read(argument0, buffer_u8)){
     buffer_write(nw_buffer, buffer_u8, NW.interact);
     buffer_write(nw_buffer, buffer_u16, index);
     nw_broadcast(nw_buffer);
+  break;
+  case NW.pawn_pickup:
+    var index = buffer_read(argument0, buffer_u16);
+    var inst = obj_world.inst_by_index[? index];
+    
+    if (inst != undefined){
+      gp_pickup(inst, player[? "pawn"]);
+    }
+    
+    buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.pawn_pickup);
+    buffer_write(nw_buffer, buffer_u8, player[? "id"]);
+    buffer_write(nw_buffer, buffer_u16, index);
+    nw_broadcast(nw_buffer, player);
+  break;
+  case NW.pawn_putdown:
+    var pawn = player[? "pawn"];    
+    var xx = buffer_read(argument0, buffer_u16);
+    var yy = buffer_read(argument0, buffer_u16);
+    if (pawn.pickup != -1){
+      gp_putdown(pawn, xx, yy);
+    }
+    
+    buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.pawn_putdown);
+    buffer_write(nw_buffer, buffer_u8, player[? "id"]);
+    buffer_write(nw_buffer, buffer_u16, xx);
+    buffer_write(nw_buffer, buffer_u16, yy);
+    nw_broadcast(nw_buffer, player);
   break;
 }

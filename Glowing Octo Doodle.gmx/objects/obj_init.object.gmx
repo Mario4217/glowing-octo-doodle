@@ -28,7 +28,6 @@
             <string>///language
 lang_init();
 lang_extern("language/english.txt");
-
 </string>
           </argument>
         </arguments>

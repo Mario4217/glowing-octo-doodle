@@ -346,6 +346,9 @@
       <script>scripts\gameplay_object_set_depth_anchor.gml</script>
       <script>scripts\gameplay_object_have_tag.gml</script>
       <script>scripts\gameplay_object_make_pickup.gml</script>
+      <script>scripts\event_trigger.gml</script>
+      <script>scripts\gp_pickup.gml</script>
+      <script>scripts\gp_putdown.gml</script>
     </scripts>
     <scripts name="editor">
       <script>scripts\refresh_editor_level.gml</script>
@@ -383,7 +386,6 @@
     <script>scripts\settings_save.gml</script>
     <script>scripts\settings_load.gml</script>
     <script>scripts\draw_sprite_area.gml</script>
-    <script>scripts\event_trigger.gml</script>
     <script>scripts\global_mouse_over_ui.gml</script>
     <script>scripts\mouse_over_ui.gml</script>
     <script>scripts\mouse_over.gml</script>

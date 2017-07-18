@@ -5,6 +5,15 @@ var texture = element[? "texture"];
 var w = element[? "width"];
 var h = element[? "height"];
 
+/*
+var x1 = argument0;
+var y1 = argument1;
+var x2 = argument2;
+var y2 = argument3;
+
+var ratio = (element[? "tex_bottom"]-element[? "tex_top"])/(element[? "tex_right"]-element[? "tex_left"]);
+*/
+
 var top = element[? "tex_top"] / h;
 var left = element[? "tex_left"] / w;
 var bottom = (element[? "tex_top"] + element[? "tex_height"]) / h;

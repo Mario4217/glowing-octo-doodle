@@ -169,13 +169,15 @@ init = true;
       nw_broadcast(nw_buffer);
     }
     if (gameplay_object_have_tag(src_map[? "id"], "pickup")){
-      if (obj_player_controller.pickup == -1){
-        obj_player_controller.pickup = id;
-        x = -32;
-        visible = false;
-        if (gameplay_object_have_tag(src_map[? "id"],"clip")){
-          clip.x = x;
+      gp_pickup(id, pawn);
+      if (is_network){
+        buffer_seek(nw_buffer, buffer_seek_start, 0);
+        buffer_write(nw_buffer, buffer_u8, NW.pawn_pickup)
+        if (is_server){
+          buffer_write(nw_buffer, buffer_u8, 0);
         }
+        buffer_write(nw_buffer, buffer_u16, index);
+        nw_broadcast(nw_buffer);
       }
     }
   }

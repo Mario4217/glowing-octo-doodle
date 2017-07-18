@@ -82,12 +82,24 @@ switch (buffer_read(argument0, buffer_u8)){
   break;
   case NW.pawn_pickup:
     var player = nw_players[? buffer_read(argument0, buffer_u8)];
-    var pawn = player[? "pawn"];
-    var pickup_inst = obj_world.inst_by_index[? buffer_read(argument0, buffer_u16)];
-    if (pickup_inst != undefined){
-      pawn.pickup = pickup_inst;
-    }else{
-      pawn.pickup = -1;
+    if (player != undefined){
+      var pawn = player[? "pawn"];
+      var index = buffer_read(argument0, buffer_u16);
+      var inst = obj_world.inst_by_index[? index];
+      if (inst != undefined){
+        gp_pickup(inst, pawn);
+      }
+    }
+  break;
+  case NW.pawn_putdown:
+    var player = nw_players[? buffer_read(argument0, buffer_u8)];
+    if (player != undefined){
+      var pawn = player[? "pawn"];    
+      var xx = buffer_read(argument0, buffer_u16);
+      var yy = buffer_read(argument0, buffer_u16);
+      if (pawn.pickup != -1){
+        gp_putdown(pawn, xx, yy);
+      }
     }
   break;
   case NW.pack:
