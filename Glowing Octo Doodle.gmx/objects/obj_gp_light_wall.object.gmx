@@ -83,11 +83,13 @@ if (attr[? ATTRIBUTE.orientation] == 0){
             <kind>1</kind>
             <string>event_inherited();
 
+//particle
+/*
 if (init){
   if (is_open == false){ 
     if (attr[? ATTRIBUTE.orientation] == 0){
       repeat (floor(attr[? ATTRIBUTE.size] / 32)){
-        part_particles_create(obj_world.particle_system, x+irandom(attr[? ATTRIBUTE.size]),y+irandom(64),particle_map[? "lightwall"],2);
+        part_particles_create(obj_world.particle_system, x+irandom_range(5,attr[? ATTRIBUTE.size]-5),y+irandom_range(5, 59),particle_map[? "lightwall"],2);
       }
     }else{
       repeat (floor(attr[? ATTRIBUTE.size] / 64)){
@@ -96,6 +98,7 @@ if (init){
     }
   }
 }
+*/
 </string>
           </argument>
         </arguments>
@@ -152,6 +155,9 @@ if (init){
           <argument>
             <kind>1</kind>
             <string>if (init){
+  
+  image_alpha = ((sin(current_time/1000*pi)+1)/4)+0.5;
+
   if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
     image_xscale = attr[? ATTRIBUTE.size] / 64;
     image_yscale = 1;

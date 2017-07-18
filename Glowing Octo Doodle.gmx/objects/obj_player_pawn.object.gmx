@@ -29,6 +29,8 @@
 walking = false;
 dir = 0;
 
+is_in_goal = false;
+
 sprites[0,0] = spr_ballbot_right;
 sprites[1,0] = spr_ballbot_back;
 sprites[2,0] = spr_ballbot_right;
@@ -77,6 +79,8 @@ if (dir == 2){
 }else{
   image_xscale = 1;
 }
+
+is_in_goal = position_meeting(x, y, obj_gp_goalzone);
 </string>
           </argument>
         </arguments>

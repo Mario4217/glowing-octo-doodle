@@ -10,6 +10,7 @@ if (init){
       shadow_line_sun(bbox_left+xx, bbox_top+yy, bbox_left+xx, bbox_bottom+yy, sun_direction, sun_length*64);
     break;
     case 9:
+      /*
       var l = attr[? ATTRIBUTE.left] / 512;
       var t = attr[? ATTRIBUTE.top] / 512;
       var r = (attr[? ATTRIBUTE.left] + attr[? ATTRIBUTE.width]) / 512;
@@ -21,6 +22,7 @@ if (init){
       draw_vertex_texture(bbox_left+xx+lengthdir_x(sun_direction, len), bbox_bottom+yy+lengthdir_y(sun_direction, len), l, t);
       draw_vertex_texture(bbox_right+xx+lengthdir_x(sun_direction, len), bbox_bottom+yy+lengthdir_y(sun_direction, len), r, t);
       draw_primitive_end()
+      */
     break;
   }
 }

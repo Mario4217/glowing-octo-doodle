@@ -51,8 +51,8 @@ sli_players = ui_add_child(stage, ui_create_slider(0.05,v,0.45,v+0.05,"{editor.m
 ui_add_child(stage, ui_create_button(0.5,0.1,0.95,0.15,"{editor.add_map}","pack_show_maps 1"));
 maps_container = ui_add_child(stage, ui_create_label(0.5,0.15,0.95,0.9,""));
 
-map_dialog = ui_create_label(0.3,0.3,0.7,0.9,"");
-ui_add_child(map_dialog,ui_create_label(0,0,0.8,0.05,"{editor.choose_map}"));
+map_dialog = ui_create_draggable(0.3,0.3,0.7,0.9,"{editor.choose_map}",true);
+//ui_add_child(map_dialog,ui_create_label(0,0,0.8,0.05,"{editor.choose_map}"));
 ui_add_child(map_dialog,ui_create_button(0.8,0,1,0.05,"{editor.cancel}","pack_show_maps 0"));
 map_dialog_list = ui_add_child(map_dialog,ui_create_container(0,0.05,1,1));
 for (i=0; i&lt;ds_list_size(map_list); i+=1){

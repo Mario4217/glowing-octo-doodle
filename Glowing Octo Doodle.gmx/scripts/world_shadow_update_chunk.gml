@@ -23,6 +23,12 @@ if (argument0 >= 0 && argument1 >= 0 && argument0 < obj_floor.width / obj_floor.
   with (obj_editor_ent){
     draw_shadow();
   }
+    with (obj_parent_gameplay){
+    draw_shadow_sub();
+  }
+  with (obj_editor_ent){
+    draw_shadow_sub();
+  }
   surface_reset_target();
   
   view_xview[0] = lx;

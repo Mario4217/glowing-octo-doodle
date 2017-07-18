@@ -336,7 +336,10 @@ profile_sprite_secondary_white[? "blend"] = make_color_rgb(profile_map[? "red"],
           <argument>
             <kind>1</kind>
             <string>if (room == rm_game){
-  interface[? "menu"] = "1";
+  interface[? "menu"] = "0";
+  if (global.current_map_path == "maps/dGl0bGU=.puz"){
+    interface[? "menu"] = "1";
+  }
   interface[? "submenu"] = 0;
   ui_gamepad_position = btn_play;
   refresh_editor_level();

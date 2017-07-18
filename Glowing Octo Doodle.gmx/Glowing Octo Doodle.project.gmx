@@ -392,6 +392,7 @@
     <script>scripts\grid_from_buffer.gml</script>
     <script>scripts\grid_to_buffer.gml</script>
     <script>scripts\draw_shadow.gml</script>
+    <script>scripts\draw_shadow_sub.gml</script>
     <script>scripts\shadow_line.gml</script>
     <script>scripts\shadow_line_sun.gml</script>
     <script>scripts\world_update_region.gml</script>
@@ -431,6 +432,7 @@
       <object>objects\obj_gp_button</object>
       <object>objects\obj_parent_gameplay</object>
     </objects>
+    <object>objects\obj_shadows</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>

@@ -10,8 +10,8 @@ if (argument0 >= 0 && argument1 >= 0 && argument0 < (obj_floor.width / obj_floor
   draw_set_color(c_white);
   surface_set_target(surf)
   draw_clear_alpha(0, 0);
-  for (i=0; i<obj_floor.chunk_size; i+=1){
-    for (j=0; j<obj_floor.chunk_size; j+=1){
+  for (var i=0; i<obj_floor.chunk_size; i+=1){
+    for (var j=0; j<obj_floor.chunk_size; j+=1){
       var index = obj_floor.grid[# i+argument0*obj_floor.chunk_size, j+argument1*obj_floor.chunk_size];
       var tex = floorlist[index, 0];
       var xx = i*32;
@@ -26,5 +26,16 @@ if (argument0 >= 0 && argument1 >= 0 && argument0 < (obj_floor.width / obj_floor
       draw_primitive_end();
     };  
   };
+  /* //If tiles will be drawn onto the floor
+  var xo = argument0*32*obj_floor.chunk_size;
+  var yo = argument1*32*obj_floor.chunk_size;
+  for (var i=0; i<instance_number(obj_gp_tile); i+=1){
+    var inst = instance_find(obj_gp_tile, i);
+    if (inst.init){
+      draw_sprite_part(spr_tiles, inst.attr[? ATTRIBUTE.skin], inst.attr[? ATTRIBUTE.left], inst.attr[? ATTRIBUTE.top], inst.attr[? ATTRIBUTE.width], inst.attr[? ATTRIBUTE.height], inst.x-xo, inst.y-yo);
+    }
+  };
+  */
+  
   surface_reset_target();
 }
