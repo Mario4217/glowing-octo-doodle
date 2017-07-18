@@ -201,15 +201,7 @@ if (drag &amp;&amp; obj_editor.inst_selected == id){
   if (mouse_check_button_released(mb_left)){
     drag = false;
   }
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size)    , floor(y / 32 / obj_floor.chunk_size)    );
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size) + 1, floor(y / 32 / obj_floor.chunk_size)    );
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size) - 1, floor(y / 32 / obj_floor.chunk_size)    );
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size)    , floor(y / 32 / obj_floor.chunk_size) + 1);
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size)    , floor(y / 32 / obj_floor.chunk_size) - 1);
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size) + 1, floor(y / 32 / obj_floor.chunk_size) + 1);
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size) + 1, floor(y / 32 / obj_floor.chunk_size) - 1);
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size) - 1, floor(y / 32 / obj_floor.chunk_size) + 1);
-  world_shadow_update_chunk(floor(x / 32 / obj_floor.chunk_size) - 1, floor(y / 32 / obj_floor.chunk_size) - 1);
+  world_update_region(bbox_left,bbox_top,bbox_right,bbox_bottom);
 }
 </string>
           </argument>
@@ -332,6 +324,7 @@ switch (gp_obj_index){
         size_drag = false;
         editor_ent_send_to_ui();
       }
+      world_update_region(bbox_left,bbox_top,bbox_right,bbox_bottom);
     }
   break;
   case 4: //light wall

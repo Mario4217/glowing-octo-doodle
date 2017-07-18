@@ -98,7 +98,7 @@ if (ui_gamepad_position != -1){
         ui_gamepad_position = children[| pos+1];
         pos += 1;
       }
-      while(ui_gamepad_position[? "gp_jump"]){
+      while(ui_gamepad_position[? "gp_jump"] || !ui_gamepad_position[? "visible"]){
         if (pos == ds_list_size(children)-1){
           ui_gamepad_position = children[| 0];
           pos = 0;
@@ -121,7 +121,7 @@ if (ui_gamepad_position != -1){
         ui_gamepad_position = children[| pos-1];
         pos -= 1;
       }
-      while(ui_gamepad_position[? "gp_jump"]){
+      while(ui_gamepad_position[? "gp_jump"] || !ui_gamepad_position[? "visible"]){
         if (pos == 0){
           ui_gamepad_position = children[| ds_list_size(children)-1];
           pos = ds_list_size(children)-1;

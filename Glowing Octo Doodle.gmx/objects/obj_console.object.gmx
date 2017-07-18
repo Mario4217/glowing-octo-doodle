@@ -99,7 +99,11 @@ console_command_add("current_pack_end",cmd_pack_end,0,"Ends the current levelpac
           <argument>
             <kind>1</kind>
             <string>if (keyboard_check_pressed(vk_f12)){
-  console_command_execute("console");
+  if (console_is_open){
+    console_hide();
+  }else{
+    console_show();
+  }
 }
 </string>
           </argument>

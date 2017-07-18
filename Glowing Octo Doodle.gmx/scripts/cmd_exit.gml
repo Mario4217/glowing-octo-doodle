@@ -1,2 +1,3 @@
 ///cmd_exit(args)
-console_is_open = false;
+console_hide();
+console_string = "";

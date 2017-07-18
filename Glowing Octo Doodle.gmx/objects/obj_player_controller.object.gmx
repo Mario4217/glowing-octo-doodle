@@ -104,8 +104,9 @@ if (testmode != ""){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var xmov = bind_check("player_horizontal");
-var ymov = bind_check("player_vertical");
+            <string>var can_control = (interface[? "menu"] == "0" &amp;&amp; !console_is_open)
+var xmov = bind_check("player_horizontal") * can_control;
+var ymov = bind_check("player_vertical") * can_control;
 
 //player_pawn.dir = 3;
 player_pawn.walking = false;
@@ -133,7 +134,7 @@ pawn.xdis = lengthdir_x(spd, dir);
 pawn.ydis = lengthdir_y(spd, dir);
 
 with (pawn){
-  if (place_meeting(x + xdis, y, obj_clip)) {
+  if (place_meeting(x + xdis, y, obj_clip) &amp;&amp; !cheat_noclip) {
     while (!place_meeting(x + sign(xdis), y, obj_clip)){
       x += sign(xdis);
     }
@@ -141,7 +142,7 @@ with (pawn){
   }
   x += xdis;
   
-  if (place_meeting(x, y + ydis, obj_clip)) {
+  if (place_meeting(x, y + ydis, obj_clip) &amp;&amp; !cheat_noclip) {
     while (!place_meeting(x, y + sign(ydis), obj_clip)){
       y += sign(ydis);
     }
@@ -150,28 +151,11 @@ with (pawn){
   y += ydis;
 }
 
-/*
-var dir = point_direction(0, 0, xmov, ymov);
-
-var spd = game_delta_time * move_spd * point_distance(0, 0, xmov, ymov);
-
-if (!collision_rectangle(player_pawn.x-16+xmov*spd, player_pawn.y-16, player_pawn.x+16+xmov*spd, player_pawn.y, obj_clip, 0, 0) || cheat_noclip){
-  player_pawn.x += xmov*spd;
-}
-if (!collision_rectangle(player_pawn.x-16, player_pawn.y-16+ymov*spd, player_pawn.x+16, player_pawn.y+ymov*spd, obj_clip, 0, 0) || cheat_noclip){
-  player_pawn.y += ymov*spd;
-}
-/*
-if (point_distance(0, 0, xmov*spd, ymov*spd) &gt; 0) {
-    move(spd, dir, player_pawn);
-}
-*/
-
 view_xview[0] = floor(player_pawn.x - view_wview[0]/2);
 view_yview[0] = floor(player_pawn.y - view_hview[0]/2);
 
 if (pickup != -1){
-  if (bind_check_pressed('putdown') &amp;&amp; point_distance(player_pawn.x, player_pawn.y, mouse_x, mouse_y) &lt; pickup_distance
+  if (bind_check_pressed('putdown') &amp;&amp; can_control &amp;&amp; point_distance(player_pawn.x, player_pawn.y, mouse_x, mouse_y) &lt; pickup_distance
   &amp;&amp; !collision_rectangle(mouse_x-pickup.sprite_xoffset, mouse_y-pickup.sprite_yoffset, mouse_x-pickup.sprite_xoffset+pickup.sprite_width, mouse_y-pickup.sprite_yoffset+pickup.sprite_height, obj_clip, 0, 1)
   &amp;&amp; !collision_line(mouse_x, mouse_y, player_pawn.x, player_pawn.y, obj_clip, 0, 1)
   ){
@@ -188,7 +172,7 @@ if (pickup != -1){
 player_pawn.pickup = pickup;
 
 if (testmode != ""){
-  if (bind_check_pressed("player_swap")){
+  if (bind_check_pressed("player_swap") &amp;&amp; can_control){
     var index = (ds_list_find_index(pawns, player_pawn) + 1) % ds_list_size(pawns);
     player_pawn = pawns[| index];
   }

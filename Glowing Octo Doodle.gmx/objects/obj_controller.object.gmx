@@ -111,16 +111,20 @@ switch (async_load[? "type"]){
       buffer_seek(nw_buffer, buffer_seek_start, 0);
       buffer_write(nw_buffer, buffer_u8, NW.server_welcome);
       network_send_packet(nw_socket, nw_buffer, buffer_get_size(nw_buffer));
-      
-      
-      
     }else{
       console_print("Connection to server failed!",c_orange);
-      nw_end();        
+      nw_end();
     }
   break;
   case network_type_connect:
     if (is_server){
+      for (i=0; i&lt;current_pack[? "players"]; i+=1){
+        if (nw_players[? i] == undefined){
+          next_player_id = i;
+          break;
+        }
+      };
+      
       var socket = async_load[? "socket"];
       var player = nw_make_player(socket);
       player[? "id"] = next_player_id;
@@ -131,8 +135,6 @@ switch (async_load[? "type"]){
       console_print("Someone connected to the server!");
       
       idmap[? async_load[? "socket"]] = next_player_id;
-      
-      next_player_id ++;
     }
   break;
   case network_type_data:
@@ -212,6 +214,10 @@ switch (async_load[? "type"]){
     yy+=32;
   };
 }
+
+draw_set_color(c_black);
+draw_set_font(ft_console);
+draw_text(0,view_hport[0]-16,"Glowing Octo Doodle Alpha version "+string(GM_version))
 </string>
           </argument>
         </arguments>
