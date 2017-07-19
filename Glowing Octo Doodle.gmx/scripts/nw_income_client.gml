@@ -132,4 +132,7 @@ switch (buffer_read(argument0, buffer_u8)){
       }
     }
   break;
+  case NW.server_close:
+    nw_end();
+  break;
 }

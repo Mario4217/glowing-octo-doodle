@@ -38,7 +38,8 @@
   pack = 11,
   interact = 12,
   pawn_putdown = 13,
-  carrier = 14
+  carrier = 14,
+  server_close = 15
 }
 
 globalvar nw_buffer;
@@ -161,6 +162,31 @@ switch (async_load[? "type"]){
     ds_map_delete(idmap, async_load[? "id"]);
     console_print("Someone disconnected from the server!")
   break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (is_network){
+  nw_end();
 }
 </string>
           </argument>

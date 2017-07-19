@@ -132,13 +132,29 @@ ui_set_value(input_players, world_players);
 
 //objects panel
 lb_selcted_object = ui_add_child(objects_container, ui_create_label(0,0.05,1,0.1,""));
+var u = 0;
+var v = 0.1;
+var h = 0.1;
 for (var i=0; i&lt;ds_list_size(gp_editor); i++){
-  var map = gp_objects[? gp_editor[| i]];
-  var u = (i % 2) * 0.5;
-  var v = floor(i/2)*0.1+0.1;
-  var btn = ui_create_radio(u,v,u+0.5,v+0.1,""/*map[? "name"]*/,map[? "id"]);
-  ui_add_child(btn,ui_create_sprite(0.01,0.01,0.99,0.99,map[? "sprite"],0));
-  ui_add_child(objects_container,btn);
+  var val = gp_editor[| i];
+  if (is_real(val)){
+    var map = gp_objects[? val];
+    var btn = ui_create_radio(u,v,u+0.5,v+0.1,"",map[? "id"]);
+    ui_add_child(btn,ui_create_sprite(0.05,0.05,0.95,0.95,map[? "sprite"],0));
+    ui_add_child(objects_container,btn);
+    u += 0.5;
+    if (u &gt;= 1){
+      u = 0;
+      v += h;
+    }
+  }else if(is_string(val)){
+    if (u != 0){
+      u = 0;
+      v += h;
+    }
+    ui_add_child(objects_container, ui_create_label(0, v, 1, v+h/2, val));
+    v += h/2;
+  }
 }
 
 //floors panel

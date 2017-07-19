@@ -39,7 +39,6 @@ pawns = -1;
 interact_inst = -1;
 
 if (testmode != ""){
-  btn_back_to_editor = ui_create_button(0.8,0,1,0.04,"{editor.testmode.back}","editor "+string(testmode))
   pawns = ds_list_create();
   pawns[| 0] = player_pawn;
   //wait for spawns to spawn
@@ -279,7 +278,6 @@ if (testmode != ""){
     draw_text(0,view_hport[0]-16,lang_format("{editor.testmode.current_player}",ds_list_find_index(pawns, player_pawn),ds_list_size(pawns)-1,lang_format(bind_string(bind_get("player_swap",0)))));
   }
   draw_set_valign(fa_top);
-  ui_draw(btn_back_to_editor);
 }
 </string>
           </argument>

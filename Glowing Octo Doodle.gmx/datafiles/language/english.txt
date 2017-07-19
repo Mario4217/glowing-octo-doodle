@@ -79,6 +79,9 @@ editor.down:					Down
 editor.remove:					Remove
 editor.brush_size:				Brush Size: [1]
 editor.choose_tile:				Choose Tile
+editor.group.logic:				Logic
+editor.group.general:			General
+editor.group.rails:				Rails
 
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin
@@ -145,6 +148,7 @@ gp.button:						Button
 gp.rail:						Rail
 gp.cart:						Cart
 gp.logic_delay:					Logic Delay
+gp.carry_blocker:				Carry Blocker
 
 key.add:						Add
 key.alt:						Alt

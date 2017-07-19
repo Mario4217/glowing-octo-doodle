@@ -30,10 +30,26 @@
     image_xscale = attr[? ATTRIBUTE.size] / 32;
     image_yscale = 1;
     draw_sprite_area(spr_gp_rail_h, image_index, x, y, x+attr[? ATTRIBUTE.size], y+32);
+    if (collision_rectangle(bbox_left+2, bbox_top+2, bbox_right-2, bbox_bottom-2, obj_gp_rail, 0, true)){
+      for (var i=0; i&lt;floor(attr[? ATTRIBUTE.size] / 32); i+=1){
+        var c = collision_line(x+i*32+16, y+16,x+i*32+48, y+16, obj_gp_rail, 0, 1);
+        if (c){
+          draw_sprite(spr_gp_rail_cross, 0, c.x, y);
+        }
+      };
+    }
   }else{
     image_yscale = attr[? ATTRIBUTE.size] / 32;
     image_xscale = 1;
     draw_sprite_area(spr_gp_rail_v, image_index, x, y, x+32, y+attr[? ATTRIBUTE.size]);
+    if (collision_rectangle(bbox_left+2, bbox_top+2, bbox_right-2, bbox_bottom-2, obj_gp_rail, 0, true)){
+      for (var i=0; i&lt;floor(attr[? ATTRIBUTE.size] / 32); i+=1){
+        var c = collision_line(x+16, y+16+32*i, x+16, y+48+32*i, obj_gp_rail, 0, 1);
+        if (c){
+          draw_sprite(spr_gp_rail_cross, 0, x, c.y);
+        }
+      };
+    }
   }
 }
 </string>

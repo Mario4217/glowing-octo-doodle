@@ -1,5 +1,9 @@
 ///nw_end()
 if (is_server){
+  buffer_seek(nw_buffer, buffer_seek_start, 0);
+  buffer_write(nw_buffer, buffer_u8, NW.server_close);
+  nw_broadcast(nw_buffer);
+
   network_destroy(nw_server)
 }else{
   network_destroy(nw_socket)
