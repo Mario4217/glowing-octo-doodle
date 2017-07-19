@@ -37,7 +37,8 @@
   pawn_pickup = 9,
   pack = 11,
   interact = 12,
-  pawn_putdown = 13
+  pawn_putdown = 13,
+  carrier = 14
 }
 
 globalvar nw_buffer;

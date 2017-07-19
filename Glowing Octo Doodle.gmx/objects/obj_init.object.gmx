@@ -64,13 +64,13 @@ bind_add("player_horizontal", "K", ord("D"), 1);
 bind_add("player_horizontal", "K", ord("A"), -1);
 bind_add("player_horizontal", "K", vk_right, 1);
 bind_add("player_horizontal", "K", vk_left, -1);
-bind_add("player_horizontal", "A", gp_axisrh);
+bind_add("player_horizontal", "A", gp_axislh);
 
 bind_add("player_vertical", "K", ord("W"), -1);
 bind_add("player_vertical", "K", ord("S"), 1);
 bind_add("player_vertical", "K", vk_up, -1);
 bind_add("player_vertical", "K", vk_down, 1);
-bind_add("player_vertical", "A", gp_axisrv);
+bind_add("player_vertical", "A", gp_axislv);
 
 bind_add("interact", "M", mb_left);
 bind_add("interact", "K", ord("E"));
@@ -299,6 +299,7 @@ register_gameplay_object(10, "{gp.button}", obj_gp_button);
 gameplay_object_add_attribute(10, ATTRIBUTE.time, 1, buffer_u8, 0, 255);
 gameplay_object_add_output(10, EVENT.onPress);
 gameplay_object_add_output(10, EVENT.onRelease);
+gameplay_object_add_tag(10,"interact");
 
 register_gameplay_object(11, "{gp.logic_relay}", obj_gp_logic_relay);
 gameplay_object_add_input(11, ACTION.trigger);

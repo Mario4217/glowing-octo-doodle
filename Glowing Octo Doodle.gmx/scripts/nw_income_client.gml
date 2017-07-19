@@ -116,4 +116,20 @@ switch (buffer_read(argument0, buffer_u8)){
       }
     }
   break;
+  case NW.carrier:
+    var player = nw_players[? buffer_read(argument0, buffer_u8)];
+    var index = buffer_read(argument0, buffer_u16);
+    if (player != undefined){
+      var pawn = player[? "pawn"];    
+      var carrier = obj_world.inst_by_index[? index];
+    
+      if (pawn.pickup != -1){
+        pawn.pickup = carrier.carry;
+        carrier.pickup = -1;
+      }else if(carrier.pickup != -1){
+        pawn.pickup = carrier.carry;
+        carrier.carry = -1;
+      }
+    }
+  break;
 }

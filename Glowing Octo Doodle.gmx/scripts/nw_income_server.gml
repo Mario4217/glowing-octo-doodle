@@ -112,4 +112,24 @@ switch (buffer_read(argument0, buffer_u8)){
     buffer_write(nw_buffer, buffer_u16, yy);
     nw_broadcast(nw_buffer, player);
   break;
+  case NW.carrier:
+    var index = buffer_read(argument0, buffer_u16);
+  
+    var pawn = player[? "pawn"];    
+    var carrier = obj_world.inst_by_index[? index];
+    
+    if (pawn.pickup != -1){
+      pawn.pickup = carrier.carry;
+      carrier.pickup = -1;
+    }else if(carrier.pickup != -1){
+      pawn.pickup = carrier.carry;
+      carrier.carry = -1;
+    }
+    
+    buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.carrier);
+    buffer_write(nw_buffer, buffer_u8, player[? "id"]);
+    buffer_write(nw_buffer, buffer_u16, index);
+    nw_broadcast(nw_buffer, player);
+  break;
 }
