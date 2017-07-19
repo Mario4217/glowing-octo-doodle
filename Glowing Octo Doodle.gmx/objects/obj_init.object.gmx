@@ -155,7 +155,8 @@ enum ATTRIBUTE {
   left = 10,
   collision = 11,
   time = 12,
-  start_active = 13
+  start_active = 13,
+  spd = 14
 }
 
 enum EVENT {
@@ -164,7 +165,8 @@ enum EVENT {
   onSpawn = 3,
   onTrue = 4,
   onFalse = 5,
-  onTrigger = 6
+  onTrigger = 6,
+  onEndOfRail = 7
 }
 
 enum ACTION{
@@ -175,7 +177,13 @@ enum ACTION{
   setB = 5,
   unsetB = 6,
   test = 7,
-  trigger = 8
+  trigger = 8,
+  goRight = 9,
+  goLeft = 10,
+  goUp = 11,
+  goDown = 12,
+  stop = 13,
+  reverse = 14
 }
 
 globalvar dictionary_action, dictionary_attribute, dictionary_event;
@@ -188,6 +196,12 @@ dictionary_action[? ACTION.unsetA] = "{editor.action.unsetA}";
 dictionary_action[? ACTION.unsetB] = "{editor.action.unsetB}";
 dictionary_action[? ACTION.test] = "{editor.action.test}";
 dictionary_action[? ACTION.trigger] = "{editor.action.trigger}";
+dictionary_action[? ACTION.goUp] = "{editor.action.goUp}";
+dictionary_action[? ACTION.goDown] = "{editor.action.goDown}";
+dictionary_action[? ACTION.goRight] = "{editor.action.goRight}";
+dictionary_action[? ACTION.goLeft] = "{editor.action.goLeft}";
+dictionary_action[? ACTION.stop] = "{editor.action.stop}";
+dictionary_action[? ACTION.reverse] = "{editor.action.reverse}";
 dictionary_attribute = ds_map_create();
 dictionary_attribute[? ATTRIBUTE.skin] = "{editor.attribute.skin}";
 dictionary_attribute[? ATTRIBUTE.size] = "{editor.attribute.size}";
@@ -202,7 +216,8 @@ dictionary_attribute[? ATTRIBUTE.top] = "{editor.attribute.top}";
 dictionary_attribute[? ATTRIBUTE.left] = "{editor.attribute.left}";
 dictionary_attribute[? ATTRIBUTE.collision] = "{editor.attribute.collision}";
 dictionary_attribute[? ATTRIBUTE.time] = "{editor.attribute.time}";
-dictionary_attribute[? ATTRIBUTE.start_active] = "{editor.attribute.start_active}"
+dictionary_attribute[? ATTRIBUTE.start_active] = "{editor.attribute.start_active}";
+dictionary_attribute[? ATTRIBUTE.spd] = "{editor.attribute.speed}";
 dictionary_event = ds_map_create();
 dictionary_event[? EVENT.onPress] = "{editor.event.onPress}";
 dictionary_event[? EVENT.onRelease] = "{editor.event.onRelease}";
@@ -210,6 +225,7 @@ dictionary_event[? EVENT.onSpawn] = "{editor.event.onSpawn}";
 dictionary_event[? EVENT.onTrue] = "{editor.event.onTrue}";
 dictionary_event[? EVENT.onFalse] = "{editor.event.onFalse}";
 dictionary_event[? EVENT.onTrigger] = "{editor.event.onTrigger}";
+dictionary_event[? EVENT.onEndOfRail] = "{editor.event.onEndOfRail}";
 
 
 globalvar gp_objects, gp_editor; //a ds map with every gameplay object. (buttons, cubes, spawnpoint... entities)
@@ -291,10 +307,22 @@ gameplay_object_add_output(11, EVENT.onTrigger);
 register_gameplay_object(12,"{gp.rail}", obj_gp_rail);
 gameplay_object_add_attribute(12, ATTRIBUTE.orientation, 0, buffer_bool, 0, 1);
 gameplay_object_add_attribute(12, ATTRIBUTE.size, 64, buffer_u16, 32, 1024);
-gameplay_object_set_depth_anchor(12, 1);
+gameplay_object_set_depth_anchor(12, 2);
+
+register_gameplay_object(13, "{gp.cart}", obj_gp_cart);
+gameplay_object_add_attribute(13, ATTRIBUTE.spd, 100, buffer_u16, 0, 500);
+gameplay_object_add_input(13, ACTION.goUp);
+gameplay_object_add_input(13, ACTION.goDown);
+gameplay_object_add_input(13, ACTION.goRight);
+gameplay_object_add_input(13, ACTION.goLeft);
+gameplay_object_add_input(13, ACTION.stop);
+gameplay_object_add_input(13, ACTION.reverse);
+gameplay_object_add_output(13, EVENT.onEndOfRail);
+gameplay_object_add_tag(13,"clip");
+gameplay_object_add_tag(13,"carrier");
 
 //make the objects in the ingame editor accsesable
-ds_list_add(gp_editor, 2, 1, 3, 4, 5, 6, 10, 12, 7, 8, 11);
+ds_list_add(gp_editor, 2, 1, 3, 4, 5, 6, 10, 12, 13, 7, 8, 11);
 </string>
           </argument>
         </arguments>

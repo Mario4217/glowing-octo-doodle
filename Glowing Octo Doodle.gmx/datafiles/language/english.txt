@@ -94,6 +94,7 @@ editor.attribute.left:			Left
 editor.attribute.collision:		Collisions
 editor.attribute.time:			Time
 editor.attribute.start_active:	Start Active
+editor.attribute.speed:			Speed
 
 editor.action.open:				Open
 editor.action.close:			Close
@@ -103,6 +104,12 @@ editor.action.unsetA:			Unset A
 editor.action.unsetB:			Unset B
 editor.action.test:				Test
 editor.action.trigger:			Trigger
+editor.action.goRight:			Go Right
+editor.action.goLeft:			Go Left
+editor.action.goUp:				Go Up
+editor.action.goDown:			Go Down
+editor.action.stop:				Stop
+editor.action.reverse:			Reverse
 
 editor.event.onPress:			OnPress
 editor.event.onRelease:			OnRelease
@@ -110,6 +117,7 @@ editor.event.onSpawn:			OnSpawn
 editor.event.onTrue:			OnTrue
 editor.event.onFalse:			OnFalse
 editor.event.onTrigger:			OnTrigger
+editor.event.onEndOfRail:		OnEndOfRail
 
 editor.tileset.enviroment:		Enviroment
 editor.tileset.mark:			Mark
@@ -129,6 +137,7 @@ gp.logic_relay:					Logic Relay
 gp.tile:						Tile
 gp.button:						Button
 gp.rail:						Rail
+gp.cart:						Cart
 
 key.add:						Add
 key.alt:						Alt

@@ -175,7 +175,16 @@ if (mouse_x &gt; x-sprite_xoffset &amp;&amp; mouse_x &lt; x+sprite_width-sprite_
   ui_mouseHover = id;
 }
 
-depth = obj_editor.world_height*32 - bbox_bottom;
+if (init){
+  if (src_map[? "yanchor"] == 0){
+    depth = obj_editor.world_height*32 - bbox_bottom;
+  }else if (src_map[? "yanchor"] == 1){
+    depth = obj_editor.world_height*32 - bbox_top;
+  }else{
+    depth = obj_editor.world_height*32;
+  }
+}
+//depth = obj_editor.world_height*32 - bbox_bottom;
 
 if (obj_editor.inst_selected == id){
   //depth = 0;

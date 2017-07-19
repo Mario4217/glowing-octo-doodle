@@ -115,7 +115,7 @@ if (attr[? ATTRIBUTE.skin] != undefined){
   image_index = attr[? ATTRIBUTE.skin];
 }
 
-if (gameplay_object_have_tag(src_map[? "id"],"clip")){
+if (gameplay_object_have_tag(src_map[? "id"], "clip")){
   clip = instance_create(x-sprite_xoffset,y-sprite_yoffset,obj_clip);
   if (attr[? ATTRIBUTE.width] != undefined){
     clip.image_xscale = attr[? ATTRIBUTE.width]/32;
@@ -123,6 +123,9 @@ if (gameplay_object_have_tag(src_map[? "id"],"clip")){
   if (attr[? ATTRIBUTE.height] != undefined){
     clip.image_yscale = attr[? ATTRIBUTE.height]/32;
   }
+}
+if (gameplay_object_have_tag(src_map[? "id"], "carrier")){
+  carry = -1;
 }
 
 ds_map_destroy(overwrite_attr);
@@ -153,8 +156,10 @@ init = true;
             <string>if (init){
   if (src_map[? "yanchor"] == 0){
     depth = obj_world.world_height*32 - bbox_bottom;
-  }else{
+  }else if (src_map[? "yanchor"] == 1){
     depth = obj_world.world_height*32 - bbox_top;
+  }else{
+    depth = obj_world.world_height*32;
   }
 
   var pawn = obj_player_controller.player_pawn; //own pawn of the current player you are controlling
@@ -181,7 +186,7 @@ init = true;
     }
   }
 
-  if ((mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) || obj_player_controller.interact_inst == id) &amp;&amp; bind_check_pressed('interact') &amp;&amp; point_distance(x, y, pawn.center_x, pawn.center_y) &lt; obj_player_controller.pickup_distance &amp;&amp; pawn.pickup == -1){
+  if ((mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) || obj_player_controller.interact_inst == id) &amp;&amp; bind_check_pressed('interact') &amp;&amp; point_distance(x, y, pawn.center_x, pawn.center_y) &lt; obj_player_controller.pickup_distance){
     if (is_server){
       event_perform(ev_other, ev_user1);
     }
@@ -191,7 +196,7 @@ init = true;
       buffer_write(nw_buffer, buffer_u16, index);
       nw_broadcast(nw_buffer);
     }
-    if (gameplay_object_have_tag(src_map[? "id"], "pickup")){
+    if (gameplay_object_have_tag(src_map[? "id"], "pickup") &amp;&amp; pawn.pickup == -1){
       gp_pickup(id, pawn);
       if (is_network){
         buffer_seek(nw_buffer, buffer_seek_start, 0);
@@ -201,6 +206,15 @@ init = true;
         }
         buffer_write(nw_buffer, buffer_u16, index);
         nw_broadcast(nw_buffer);
+      }
+    }
+    if (gameplay_object_have_tag(src_map[? "id"], "carrier")){
+      if (carry == -1 &amp;&amp; pawn.pickup != -1){
+        carry = pawn.pickup;
+        pawn.pickup = -1;
+      }else if(carry != -1 &amp;&amp; pawn.pickup == -1){
+        pawn.pickup = carry;
+        carry = -1;
       }
     }
   }
