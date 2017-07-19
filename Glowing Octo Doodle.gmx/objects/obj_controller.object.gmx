@@ -70,15 +70,17 @@ idmap = ds_map_create();
           <argument>
             <kind>1</kind>
             <string>if (is_network &amp;&amp; nw_is_connected){
-  buffer_seek(nw_buffer, buffer_seek_start, 0);
-  buffer_write(nw_buffer, buffer_u8, NW.position)
-  if (is_server){
-    buffer_write(nw_buffer, buffer_u8, 0);
+  if (obj_player_controller.player_pawn.x != obj_player_controller.player_pawn.xprevious || obj_player_controller.player_pawn.y != obj_player_controller.player_pawn.yprevious){
+    buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.position)
+    if (is_server){
+      buffer_write(nw_buffer, buffer_u8, 0);
+    }
+    buffer_write(nw_buffer, buffer_u16, obj_player_controller.player_pawn.x);
+    buffer_write(nw_buffer, buffer_u16, obj_player_controller.player_pawn.y);
+    
+    nw_broadcast(nw_buffer);
   }
-  buffer_write(nw_buffer, buffer_u16, obj_player_controller.player_pawn.x);
-  buffer_write(nw_buffer, buffer_u16, obj_player_controller.player_pawn.y);
-  
-  nw_broadcast(nw_buffer);
 }
 </string>
           </argument>

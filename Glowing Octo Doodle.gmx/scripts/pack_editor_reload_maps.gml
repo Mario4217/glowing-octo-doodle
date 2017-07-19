@@ -1,9 +1,10 @@
 ///pack_editor_reload_maps()
 ds_list_clear(obj_pack_editor.maps_container[? "children"]);
+var h = 0.05;
 for (var i=0; i<ds_list_size(obj_pack_editor.maps); i+=1){
   var map = obj_pack_editor.maps[| i];
-  var v1 = i*0.05;
-  var v2 = (i+1)*0.05;
+  var v1 = i*h;
+  var v2 = (i+1)*h;
   ui_add_child(obj_pack_editor.maps_container, ui_create_label(0,v1,0.05,v2,i));
   if (i > 0){
     ui_add_child(obj_pack_editor.maps_container, ui_create_button(0.05,v1,0.1,v2,"{editor.up}","pack_switch_maps "+string(i-1)+" "+string(i)));

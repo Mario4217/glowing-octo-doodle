@@ -4,6 +4,7 @@ if (room == rm_editor){
     if (instance_exists(obj_editor.inst_selected)){
       with(obj_editor.inst_selected){
         instance_destroy();
+        world_update_region(bbox_left,bbox_top,bbox_right,bbox_bottom);
       }
     }
     obj_editor.inst_selected = -1;

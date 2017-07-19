@@ -215,11 +215,12 @@
         <script>scripts\ui_draw_element_progress.gml</script>
       </scripts>
       <scripts name="create">
-        <script>scripts\ui_create_button.gml</script>
         <script>scripts\ui_create_container.gml</script>
+        <script>scripts\ui_create_button.gml</script>
         <script>scripts\ui_create_draggable.gml</script>
         <script>scripts\ui_create_radio.gml</script>
         <script>scripts\ui_create_label.gml</script>
+        <script>scripts\ui_create_scroll.gml</script>
         <script>scripts\ui_create_progress.gml</script>
         <script>scripts\ui_create_slider.gml</script>
         <script>scripts\ui_create_textbox.gml</script>
@@ -332,6 +333,7 @@
       <script>scripts\cmd_floor_clear.gml</script>
       <script>scripts\cmd_current_pack.gml</script>
       <script>scripts\cmd_pack_end.gml</script>
+      <script>scripts\cmd_show_collisions.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -444,6 +446,7 @@
     <object>objects\obj_clip</object>
     <object>objects\obj_controller</object>
     <object>objects\obj_pack_editor</object>
+    <object>objects\obj_shadows</object>
     <objects name="gameplay">
       <object>objects\obj_gp_floor_button</object>
       <object>objects\obj_gp_goalzone</object>
@@ -462,7 +465,6 @@
       <object>objects\obj_gp_cart</object>
       <object>objects\obj_parent_gameplay</object>
     </objects>
-    <object>objects\obj_shadows</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>

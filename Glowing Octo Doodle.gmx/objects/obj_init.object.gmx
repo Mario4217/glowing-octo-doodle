@@ -375,7 +375,7 @@ gameplay_object_add_tag(15, "clip");
 
 
 //make the objects in the ingame editor accsesable
-ds_list_add(gp_editor, "{editor.group.general}", 2, 6, 1, 5, 4, 3, 15);
+ds_list_add(gp_editor, "{editor.group.general}", 2, 6, 1, 10, 5, 4, 3, 15);
 ds_list_add(gp_editor, "{editor.group.rails}", 12, 13)
 ds_list_add(gp_editor, "{editor.group.logic}", 7, 8, 11, 14);
 </string>

@@ -6,7 +6,7 @@ if (element[? "visible"]){
   
   var w = view_wport[0];
   var h = view_hport[0];
-  
+    
   if (element[? "parent"] == -1){
     var x1 = element[? "u1"] * w;
     var y1 = element[? "v1"] * h;
@@ -14,10 +14,16 @@ if (element[? "visible"]){
     var y2 = element[? "v2"] * h;
   }else{
     var parent = element[? "parent"];
+    
+    var scroll = 0;
+    if (parent[?  "scroll"] != undefined){
+      scroll = parent[? "scroll"];
+    }
+    
     var x1 = parent[? "px1"]+parent[? "pw"] * element[? "u1"];
-    var y1 = parent[? "py1"]+parent[? "ph"] * element[? "v1"];
+    var y1 = parent[? "py1"]+parent[? "ph"] * (element[? "v1"]-scroll);
     var x2 = parent[? "px1"]+parent[? "pw"] * element[? "u2"];
-    var y2 = parent[? "py1"]+parent[? "ph"] * element[? "v2"];
+    var y2 = parent[? "py1"]+parent[? "ph"] * (element[? "v2"]-scroll);
   }
   
   element[? "px1"] = x1;
@@ -259,6 +265,9 @@ if (element[? "visible"]){
     break;
     case "texture":
       ui_draw_element_texture(x1,y1,x2,y2,element);
+    break;
+    case "scroll":
+      element[? "scroll"] = clamp(element[? "scroll"]+(-mouse_wheel_up()+mouse_wheel_down())*0.1,0,max(0,element[? "max-v"]-1));
     break;
   }
   if (element[? "top"] != undefined){

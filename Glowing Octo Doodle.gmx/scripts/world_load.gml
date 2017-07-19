@@ -5,6 +5,11 @@ global.current_map_path = path;
 if (file_exists(path)){
   var buff = buffer_load(path);
   
+  if (path == "maps/dGl0bGU=.puz"){
+    interface[? "menu"] = "1";
+    ui_gamepad_position = obj_menu.btn_play;
+  }
+  
   if (is_network){
     var send_buffer = buffer_create(256, buffer_grow, 1);
     buffer_seek(send_buffer, buffer_seek_start, 0);

@@ -67,10 +67,10 @@ lb_current_pack = ui_add_child(menu_main, ui_create_label(0.8,0,1,0.05,""));
 
 //###############---Play---####################
 ui_add_child(menu_play,ui_create_label(0.1,0.2,0.4,0.28,"{menu.play}"));
-ui_add_child(menu_play,ui_create_button(0.1,0.3,0.4,0.35,"{menu.play.new}",""));
+btn_new_game = ui_add_child(menu_play,ui_create_button(0.1,0.3,0.4,0.35,"{menu.play.new}","set submenu 1"));
 ui_add_child(menu_play,ui_create_button(0.1,0.4,0.4,0.45,"{menu.play.join}",""));
 
-menu_play_packs = ui_add_child(menu_play,ui_create_label(0.5,0.2,0.9,0.9,"{menu.play.play_pack}"));
+menu_play_packs = ui_add_child(menu_play,ui_create_scroll(0.5,0.2,0.9,0.9));
 
 var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
 ui_add_child(menu_play,btn_back);
@@ -80,8 +80,8 @@ btn_back[? "gp_port"] = btn_play;
 ui_add_child(menu_editor,ui_create_label(0.1,0.2,0.4,0.28,"{menu.editor}"));
 btn_maps = ui_add_child(menu_editor,ui_create_button(0.1,0.3,0.4,0.35,"{menu.editor.maps}","set submenu 1"));
 btn_packs = ui_add_child(menu_editor,ui_create_button(0.1,0.4,0.4,0.45,"{menu.editor.packs}","set submenu 2"));
-menu_editor_level = ui_add_child(menu_editor,ui_create_label(0.5,0.2,0.9,0.9,"{menu.editor.edit_map}"));
-menu_editor_packs = ui_add_child(menu_editor,ui_create_label(0.5,0.2,0.9,0.9,"{menu.editor.edit_pack}"));
+menu_editor_level = ui_add_child(menu_editor,ui_create_scroll(0.5,0.2,0.9,0.9));
+menu_editor_packs = ui_add_child(menu_editor,ui_create_scroll(0.5,0.2,0.9,0.9));
 var btn_back = ui_create_button(0.1,0.85,0.4,0.9,"{menu.back}","set menu 1");
 ui_add_child(menu_editor,btn_back);
 btn_back[? "gp_port"] = btn_editor;
@@ -259,6 +259,7 @@ menu_profile[? "visible"] =  (menu_profile[? "u1"] &gt; -0.2);
 menu_settings[? "visible"] =  (menu_settings[? "u1"] &gt; -0.2);
 menu_editor[? "visible"] =  (menu_editor[? "u1"] &gt; -0.2);
 
+menu_play_packs[? "visible"] = (interface[? "menu"] == "2" &amp;&amp; interface[? "submenu"] == 1);
 menu_editor_level[? "visible"] = (interface[? "menu"] == "5" &amp;&amp; interface[? "submenu"] == 1);
 menu_editor_packs[? "visible"] = (interface[? "menu"] == "5" &amp;&amp; interface[? "submenu"] == 2);
 
@@ -305,6 +306,9 @@ if (room == rm_game){
     }else{
       if (interface[? "menu"] == "5"){
         ui_gamepad_position = btn_maps;
+      }
+      if (interface[? "menu"] == "2"){
+        ui_gamepad_position = btn_new_game;
       }
       interface[? "submenu"] = 0;
     }

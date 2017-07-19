@@ -195,6 +195,7 @@ if (pickup != -1){
   if (bind_check_pressed('putdown') &amp;&amp; can_control &amp;&amp; point_distance(player_pawn.x, player_pawn.y, putdown_x, putdown_y) &lt; pickup_distance
   &amp;&amp; !collision_rectangle(putdown_x-pickup.sprite_xoffset, putdown_y-pickup.sprite_yoffset, putdown_x-pickup.sprite_xoffset+pickup.sprite_width, putdown_y-pickup.sprite_yoffset+pickup.sprite_height, obj_clip, 0, 1)
   &amp;&amp; !collision_line(putdown_x, putdown_y, player_pawn.x, player_pawn.y, obj_clip, 0, 1)
+  &amp;&amp; !collision_line(putdown_x, putdown_y, player_pawn.x, player_pawn.y, obj_gp_carry_blocker, 0, 1)
   ){
     gp_putdown(player_pawn, putdown_x, putdown_y);
     if (is_network){

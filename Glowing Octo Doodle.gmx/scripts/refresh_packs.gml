@@ -35,4 +35,5 @@ with (obj_menu){
     v+=0.1;
   }
   file_find_close();
+  btn_new_game[? "gp_port"] = ds_list_find_value(parent[? "children"],0);
 }
