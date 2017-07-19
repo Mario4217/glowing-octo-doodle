@@ -386,6 +386,54 @@ switch (gp_obj_index){
     image_yscale = attr[? ATTRIBUTE.height] / 32;
     draw_sprite_part(spr_tiles, image_index, attr[? ATTRIBUTE.left], attr[? ATTRIBUTE.top], attr[? ATTRIBUTE.width], attr[? ATTRIBUTE.height], x, y);
   break;
+  case 12: //rail
+    var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; hov);
+    if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
+      image_xscale = attr[? ATTRIBUTE.size] / 32;
+      image_yscale = 1;
+      draw_sprite_area(spr_gp_rail_h, image_index, x, y, x+attr[? ATTRIBUTE.size], y+32);
+      if (obj_editor.inst_selected == id){
+        draw_sprite_part(spr_scaleable, ho, 0, 0, min(32, attr[? ATTRIBUTE.size]), 32, bbox_right-32, bbox_bottom-32);
+      }
+      if (ho){
+        if (mouse_check_button_pressed(mb_left)){
+          drag = false;
+          size_drag = true;
+          size_drag_x = attr[? ATTRIBUTE.size] - mouse_x;
+        }
+      }
+      if (size_drag){
+        obj_editor.show_grid = true;
+        attr[? ATTRIBUTE.size] = floor(clamp(size_drag_x + mouse_x,64,1024)/16)*16;
+        if (mouse_check_button_released(mb_left)){
+          size_drag = false;
+          editor_ent_send_to_ui();
+        }
+      }
+    }else{ //vertical
+      image_yscale = attr[? ATTRIBUTE.size] / 32;
+      image_xscale = 1;
+      draw_sprite_area(spr_gp_rail_v, image_index, x, y, x+32, y+attr[? ATTRIBUTE.size]);
+      if (obj_editor.inst_selected == id){
+        draw_sprite_part(spr_scaleable, ho, 0, 0, min(32, attr[? ATTRIBUTE.size]), 32, bbox_right-32, bbox_bottom-32,);
+      }
+      if (ho){
+        if (mouse_check_button_pressed(mb_left)){
+          drag = false;
+          size_drag = true;
+          size_drag_y = attr[? ATTRIBUTE.size] - mouse_y;
+        }
+      }
+      if (size_drag){
+        obj_editor.show_grid = true;
+        attr[? ATTRIBUTE.size] = floor(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
+        if (mouse_check_button_released(mb_left)){
+          size_drag = false;
+          editor_ent_send_to_ui();
+        }
+      }
+    }
+  break;
   default:
     draw_self();
 }

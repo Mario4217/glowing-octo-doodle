@@ -491,8 +491,8 @@ if (tile_dialog){
   var scale = 1;
   var xx = view_wport[0] / 2 - (256*scale);
   var yy = view_hport[0] / 2 - (256*scale);
-  var mx = floor(((window_mouse_get_x() - xx)*scale)/32)*32;
-  var my = floor(((window_mouse_get_y() - yy)*scale)/32)*32;
+  var mx = (floor((window_mouse_get_x() - xx)/32)*32)*scale;
+  var my = (floor((window_mouse_get_y() - yy)/32)*32)*scale;
   
   draw_set_color(c_white);
   draw_set_alpha(0.9);

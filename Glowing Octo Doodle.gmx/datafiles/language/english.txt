@@ -128,6 +128,7 @@ gp.logic_and:					Logic AND
 gp.logic_relay:					Logic Relay
 gp.tile:						Tile
 gp.button:						Button
+gp.rail:						Rail
 
 key.add:						Add
 key.alt:						Alt
