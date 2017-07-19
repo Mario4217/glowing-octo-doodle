@@ -41,7 +41,7 @@ menu.editor.packs:				Packs
 menu.end_pack:					Exit this pack
 menu.disconnect:				Disconnect
 
-lobby.wait_for_player:			-Empty-
+lobbx.empty:					-Empty-
 lobby.players:					Players [1]/[2]
 
 editor.exit:					Exit the editor
@@ -94,7 +94,8 @@ editor.attribute.left:			Left
 editor.attribute.collision:		Collisions
 editor.attribute.time:			Time
 editor.attribute.start_active:	Start Active
-editor.attribute.speed:			Speed
+editor.attribute.speed:			Speed (px/s)
+editor.attribute.milliseconds:	Milliseconds
 
 editor.action.open:				Open
 editor.action.close:			Close
@@ -110,6 +111,10 @@ editor.action.goUp:				Go Up
 editor.action.goDown:			Go Down
 editor.action.stop:				Stop
 editor.action.reverse:			Reverse
+editor.action.start:			Start
+editor.action.pause:			Pause
+editor.action.reset:			Reset
+editor.action.unpause:			Unpause
 
 editor.event.onPress:			OnPress
 editor.event.onRelease:			OnRelease
@@ -118,6 +123,7 @@ editor.event.onTrue:			OnTrue
 editor.event.onFalse:			OnFalse
 editor.event.onTrigger:			OnTrigger
 editor.event.onEndOfRail:		OnEndOfRail
+editor.event.onDelay:			OnDelay
 
 editor.tileset.enviroment:		Enviroment
 editor.tileset.mark:			Mark
@@ -138,6 +144,7 @@ gp.tile:						Tile
 gp.button:						Button
 gp.rail:						Rail
 gp.cart:						Cart
+gp.logic_delay:					Logic Delay
 
 key.add:						Add
 key.alt:						Alt

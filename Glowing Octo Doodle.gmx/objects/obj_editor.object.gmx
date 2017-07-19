@@ -290,9 +290,9 @@ if (instance_exists(inst_hover)){
     }else{
       if (mouse_check_button_pressed(mb_left)){
         ds_list_clear(obj_editor.logic_window[? "children"]);
-        linktarget = ui_hover;
+        linktarget = inst_hover;
         v = 1;
-        var inputs = ui_hover.src_map[? "inputs"];
+        var inputs = inst_hover.src_map[? "inputs"];
         for (var i=0; i&lt;ds_list_size(inputs); i+=1){
           var iid = inputs[| i];
           var label = ui_add_child(obj_editor.logic_window, ui_create_label(0,v,1,v+1,dictionary_action[? iid]));

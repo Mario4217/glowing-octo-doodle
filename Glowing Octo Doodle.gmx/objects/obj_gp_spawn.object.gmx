@@ -55,6 +55,7 @@ var player = nw_players[? attr[? ATTRIBUTE.player_index]];
 if (player != undefined){
   player[? "pawn"].x = x;
   player[? "pawn"].y = y;
+  event_trigger(EVENT.onSpawn);
 }
 </string>
           </argument>

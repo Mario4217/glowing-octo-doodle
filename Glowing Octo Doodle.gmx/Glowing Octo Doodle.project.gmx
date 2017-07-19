@@ -137,7 +137,8 @@
       <sprite>sprites\spr_gp_logic_relay</sprite>
       <sprite>sprites\spr_gp_rail_h</sprite>
       <sprite>sprites\spr_gp_rail_v</sprite>
-      <sprite>sprites\spr_cart_h</sprite>
+      <sprite>sprites\spr_gp_cart_h</sprite>
+      <sprite>sprites\spr_gp_logic_delay</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -433,6 +434,7 @@
       <object>objects\obj_gp_tile</object>
       <object>objects\obj_gp_logic_or</object>
       <object>objects\obj_gp_logic_and</object>
+      <object>objects\obj_gp_logic_delay</object>
       <object>objects\obj_gp_logic_relay</object>
       <object>objects\obj_gp_button</object>
       <object>objects\obj_gp_rail</object>
