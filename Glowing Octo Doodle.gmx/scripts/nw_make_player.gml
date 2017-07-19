@@ -8,5 +8,6 @@ map[? "blue"] = 255;
 map[? "pawn"] = instance_create(0,0,obj_player_pawn);
 map[? "connected"] = false;
 map[? "color"] = c_white;
+map[? "loaded"] = false;
 
 return map;

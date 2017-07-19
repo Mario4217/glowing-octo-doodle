@@ -323,6 +323,7 @@ profile_map[? "name"] = ini_read_string("player","name","player");
 profile_map[? "socket"] = -1;
 profile_map[? "id"] = 0;
 profile_map[? "color"] = make_color_rgb(profile_map[? "red"], profile_map[? "green"], profile_map[? "blue"]);
+profile_map[? "loaded"] = true;
 
 ini_close();
 </string>

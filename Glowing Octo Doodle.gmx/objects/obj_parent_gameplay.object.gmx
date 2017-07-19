@@ -160,20 +160,28 @@ init = true;
   var pawn = obj_player_controller.player_pawn; //own pawn of the current player you are controlling
   
   if ((gameplay_object_have_tag(src_map[? "id"],"interact") || gameplay_object_have_tag(src_map[? "id"],"pickup") &amp;&amp; obj_player_controller.is_using_gamepad)){
-    if (point_distance(x, y, pawn.x, pawn.y) &lt; obj_player_controller.pickup_distance){
-      var angle = point_direction(x, y, pawn.x, pawn.y);
+    var dist = point_distance(x, y, pawn.center_x, pawn.center_y);
+    if (dist &lt; obj_player_controller.pickup_distance){
+      var angle = point_direction(x, y, pawn.center_x, pawn.center_y);
       if (
         (pawn.dir == 2 &amp;&amp; (angle &lt; 45  || angle &gt; 315)) ||
         (pawn.dir == 3 &amp;&amp; (angle &gt; 45  &amp;&amp; angle &lt; 135)) ||
         (pawn.dir == 0 &amp;&amp; (angle &gt; 135 &amp;&amp; angle &lt; 225)) ||
         (pawn.dir == 1 &amp;&amp; (angle &gt; 225 &amp;&amp; angle &lt; 315))
       ){
-        obj_player_controller.interact_inst = id;
+        if (obj_player_controller.interact_inst != -1){
+          var cur = obj_player_controller.interact_inst;
+          if (dist &lt; point_distance(pawn.center_x, pawn.center_y, cur.x, cur.y)){
+            obj_player_controller.interact_inst = id;
+          }
+        }else{
+          obj_player_controller.interact_inst = id;
+        }
       }
     }
   }
 
-  if ((mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) || obj_player_controller.interact_inst) &amp;&amp; bind_check_pressed('interact') &amp;&amp; point_distance(x, y, pawn.x, pawn.y) &lt; obj_player_controller.pickup_distance){
+  if ((mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) || obj_player_controller.interact_inst == id) &amp;&amp; bind_check_pressed('interact') &amp;&amp; point_distance(x, y, pawn.center_x, pawn.center_y) &lt; obj_player_controller.pickup_distance &amp;&amp; pawn.pickup == -1){
     if (is_server){
       event_perform(ev_other, ev_user1);
     }

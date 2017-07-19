@@ -119,7 +119,7 @@ switch (async_load[? "type"]){
   break;
   case network_type_connect:
     if (is_server){
-      for (i=0; i&lt;current_pack[? "players"]; i+=1){
+      for (i=1; i&lt;current_pack[? "players"]; i+=1){
         if (nw_players[? i] == undefined){
           next_player_id = i;
           break;

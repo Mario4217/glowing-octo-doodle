@@ -76,7 +76,7 @@ switch (buffer_read(argument0, buffer_u8)){
     if (inst != undefined){
       if (instance_exists(inst)){
         inst.x = buffer_read(argument0, buffer_u16);
-        inst.y = buffer_read(argument0, buffer_u16);        
+        inst.y = buffer_read(argument0, buffer_u16);
       }
     }
   break;

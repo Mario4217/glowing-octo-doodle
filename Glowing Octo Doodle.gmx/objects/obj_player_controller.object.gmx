@@ -34,7 +34,7 @@ putdown_x = x;
 putdown_y = y;
 
 move_spd = 400;
-pickup_distance = 50;
+pickup_distance = 100;
 pawns = -1;
 interact_inst = -1;
 
@@ -181,9 +181,9 @@ view_xview[0] = floor(player_pawn.x - view_wview[0]/2);
 view_yview[0] = floor(player_pawn.y - view_hview[0]/2);
 
 if (is_using_gamepad){
-  var dis = 32;
-  putdown_x = player_pawn.x+lengthdir_x(dis,player_pawn.dir*90);
-  putdown_y = player_pawn.y+lengthdir_y(dis,player_pawn.dir*90);
+  var dis = 48;
+  putdown_x = player_pawn.center_x+lengthdir_x(dis,player_pawn.dir*90);
+  putdown_y = player_pawn.center_y+lengthdir_y(dis,player_pawn.dir*90);
 }
 
 pickup = player_pawn.pickup;
