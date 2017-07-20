@@ -25,9 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///language
-lang_init();
-lang_extern("language/english.txt");
+            <string>///release mode
+//gml_release_mode(true);
 </string>
           </argument>
         </arguments>
@@ -48,8 +47,9 @@ lang_extern("language/english.txt");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///release mode
-//gml_release_mode(true);
+            <string>///language
+lang_init();
+lang_extern("language/english.txt");
 </string>
           </argument>
         </arguments>

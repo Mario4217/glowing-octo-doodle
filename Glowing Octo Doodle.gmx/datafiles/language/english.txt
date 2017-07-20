@@ -79,6 +79,10 @@ editor.down:					Down
 editor.remove:					Remove
 editor.brush_size:				Brush Size: [1]
 editor.choose_tile:				Choose Tile
+editor.saving:					Saving...
+editor.saved:					Saved!
+editor.save_failed:				Save failed!
+
 editor.group.logic:				Logic
 editor.group.general:			General
 editor.group.rails:				Rails

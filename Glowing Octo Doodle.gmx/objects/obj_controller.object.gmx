@@ -247,7 +247,7 @@ switch (async_load[? "type"]){
 
 draw_set_color(c_black);
 draw_set_font(ft_console);
-draw_text(0,view_hport[0]-16,"Glowing Octo Doodle Alpha version "+string(GM_version))
+draw_text(0,view_hport[0]-16,"Glowing Octo Doodle Alpha version "+string(GM_version));
 </string>
           </argument>
         </arguments>

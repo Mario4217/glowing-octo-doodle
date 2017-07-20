@@ -159,7 +159,7 @@ init = true;
   }else if (src_map[? "yanchor"] == 1){
     depth = obj_world.world_height*32 - bbox_top;
   }else{
-    depth = obj_world.world_height*32;
+    depth = obj_world.world_height*32-1;
   }
 
   var pawn = obj_player_controller.player_pawn; //own pawn of the current player you are controlling

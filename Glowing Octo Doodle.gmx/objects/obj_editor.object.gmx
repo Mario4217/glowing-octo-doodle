@@ -101,6 +101,12 @@ error = ui_create_button(0.3,0.3,0.7,0.7,"",'set editor_error ""');
 ui_set_class(error, "editor-error");
 ui_add_child(editor_container, error);
 
+//info popup thing
+lb_info = ui_create_label(0.3, 0.1, 0.7,0.18, "");
+lb_info[? "visible"] = false;
+lb_info_time = 0;
+ui_add_child(editor_container, lb_info);
+
 //entity stat/setting panel
 ent_label = ui_create_draggable(0.7,0.7,1,1,"{editor.selected_entity}",true);
 ent_label[? "visible"] = false;
@@ -194,6 +200,8 @@ if (global.toLoad != ""){
 rad_t1[? "gp_port"] = ds_list_find_value(maps_container[? "children"],1);
 rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"],0);
 rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"],0);
+
+saveid = -1;
 
 inst_selected = -1;
 inst_hover = 0;
@@ -453,6 +461,42 @@ tile_preview[? "tex_height"] = tile_y2 - tile_y1;
 var index = ui_get_value(floors_container);
 if (index != -1){
   floor_preview[? "texture"] = floorlist[index, 0];
+}
+
+if (lb_info_time &gt; 0){
+  lb_info_time -= 1/60;
+  if (lb_info_time &lt;= 0){
+    lb_info[? "visible"] = false;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="72">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (async_load[? "id"] == saveid){
+  if ds_map_find_value(async_load, "status") == false{
+    editor_show_info("{editor.save_failed}",3)
+  }else{
+    editor_show_info("{editor.saved}",3)
+  }
 }
 </string>
           </argument>

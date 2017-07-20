@@ -57,7 +57,6 @@ if (image_index == 1){
   image_yscale = attr[? ATTRIBUTE.height] / 32;
   draw_sprite_part(spr_tiles, attr[? ATTRIBUTE.skin], attr[? ATTRIBUTE.left], attr[? ATTRIBUTE.top], attr[? ATTRIBUTE.width], attr[? ATTRIBUTE.height], x, y);
 }
-
 </string>
           </argument>
         </arguments>
