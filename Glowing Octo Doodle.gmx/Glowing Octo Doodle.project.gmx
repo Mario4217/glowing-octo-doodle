@@ -165,6 +165,7 @@
       <sprite>sprites\spr_achievement_secret</sprite>
       <sprite>sprites\spr_ui_trash</sprite>
       <sprite>sprites\spr_ui_io</sprite>
+      <sprite>sprites\spr_gamepad_icons</sprite>
     </sprites>
     <sprites name="player">
       <sprite>sprites\spr_player_front</sprite>

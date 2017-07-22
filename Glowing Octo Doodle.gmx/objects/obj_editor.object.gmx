@@ -49,10 +49,16 @@ btn_save = ui_add_child(menu_container, ui_create_button(0,0.1,1,0.15,"{editor.s
 btn_exit = ui_add_child(menu_container, ui_create_button(0,0.9,1,0.95,"{editor.exit}","editor_exit"));
 btn_exit[? "gp_port"] = -1;
 
-rad_t1 = ui_add_child(topbar, ui_create_radio(0,0,0.2,1,"{editor.map}",1));
-rad_t2 = ui_add_child(topbar, ui_create_radio(0.2,0,0.4,1,"{editor.objects}",2));
-rad_t3 = ui_add_child(topbar, ui_create_radio(0.4,0,0.6,1,"{editor.tiles}",3));
-rad_t4 = ui_add_child(topbar, ui_create_radio(0.6,0,0.8,1,"{editor.floor}",4));
+var w = 0.2;
+var u = 0.05;
+rad_t1 = ui_add_child(topbar, ui_create_radio(u,0,u+w,1,"{editor.map}",1));
+u+=w;
+rad_t2 = ui_add_child(topbar, ui_create_radio(u,0,u+w,1,"{editor.objects}",2));
+u+=w;
+rad_t3 = ui_add_child(topbar, ui_create_radio(u,0,u+w,1,"{editor.tiles}",3));
+u+=w;
+rad_t4 = ui_add_child(topbar, ui_create_radio(u,0,u+w,1,"{editor.floor}",4));
+u+=w;
 rad_t5 = ui_add_child(topbar, ui_create_button(0.9,0,1,1,"{editor.test}","editor_test"));
 rad_t1[? "gp_right"] = rad_t2;
 rad_t2[? "gp_right"] = rad_t3;
@@ -197,9 +203,10 @@ if (global.toLoad != ""){
   global.toLoad = "";
 }
 
-rad_t1[? "gp_port"] = ds_list_find_value(maps_container[? "children"],1);
-rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"],0);
-rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"],0);
+rad_t1[? "gp_port"] = ds_list_find_value(maps_container[? "children"], 1);
+rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"], 0);
+rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"], 0);
+rad_t4[? "gp_port"] = ds_list_find_value(floors_container[? "children"], 0)
 
 saveid = -1;
 
@@ -415,6 +422,8 @@ if (gamepad_button_check_pressed(0,gp_face2)){
       ui_gamepad_position = rad_t2; 
     }else if (interface[? "editor_menu"] == "3"){
       ui_gamepad_position = rad_t3;
+    }else if (interface[? "editor_menu"] == "4"){
+      ui_gamepad_position = rad_t4;
     }else{
       ui_gamepad_position = rad_t1;
     }
@@ -629,7 +638,7 @@ if (interface[? "editor_menu"] == "2"){
       var color = c_lime;
     }
     draw_sprite_ext(map[? "sprite"], 0, place_x, place_y,1 ,1 ,0 ,color ,0.3);
-    if ((mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0, gp_face1)) &amp;&amp; !c){
+    if ((mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0, gp_face4)) &amp;&amp; !c){
       var inst = instance_create(place_x,place_y,obj_editor_ent);
       inst.gp_obj_index = obj_to_place;
       ui_set_value(objects_container, -1);
@@ -665,7 +674,7 @@ if (interface[? "editor_menu"] == "4"){
     draw_rectangle(cx*32, cy*32, cx*32+size*32-1, cy*32+size*32-1, false);
     draw_set_alpha(1);
     var c = (ui_hover != -1)
-    if (mouse_check_button(mb_left) &amp;&amp; !c){
+    if ((mouse_check_button(mb_left) || gamepad_button_check_pressed(0, gp_face4)) &amp;&amp; !c){
       ds_grid_set_region(grid_floor, cx, cy, cx+size-1, cy+size-1, floor_to_set);
       world_floor_update_chunk(floor(cx / obj_floor.chunk_size)    , floor(cy / obj_floor.chunk_size)    );
       world_floor_update_chunk(floor(cx / obj_floor.chunk_size) + 1, floor(cy / obj_floor.chunk_size)    );

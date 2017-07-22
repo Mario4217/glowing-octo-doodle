@@ -30,10 +30,14 @@ with (obj_menu){
     parent = menu_play_packs;
     var btn = ui_add_child(parent, ui_create_button(0,v-0.12,1,v-0.02,name,'pack_start "'+string(name)+'"'));
     
+    if (i == 0){
+      btn_new_game[? "gp_port"] = btn;
+    }
+    
     filename = file_find_next();
     i++
     v+=0.1;
   }
   file_find_close();
-  btn_new_game[? "gp_port"] = ds_list_find_value(parent[? "children"],0);
+  //btn_new_game[? "gp_port"] = ds_list_find_value(parent[? "children"],0);
 }
