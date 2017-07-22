@@ -24,7 +24,7 @@ menu.settings.walk_up:			Walk Up
 menu.settings.walk_right:		Walk Right
 menu.settings.walk_down:		Walk Down
 menu.settings.walk_left:		Walk Left
-menu.settings.interact:			Interact
+menu.settings.interact:			Interact / Pickup
 menu.settings.pickup:			Pick Up
 menu.settings.putdown:			Put Down
 menu.settings.bindings:			Bindings
@@ -41,7 +41,7 @@ menu.editor.packs:				Packs
 menu.end_pack:					Exit this pack
 menu.disconnect:				Disconnect
 
-lobbx.empty:					-Empty-
+lobby.empty:					-Empty-
 lobby.players:					Players [1]/[2]
 
 editor.exit:					Exit the editor

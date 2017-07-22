@@ -46,6 +46,12 @@ if (testmode != ""){
 }
 
 //moved bind stuff to the init object
+
+gamepad_help = ui_create_container(0,0.9,0.3,0.95);
+gamepad_help_sprite = ui_create_sprite(0,0,0.2,1,spr_gamepad_icons, 0);
+gamepad_help_text = ui_create_label(0.2,0,1,1, "");
+ui_add_child(gamepad_help, gamepad_help_sprite);
+ui_add_child(gamepad_help, gamepad_help_text);
 </string>
           </argument>
         </arguments>
@@ -242,6 +248,7 @@ if (testmode != ""){
             <string>if (testmode != ""){
   ds_list_destroy(pawns);
 }
+ds_map_destroy(gamepad_help);
 </string>
           </argument>
         </arguments>
@@ -279,6 +286,22 @@ if (testmode != ""){
     draw_text(0,view_hport[0]-16,lang_format("{editor.testmode.current_player}",ds_list_find_index(pawns, player_pawn),ds_list_size(pawns)-1,lang_format(bind_string(bind_get("player_swap",0)))));
   }
   draw_set_valign(fa_top);
+}
+
+if (is_using_gamepad){
+  gamepad_help[? "visible"] = false;
+  if (interact_inst != -1){
+    gamepad_help[? "visible"] = true;
+    gamepad_help_sprite[? "image"] = 0;
+    ui_set_text(gamepad_help_text, "{menu.settings.interact}");
+  }
+  if (player_pawn.pickup != -1){
+    gamepad_help[? "visible"] = true;
+    gamepad_help_sprite[? "image"] = 1;
+    ui_set_text(gamepad_help_text, "{menu.settings.putdown}");
+  }
+  draw_set_font(ft_ui);
+  ui_draw(gamepad_help);
 }
 </string>
           </argument>
