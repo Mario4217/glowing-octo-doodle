@@ -143,9 +143,13 @@ ui_set_value(input_height, world_height);
 ui_set_value(input_players, world_players);
 
 //objects panel
-lb_selcted_object = ui_add_child(objects_container, ui_create_label(0,0.05,1,0.1,""));
+lb_selected_object = ui_add_child(objects_container, ui_create_label(0,0.05,1,0.1,""));
+
+objectlist = ui_add_child(objects_container, ui_create_scroll(0,0.1,1,1));
+ui_set_value(objectlist, -1);
+
 var u = 0;
-var v = 0.1;
+var v = 0;
 var h = 0.1;
 for (var i=0; i&lt;ds_list_size(gp_editor); i++){
   var val = gp_editor[| i];
@@ -153,7 +157,7 @@ for (var i=0; i&lt;ds_list_size(gp_editor); i++){
     var map = gp_objects[? val];
     var btn = ui_create_radio(u,v,u+0.5,v+0.1,"",map[? "id"]);
     ui_add_child(btn,ui_create_sprite(0.05,0.05,0.95,0.95,map[? "sprite"],0));
-    ui_add_child(objects_container,btn);
+    ui_add_child(objectlist,btn);
     u += 0.5;
     if (u &gt;= 1){
       u = 0;
@@ -164,7 +168,7 @@ for (var i=0; i&lt;ds_list_size(gp_editor); i++){
       u = 0;
       v += h;
     }
-    ui_add_child(objects_container, ui_create_label(0, v, 1, v+h/2, val));
+    ui_add_child(objectlist, ui_create_label(0, v, 1, v+h/2, val));
     v += h/2;
   }
 }
@@ -440,15 +444,15 @@ if (interface[? "editor_error"] != ""){
 }
 
 if (interface[? "editor_menu"] == "2"){
-  var obj_to_place = ui_get_value(objects_container);
+  var obj_to_place = ui_get_value(objectlist);
   if (obj_to_place != -1){
     var obj = gp_objects[? obj_to_place];
-    ui_set_text(lb_selcted_object, lang_format(obj[? "name"]));
+    ui_set_text(lb_selected_object, lang_format(obj[? "name"]));
     if (mouse_check_button_pressed(mb_right)){
-      ui_set_value(objects_container, -1);
+      ui_set_value(objectlist, -1);
     }
   }else{
-    ui_set_text(lb_selcted_object, "");
+    ui_set_text(lb_selected_object, "");
   }
 }
 
@@ -623,7 +627,7 @@ if (!keyboard_check(vk_alt)){
 }
 
 if (interface[? "editor_menu"] == "2"){
-  var obj_to_place = ui_get_value(objects_container);
+  var obj_to_place = ui_get_value(objectlist);
   if (obj_to_place != -1){
     show_grid = true;
     var map = gp_objects[? obj_to_place];
@@ -641,7 +645,7 @@ if (interface[? "editor_menu"] == "2"){
     if ((mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0, gp_face4)) &amp;&amp; !c){
       var inst = instance_create(place_x,place_y,obj_editor_ent);
       inst.gp_obj_index = obj_to_place;
-      ui_set_value(objects_container, -1);
+      ui_set_value(objectlist, -1);
     }
   }
 }

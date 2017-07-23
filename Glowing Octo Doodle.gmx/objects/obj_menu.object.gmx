@@ -266,9 +266,15 @@ menu_editor_packs[? "visible"] = (interface[? "menu"] == "5" &amp;&amp; interfac
 ui_step();
 
 var btn_for_gamepad = btn_play;
+
+btn_disconnect[? "visible"] = false;
+btn_pack_end[? "visible"] = false;
+btn_play[? "visible"] = false;
+btn_end_testmode[? "visible"] = false;
+
 lb_current_pack[? "visible"] = (current_pack != -1)
-if (testmode != ""){
-  btn_end_testmode[? "visible"] = true;
+if (testmode == ""){
+  btn_end_testmode[? "visible"] = false;
   if (current_pack != -1){
     btn_play[? "visible"] = false;
     ui_set_text(lb_current_pack, current_pack[? "name"]);
@@ -287,7 +293,7 @@ if (testmode != ""){
     btn_pack_end[? "visible"] = false;
   }
 }else{
-  btn_end_testmode[? "visible"] = false;
+  btn_end_testmode[? "visible"] = true;
 }
 
 
