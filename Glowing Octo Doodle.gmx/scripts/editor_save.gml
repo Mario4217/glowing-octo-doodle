@@ -66,7 +66,9 @@ if (room == rm_editor){
   
   grid_to_buffer(buff, obj_editor.grid_floor);
   
-  editor_show_info("{editor.saving}",-1);
-  obj_editor.saveid = buffer_save_async(buff,"maps/"+string(name)+".puz", 0, buffer_get_size(buff));
+  editor_show_info("{editor.saved}",3);
+  buffer_save(buff,"maps/"+string(name)+".puz");
+  //Can't use buffer_save_async, because we are not developing for console! Thanks yoyogames missing information in the docs
+  //obj_editor.saveid = buffer_save_async(buff,"maps/"+string(name)+".puz", 0, buffer_get_size(buff));
   buffer_delete(buff);
 }

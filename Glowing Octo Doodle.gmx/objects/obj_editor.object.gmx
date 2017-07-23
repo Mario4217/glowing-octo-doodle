@@ -508,8 +508,12 @@ if (lb_info_time &gt; 0){
   if ds_map_find_value(async_load, "status") == false{
     editor_show_info("{editor.save_failed}",3)
   }else{
-    editor_show_info("{editor.saved}",3)
+    editor_show_info("{editor.saved}",3);
+    if (testmode != ""){
+      room = rm_game;
+    }
   }
+  saveid = -1;
 }
 </string>
           </argument>
