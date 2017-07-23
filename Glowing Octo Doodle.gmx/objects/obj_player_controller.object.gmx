@@ -136,6 +136,13 @@ if (testmode != ""){
           <argument>
             <kind>1</kind>
             <string>var can_control = (interface[? "menu"] == "0" &amp;&amp; !console_is_open)
+
+if (is_network &amp;&amp; current_pack != -1){
+  if (ds_map_size(nw_players)&lt;current_pack[? "players"]){
+    can_control = false;
+  }
+}
+
 var xmov = bind_check("player_horizontal") * can_control;
 var ymov = bind_check("player_vertical") * can_control;
 

@@ -134,5 +134,6 @@ switch (buffer_read(argument0, buffer_u8)){
   break;
   case NW.server_close:
     nw_end();
+    current_pack_goto_level(255);
   break;
 }

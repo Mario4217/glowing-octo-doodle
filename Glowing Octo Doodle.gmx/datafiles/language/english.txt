@@ -24,7 +24,7 @@ menu.settings.walk_up:			Walk Up
 menu.settings.walk_right:		Walk Right
 menu.settings.walk_down:		Walk Down
 menu.settings.walk_left:		Walk Left
-menu.settings.interact:			Interact / Pickup
+menu.settings.interact:			Use / Pickup
 menu.settings.pickup:			Pick Up
 menu.settings.putdown:			Put Down
 menu.settings.bindings:			Bindings
@@ -43,6 +43,7 @@ menu.disconnect:				Disconnect
 
 lobby.empty:					-Empty-
 lobby.players:					Players [1]/[2]
+lobby.waiting_for_players:		Waiting for other players...
 
 editor.exit:					Exit the editor
 editor.save:					Save
@@ -70,7 +71,6 @@ editor.io:						IO
 editor.link:					[1] -> [2] [3]
 editor.packname:				Packname
 editor.description:				Description
-editor.hub:						Hub map (empty for none)
 editor.add_map:					Add Map
 editor.choose_map:				Choose a map to add!
 editor.cancel:					Cancel

@@ -216,18 +216,18 @@ switch (async_load[? "type"]){
   draw_set_font(ft_ui);
   var xx = view_wport[0]-256;
   var yy = 32;
-  draw_set_color(c_white);
+  draw_set_color(c_black);
   draw_set_alpha(0.4);
   draw_rectangle(xx, yy, view_wport[0], yy+31,false);
   draw_set_alpha(1);
-  draw_set_color(c_black);
+  draw_set_color(c_white);
   draw_text(xx+8,yy,lang_format("{lobby.players}", ds_map_size(nw_players), current_pack[? "players"]));
   yy+=32;
 
   for (var i=0; i&lt;(current_pack[? "players"]); i+=1){
-    draw_set_color(c_white);
+    draw_set_color(c_black);
     if (i % 2 == 0){
-      draw_set_color(c_ltgray);
+      draw_set_color(c_dkgray);
     }
     draw_set_alpha(0.4);
     draw_rectangle(xx, yy, view_wport[0], yy+31,false);
@@ -235,14 +235,32 @@ switch (async_load[? "type"]){
   
     var player = nw_players[? i];
     if (player != undefined){
+      draw_set_color(c_black);
+      draw_text(xx+8+2,yy+2,player[? "name"]);
       draw_set_color(make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]));
       draw_text(xx+8,yy,player[? "name"]);
     }else{
       draw_set_color(c_black);
+      draw_text(xx+8+2,yy+2,lang_format("{lobby.empty}"));
+      draw_set_color(c_white);
       draw_text(xx+8,yy,lang_format("{lobby.empty}"));
     }
     yy+=32;
   };
+  
+  //waiting for other players screen
+  if (ds_map_size(nw_players)&lt;current_pack[? "players"]){
+
+    draw_set_halign(fa_center);
+    draw_set_color(c_black);
+    draw_set_alpha(0.3);
+    draw_rectangle(0, 0, view_wport[0], view_hport[0], false);
+    draw_set_alpha(1);
+    draw_text(view_wport[0]/2+2,128+2,lang_format("{lobby.waiting_for_players}"));
+    draw_set_color(c_white);
+    draw_text(view_wport[0]/2,128,lang_format("{lobby.waiting_for_players}"));
+    draw_set_halign(fa_left);
+  }
 }
 
 draw_set_color(c_black);

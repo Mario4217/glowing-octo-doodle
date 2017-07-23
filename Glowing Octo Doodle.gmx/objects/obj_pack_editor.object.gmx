@@ -44,8 +44,6 @@ ui_add_child(stage, ui_create_label(0.05,v,0.45,v+0.05,"{editor.description}"));
 v+= 0.05;
 txt_description = ui_add_child(stage, ui_create_textbox(0.05,v,0.45,v+0.4, 1024, "",false));
 v += 0.45;
-ui_add_child(stage, ui_create_label(0.05,v,0.45,v+0.05,"{editor.hub}"));
-v+= 0.1;
 sli_players = ui_add_child(stage, ui_create_slider(0.05,v,0.45,v+0.05,"{editor.map.players}",1,16,1));
 
 ui_add_child(stage, ui_create_button(0.5,0.1,0.95,0.15,"{editor.add_map}","pack_show_maps 1"));
