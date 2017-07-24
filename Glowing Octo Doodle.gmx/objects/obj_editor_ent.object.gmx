@@ -366,10 +366,29 @@ switch (gp_obj_index){
       image_xscale = attr[? ATTRIBUTE.size] / 32;
       image_yscale = 1;
       draw_sprite_area(spr_gp_rail_h, image_index, x, y, x+attr[? ATTRIBUTE.size], y+32);
+      
+      //intersections (horizontal)
+      for (var i=0; i&lt;floor(attr[? ATTRIBUTE.size] / 32)-1; i+=1){
+        var c = collision_line(x+i*32+16, y+16,x+i*32+48, y+16, object_index, 0, 1);
+        if (c){
+          if (c.gp_obj_index == gp_obj_index)
+            draw_sprite(spr_gp_rail_cross, 0, c.x, y);
+        }
+      };
+      
     }else{ //vertical
       image_yscale = attr[? ATTRIBUTE.size] / 32;
       image_xscale = 1;
       draw_sprite_area(spr_gp_rail_v, image_index, x, y, x+32, y+attr[? ATTRIBUTE.size]);
+      
+      //intersections (vertical)
+      for (var i=0; i&lt;floor(attr[? ATTRIBUTE.size] / 32)-1; i+=1){
+        var c = collision_line(x+16, y+16+32*i, x+16, y+48+32*i, object_index, 0, 1);
+        if (c){
+          if (c.gp_obj_index == gp_obj_index)
+            draw_sprite(spr_gp_rail_cross, 0, x, c.y);
+        }
+      };
     }
   break;
   
