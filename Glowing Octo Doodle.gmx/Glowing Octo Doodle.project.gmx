@@ -159,6 +159,7 @@
       <sprite>sprites\spr_gp_cart_h</sprite>
       <sprite>sprites\spr_gp_logic_delay</sprite>
       <sprite>sprites\spr_gp_carry_blocker_v</sprite>
+      <sprite>sprites\spr_gp_rail_detector_h</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -466,6 +467,7 @@
       <object>objects\obj_gp_rail</object>
       <object>objects\obj_gp_cart</object>
       <object>objects\obj_parent_gameplay</object>
+      <object>objects\obj_gp_rail_detector</object>
     </objects>
   </objects>
   <rooms name="rooms">

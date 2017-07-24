@@ -190,7 +190,9 @@ enum EVENT {
   onFalse = 5,
   onTrigger = 6,
   onEndOfRail = 7,
-  onDelay = 8
+  onDelay = 8,
+  onDetect = 9,
+  onUndetect = 10
 }
 
 enum ACTION{
@@ -260,7 +262,8 @@ dictionary_event[? EVENT.onFalse] = "{editor.event.onFalse}";
 dictionary_event[? EVENT.onTrigger] = "{editor.event.onTrigger}";
 dictionary_event[? EVENT.onEndOfRail] = "{editor.event.onEndOfRail}";
 dictionary_event[? EVENT.onDelay] = "{editor.event.onDelay}";
-
+dictionary_event[? EVENT.onDetect] = "{editor.event.onDetect}";
+dictionary_event[? EVENT.onUndetect] = "{editor.event.onUndetect}";
 
 globalvar gp_objects, gp_editor; //a ds map with every gameplay object. (buttons, cubes, spawnpoint... entities)
 gp_objects = ds_map_create();
@@ -373,10 +376,14 @@ gameplay_object_add_input(15, ACTION.open);
 gameplay_object_add_input(15, ACTION.close);
 gameplay_object_add_tag(15, "clip");
 
+register_gameplay_object(16, "{gp.rail_detector}", obj_gp_rail_detector);
+gameplay_object_add_output(16, EVENT.onDetect);
+gameplay_object_add_output(16, EVENT.onUndetect);
+
 
 //make the objects in the ingame editor accsesable
 ds_list_add(gp_editor, "{editor.group.general}", 2, 6, 1, 10, 5, 4, 3, 15);
-ds_list_add(gp_editor, "{editor.group.rails}", 12, 13)
+ds_list_add(gp_editor, "{editor.group.rails}", 12, 13, 16)
 ds_list_add(gp_editor, "{editor.group.logic}", 7, 8, 11, 14);
 </string>
           </argument>

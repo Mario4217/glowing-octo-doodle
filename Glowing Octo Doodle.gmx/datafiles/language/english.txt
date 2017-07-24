@@ -131,6 +131,8 @@ editor.event.onFalse:			OnFalse
 editor.event.onTrigger:			OnTrigger
 editor.event.onEndOfRail:		OnEndOfRail
 editor.event.onDelay:			OnDelay
+editor.event.onDetect:			OnDetect
+editor.event.onUndetect:		OnUndetect
 
 editor.tileset.enviroment:		Enviroment
 editor.tileset.mark:			Mark
@@ -153,6 +155,7 @@ gp.rail:						Rail
 gp.cart:						Cart
 gp.logic_delay:					Logic Delay
 gp.carry_blocker:				Carry Blocker
+gp.rail_detector:				Detector Rail
 
 key.add:						Add
 key.alt:						Alt
