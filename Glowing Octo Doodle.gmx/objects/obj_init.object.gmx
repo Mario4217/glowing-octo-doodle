@@ -179,7 +179,10 @@ enum ATTRIBUTE {
   time = 12,
   start_active = 13,
   spd = 14,
-  milliseconds = 15
+  milliseconds = 15,
+  text = 16,
+  title = 17,
+  reset = 18
 }
 
 enum EVENT {
@@ -192,7 +195,12 @@ enum EVENT {
   onEndOfRail = 7,
   onDelay = 8,
   onDetect = 9,
-  onUndetect = 10
+  onUndetect = 10,
+  onNext = 11,
+  onStartTouch = 12,
+  onEndTouch = 13,
+  onFirst = 14,
+  onNotFirst = 15
 }
 
 enum ACTION{
@@ -213,7 +221,8 @@ enum ACTION{
   start = 15,
   pause = 16,
   reset = 17,
-  unpause = 18
+  unpause = 18,
+  show = 19
 }
 
 globalvar dictionary_action, dictionary_attribute, dictionary_event;
@@ -236,6 +245,8 @@ dictionary_action[? ACTION.start] = "{editor.action.start}";
 dictionary_action[? ACTION.pause] = "{editor.action.pause}";
 dictionary_action[? ACTION.reset] = "{editor.action.reset}";
 dictionary_action[? ACTION.unpause] = "{editor.action.unpause}";
+dictionary_action[? ACTION.show] = "{editor.action.show}";
+dictionary_action[? ACTION.reset] = "{editor.action.reset}";
 dictionary_attribute = ds_map_create();
 dictionary_attribute[? ATTRIBUTE.skin] = "{editor.attribute.skin}";
 dictionary_attribute[? ATTRIBUTE.size] = "{editor.attribute.size}";
@@ -253,6 +264,8 @@ dictionary_attribute[? ATTRIBUTE.time] = "{editor.attribute.time}";
 dictionary_attribute[? ATTRIBUTE.start_active] = "{editor.attribute.start_active}";
 dictionary_attribute[? ATTRIBUTE.spd] = "{editor.attribute.speed}";
 dictionary_attribute[? ATTRIBUTE.milliseconds] = "{editor.attribute.milliseconds}";
+dictionary_attribute[? ATTRIBUTE.text] = "{editor.attribute.text}";
+dictionary_attribute[? ATTRIBUTE.title] = "{editor.attribute.title}";
 dictionary_event = ds_map_create();
 dictionary_event[? EVENT.onPress] = "{editor.event.onPress}";
 dictionary_event[? EVENT.onRelease] = "{editor.event.onRelease}";
@@ -264,6 +277,11 @@ dictionary_event[? EVENT.onEndOfRail] = "{editor.event.onEndOfRail}";
 dictionary_event[? EVENT.onDelay] = "{editor.event.onDelay}";
 dictionary_event[? EVENT.onDetect] = "{editor.event.onDetect}";
 dictionary_event[? EVENT.onUndetect] = "{editor.event.onUndetect}";
+dictionary_event[? EVENT.onNext] = "{editor.event.onNext}";
+dictionary_event[? EVENT.onStartTouch] = "{editor.event.onStartTouch}";
+dictionary_event[? EVENT.onEndTouch] = "{editor.event.onEndTouch}";
+dictionary_event[? EVENT.onFirst] = "{editor.event.onFirst}";
+dictionary_event[? EVENT.onNotFirst] = "{editor.event.onNotFirst}";
 
 globalvar gp_objects, gp_editor; //a ds map with every gameplay object. (buttons, cubes, spawnpoint... entities)
 gp_objects = ds_map_create();
@@ -381,11 +399,30 @@ gameplay_object_set_depth_anchor(12, 3); //bottom - layer 2
 gameplay_object_add_output(16, EVENT.onDetect);
 gameplay_object_add_output(16, EVENT.onUndetect);
 
+register_gameplay_object(17, "{gp.story_message}", obj_gp_message);
+gameplay_object_add_attribute(17, ATTRIBUTE.text, "", buffer_string, 0, 256);
+gameplay_object_add_attribute(17, ATTRIBUTE.title, "", buffer_string, 0, 256);
+gameplay_object_add_input(17, ACTION.show);
+gameplay_object_add_output(17, EVENT.onNext);
+
+register_gameplay_object(18, "{gp.trigger_zone}", obj_gp_trigger);
+gameplay_object_add_attribute(18, ATTRIBUTE.width, 64, buffer_u16, 0, 1024);
+gameplay_object_add_attribute(18, ATTRIBUTE.height, 64, buffer_u16, 0, 1024);
+gameplay_object_add_output(18, EVENT.onStartTouch);
+gameplay_object_add_output(18, EVENT.onEndTouch);
+
+register_gameplay_object(19, "{gp.logic_memory}", obj_gp_logic_memory);
+gameplay_object_add_output(19, EVENT.onFirst);
+gameplay_object_add_output(19, EVENT.onNotFirst);
+gameplay_object_add_input(19, ACTION.trigger);
+
 
 //make the objects in the ingame editor accsesable
 ds_list_add(gp_editor, "{editor.group.general}", 2, 6, 1, 10, 5, 4, 3, 15);
 ds_list_add(gp_editor, "{editor.group.rails}", 12, 13, 16)
-ds_list_add(gp_editor, "{editor.group.logic}", 7, 8, 11, 14);
+ds_list_add(gp_editor, "{editor.group.laser}")
+ds_list_add(gp_editor, "{editor.group.logic}", 7, 8, 11, 14, 19);
+ds_list_add(gp_editor, "{editor.group.story}", 17, 18);
 </string>
           </argument>
         </arguments>
@@ -486,6 +523,14 @@ floorlist[1,0] = background_get_texture(bg_floor_concrete);
 floorlist[1,1] = background_get_width(bg_floor_concrete);
 floorlist[1,2] = background_get_height(bg_floor_concrete);
 floorlist[1,3] = "{editor.floor.concrete}"
+floorlist[2,0] = background_get_texture(bg_floor_darkness);
+floorlist[2,1] = background_get_width(bg_floor_darkness);
+floorlist[2,2] = background_get_height(bg_floor_darkness);
+floorlist[2,3] = "{editor.floor.darkness}";
+floorlist[3,0] = background_get_texture(bg_floor_spaceship);
+floorlist[3,1] = background_get_width(bg_floor_spaceship);
+floorlist[3,2] = background_get_height(bg_floor_spaceship);
+floorlist[3,3] = "{editor.floor.spaceship}";
 
 global.toLoad = "title";
 global.current_map_path = "";

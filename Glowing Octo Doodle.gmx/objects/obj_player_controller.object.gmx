@@ -38,6 +38,8 @@ pickup_distance = 100;
 pawns = -1;
 interact_inst = -1;
 
+messagebox = -1;
+
 if (testmode != ""){
   pawns = ds_list_create();
   pawns[| 0] = player_pawn;
@@ -52,6 +54,13 @@ gamepad_help_sprite = ui_create_sprite(0,0,0.2,1,spr_gamepad_icons, 0);
 gamepad_help_text = ui_create_label(0.2,0,1,1, "");
 ui_add_child(gamepad_help, gamepad_help_sprite);
 ui_add_child(gamepad_help, gamepad_help_text);
+
+msgbox_body = ui_create_label(0.3,0.8,0.7,1,"");
+msgbox_title = ui_create_label(0,0,1,0.2,"");
+msgbox_next = ui_create_sprite(0.9,0.9,1,1,spr_ui_msgbox_next, 0);
+msgbox_text = "";
+ui_add_child(msgbox_body, msgbox_title);
+ui_add_child(msgbox_body, msgbox_next);
 </string>
           </argument>
         </arguments>
@@ -135,7 +144,7 @@ if (testmode != ""){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var can_control = (interface[? "menu"] == "0" &amp;&amp; !console_is_open)
+            <string>var can_control = (interface[? "menu"] == "0" &amp;&amp; !console_is_open &amp;&amp; (messagebox == -1));
 
 if (is_network &amp;&amp; current_pack != -1){
   if (ds_map_size(nw_players)&lt;current_pack[? "players"]){
@@ -213,7 +222,7 @@ if (pickup != -1){
     gp_putdown(player_pawn, putdown_x, putdown_y);
     if (is_network){
       buffer_seek(nw_buffer, buffer_seek_start, 0);
-      buffer_write(nw_buffer, buffer_u8, NW.pawn_putdown)
+      buffer_write(nw_buffer, buffer_u8, NW.pawn_putdown);
       if (is_server){
         buffer_write(nw_buffer, buffer_u8, 0);
       }
@@ -256,6 +265,7 @@ if (testmode != ""){
   ds_list_destroy(pawns);
 }
 ds_map_destroy(gamepad_help);
+ds_map_destroy(msgbox_body);
 </string>
           </argument>
         </arguments>
@@ -309,6 +319,25 @@ if (is_using_gamepad){
   }
   draw_set_font(ft_ui);
   ui_draw(gamepad_help);
+}
+
+if (messagebox != -1 &amp;&amp; interface[? "menu"] == "0"){
+  draw_set_font(ft_ui);
+  var complete_text = lang_format(messagebox.attr[? ATTRIBUTE.text]);
+  if (string_length(msgbox_text) &lt; string_length(complete_text)){
+    msgbox_text += string_char_at(complete_text, string_length(msgbox_text)+1);
+  }
+  ui_set_text(msgbox_title, messagebox.attr[? ATTRIBUTE.title]);
+  ui_set_text(msgbox_body, msgbox_text);
+  msgbox_next[? "visible"] = (msgbox_text == complete_text);
+  ui_draw(msgbox_body);
+  if (bind_check_pressed("interact") &amp;&amp; msgbox_text == complete_text){
+    msgbox_text = "";
+    with (messagebox){
+      obj_player_controller.messagebox = -1;
+      event_trigger(EVENT.onNext);
+    }
+  }
 }
 </string>
           </argument>

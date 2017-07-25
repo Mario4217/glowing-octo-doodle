@@ -312,31 +312,6 @@ switch (gp_obj_index){
     
     image_xscale = width / 64;
     image_yscale = height / 64;
-    
-    var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; hov);
-    
-    if (obj_editor.inst_selected == id){
-      var o = min(32, attr[? ATTRIBUTE.width]);
-      draw_sprite_part(spr_scaleable, ho, 0, 0, o, attr[? ATTRIBUTE.height], bbox_right-o, bbox_bottom-32);
-    }
-    if (ho){
-      if (mouse_check_button_pressed(mb_left)){
-        drag = false;
-        size_drag = true;
-        size_drag_x = attr[? ATTRIBUTE.width] - mouse_x;
-        size_drag_y = attr[? ATTRIBUTE.height] - mouse_y;
-      }
-    }
-    if (size_drag){
-      obj_editor.show_grid = true;
-      attr[? ATTRIBUTE.width] = floor(clamp(size_drag_x + mouse_x,16,1024)/16)*16;
-      attr[? ATTRIBUTE.height] = floor(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
-      if (mouse_check_button_released(mb_left)){
-        size_drag = false;
-        editor_ent_send_to_ui();
-      }
-      world_update_region(bbox_left,bbox_top,bbox_right,bbox_bottom);
-    }
   break;
   
   case 4: //light wall
@@ -408,8 +383,43 @@ switch (gp_obj_index){
     }
   break;
   
+  case 18:
+    width = attr[? ATTRIBUTE.width];
+    height = attr[? ATTRIBUTE.height];
+    draw_sprite_area(spr_gp_trigger, image_index, x, y, x+width, y+height);
+    image_xscale = attr[? ATTRIBUTE.width] / 64;
+    image_yscale = attr[? ATTRIBUTE.height] / 64;
+  break;
+  
   default:
     draw_self();
+}
+
+//2-Dimension size helper
+if (attr[? ATTRIBUTE.width] != undefined &amp;&amp; attr[? ATTRIBUTE.height] != undefined &amp;&amp; gp_obj_index != 9){
+  var ho = (mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; hov);
+  if (obj_editor.inst_selected == id){
+    var o = min(32, attr[? ATTRIBUTE.width]);
+    draw_sprite_part(spr_scaleable, ho, 0, 0, o, attr[? ATTRIBUTE.height], bbox_right-o, bbox_bottom-32);
+  }
+  if (ho){
+    if (mouse_check_button_pressed(mb_left) &amp;&amp; !yet_selected){
+      drag = false;
+      size_drag = true;
+      size_drag_x = attr[? ATTRIBUTE.width] - mouse_x;
+      size_drag_y = attr[? ATTRIBUTE.height] - mouse_y;
+    }
+  }
+  if (size_drag){
+    obj_editor.show_grid = true;
+    attr[? ATTRIBUTE.width] = floor(clamp(size_drag_x + mouse_x,16,1024)/16)*16;
+    attr[? ATTRIBUTE.height] = floor(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
+    if (mouse_check_button_released(mb_left)){
+      size_drag = false;
+      editor_ent_send_to_ui();
+    }
+    world_update_region(bbox_left,bbox_top,bbox_right,bbox_bottom);
+  }
 }
 
 //Size helper

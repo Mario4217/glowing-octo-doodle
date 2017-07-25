@@ -29,6 +29,10 @@ for (var i=1; i<ds_grid_height(grid)*ds_grid_width(grid); i+=1)
     bid = cell;
   }
 };
+ds_list_add(blocklist, bnum);
+ds_list_add(blocklist, bid);
+bnum = 1;
+bid = cell;
 
 buffer_write(buff, buffer_u32, ds_list_size(blocklist)/2);
 for (i=0; i<ds_list_size(blocklist); i+=2)

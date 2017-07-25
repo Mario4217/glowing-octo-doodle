@@ -267,7 +267,8 @@ if (element[? "visible"]){
       ui_draw_element_texture(x1,y1,x2,y2,element);
     break;
     case "scroll":
-      element[? "scroll"] = clamp(element[? "scroll"]+(-mouse_wheel_up()+mouse_wheel_down())*0.1,0,max(0,element[? "max-v"]-1));
+      if (mouse_over_ui(x1,y1,x2,y2))
+        element[? "scroll"] = clamp(element[? "scroll"]+(-mouse_wheel_up()+mouse_wheel_down())*0.1,0,max(0,element[? "max-v"]-1));
     break;
   }
   if (element[? "top"] != undefined){

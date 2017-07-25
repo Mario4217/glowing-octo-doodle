@@ -1,0 +1,10 @@
+[maps]
+4="spaceship_5"
+3="spaceship_4"
+2="spaceship_3"
+1="spaceship_2"
+0="spaceship_1"
+[info]
+players="1.000000"
+description=""
+name="Spaceship"

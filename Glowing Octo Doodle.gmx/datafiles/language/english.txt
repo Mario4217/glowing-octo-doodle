@@ -86,6 +86,8 @@ editor.save_failed:				Save failed!
 editor.group.logic:				Logic
 editor.group.general:			General
 editor.group.rails:				Rails
+editor.group.story:				Story
+editor.group.laser:				Laser
 
 editor.attribute.player_index:	Player ID
 editor.attribute.skin:			Skin
@@ -103,6 +105,8 @@ editor.attribute.time:			Time
 editor.attribute.start_active:	Start Active
 editor.attribute.speed:			Speed (px/s)
 editor.attribute.milliseconds:	Milliseconds
+editor.attribute.text:			Text
+editor.attribute.title:			Title
 
 editor.action.open:				Open
 editor.action.close:			Close
@@ -122,6 +126,8 @@ editor.action.start:			Start
 editor.action.pause:			Pause
 editor.action.reset:			Reset
 editor.action.unpause:			Unpause
+editor.action.show:				Show
+editor.action.reset:			Reset
 
 editor.event.onPress:			OnPress
 editor.event.onRelease:			OnRelease
@@ -133,12 +139,19 @@ editor.event.onEndOfRail:		OnEndOfRail
 editor.event.onDelay:			OnDelay
 editor.event.onDetect:			OnDetect
 editor.event.onUndetect:		OnUndetect
+editor.event.onNext:			OnFinish
+editor.event.onStartTouch:		OnStartTouch
+editor.event.onEndTouch:		OnEndTouch
+editor.event.onFirst:			OnFirst
+editor.event.onNotFirst:		OnNotFirst
 
 editor.tileset.enviroment:		Enviroment
 editor.tileset.mark:			Mark
 
 editor.floor.grass:				Grass
 editor.floor.concrete:			Concrete
+editor.floor.darkness:			Darkness
+editor.floor.spaceship:			Spaceship
 
 gp.floor_button:				Floor Button
 gp.spawn:						Spawnpoint
@@ -156,6 +169,9 @@ gp.cart:						Cart
 gp.logic_delay:					Logic Delay
 gp.carry_blocker:				Carry Blocker
 gp.rail_detector:				Detector Rail
+gp.story_message:				Message Box
+gp.trigger_zone:				Trigger Zone
+gp.logic_memory:				Logic Memory
 
 key.add:						Add
 key.alt:						Alt
@@ -219,3 +235,7 @@ key.numlock:					Numlock
 key.mb_right:					Right Mousebutton
 key.mb_left:					Left Mousebutton
 key.mb_middle:					Middle Mousebutton
+
+story.ss.mystery:				Mysterious voice
+story.ss.chamber3:				Hello?
+story.ss.chamber4_great:		Great!
