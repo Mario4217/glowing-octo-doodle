@@ -347,6 +347,7 @@
         <script>scripts\ui_style_draw_text.gml</script>
         <script>scripts\ui_style_get.gml</script>
         <script>scripts\ui_style_load.gml</script>
+        <script>scripts\ui_style_init.gml</script>
       </scripts>
       <scripts name="convert">
         <script>scripts\ui_string_to_color.gml</script>
