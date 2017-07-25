@@ -161,8 +161,14 @@ switch (async_load[? "type"]){
       instance_destroy();
     }
     ds_map_delete(nw_players, idmap[? async_load[? "socket"]]);
-    ds_map_delete(idmap, async_load[? "id"]);
     console_print("Someone disconnected from the server!")
+    
+    buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.client_disconnect);
+    buffer_write(nw_buffer, buffer_u8, idmap[? async_load[? "socket"]]);
+    nw_broadcast(nw_buffer);
+    
+    ds_map_delete(idmap, async_load[? "id"]);
   break;
 }
 </string>

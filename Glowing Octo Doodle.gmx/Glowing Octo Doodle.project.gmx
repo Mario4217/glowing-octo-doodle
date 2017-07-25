@@ -191,6 +191,8 @@
     <sprite>sprites\spr_clip</sprite>
     <sprite>sprites\spr_tiles</sprite>
     <sprite>sprites\spr_wall_ao</sprite>
+    <sprite>sprites\spr_icon</sprite>
+    <sprite>sprites\sprite47</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>

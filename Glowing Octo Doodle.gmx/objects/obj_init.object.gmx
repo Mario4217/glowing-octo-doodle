@@ -377,6 +377,7 @@ gameplay_object_add_input(15, ACTION.close);
 gameplay_object_add_tag(15, "clip");
 
 register_gameplay_object(16, "{gp.rail_detector}", obj_gp_rail_detector);
+gameplay_object_set_depth_anchor(12, 3); //bottom - layer 2
 gameplay_object_add_output(16, EVENT.onDetect);
 gameplay_object_add_output(16, EVENT.onUndetect);
 

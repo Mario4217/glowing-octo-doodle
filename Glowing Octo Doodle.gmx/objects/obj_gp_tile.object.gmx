@@ -27,9 +27,9 @@
             <kind>1</kind>
             <string>event_inherited();
 
-if (image_index == 1){
+//if (image_index == 1){
   depth = obj_world.world_height*32-1
-}
+//}
 </string>
           </argument>
         </arguments>

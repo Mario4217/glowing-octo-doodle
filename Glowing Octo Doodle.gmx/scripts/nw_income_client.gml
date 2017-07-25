@@ -35,15 +35,29 @@ switch (buffer_read(argument0, buffer_u8)){
     nw_players[? pl[? "id"]] = pl;
     
   break;
+  case NW.client_disconnect:
+    var pindex = buffer_read(argument0, buffer_u8);
+    var player = nw_players[? pindex];
+    if (player != undefined){
+      with (player[? "pawn"]){
+        instance_destroy();
+      }
+      ds_map_delete(nw_players, pindex);
+    }
+  break;
   case NW.client_profile:
-    var player = nw_players[? buffer_read(argument0, buffer_u8)];
-    player[? "red"] = buffer_read(argument0, buffer_u8);
-    player[? "green"] = buffer_read(argument0, buffer_u8);
-    player[? "blue"] = buffer_read(argument0, buffer_u8);
-    player[? "name"] = buffer_read(argument0, buffer_string);
-    player[? "pawn"].secondary_color = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
-    
-    player[? "color"] = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
+    var pid = buffer_read(argument0, buffer_u8)
+    var player = nw_players[? pid];
+    if (player != undefined){
+      player[? "red"] = buffer_read(argument0, buffer_u8);
+      player[? "green"] = buffer_read(argument0, buffer_u8);
+      player[? "blue"] = buffer_read(argument0, buffer_u8);
+      player[? "name"] = buffer_read(argument0, buffer_string);
+      player[? "pawn"].secondary_color = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
+      player[? "color"] = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
+    }else{
+      show_debug_message("Got data from unkown player id: "+string(pid));
+    }
   break;
   case NW.position:
     var player = nw_players[? buffer_read(argument0, buffer_u8)];

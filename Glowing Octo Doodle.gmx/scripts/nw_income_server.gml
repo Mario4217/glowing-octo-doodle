@@ -38,6 +38,17 @@ switch (buffer_read(argument0, buffer_u8)){
       buffer_delete(map_buffer);
       
       player[? "connected"] = true;
+      
+      //tell the others, they have a new friend
+      buffer_seek(nw_buffer, buffer_seek_start, 0);
+      buffer_write(nw_buffer, buffer_u8, NW.client_connect);
+      buffer_write(nw_buffer, buffer_u8, player[? "id"]);
+      buffer_write(nw_buffer, buffer_string, player[? "name"]);
+      buffer_write(nw_buffer, buffer_u8, player[? "red"]);
+      buffer_write(nw_buffer, buffer_u8, player[? "green"]);
+      buffer_write(nw_buffer, buffer_u8, player[? "blue"]);
+      nw_broadcast(nw_buffer, player);
+      
   break;
   case NW.client_profile:
     player[? "red"] = buffer_read(argument0, buffer_u8);
@@ -50,7 +61,8 @@ switch (buffer_read(argument0, buffer_u8)){
     player[? "pawn"].secondary_color = make_color_rgb(player[? "red"], player[? "green"], player[? "blue"]);
     
     buffer_seek(nw_buffer, buffer_seek_start, 0);
-    buffer_write(nw_buffer, buffer_u8, async_load[? "id"]);
+    buffer_write(nw_buffer, buffer_u8, NW.client_profile);
+    buffer_write(nw_buffer, buffer_u8, player[? "id"]);
     buffer_write(nw_buffer, buffer_u8, player[? "red"]);
     buffer_write(nw_buffer, buffer_u8, player[? "green"]);
     buffer_write(nw_buffer, buffer_u8, player[? "blue"]);
@@ -65,6 +77,7 @@ switch (buffer_read(argument0, buffer_u8)){
     pawn.y = yy;
     
     buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.position)
     buffer_write(nw_buffer, buffer_u8, player[? "id"]);
     buffer_write(nw_buffer, buffer_u16, xx);
     buffer_write(nw_buffer, buffer_u16, yy);
