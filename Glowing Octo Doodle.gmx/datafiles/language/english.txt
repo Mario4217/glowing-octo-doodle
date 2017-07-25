@@ -128,6 +128,8 @@ editor.action.reset:			Reset
 editor.action.unpause:			Unpause
 editor.action.show:				Show
 editor.action.reset:			Reset
+editor.action.state1:			State 1
+editor.action.state2:			State 2
 
 editor.event.onPress:			OnPress
 editor.event.onRelease:			OnRelease
@@ -144,6 +146,8 @@ editor.event.onStartTouch:		OnStartTouch
 editor.event.onEndTouch:		OnEndTouch
 editor.event.onFirst:			OnFirst
 editor.event.onNotFirst:		OnNotFirst
+editor.event.onState1:			OnState1
+editor.event.onState2:			OnState2
 
 editor.tileset.enviroment:		Enviroment
 editor.tileset.mark:			Mark
@@ -172,6 +176,7 @@ gp.rail_detector:				Detector Rail
 gp.story_message:				Message Box
 gp.trigger_zone:				Trigger Zone
 gp.logic_memory:				Logic Memory
+gp.lever:						Lever
 
 key.add:						Add
 key.alt:						Alt
@@ -239,3 +244,8 @@ key.mb_middle:					Middle Mousebutton
 story.ss.mystery:				Mysterious voice
 story.ss.chamber3:				Hello?
 story.ss.chamber4_great:		Great!
+story.ss.chamber7:				Seems like you are not as stupid as you look
+story.ss.chamber7b:				You are a robot
+story.ss.chamber7c:				You should know a bit on mathmatics
+story.ss.chamber8:				Let's see... What is the strength of a Human created machine?
+story.ss.chamber8b:				Oh yes, simple binary task that can only be solved on 10 ways!

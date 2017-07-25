@@ -5,7 +5,7 @@ ui_style = ds_map_create();
 var elements = ds_list_create();
 var modes = ds_list_create();
 ds_list_add(elements, "label", "draggable", "button", "sprite", "texture", "radio", "slider", "textbox", "spinner", "toggle", "progress");
-ds_list_add(modes, "hover", "", "pressed")
+ds_list_add(modes, "hover", "");
 
 for (i=0; i<ds_list_size(elements); i+=1){
   var element = elements[| i];
@@ -42,6 +42,8 @@ ui_style[? "radio.background-color:hover"] = c_ltgray;
 ui_style[? "slider.dot.background-color:"] = c_lime;
 ui_style[? "slider.background-color:hover"] = c_ltgray;
 ui_style[? "textbox.text-halign:"] = fa_left;
+ui_style[? "textbox.text-halign:hover"] = fa_left;
+ui_style[? "textbox.text-halign:pressed"] = fa_left;
 ui_style[? "textbox.background-color:hover"] = c_ltgray;
 ui_style[? "textbox.background-color:active"] = c_navy;
 ui_style[? "textbox.text-color:active"] = c_white;
@@ -51,6 +53,7 @@ ui_style[? "draggable.text-halign:"] = fa_left;
 ui_style[? "draggable.text-valign:"] = fa_top;
 ui_style[? "draggable.text-color:"] = c_white;
 ui_style[? "draggable.background-color:"] = c_dkgray;
+ui_style[? "draggable.background-color:hover"] = c_dkgray;
 ui_style[? "binding.background-color:hover"] = c_ltgray;
 ui_style[? "binding.background-color:active"] = c_navy;
 ui_style[? "binding.text-color:active"] = c_white;

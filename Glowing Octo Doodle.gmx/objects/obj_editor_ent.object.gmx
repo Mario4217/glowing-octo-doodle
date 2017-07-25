@@ -412,8 +412,8 @@ if (attr[? ATTRIBUTE.width] != undefined &amp;&amp; attr[? ATTRIBUTE.height] != 
   }
   if (size_drag){
     obj_editor.show_grid = true;
-    attr[? ATTRIBUTE.width] = floor(clamp(size_drag_x + mouse_x,16,1024)/16)*16;
-    attr[? ATTRIBUTE.height] = floor(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
+    attr[? ATTRIBUTE.width] = round(clamp(size_drag_x + mouse_x,16,1024)/16)*16;
+    attr[? ATTRIBUTE.height] = round(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
     if (mouse_check_button_released(mb_left)){
       size_drag = false;
       editor_ent_send_to_ui();
@@ -439,9 +439,9 @@ if (attr[? ATTRIBUTE.size] != undefined &amp;&amp; attr[? ATTRIBUTE.orientation]
     if (size_drag){
       obj_editor.show_grid = true;
       if (attr[? ATTRIBUTE.orientation] == 1){ 
-        attr[? ATTRIBUTE.size] = floor(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
+        attr[? ATTRIBUTE.size] = round(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
       }else{
-        attr[? ATTRIBUTE.size] = floor(clamp(size_drag_x + mouse_x,64,1024)/16)*16;
+        attr[? ATTRIBUTE.size] = round(clamp(size_drag_x + mouse_x,64,1024)/16)*16;
       }
       if (mouse_check_button_released(mb_left)){
         size_drag = false;

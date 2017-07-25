@@ -98,7 +98,10 @@ if (init){
         my = 1;
       }    
     }
-    if (place_meeting(x+mx*16, y+my*16, rail)){
+    var can_move = place_meeting(x+mx*16, y+my*16, rail);
+    var cb = collision_line(x, y, x+mx*16, y+my*16, obj_gp_carry_blocker, 0, 0);
+    if ( cb ){ if (cb.is_open == false &amp;&amp; carry != -1){ can_move = false; } }
+    if (can_move){
       x += mx*spd;
       y += my*spd;
       clip.x = x-16;

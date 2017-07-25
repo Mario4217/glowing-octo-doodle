@@ -28,7 +28,7 @@
             <string>event_inherited();
 
 is_open = false;
-base_alpha = 0.1;
+base_alpha = 0.3;
 </string>
           </argument>
         </arguments>
@@ -58,8 +58,10 @@ if (attr[? ATTRIBUTE.orientation] == 0){
   clip.image_yscale = 2;
 }else{
   clip.image_xscale = 0.5;
-  clip.image_yscale = attr[? ATTRIBUTE.size] / 32;;
+  clip.image_yscale = attr[? ATTRIBUTE.size] / 32;
 }
+image_xscale = clip.image_xscale / 2;
+image_yscale = clip.image_yscale / 2;
 is_open = !attr[? ATTRIBUTE.start_active];
 </string>
           </argument>
@@ -162,9 +164,14 @@ if (init){
     image_yscale = 1;
     if (!is_open){
       draw_sprite_area(sprite_index, image_index, x, y, x+attr[? ATTRIBUTE.size], y+64);
+      
+      draw_sprite_ext(spr_wall_projector_particles, image_index, x+8, y, 1, 1, 0, c_lime, 1);
+      draw_sprite_ext(spr_wall_projector_particles, image_index, x+attr[? ATTRIBUTE.size]-8, y, -1, 1, 0, c_lime, 1);
     }
+        
     draw_sprite(spr_gp_barricade_left, image_index, x, y);
-    draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
+    draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);  
+        
   }else{ //vertical
     image_yscale = attr[? ATTRIBUTE.size] / 64;
     image_xscale = 0.5;

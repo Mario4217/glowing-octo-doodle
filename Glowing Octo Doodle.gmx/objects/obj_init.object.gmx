@@ -182,7 +182,7 @@ enum ATTRIBUTE {
   milliseconds = 15,
   text = 16,
   title = 17,
-  reset = 18
+  reset = 18,
 }
 
 enum EVENT {
@@ -200,7 +200,9 @@ enum EVENT {
   onStartTouch = 12,
   onEndTouch = 13,
   onFirst = 14,
-  onNotFirst = 15
+  onNotFirst = 15,
+  onState1 = 16,
+  onState2 = 17
 }
 
 enum ACTION{
@@ -222,7 +224,9 @@ enum ACTION{
   pause = 16,
   reset = 17,
   unpause = 18,
-  show = 19
+  show = 19,
+  state1 = 20,
+  state2 = 21
 }
 
 globalvar dictionary_action, dictionary_attribute, dictionary_event;
@@ -247,6 +251,8 @@ dictionary_action[? ACTION.reset] = "{editor.action.reset}";
 dictionary_action[? ACTION.unpause] = "{editor.action.unpause}";
 dictionary_action[? ACTION.show] = "{editor.action.show}";
 dictionary_action[? ACTION.reset] = "{editor.action.reset}";
+dictionary_action[? ACTION.state1] = "{editor.action.state1}";
+dictionary_action[? ACTION.state2] = "{editor.action.state2}";
 dictionary_attribute = ds_map_create();
 dictionary_attribute[? ATTRIBUTE.skin] = "{editor.attribute.skin}";
 dictionary_attribute[? ATTRIBUTE.size] = "{editor.attribute.size}";
@@ -282,6 +288,8 @@ dictionary_event[? EVENT.onStartTouch] = "{editor.event.onStartTouch}";
 dictionary_event[? EVENT.onEndTouch] = "{editor.event.onEndTouch}";
 dictionary_event[? EVENT.onFirst] = "{editor.event.onFirst}";
 dictionary_event[? EVENT.onNotFirst] = "{editor.event.onNotFirst}";
+dictionary_event[? EVENT.onState1] = "{editor.event.onState1}";
+dictionary_event[? EVENT.onState2] = "{editor.event.onState2}";
 
 globalvar gp_objects, gp_editor; //a ds map with every gameplay object. (buttons, cubes, spawnpoint... entities)
 gp_objects = ds_map_create();
@@ -305,7 +313,6 @@ gameplay_object_add_tag(3,"wall");
 gameplay_object_add_tag(3,"clip");
 
 register_gameplay_object(4, "{gp.light_gate}",obj_gp_light_wall);
-//gameplay_object_add_attribute(4,ATTRIBUTE.skin,"skin",0,buffer_u8,0,sprite_get_number(spr_gp_light_wall)-1);
 gameplay_object_add_attribute(4, ATTRIBUTE.orientation, 0, buffer_bool, 0, 1);
 gameplay_object_add_attribute(4, ATTRIBUTE.size, 64, buffer_u16, 64, 1024);
 gameplay_object_add_attribute(4, ATTRIBUTE.start_active, 1, buffer_bool, 0, 1);
@@ -386,7 +393,6 @@ gameplay_object_add_input(14, ACTION.reset);
 gameplay_object_add_output(14, EVENT.onDelay);
 
 register_gameplay_object(15, "{gp.carry_blocker}",obj_gp_carry_blocker);
-//gameplay_object_add_attribute(4,ATTRIBUTE.skin,"skin",0,buffer_u8,0,sprite_get_number(spr_gp_light_wall)-1);
 gameplay_object_add_attribute(15, ATTRIBUTE.orientation, 0, buffer_bool, 0, 1);
 gameplay_object_add_attribute(15, ATTRIBUTE.size, 64, buffer_u16, 64, 1024);
 gameplay_object_add_attribute(15, ATTRIBUTE.start_active, 1, buffer_bool, 0, 1);
@@ -416,9 +422,14 @@ gameplay_object_add_output(19, EVENT.onFirst);
 gameplay_object_add_output(19, EVENT.onNotFirst);
 gameplay_object_add_input(19, ACTION.trigger);
 
+register_gameplay_object(20, "{gp.lever}", obj_gp_lever);
+gameplay_object_add_output(20, EVENT.onState1);
+gameplay_object_add_output(20, EVENT.onState2);
+gameplay_object_add_input(20, ACTION.state1);
+gameplay_object_add_input(20, ACTION.state2);
 
 //make the objects in the ingame editor accsesable
-ds_list_add(gp_editor, "{editor.group.general}", 2, 6, 1, 10, 5, 4, 3, 15);
+ds_list_add(gp_editor, "{editor.group.general}", 2, 6, 1, 10, 20, 5, 4, 3, 15);
 ds_list_add(gp_editor, "{editor.group.rails}", 12, 13, 16)
 ds_list_add(gp_editor, "{editor.group.laser}")
 ds_list_add(gp_editor, "{editor.group.logic}", 7, 8, 11, 14, 19);

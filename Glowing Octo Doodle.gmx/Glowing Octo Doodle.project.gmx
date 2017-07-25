@@ -265,6 +265,8 @@
       <sprite>sprites\spr_gp_message</sprite>
       <sprite>sprites\spr_gp_trigger</sprite>
       <sprite>sprites\spr_gp_logic_memory</sprite>
+      <sprite>sprites\spr_gp_lever_state2</sprite>
+      <sprite>sprites\spr_gp_lever_state1</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -298,6 +300,7 @@
     <sprite>sprites\spr_tiles</sprite>
     <sprite>sprites\spr_wall_ao</sprite>
     <sprite>sprites\spr_icon</sprite>
+    <sprite>sprites\spr_wall_projector_particles</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
@@ -578,6 +581,7 @@
       <object>objects\obj_gp_logic_delay</object>
       <object>objects\obj_gp_logic_relay</object>
       <object>objects\obj_gp_button</object>
+      <object>objects\obj_gp_lever</object>
       <object>objects\obj_gp_rail</object>
       <object>objects\obj_gp_cart</object>
       <object>objects\obj_gp_rail_detector</object>
