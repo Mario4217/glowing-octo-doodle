@@ -3,12 +3,12 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="15" name="datafiles">
-    <datafiles number="15" name="packs">
+  <datafiles number="26" name="datafiles">
+    <datafiles number="26" name="packs">
       <datafile>
         <name>VGVzdHBhY2s=.pak</name>
         <exists>-1</exists>
-        <size>119</size>
+        <size>129</size>
         <exportAction>2</exportAction>
         <exportDir></exportDir>
         <overwrite>0</overwrite>
@@ -40,7 +40,7 @@
         <filename>U3BhY2VzaGlw.pak</filename>
       </datafile>
     </datafiles>
-    <datafiles number="15" name="maps">
+    <datafiles number="26" name="maps">
       <datafile>
         <name>YzFfMg==.puz</name>
         <exists>-1</exists>
@@ -127,6 +127,159 @@
         <filename>c3BhY2VzaGlwXzU=.puz</filename>
       </datafile>
       <datafile>
+        <name>c3BhY2VzaGlwXzI=.puz</name>
+        <exists>-1</exists>
+        <size>512</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzI=.puz</filename>
+      </datafile>
+      <datafile>
+        <name>c3BhY2VzaGlwXzk=.puz</name>
+        <exists>-1</exists>
+        <size>256</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzk=.puz</filename>
+      </datafile>
+      <datafile>
+        <name>c3BhY2VzaGlwXzM=.puz</name>
+        <exists>-1</exists>
+        <size>1024</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzM=.puz</filename>
+      </datafile>
+      <datafile>
+        <name>c3BhY2VzaGlwXzQ=.puz</name>
+        <exists>-1</exists>
+        <size>1024</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzQ=.puz</filename>
+      </datafile>
+      <datafile>
+        <name>c3BhY2VzaGlwXzU=.puz</name>
+        <exists>-1</exists>
+        <size>1024</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzU=.puz</filename>
+      </datafile>
+      <datafile>
+        <name>c3BhY2VzaGlwXzY=.puz</name>
+        <exists>-1</exists>
+        <size>2048</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzY=.puz</filename>
+      </datafile>
+      <datafile>
+        <name>c3BhY2VzaGlwXzc=.puz</name>
+        <exists>-1</exists>
+        <size>2048</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzc=.puz</filename>
+      </datafile>
+      <datafile>
+        <name>c3BhY2VzaGlwXzE=.puz</name>
+        <exists>-1</exists>
+        <size>512</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzE=.puz</filename>
+      </datafile>
+      <datafile>
+        <name>c3BhY2VzaGlwXzg=.puz</name>
+        <exists>-1</exists>
+        <size>2048</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>c3BhY2VzaGlwXzg=.puz</filename>
+      </datafile>
+      <datafile>
         <name>c3BhY2VzaGlwXzE=.puz</name>
         <exists>-1</exists>
         <size>512</size>
@@ -195,7 +348,7 @@
         <filename>YzFfMw==.puz</filename>
       </datafile>
     </datafiles>
-    <datafiles number="15" name="language">
+    <datafiles number="26" name="language">
       <datafile>
         <name>english.txt</name>
         <exists>-1</exists>
