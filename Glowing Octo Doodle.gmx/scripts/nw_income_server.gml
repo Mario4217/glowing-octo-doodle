@@ -3,51 +3,51 @@ var player = argument1;
 
 switch (buffer_read(argument0, buffer_u8)){
   case NW.server_welcome:
-      //say hello to our nice client
-      buffer_seek(nw_buffer, buffer_seek_start, 0);
-      buffer_write(nw_buffer, buffer_u8, NW.server_welcome);
-      buffer_write(nw_buffer, buffer_string, GM_version);
-      buffer_write(nw_buffer, buffer_u8, player[? "id"]);
-      buffer_write(nw_buffer, buffer_string, current_pack[? "name"]);
-      buffer_write(nw_buffer, buffer_u8, current_pack[? "players"]);
-      nw_send(player, nw_buffer);
-      
-      var key = ds_map_find_first(nw_players); //sending the new one, who there is already
-      for (i=0; i<ds_map_size(nw_players); i+=1){
-        var pl = nw_players[? key];
-        if (pl != player){ //he don't need to know about himself
-          buffer_seek(nw_buffer, buffer_seek_start, 0);
-          buffer_write(nw_buffer, buffer_u8, NW.client_connect);
-          buffer_write(nw_buffer, buffer_u8, pl[? "id"]);
-          buffer_write(nw_buffer, buffer_string, pl[? "name"]);
-          buffer_write(nw_buffer, buffer_u8, pl[? "red"]);
-          buffer_write(nw_buffer, buffer_u8, pl[? "green"]);
-          buffer_write(nw_buffer, buffer_u8, pl[? "blue"]);
-          nw_send(player, nw_buffer);
-        }
-        key = ds_map_find_next(nw_players, key);
-      };
-      
-      var map_buffer = buffer_load(global.current_map_path);
-      var send_buffer = buffer_create(256, buffer_grow, 1);
-      buffer_seek(send_buffer, buffer_seek_start, 0);
-      buffer_write(send_buffer, buffer_u8, NW.map_data);
-      buffer_copy(map_buffer, 0, buffer_get_size(map_buffer), send_buffer, 1);    
-      nw_send(player, send_buffer);
-      buffer_delete(send_buffer);
-      buffer_delete(map_buffer);
-      
-      player[? "connected"] = true;
-      
-      //tell the others, they have a new friend
-      buffer_seek(nw_buffer, buffer_seek_start, 0);
-      buffer_write(nw_buffer, buffer_u8, NW.client_connect);
-      buffer_write(nw_buffer, buffer_u8, player[? "id"]);
-      buffer_write(nw_buffer, buffer_string, player[? "name"]);
-      buffer_write(nw_buffer, buffer_u8, player[? "red"]);
-      buffer_write(nw_buffer, buffer_u8, player[? "green"]);
-      buffer_write(nw_buffer, buffer_u8, player[? "blue"]);
-      nw_broadcast(nw_buffer, player);
+    //say hello to our nice client
+    buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.server_welcome);
+    buffer_write(nw_buffer, buffer_string, GM_version);
+    buffer_write(nw_buffer, buffer_u8, player[? "id"]);
+    buffer_write(nw_buffer, buffer_string, current_pack[? "name"]);
+    buffer_write(nw_buffer, buffer_u8, current_pack[? "players"]);
+    nw_send(player, nw_buffer);
+    
+    var key = ds_map_find_first(nw_players); //sending the new one, who there is already
+    for (i=0; i<ds_map_size(nw_players); i+=1){
+      var pl = nw_players[? key];
+      if (pl != player){ //he don't need to know about himself
+        buffer_seek(nw_buffer, buffer_seek_start, 0);
+        buffer_write(nw_buffer, buffer_u8, NW.client_connect);
+        buffer_write(nw_buffer, buffer_u8, pl[? "id"]);
+        buffer_write(nw_buffer, buffer_string, pl[? "name"]);
+        buffer_write(nw_buffer, buffer_u8, pl[? "red"]);
+        buffer_write(nw_buffer, buffer_u8, pl[? "green"]);
+        buffer_write(nw_buffer, buffer_u8, pl[? "blue"]);
+        nw_send(player, nw_buffer);
+      }
+      key = ds_map_find_next(nw_players, key);
+    };
+    
+    var map_buffer = buffer_load(global.current_map_path);
+    var send_buffer = buffer_create(256, buffer_grow, 1);
+    buffer_seek(send_buffer, buffer_seek_start, 0);
+    buffer_write(send_buffer, buffer_u8, NW.map_data);
+    buffer_copy(map_buffer, 0, buffer_get_size(map_buffer), send_buffer, 1);    
+    nw_send(player, send_buffer);
+    buffer_delete(send_buffer);
+    buffer_delete(map_buffer);
+    
+    player[? "connected"] = true;
+    
+    //tell the others, they have a new friend
+    buffer_seek(nw_buffer, buffer_seek_start, 0);
+    buffer_write(nw_buffer, buffer_u8, NW.client_connect);
+    buffer_write(nw_buffer, buffer_u8, player[? "id"]);
+    buffer_write(nw_buffer, buffer_string, player[? "name"]);
+    buffer_write(nw_buffer, buffer_u8, player[? "red"]);
+    buffer_write(nw_buffer, buffer_u8, player[? "green"]);
+    buffer_write(nw_buffer, buffer_u8, player[? "blue"]);
+    nw_broadcast(nw_buffer, player);
       
   break;
   case NW.client_profile:
@@ -128,7 +128,7 @@ switch (buffer_read(argument0, buffer_u8)){
   case NW.carrier:
     var index = buffer_read(argument0, buffer_u16);
   
-    var pawn = player[? "pawn"];    
+    var pawn = player[? "pawn"];
     var carrier = obj_world.inst_by_index[? index];
     
     if (pawn.pickup != -1){

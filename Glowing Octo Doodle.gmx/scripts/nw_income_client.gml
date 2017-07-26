@@ -120,6 +120,7 @@ switch (buffer_read(argument0, buffer_u8)){
     current_pack = ds_map_create();
     current_pack[? "name"] = buffer_read(argument0, buffer_string);
     current_pack[? "players"] = buffer_read(argument0, buffer_u8);
+    current_pack[? "current_map_index"] = 0;
   break;
   case NW.interact:
     var index = buffer_read(argument0, buffer_u16);
@@ -148,6 +149,6 @@ switch (buffer_read(argument0, buffer_u8)){
   break;
   case NW.server_close:
     nw_end();
-    current_pack_goto_level(255);
+    pack_end();
   break;
 }
