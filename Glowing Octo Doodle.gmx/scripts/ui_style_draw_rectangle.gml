@@ -5,6 +5,7 @@ var bg_alpha = real(ui_style_get(argument4,"background-alpha",argument5,ui_curre
 var bo_color = real(ui_style_get(argument4,"border-color",argument5,ui_current_class));
 var bo_alpha = real(ui_style_get(argument4,"border-alpha",argument5,ui_current_class));
 var bo_radius = real(ui_style_get(argument4,"border-radius",argument5,ui_current_class));
+if (ui_current_hover > 0 && ui_current_hover < 1)
 if (ui_style_get(argument4,"animation","",ui_current_class) && (argument5 == "hover" || argument5 == "")){
   var bg_color_h = ui_style_get(argument4,"background-color","hover",ui_current_class);
   var bg_alpha_h = ui_style_get(argument4,"background-alpha","hover",ui_current_class);
