@@ -210,7 +210,7 @@ if (global.toLoad != ""){
 rad_t1[? "gp_port"] = ds_list_find_value(maps_container[? "children"], 1);
 rad_t2[? "gp_port"] = ds_list_find_value(objects_container[? "children"], 0);
 rad_t3[? "gp_port"] = ds_list_find_value(tiles_container[? "children"], 0);
-rad_t4[? "gp_port"] = ds_list_find_value(floors_container[? "children"], 0)
+rad_t4[? "gp_port"] = ds_list_find_value(floors_container[? "children"], 0);
 
 saveid = -1;
 

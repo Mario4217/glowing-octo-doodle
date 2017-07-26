@@ -37,6 +37,7 @@ overwrite_attr = ds_map_create();
 src_map = -1;
 size_drag = false;
 yet_selected = false;
+attr_ui = ds_map_create();
 
 init = false;
 </string>
@@ -75,6 +76,7 @@ for (i=0; i&lt;ds_list_size(outputs); i+=1){
 ds_list_destroy(inputs);
 ds_list_destroy(outputs);
 ds_map_destroy(attr);
+ds_map_destroy(attr_ui);
 </string>
           </argument>
         </arguments>
@@ -416,7 +418,7 @@ if (attr[? ATTRIBUTE.width] != undefined &amp;&amp; attr[? ATTRIBUTE.height] != 
     attr[? ATTRIBUTE.height] = round(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
     if (mouse_check_button_released(mb_left)){
       size_drag = false;
-      editor_ent_send_to_ui();
+      editor_ent_update_ui();
     }
     world_update_region(bbox_left,bbox_top,bbox_right,bbox_bottom);
   }
@@ -445,7 +447,7 @@ if (attr[? ATTRIBUTE.size] != undefined &amp;&amp; attr[? ATTRIBUTE.orientation]
       }
       if (mouse_check_button_released(mb_left)){
         size_drag = false;
-        editor_ent_send_to_ui();
+        editor_ent_update_ui();
       }
     }
   }
@@ -458,7 +460,7 @@ if (attr[? ATTRIBUTE.orientation] != undefined){
     draw_sprite(spr_rotatable, ho, x, y);
     if (mouse_check_button_pressed(mb_left) &amp;&amp; ho &amp;&amp; !yet_selected){
       attr[? ATTRIBUTE.orientation] = 1-attr[? ATTRIBUTE.orientation];
-      editor_ent_send_to_ui();
+      editor_ent_update_ui();
       drag = false;
     }
   }

@@ -649,6 +649,7 @@
       <script>scripts\refresh_editor_level.gml</script>
       <script>scripts\refresh_packs.gml</script>
       <script>scripts\editor_ent_send_to_ui.gml</script>
+      <script>scripts\editor_ent_update_ui.gml</script>
       <script>scripts\editor_save.gml</script>
       <script>scripts\pack_save.gml</script>
       <script>scripts\pack_load.gml</script>

@@ -39,7 +39,6 @@
   image_xscale = width / 64;
   image_yscale = height / 64;
   
-  
   if (instance_position(x-1, y+height+8,obj_gp_wall)){
     draw_sprite(spr_wall_ao, 0, x, y+height-64);
   }
