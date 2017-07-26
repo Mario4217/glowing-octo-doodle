@@ -525,6 +525,7 @@
     </scripts>
     <script>scripts\current_pack_goto_level.gml</script>
     <script>scripts\pack_start.gml</script>
+    <script>scripts\pack_end.gml</script>
     <script>scripts\string_trim.gml</script>
     <script>scripts\move.gml</script>
     <script>scripts\settings_save.gml</script>

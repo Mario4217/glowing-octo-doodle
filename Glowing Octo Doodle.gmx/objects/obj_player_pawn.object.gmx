@@ -88,8 +88,8 @@ is_in_goal = position_meeting(x, y, obj_gp_goalzone);
 center_x = x;
 center_y = y - 24;
 
-var collide = instance_place(x, y, obj_clip) &amp;&amp; !cheat_noclip;
-if (collide){
+var collide = instance_place(x, y, obj_clip)
+if (collide &amp;&amp; !cheat_noclip){
   var dis_top = abs(y - collide.bbox_top);
   var dis_right = abs(x - collide.bbox_right);
   var dis_bottom = abs(y - collide.bbox_bottom);
