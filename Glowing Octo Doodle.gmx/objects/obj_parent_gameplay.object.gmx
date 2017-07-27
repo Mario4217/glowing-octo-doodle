@@ -154,14 +154,22 @@ init = true;
           <argument>
             <kind>1</kind>
             <string>if (init){
-  if (src_map[? "yanchor"] == 0){
-    depth = obj_world.world_height*32 - bbox_bottom;
-  }else if (src_map[? "yanchor"] == 1){
-    depth = obj_world.world_height*32 - bbox_top;
-  }else if (src_map[? "yanchor"] == 2){
-    depth = obj_world.world_height*32-1;
-  }else{
-    depth = obj_world.world_height*32-2;
+  switch (src_map[? "yanchor"]){
+    case YANCHOR.normal:
+      depth = obj_world.world_height*32 - bbox_bottom;
+    break;
+    case YANCHOR.floor1:
+      depth = obj_world.world_height*32-1;
+    break;
+    case YANCHOR.floor2:
+      depth = obj_world.world_height*32-2;
+    break;
+    case YANCHOR.plate:
+      depth = obj_world.world_height*32 - bbox_top;
+    break;
+    case YANCHOR.onwall:
+      depth = obj_world.world_height*32 - bbox_bottom-64;
+    break;
   }
 
   var pawn = obj_player_controller.player_pawn; //own pawn of the current player you are controlling

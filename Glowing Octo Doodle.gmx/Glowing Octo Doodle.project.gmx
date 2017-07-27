@@ -420,6 +420,7 @@
       <sprite>sprites\spr_gp_logic_memory</sprite>
       <sprite>sprites\spr_gp_lever_state2</sprite>
       <sprite>sprites\spr_gp_lever_state1</sprite>
+      <sprite>sprites\spr_gp_laser_emitter</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -430,9 +431,6 @@
       <sprite>sprites\spr_ui_msgbox_next</sprite>
     </sprites>
     <sprites name="player">
-      <sprite>sprites\spr_player_front</sprite>
-      <sprite>sprites\spr_player_right</sprite>
-      <sprite>sprites\spr_player_left</sprite>
       <sprites name="ballbot">
         <sprite>sprites\spr_ballbot_front</sprite>
         <sprite>sprites\spr_ballbot_right</sprite>
@@ -441,6 +439,9 @@
         <sprite>sprites\spr_ballbot_right_secondary</sprite>
         <sprite>sprites\spr_ballbot_back_secondary</sprite>
       </sprites>
+      <sprite>sprites\spr_player_front</sprite>
+      <sprite>sprites\spr_player_right</sprite>
+      <sprite>sprites\spr_player_left</sprite>
     </sprites>
     <sprites name="editor">
       <sprite>sprites\spr_io</sprite>
@@ -454,6 +455,7 @@
     <sprite>sprites\spr_wall_ao</sprite>
     <sprite>sprites\spr_icon</sprite>
     <sprite>sprites\spr_wall_projector_particles</sprite>
+    <sprite>sprites\spr_glow</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
@@ -741,6 +743,7 @@
       <object>objects\obj_gp_cart</object>
       <object>objects\obj_gp_rail_detector</object>
       <object>objects\obj_gp_message</object>
+      <object>objects\obj_gp_laser_emitter</object>
     </objects>
   </objects>
   <rooms name="rooms">

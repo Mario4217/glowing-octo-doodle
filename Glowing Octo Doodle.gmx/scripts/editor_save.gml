@@ -42,7 +42,42 @@ if (room == rm_editor){
         buffer_write(buff, id_type, i);
         buffer_write(buff, buffer_u16, key);
         buffer_write(buff, buffer_u8, type);
-        buffer_write(buff, type, inst.attr[? key]);
+        switch (type){
+          case ATTR_TYPE.u8:
+          case ATTR_TYPE.slider_u8:
+            buffer_write(buff, buffer_u8, inst.attr[? key]);
+          break;
+          case ATTR_TYPE.u16:
+          case ATTR_TYPE.slider_u16:
+            buffer_write(buff, buffer_u16, inst.attr[? key]);          
+          break;
+          case ATTR_TYPE.u32:
+            buffer_write(buff, buffer_u32, inst.attr[? key]);
+          break;
+          case ATTR_TYPE.u64:
+            buffer_write(buff, buffer_u64, inst.attr[? key]);
+          break;
+          case ATTR_TYPE.f32:
+            buffer_write(buff, buffer_f32, inst.attr[? key]);
+          break;
+          case ATTR_TYPE.f64:
+            buffer_write(buff, buffer_f64, inst.attr[? key]);
+          break;
+          case ATTR_TYPE.text:
+            buffer_write(buff, buffer_string, inst.attr[? key]);
+          break;
+          case ATTR_TYPE.bool:
+            buffer_write(buff, buffer_bool, inst.attr[? key]);
+          break;
+          case ATTR_TYPE.color:
+            buffer_write(buff, buffer_u8, color_get_red(inst.attr[? key]));
+            buffer_write(buff, buffer_u8, color_get_green(inst.attr[? key]));
+            buffer_write(buff, buffer_u8, color_get_blue(inst.attr[? key]));
+          break;
+          case ATTR_TYPE.inst:
+            buffer_write(buff, buffer_u16, color_get_red(inst.attr[? key]));
+          break;
+        }
       }
       key = ds_map_find_next(inst.attr, key);
     };

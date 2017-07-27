@@ -178,12 +178,22 @@ if (mouse_x &gt; x-sprite_xoffset &amp;&amp; mouse_x &lt; x+sprite_width-sprite_
 }
 
 if (init){
-  if (src_map[? "yanchor"] == 0){
-    depth = obj_editor.world_height*32 - bbox_bottom;
-  }else if (src_map[? "yanchor"] == 1){
-    depth = obj_editor.world_height*32 - bbox_top;
-  }else{
-    depth = obj_editor.world_height*32;
+  switch (src_map[? "yanchor"]){
+    case YANCHOR.normal:
+      depth = obj_editor.world_height*32 - bbox_bottom;
+    break;
+    case YANCHOR.floor1:
+      depth = obj_editor.world_height*32-1;
+    break;
+    case YANCHOR.floor2:
+      depth = obj_editor.world_height*32-2;
+    break;
+    case YANCHOR.plate:
+      depth = obj_editor.world_height*32 - bbox_top;
+    break;
+    case YANCHOR.onwall:
+      depth = obj_editor.world_height*32 - bbox_bottom-64;
+    break;
   }
 }
 //depth = obj_editor.world_height*32 - bbox_bottom;
@@ -391,6 +401,12 @@ switch (gp_obj_index){
     draw_sprite_area(spr_gp_trigger, image_index, x, y, x+width, y+height);
     image_xscale = attr[? ATTRIBUTE.width] / 64;
     image_yscale = attr[? ATTRIBUTE.height] / 64;
+  break;
+  
+  case 21:
+    draw_self();
+    var col = make_color_hsv(attr[? ATTRIBUTE.hue], 255, 255);
+    draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, col, 1);
   break;
   
   default:

@@ -107,6 +107,7 @@ editor.attribute.speed:			Speed (px/s)
 editor.attribute.milliseconds:	Milliseconds
 editor.attribute.text:			Text
 editor.attribute.title:			Title
+editor.attribute.hue:			Hue
 
 editor.action.open:				Open
 editor.action.close:			Close
@@ -130,6 +131,8 @@ editor.action.show:				Show
 editor.action.reset:			Reset
 editor.action.state1:			State 1
 editor.action.state2:			State 2
+editor.action.activate:			Activate
+editor.action.deactivate:		Deactivate
 
 editor.event.onPress:			OnPress
 editor.event.onRelease:			OnRelease
@@ -177,6 +180,7 @@ gp.story_message:				Message Box
 gp.trigger_zone:				Trigger Zone
 gp.logic_memory:				Logic Memory
 gp.lever:						Lever
+gp.laser_emitter:				Laser Emitter
 
 key.add:						Add
 key.alt:						Alt

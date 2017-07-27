@@ -60,7 +60,21 @@ while (index < ent_number){
   var inst = entlist[| index];
   var attr = buffer_read(buff, buffer_u16);
   var type = buffer_read(buff, buffer_u8);
-  var val = buffer_read(buff,type);
+  switch (type){
+    case ATTR_TYPE.color:
+      var val = make_color_rgb(buffer_read(buff, buffer_u8), buffer_read(buff, buffer_u8), buffer_read(buff, buffer_u8));
+    break;
+    case ATTR_TYPE.slider_u8:
+      var val = buffer_read(buff, buffer_u8);
+    break;
+    case ATTR_TYPE.slider_u16:
+      var val = buffer_read(buff, buffer_u16);
+    break;
+    default:
+      var val = buffer_read(buff, type);
+    break;
+  }
+  //var val = buffer_read(buff, type);
   inst.overwrite_attr[? attr] = val;
   index = buffer_read(buff, id_type);
 }

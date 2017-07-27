@@ -25,6 +25,135 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///enums
+enum YANCHOR{ //y-anchor (depth)
+  normal,
+  floor1,
+  floor2,
+  plate,
+  onwall
+}
+
+enum ATTRIBUTE {
+  skin = 0,
+  size = 1,
+  width = 2,
+  height = 3,
+  orientation = 4,
+  player_index = 5,
+  map_index = 6,
+  auto_test = 7,
+  relative = 8,
+  top = 9,
+  left = 10,
+  collision = 11,
+  time = 12,
+  start_active = 13,
+  spd = 14,
+  milliseconds = 15,
+  text = 16,
+  title = 17,
+  reset = 18,
+  hue = 19
+}
+
+enum EVENT {
+  onPress = 1,
+  onRelease = 2,
+  onSpawn = 3,
+  onTrue = 4,
+  onFalse = 5,
+  onTrigger = 6,
+  onEndOfRail = 7,
+  onDelay = 8,
+  onDetect = 9,
+  onUndetect = 10,
+  onNext = 11,
+  onStartTouch = 12,
+  onEndTouch = 13,
+  onFirst = 14,
+  onNotFirst = 15,
+  onState1 = 16,
+  onState2 = 17
+}
+
+enum ACTION{
+  open = 1,
+  close = 2,
+  setA = 3,
+  unsetA = 4,
+  setB = 5,
+  unsetB = 6,
+  test = 7,
+  trigger = 8,
+  goRight = 9,
+  goLeft = 10,
+  goUp = 11,
+  goDown = 12,
+  stop = 13,
+  reverse = 14,
+  start = 15,
+  pause = 16,
+  reset = 17,
+  unpause = 18,
+  show = 19,
+  state1 = 20,
+  state2 = 21,
+  activate = 22,
+  deactivate = 23
+}
+
+enum NW{
+  server_welcome = 10,
+  client_profile = 2,
+  client_connect = 3,
+  client_disconnect = 4,
+  position = 5,
+  map_data = 6,
+  ent_action = 7,
+  ent_position = 8,
+  pawn_pickup = 9,
+  pack = 11,
+  interact = 12,
+  pawn_putdown = 13,
+  carrier = 14,
+  server_close = 15
+}
+
+enum ATTR_TYPE{
+  u8 = buffer_u8,
+  u16 = buffer_u16,
+  u32 = buffer_u32,
+  u64 = buffer_u64,
+  f32 = buffer_f32,
+  f64 = buffer_f64,
+  bool = buffer_bool,
+  text = buffer_string,
+  color = 20,
+  inst = 21,
+  slider_u8 = 22,
+  slider_u16 = 23
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///release mode
 //gml_release_mode(true);
 </string>
@@ -163,72 +292,6 @@ settings_load();
             <kind>1</kind>
             <string>///Gameplay Objects
 
-enum ATTRIBUTE {
-  skin = 0,
-  size = 1,
-  width = 2,
-  height = 3,
-  orientation = 4,
-  player_index = 5,
-  map_index = 6,
-  auto_test = 7,
-  relative = 8,
-  top = 9,
-  left = 10,
-  collision = 11,
-  time = 12,
-  start_active = 13,
-  spd = 14,
-  milliseconds = 15,
-  text = 16,
-  title = 17,
-  reset = 18,
-}
-
-enum EVENT {
-  onPress = 1,
-  onRelease = 2,
-  onSpawn = 3,
-  onTrue = 4,
-  onFalse = 5,
-  onTrigger = 6,
-  onEndOfRail = 7,
-  onDelay = 8,
-  onDetect = 9,
-  onUndetect = 10,
-  onNext = 11,
-  onStartTouch = 12,
-  onEndTouch = 13,
-  onFirst = 14,
-  onNotFirst = 15,
-  onState1 = 16,
-  onState2 = 17
-}
-
-enum ACTION{
-  open = 1,
-  close = 2,
-  setA = 3,
-  unsetA = 4,
-  setB = 5,
-  unsetB = 6,
-  test = 7,
-  trigger = 8,
-  goRight = 9,
-  goLeft = 10,
-  goUp = 11,
-  goDown = 12,
-  stop = 13,
-  reverse = 14,
-  start = 15,
-  pause = 16,
-  reset = 17,
-  unpause = 18,
-  show = 19,
-  state1 = 20,
-  state2 = 21
-}
-
 globalvar dictionary_action, dictionary_attribute, dictionary_event;
 dictionary_action = ds_map_create();
 dictionary_action[? ACTION.open] = "{editor.action.open}";
@@ -253,6 +316,8 @@ dictionary_action[? ACTION.show] = "{editor.action.show}";
 dictionary_action[? ACTION.reset] = "{editor.action.reset}";
 dictionary_action[? ACTION.state1] = "{editor.action.state1}";
 dictionary_action[? ACTION.state2] = "{editor.action.state2}";
+dictionary_action[? ACTION.activate] = "{editor.action.activate}";
+dictionary_action[? ACTION.deactivate] = "{editor.action.deactivate}";
 dictionary_attribute = ds_map_create();
 dictionary_attribute[? ATTRIBUTE.skin] = "{editor.attribute.skin}";
 dictionary_attribute[? ATTRIBUTE.size] = "{editor.attribute.size}";
@@ -272,6 +337,7 @@ dictionary_attribute[? ATTRIBUTE.spd] = "{editor.attribute.speed}";
 dictionary_attribute[? ATTRIBUTE.milliseconds] = "{editor.attribute.milliseconds}";
 dictionary_attribute[? ATTRIBUTE.text] = "{editor.attribute.text}";
 dictionary_attribute[? ATTRIBUTE.title] = "{editor.attribute.title}";
+dictionary_attribute[? ATTRIBUTE.hue] = "{editor.attribute.hue}";
 dictionary_event = ds_map_create();
 dictionary_event[? EVENT.onPress] = "{editor.event.onPress}";
 dictionary_event[? EVENT.onRelease] = "{editor.event.onRelease}";
@@ -298,24 +364,24 @@ gp_editor = ds_list_create();
 register_gameplay_object(1,"{gp.floor_button}",obj_gp_floor_button);
 gameplay_object_add_output(1, EVENT.onPress);
 gameplay_object_add_output(1, EVENT.onRelease);
-gameplay_object_set_depth_anchor(1,1);
+gameplay_object_set_depth_anchor(1,YANCHOR.plate);
 
 register_gameplay_object(2,"{gp.spawn}",obj_gp_spawn);
 gameplay_object_add_output(2, EVENT.onSpawn);
-gameplay_object_add_attribute(2, ATTRIBUTE.player_index,0,buffer_u8,0,15);
-gameplay_object_set_depth_anchor(2, 1);
+gameplay_object_add_attribute(2, ATTRIBUTE.player_index,0,ATTR_TYPE.u8,0,15);
+gameplay_object_set_depth_anchor(2, YANCHOR.plate);
 
 register_gameplay_object(3,"{gp.wall}",obj_gp_wall);
-gameplay_object_add_attribute(3,ATTRIBUTE.skin,0,buffer_u8,0,sprite_get_number(spr_gp_wall)-1);
-gameplay_object_add_attribute(3,ATTRIBUTE.width,64,buffer_u16,16,1024);
-gameplay_object_add_attribute(3,ATTRIBUTE.height,64,buffer_u16,64,1024);
+gameplay_object_add_attribute(3,ATTRIBUTE.skin,0,ATTR_TYPE.u8,0,sprite_get_number(spr_gp_wall)-1);
+gameplay_object_add_attribute(3,ATTRIBUTE.width,64,ATTR_TYPE.u16,16,1024);
+gameplay_object_add_attribute(3,ATTRIBUTE.height,64,ATTR_TYPE.u16,64,1024);
 gameplay_object_add_tag(3,"wall");
 gameplay_object_add_tag(3,"clip");
 
 register_gameplay_object(4, "{gp.light_gate}",obj_gp_light_wall);
-gameplay_object_add_attribute(4, ATTRIBUTE.orientation, 0, buffer_bool, 0, 1);
-gameplay_object_add_attribute(4, ATTRIBUTE.size, 64, buffer_u16, 64, 1024);
-gameplay_object_add_attribute(4, ATTRIBUTE.start_active, 1, buffer_bool, 0, 1);
+gameplay_object_add_attribute(4, ATTRIBUTE.orientation, 0, ATTR_TYPE.bool, 0, 1);
+gameplay_object_add_attribute(4, ATTRIBUTE.size, 64, ATTR_TYPE.u16, 64, 1024);
+gameplay_object_add_attribute(4, ATTRIBUTE.start_active, 1, ATTR_TYPE.bool, 0, 1);
 gameplay_object_add_input(4, ACTION.open);
 gameplay_object_add_input(4, ACTION.close);
 gameplay_object_add_tag(4, "clip");
@@ -325,9 +391,9 @@ gameplay_object_add_tag(5, "clip");
 gameplay_object_make_pickup(5, 50);
 
 register_gameplay_object(6, "{gp.goalzone}", obj_gp_goalzone);
-gameplay_object_add_attribute(6, ATTRIBUTE.map_index, 1, buffer_u8, 0, 255);
-gameplay_object_add_attribute(6, ATTRIBUTE.relative, 1, buffer_bool, 0, 1);
-gameplay_object_set_depth_anchor(6, 1);
+gameplay_object_add_attribute(6, ATTRIBUTE.map_index, 1, ATTR_TYPE.u8, 0, 255);
+gameplay_object_add_attribute(6, ATTRIBUTE.relative, 1, ATTR_TYPE.bool, 0, 1);
+gameplay_object_set_depth_anchor(6, YANCHOR.plate);
 
 register_gameplay_object(7, "{gp.logic_or}", obj_gp_logic_or);
 gameplay_object_add_input(7, ACTION.setA);
@@ -337,7 +403,7 @@ gameplay_object_add_input(7, ACTION.unsetB);
 gameplay_object_add_input(7, ACTION.test);
 gameplay_object_add_output(7, EVENT.onFalse);
 gameplay_object_add_output(7, EVENT.onTrue);
-gameplay_object_add_attribute(7, ATTRIBUTE.auto_test, 1, buffer_bool, 0, 1);
+gameplay_object_add_attribute(7, ATTRIBUTE.auto_test, 1, ATTR_TYPE.bool, 0, 1);
 
 register_gameplay_object(8, "{gp.logic_and}", obj_gp_logic_and);
 gameplay_object_add_input(8, ACTION.setA);
@@ -347,18 +413,18 @@ gameplay_object_add_input(8, ACTION.unsetB);
 gameplay_object_add_input(8, ACTION.test);
 gameplay_object_add_output(8, EVENT.onFalse);
 gameplay_object_add_output(8, EVENT.onTrue);
-gameplay_object_add_attribute(8, ATTRIBUTE.auto_test, 1, buffer_bool, 0, 1);
+gameplay_object_add_attribute(8, ATTRIBUTE.auto_test, 1, ATTR_TYPE.bool, 0, 1);
 
 register_gameplay_object(9, "{gp.tile}", obj_gp_tile);
-gameplay_object_add_attribute(9, ATTRIBUTE.skin, 0, buffer_u8, 0, 1);
-gameplay_object_add_attribute(9, ATTRIBUTE.width, 32, buffer_u16, 0, 1024);
-gameplay_object_add_attribute(9, ATTRIBUTE.height, 32, buffer_u16, 0, 1024);
-gameplay_object_add_attribute(9, ATTRIBUTE.top, 0, buffer_u16, 0, 1024);
-gameplay_object_add_attribute(9, ATTRIBUTE.left, 0, buffer_u16, 0, 1024);
-gameplay_object_add_attribute(9, ATTRIBUTE.collision, 0, buffer_bool, 0, 1);
+gameplay_object_add_attribute(9, ATTRIBUTE.skin, 0, ATTR_TYPE.u8, 0, 1);
+gameplay_object_add_attribute(9, ATTRIBUTE.width, 32, ATTR_TYPE.u16, 0, 1024);
+gameplay_object_add_attribute(9, ATTRIBUTE.height, 32, ATTR_TYPE.u16, 0, 1024);
+gameplay_object_add_attribute(9, ATTRIBUTE.top, 0, ATTR_TYPE.u16, 0, 1024);
+gameplay_object_add_attribute(9, ATTRIBUTE.left, 0, ATTR_TYPE.u16, 0, 1024);
+gameplay_object_add_attribute(9, ATTRIBUTE.collision, 0, ATTR_TYPE.bool, 0, 1);
 
 register_gameplay_object(10, "{gp.button}", obj_gp_button);
-gameplay_object_add_attribute(10, ATTRIBUTE.time, 1, buffer_u8, 0, 255);
+gameplay_object_add_attribute(10, ATTRIBUTE.time, 1, ATTR_TYPE.u8, 0, 255);
 gameplay_object_add_output(10, EVENT.onPress);
 gameplay_object_add_output(10, EVENT.onRelease);
 gameplay_object_add_tag(10,"interact");
@@ -368,12 +434,12 @@ gameplay_object_add_input(11, ACTION.trigger);
 gameplay_object_add_output(11, EVENT.onTrigger);
 
 register_gameplay_object(12,"{gp.rail}", obj_gp_rail);
-gameplay_object_add_attribute(12, ATTRIBUTE.orientation, 0, buffer_bool, 0, 1);
-gameplay_object_add_attribute(12, ATTRIBUTE.size, 64, buffer_u16, 32, 1024);
-gameplay_object_set_depth_anchor(12, 2);
+gameplay_object_add_attribute(12, ATTRIBUTE.orientation, 0, ATTR_TYPE.bool, 0, 1);
+gameplay_object_add_attribute(12, ATTRIBUTE.size, 64, ATTR_TYPE.u16, 32, 1024);
+gameplay_object_set_depth_anchor(12, YANCHOR.floor1);
 
 register_gameplay_object(13, "{gp.cart}", obj_gp_cart);
-gameplay_object_add_attribute(13, ATTRIBUTE.spd, 100, buffer_u16, 0, 500);
+gameplay_object_add_attribute(13, ATTRIBUTE.spd, 100, ATTR_TYPE.u16, 0, 500);
 gameplay_object_add_input(13, ACTION.goUp);
 gameplay_object_add_input(13, ACTION.goDown);
 gameplay_object_add_input(13, ACTION.goRight);
@@ -385,7 +451,7 @@ gameplay_object_add_tag(13,"clip");
 gameplay_object_add_tag(13,"carrier");
 
 register_gameplay_object(14, "{gp.logic_delay}", obj_gp_logic_delay);
-gameplay_object_add_attribute(14, ATTRIBUTE.milliseconds, 1000, buffer_u32, 0, 4294967295);
+gameplay_object_add_attribute(14, ATTRIBUTE.milliseconds, 1000, ATTR_TYPE.u32, 0, 4294967295);
 gameplay_object_add_input(14, ACTION.pause);
 gameplay_object_add_input(14, ACTION.unpause);
 gameplay_object_add_input(14, ACTION.start);
@@ -393,9 +459,9 @@ gameplay_object_add_input(14, ACTION.reset);
 gameplay_object_add_output(14, EVENT.onDelay);
 
 register_gameplay_object(15, "{gp.carry_blocker}",obj_gp_carry_blocker);
-gameplay_object_add_attribute(15, ATTRIBUTE.orientation, 0, buffer_bool, 0, 1);
-gameplay_object_add_attribute(15, ATTRIBUTE.size, 64, buffer_u16, 64, 1024);
-gameplay_object_add_attribute(15, ATTRIBUTE.start_active, 1, buffer_bool, 0, 1);
+gameplay_object_add_attribute(15, ATTRIBUTE.orientation, 0, ATTR_TYPE.bool, 0, 1);
+gameplay_object_add_attribute(15, ATTRIBUTE.size, 64, ATTR_TYPE.u16, 64, 1024);
+gameplay_object_add_attribute(15, ATTRIBUTE.start_active, 1, ATTR_TYPE.bool, 0, 1);
 gameplay_object_add_input(15, ACTION.open);
 gameplay_object_add_input(15, ACTION.close);
 gameplay_object_add_tag(15, "clip");
@@ -406,14 +472,14 @@ gameplay_object_add_output(16, EVENT.onDetect);
 gameplay_object_add_output(16, EVENT.onUndetect);
 
 register_gameplay_object(17, "{gp.story_message}", obj_gp_message);
-gameplay_object_add_attribute(17, ATTRIBUTE.text, "", buffer_string, 0, 256);
-gameplay_object_add_attribute(17, ATTRIBUTE.title, "", buffer_string, 0, 256);
+gameplay_object_add_attribute(17, ATTRIBUTE.text, "", ATTR_TYPE.text, 0, 256);
+gameplay_object_add_attribute(17, ATTRIBUTE.title, "", ATTR_TYPE.text, 0, 256);
 gameplay_object_add_input(17, ACTION.show);
 gameplay_object_add_output(17, EVENT.onNext);
 
 register_gameplay_object(18, "{gp.trigger_zone}", obj_gp_trigger);
-gameplay_object_add_attribute(18, ATTRIBUTE.width, 64, buffer_u16, 0, 1024);
-gameplay_object_add_attribute(18, ATTRIBUTE.height, 64, buffer_u16, 0, 1024);
+gameplay_object_add_attribute(18, ATTRIBUTE.width, 64, ATTR_TYPE.u16, 0, 1024);
+gameplay_object_add_attribute(18, ATTRIBUTE.height, 64, ATTR_TYPE.u16, 0, 1024);
 gameplay_object_add_output(18, EVENT.onStartTouch);
 gameplay_object_add_output(18, EVENT.onEndTouch);
 
@@ -428,10 +494,17 @@ gameplay_object_add_output(20, EVENT.onState2);
 gameplay_object_add_input(20, ACTION.state1);
 gameplay_object_add_input(20, ACTION.state2);
 
+register_gameplay_object(21, "{gp.laser_emitter}", obj_gp_laser_emitter);
+gameplay_object_add_attribute(21, ATTRIBUTE.hue, 0, ATTR_TYPE.slider_u8, 0, 255);
+gameplay_object_add_attribute(21, ATTRIBUTE.start_active, 1, ATTR_TYPE.bool, 0, 1);
+gameplay_object_set_depth_anchor(21, YANCHOR.onwall);
+gameplay_object_add_input(21, ACTION.activate);
+gameplay_object_add_input(21, ACTION.deactivate);
+
 //make the objects in the ingame editor accesesable
 ds_list_add(gp_editor, "{editor.group.general}", 2, 6, 1, 10, 20, 5, 4, 3, 15);
 ds_list_add(gp_editor, "{editor.group.rails}", 12, 13, 16);
-ds_list_add(gp_editor, "{editor.group.laser}");
+ds_list_add(gp_editor, "{editor.group.laser}", 21);
 ds_list_add(gp_editor, "{editor.group.logic}", 7, 8, 11, 14, 19);
 ds_list_add(gp_editor, "{editor.group.story}", 17, 18);
 </string>

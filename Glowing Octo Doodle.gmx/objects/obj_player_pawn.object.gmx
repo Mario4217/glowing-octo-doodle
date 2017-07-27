@@ -69,7 +69,7 @@ pickup = -1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = real(obj_world.world_height) * 32 - bbox_bottom;
+            <string>depth = real(obj_world.world_height) * 32 - bbox_bottom - 64;
 
 //sprite_index = sprites[dir,0];
 if (walking){
