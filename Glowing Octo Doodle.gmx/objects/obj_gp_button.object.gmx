@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>event_inherited();
 
-t = 0;
+time = 0;
 pressed = false;
 </string>
           </argument>
@@ -84,10 +84,12 @@ if (pressed){
           <argument>
             <kind>1</kind>
             <string>///on interact
-event_trigger(EVENT.onPress);
-pressed = true;
-time = attr[? ATTRIBUTE.time];
-sprite_index = spr_gp_button_active;
+if (!pressed){
+  event_trigger(EVENT.onPress);
+  pressed = true;
+  time = attr[? ATTRIBUTE.time]/1000;
+  sprite_index = spr_gp_button_active;
+}
 </string>
           </argument>
         </arguments>

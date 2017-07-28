@@ -273,7 +273,7 @@ gameplay_object_add_attribute(9, ATTRIBUTE.left, 0, ATTR_TYPE.u16, 0, 1024);
 gameplay_object_add_attribute(9, ATTRIBUTE.collision, 0, ATTR_TYPE.bool, 0, 1);
 
 register_gameplay_object(10, "{gp.button}", obj_gp_button);
-gameplay_object_add_attribute(10, ATTRIBUTE.time, 1, ATTR_TYPE.u8, 0, 255);
+gameplay_object_add_attribute(10, ATTRIBUTE.time, 1000, ATTR_TYPE.u32, 0, 1000000000);
 gameplay_object_add_output(10, EVENT.onPress);
 gameplay_object_add_output(10, EVENT.onRelease);
 gameplay_object_add_tag(10,"interact");
