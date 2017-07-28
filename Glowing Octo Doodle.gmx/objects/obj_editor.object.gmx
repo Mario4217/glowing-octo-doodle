@@ -226,6 +226,8 @@ linktarget = 0;
 sun_direction = 45;
 sun_length = 1;
 sun_intensity = 0.8;
+
+zoom_dead_zone = 1;
 </string>
           </argument>
         </arguments>
@@ -363,7 +365,7 @@ if (instance_exists(inst_hover)){
 view_wview[0] = view_wport[0] / zoom;
 view_hview[0] = view_hport[0] / zoom;
 
-if ((window_mouse_get_x()/view_wport[0]) &lt; 0.8){
+if ((window_mouse_get_x()/view_wport[0]) &lt; zoom_dead_zone){
   if ((mouse_wheel_up() || gamepad_button_check_pressed(0,gp_shoulderrb)) &amp;&amp; tzoom &lt; 16){
     tzoom *= 2;
   }
@@ -407,6 +409,7 @@ maps_container[? "visible"] = (maps_container[? "u1"]&lt;0.99);
 objects_container[? "visible"] = (objects_container[? "u1"]&lt;0.99);
 tiles_container[? "visible"] = (tiles_container[? "u1"]&lt;0.99);
 floors_container[? "visible"] = (floors_container[? "u1"]&lt;0.99);
+zoom_dead_zone = min(objects_container[? "u1"])
 
 if (bind_check_pressed("menu")){
   if (menu_is_open == 0){
