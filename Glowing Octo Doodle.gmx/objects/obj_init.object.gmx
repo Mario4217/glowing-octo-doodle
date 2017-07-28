@@ -25,157 +25,6 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///enums
-enum YANCHOR{ //y-anchor (depth)
-  normal,
-  floor1,
-  floor2,
-  plate,
-  onwall
-}
-
-enum ATTRIBUTE {
-  skin = 0,
-  size = 1,
-  width = 2,
-  height = 3,
-  orientation = 4,
-  player_index = 5,
-  map_index = 6,
-  auto_test = 7,
-  relative = 8,
-  top = 9,
-  left = 10,
-  collision = 11,
-  time = 12,
-  start_active = 13,
-  spd = 14,
-  milliseconds = 15,
-  text = 16,
-  title = 17,
-  reset = 18,
-  hue = 19
-}
-
-enum EVENT {
-  onPress = 1,
-  onRelease = 2,
-  onSpawn = 3,
-  onTrue = 4,
-  onFalse = 5,
-  onTrigger = 6,
-  onEndOfRail = 7,
-  onDelay = 8,
-  onDetect = 9,
-  onUndetect = 10,
-  onNext = 11,
-  onStartTouch = 12,
-  onEndTouch = 13,
-  onFirst = 14,
-  onNotFirst = 15,
-  onState1 = 16,
-  onState2 = 17
-}
-
-enum ACTION{
-  open = 1,
-  close = 2,
-  setA = 3,
-  unsetA = 4,
-  setB = 5,
-  unsetB = 6,
-  test = 7,
-  trigger = 8,
-  goRight = 9,
-  goLeft = 10,
-  goUp = 11,
-  goDown = 12,
-  stop = 13,
-  reverse = 14,
-  start = 15,
-  pause = 16,
-  reset = 17,
-  unpause = 18,
-  show = 19,
-  state1 = 20,
-  state2 = 21,
-  activate = 22,
-  deactivate = 23
-}
-
-enum NW{
-  server_welcome = 10,
-  client_profile = 2,
-  client_connect = 3,
-  client_disconnect = 4,
-  position = 5,
-  map_data = 6,
-  ent_action = 7,
-  ent_position = 8,
-  pawn_pickup = 9,
-  pack = 11,
-  interact = 12,
-  pawn_putdown = 13,
-  carrier = 14,
-  server_close = 15
-}
-
-enum ATTR_TYPE{
-  u8 = buffer_u8,
-  u16 = buffer_u16,
-  u32 = buffer_u32,
-  u64 = buffer_u64,
-  f32 = buffer_f32,
-  f64 = buffer_f64,
-  bool = buffer_bool,
-  text = buffer_string,
-  color = 20,
-  inst = 21,
-  slider_u8 = 22,
-  slider_u16 = 23
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///release mode
-//gml_release_mode(true);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///language
 lang_init();
 lang_extern("language/english.txt");
@@ -226,13 +75,13 @@ bind_add("player_vertical", "A", gp_axislv);
 bind_add("interact", "M", mb_left);
 bind_add("interact", "K", ord("E"));
 bind_add("interact", "K", vk_rcontrol);
-bind_add("interact", "G", gp_face1);
+bind_add("interact", "G", gp_shoulderr);
 
 bind_add("player_swap", "K", vk_tab);
 bind_add("player_swap","G", gp_face3);
 
-bind_add("putdown", "M", mb_right);
-bind_add("putdown", "G", gp_face2);
+bind_add("putdown", "M", mb_left);
+bind_add("putdown", "G", gp_shoulderr);
 
 </string>
           </argument>
@@ -645,6 +494,157 @@ nw_players[? 0] = profile_map;
 globalvar allow_cheats, cheat_noclip;
 allow_cheats = true;
 cheat_noclip = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///enums
+enum YANCHOR{ //y-anchor (depth)
+  normal,
+  floor1,
+  floor2,
+  plate,
+  onwall
+}
+
+enum ATTRIBUTE {
+  skin = 0,
+  size = 1,
+  width = 2,
+  height = 3,
+  orientation = 4,
+  player_index = 5,
+  map_index = 6,
+  auto_test = 7,
+  relative = 8,
+  top = 9,
+  left = 10,
+  collision = 11,
+  time = 12,
+  start_active = 13,
+  spd = 14,
+  milliseconds = 15,
+  text = 16,
+  title = 17,
+  reset = 18,
+  hue = 19
+}
+
+enum EVENT {
+  onPress = 1,
+  onRelease = 2,
+  onSpawn = 3,
+  onTrue = 4,
+  onFalse = 5,
+  onTrigger = 6,
+  onEndOfRail = 7,
+  onDelay = 8,
+  onDetect = 9,
+  onUndetect = 10,
+  onNext = 11,
+  onStartTouch = 12,
+  onEndTouch = 13,
+  onFirst = 14,
+  onNotFirst = 15,
+  onState1 = 16,
+  onState2 = 17
+}
+
+enum ACTION{
+  open = 1,
+  close = 2,
+  setA = 3,
+  unsetA = 4,
+  setB = 5,
+  unsetB = 6,
+  test = 7,
+  trigger = 8,
+  goRight = 9,
+  goLeft = 10,
+  goUp = 11,
+  goDown = 12,
+  stop = 13,
+  reverse = 14,
+  start = 15,
+  pause = 16,
+  reset = 17,
+  unpause = 18,
+  show = 19,
+  state1 = 20,
+  state2 = 21,
+  activate = 22,
+  deactivate = 23
+}
+
+enum NW{
+  server_welcome = 10,
+  client_profile = 2,
+  client_connect = 3,
+  client_disconnect = 4,
+  position = 5,
+  map_data = 6,
+  ent_action = 7,
+  ent_position = 8,
+  pawn_pickup = 9,
+  pack = 11,
+  interact = 12,
+  pawn_putdown = 13,
+  carrier = 14,
+  server_close = 15
+}
+
+enum ATTR_TYPE{
+  u8 = buffer_u8,
+  u16 = buffer_u16,
+  u32 = buffer_u32,
+  u64 = buffer_u64,
+  f32 = buffer_f32,
+  f64 = buffer_f64,
+  bool = buffer_bool,
+  text = buffer_string,
+  color = 20,
+  inst = 21,
+  slider_u8 = 22,
+  slider_u16 = 23
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///release mode
+//gml_release_mode(true);
 </string>
           </argument>
         </arguments>

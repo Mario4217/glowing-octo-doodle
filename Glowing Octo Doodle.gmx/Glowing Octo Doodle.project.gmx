@@ -412,6 +412,7 @@
       <sprite>sprites\spr_gp_rail_v</sprite>
       <sprite>sprites\spr_gp_rail_cross</sprite>
       <sprite>sprites\spr_gp_cart_h</sprite>
+      <sprite>sprites\spr_cart_v</sprite>
       <sprite>sprites\spr_gp_logic_delay</sprite>
       <sprite>sprites\spr_gp_carry_blocker_v</sprite>
       <sprite>sprites\spr_gp_rail_detector_h</sprite>

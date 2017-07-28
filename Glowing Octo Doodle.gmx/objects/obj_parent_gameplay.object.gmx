@@ -196,7 +196,7 @@ init = true;
     }
   }
 
-  if ((mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) || (obj_player_controller.interact_inst == id &amp;&amp; obj_player_controller.is_using_gamepad))){
+  if ((mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) || (obj_player_controller.interact_inst == id &amp;&amp; obj_player_controller.is_using_gamepad)) &amp;&amp; obj_player_controller.yet_interact == false){
     if (gameplay_object_have_tag(src_map[? "id"], "clip")){ //port the clip, so it doesnt interrupt the checkin for the line between the player and the object
       var clip_x = clip.x;
       clip.x = -bbox_right;
@@ -204,6 +204,7 @@ init = true;
     if (point_distance(x, y, pawn.center_x, pawn.center_y) &lt; obj_player_controller.pickup_distance &amp;&amp; !collision_line(x, y, pawn.center_x, pawn.center_y, obj_clip, 0, 1)
     &amp;&amp; !collision_line(x, y, pawn.center_x, pawn.center_y, obj_gp_carry_blocker, 0, 1)){
       if (bind_check_pressed('interact')){
+        obj_player_controller.yet_interact = true;
         if (is_server){
           event_perform(ev_other, ev_user1);
         }
@@ -226,23 +227,31 @@ init = true;
           }
         }
         if (gameplay_object_have_tag(src_map[? "id"], "carrier")){
+          var happend = false;
           if(carry != -1 &amp;&amp; pawn.pickup == -1){
             pawn.pickup = carry;
             carry = -1;
+            happend = true;
+          }else if(carry == -1 &amp;&amp; pawn.pickup != -1){
+            carry = pawn.pickup;
+            pawn.pickup = -1;
+            happend = true;
+          }
             
-            if (is_network){
-              buffer_seek(nw_buffer, buffer_seek_start, 0);
-              buffer_write(nw_buffer, buffer_u8, NW.carrier);
-              if (is_server){
-                buffer_write(nw_buffer, buffer_u8, 0);
-              }
-              buffer_write(nw_buffer, buffer_u16, index);
-              nw_broadcast(nw_buffer);
+          if (is_network &amp;&amp; happend){
+            buffer_seek(nw_buffer, buffer_seek_start, 0);
+            buffer_write(nw_buffer, buffer_u8, NW.carrier);
+            if (is_server){
+              buffer_write(nw_buffer, buffer_u8, 0);
             }
+            buffer_write(nw_buffer, buffer_u16, index);
+            nw_broadcast(nw_buffer);
           }
         }
       }
+      /* //Old putdown code from times where pickup and putdown were different buttons
       if (bind_check_pressed('putdown')){
+        obj_player_controller.yet_interact = true;
         if (gameplay_object_have_tag(src_map[? "id"], "carrier")){
           if (carry == -1 &amp;&amp; pawn.pickup != -1){
             carry = pawn.pickup;
@@ -260,6 +269,7 @@ init = true;
           }
         }
       }
+      */
     }
     if (gameplay_object_have_tag(src_map[? "id"], "clip") &amp;&amp; pawn.pickup != id){
       clip.x = clip_x;

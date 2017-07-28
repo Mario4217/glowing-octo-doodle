@@ -54,6 +54,9 @@ mv = -1;
           <argument>
             <kind>1</kind>
             <string>rail = instance_place(x,y,obj_gp_rail);
+if (rail.attr[? ATTRIBUTE.orientation] == 1){
+  sprite_index = spr_cart_v;
+}
 </string>
           </argument>
         </arguments>

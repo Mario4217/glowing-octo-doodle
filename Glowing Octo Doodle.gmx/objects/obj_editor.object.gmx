@@ -409,7 +409,7 @@ maps_container[? "visible"] = (maps_container[? "u1"]&lt;0.99);
 objects_container[? "visible"] = (objects_container[? "u1"]&lt;0.99);
 tiles_container[? "visible"] = (tiles_container[? "u1"]&lt;0.99);
 floors_container[? "visible"] = (floors_container[? "u1"]&lt;0.99);
-zoom_dead_zone = min(objects_container[? "u1"])
+zoom_dead_zone = min(objects_container[? "u1"]);
 
 if (bind_check_pressed("menu")){
   if (menu_is_open == 0){

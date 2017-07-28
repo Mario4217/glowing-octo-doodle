@@ -10,6 +10,9 @@ if (room == rm_game){
   with (obj_parent_gameplay){
     instance_destroy();
   }
+  with (obj_player_pawn){
+    pickup = -1;
+  }
   ds_map_clear(obj_world.inst_by_index);
 }else{
   var world_object = obj_editor;

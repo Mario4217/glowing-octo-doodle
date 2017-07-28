@@ -37,8 +37,10 @@ move_spd = 400;
 pickup_distance = 100;
 pawns = -1;
 interact_inst = -1;
+yet_interact = false; //is used to have only one interact per step
 
 messagebox = -1;
+can_putdown = false;
 
 if (testmode != ""){
   pawns = ds_list_create();
@@ -122,6 +124,7 @@ if (testmode != ""){
           <argument>
             <kind>1</kind>
             <string>interact_inst = -1;
+yet_interact = false;
 </string>
           </argument>
         </arguments>
@@ -202,9 +205,15 @@ view_xview[0] = floor(player_pawn.x - view_wview[0]/2);
 view_yview[0] = floor(player_pawn.y - view_hview[0]/2);
 
 if (is_using_gamepad){
-  var dis = 48;
+  var dis = 32;
   putdown_x = player_pawn.center_x+lengthdir_x(dis,player_pawn.dir*90);
   putdown_y = player_pawn.center_y+lengthdir_y(dis,player_pawn.dir*90);
+  var ah = gamepad_axis_value(0, gp_axisrh);
+  var av = gamepad_axis_value(0, gp_axisrv);
+  if ((abs(ah) + abs(av)) &gt; 0.2){
+    putdown_x = player_pawn.center_x+lengthdir_x(dis,point_direction(0,0,ah,av));
+    putdown_y = player_pawn.center_y+lengthdir_y(dis,point_direction(0,0,ah,av));
+  }
 }
 
 pickup = player_pawn.pickup;
@@ -214,22 +223,29 @@ if (!is_using_gamepad){
 }
 
 if (pickup != -1){
-  if (bind_check_pressed('putdown') &amp;&amp; can_control &amp;&amp; point_distance(player_pawn.x, player_pawn.y, putdown_x, putdown_y) &lt; pickup_distance
+  if (can_control &amp;&amp; point_distance(player_pawn.x, player_pawn.y, putdown_x, putdown_y) &lt; pickup_distance
   &amp;&amp; !collision_rectangle(putdown_x-pickup.sprite_xoffset, putdown_y-pickup.sprite_yoffset, putdown_x-pickup.sprite_xoffset+pickup.sprite_width, putdown_y-pickup.sprite_yoffset+pickup.sprite_height, obj_clip, 0, 1)
   &amp;&amp; !collision_line(putdown_x, putdown_y, player_pawn.x, player_pawn.y, obj_clip, 0, 1)
   &amp;&amp; !collision_line(putdown_x, putdown_y, player_pawn.x, player_pawn.y, obj_gp_carry_blocker, 0, 1)
+  &amp;&amp; !yet_interact
   ){
-    gp_putdown(player_pawn, putdown_x, putdown_y);
-    if (is_network){
-      buffer_seek(nw_buffer, buffer_seek_start, 0);
-      buffer_write(nw_buffer, buffer_u8, NW.pawn_putdown);
-      if (is_server){
-        buffer_write(nw_buffer, buffer_u8, 0);
+    can_putdown = true;
+    if (bind_check_pressed('putdown')){
+      yet_interact = true;
+      gp_putdown(player_pawn, putdown_x, putdown_y);
+      if (is_network){
+        buffer_seek(nw_buffer, buffer_seek_start, 0);
+        buffer_write(nw_buffer, buffer_u8, NW.pawn_putdown);
+        if (is_server){
+          buffer_write(nw_buffer, buffer_u8, 0);
+        }
+        buffer_write(nw_buffer, buffer_u16, putdown_x);
+        buffer_write(nw_buffer, buffer_u16, putdown_y);
+        nw_broadcast(nw_buffer);
       }
-      buffer_write(nw_buffer, buffer_u16, putdown_x);
-      buffer_write(nw_buffer, buffer_u16, putdown_y);
-      nw_broadcast(nw_buffer);
     }
+  }else{
+    can_putdown = false;
   }
 }
 
@@ -369,7 +385,11 @@ if (messagebox != -1 &amp;&amp; interface[? "menu"] == "0"){
   }
   if (player_pawn.pickup != -1){
     var pickup = player_pawn.pickup;
-    draw_sprite_ext(pickup.sprite_index, pickup.image_index, putdown_x,putdown_y, 1, 1, 0, c_lime, 0.3);
+    col = c_red;
+    if (can_putdown){
+      col = c_lime;
+    }
+    draw_sprite_ext(pickup.sprite_index, pickup.image_index, putdown_x,putdown_y, 1, 1, 0, col, 0.3);
   }
 }
 </string>
