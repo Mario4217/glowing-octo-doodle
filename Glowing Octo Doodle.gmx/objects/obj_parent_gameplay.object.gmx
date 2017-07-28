@@ -31,6 +31,7 @@ outputs = ds_list_create();
 input = ds_map_create();
 gp_object_index = -1;
 init = false;
+carrier = -1;
 alarm[0] = 1;
 </string>
           </argument>
@@ -126,6 +127,8 @@ if (gameplay_object_have_tag(src_map[? "id"], "clip")){
 }
 if (gameplay_object_have_tag(src_map[? "id"], "carrier")){
   carry = -1;
+  carry_x = x;
+  carry_y = y;
 }
 
 ds_map_destroy(overwrite_attr);
@@ -201,8 +204,10 @@ init = true;
       var clip_x = clip.x;
       clip.x = -bbox_right;
     }
-    if (point_distance(x, y, pawn.center_x, pawn.center_y) &lt; obj_player_controller.pickup_distance &amp;&amp; !collision_line(x, y, pawn.center_x, pawn.center_y, obj_clip, 0, 1)
-    &amp;&amp; !collision_line(x, y, pawn.center_x, pawn.center_y, obj_gp_carry_blocker, 0, 1)){
+    if (point_distance(x, y, pawn.center_x, pawn.center_y) &lt; obj_player_controller.pickup_distance 
+    &amp;&amp; !collision_line(x, y, pawn.center_x, pawn.center_y, obj_clip, 0, 1)
+    &amp;&amp; !collision_line(x, y, pawn.center_x, pawn.center_y, obj_gp_carry_blocker, 0, 1)
+    &amp;&amp; !collision_line(x, y, pawn.center_x, pawn.center_y, obj_gp_light_wall, 0, 1)){
       if (bind_check_pressed('interact')){
         obj_player_controller.yet_interact = true;
         if (is_server){
@@ -230,12 +235,14 @@ init = true;
           var happend = false;
           if(carry != -1 &amp;&amp; pawn.pickup == -1){
             pawn.pickup = carry;
+            carry.carrier = pawn;
             carry = -1;
             happend = true;
           }else if(carry == -1 &amp;&amp; pawn.pickup != -1){
-            carry = pawn.pickup;
+            /*carry = pawn.pickup;
             pawn.pickup = -1;
-            happend = true;
+            carry.carrier = id;
+            happend = true;*/
           }
             
           if (is_network &amp;&amp; happend){
@@ -249,13 +256,14 @@ init = true;
           }
         }
       }
-      /* //Old putdown code from times where pickup and putdown were different buttons
+      //put thing on carrier
       if (bind_check_pressed('putdown')){
         obj_player_controller.yet_interact = true;
         if (gameplay_object_have_tag(src_map[? "id"], "carrier")){
           if (carry == -1 &amp;&amp; pawn.pickup != -1){
             carry = pawn.pickup;
             pawn.pickup = -1;
+            carry.carrier = id;
             
             if (is_network){
               buffer_seek(nw_buffer, buffer_seek_start, 0);
@@ -269,7 +277,7 @@ init = true;
           }
         }
       }
-      */
+      //*/
     }
     if (gameplay_object_have_tag(src_map[? "id"], "clip") &amp;&amp; pawn.pickup != id){
       clip.x = clip_x;
@@ -299,6 +307,36 @@ init = true;
           <argument>
             <kind>1</kind>
             <string>///on interact
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///laser linking
+
+if (gameplay_object_have_tag(src_map[? "id"], "laser")){
+  var pawn = obj_player_controller.player_pawn;
+  if (pawn.pickup != -1){
+    if (pawn.pickup.object_index == obj_gp_laser_redirector){
+      pawn.pickup.link = id;
+    }
+  }
+}
 </string>
           </argument>
         </arguments>
@@ -345,6 +383,37 @@ init = true;
           <argument>
             <kind>1</kind>
             <string>instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//carrier
+draw_self()
+if (init){
+  if (gameplay_object_have_tag(src_map[? "id"], "carrier")){
+    if (carry != -1){
+      draw_sprite(carry.sprite_index, carry.image_index, carry_x, carry_y);
+    }
+  }
+}
 </string>
           </argument>
         </arguments>

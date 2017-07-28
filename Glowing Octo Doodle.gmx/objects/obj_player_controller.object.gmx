@@ -51,6 +51,7 @@ if (testmode != ""){
 
 //moved bind stuff to the init object
 
+//gamepad help. Shows keys and stuff
 gamepad_help = ui_create_container(0,0.9,0.3,0.95);
 gamepad_help_sprite = ui_create_sprite(0,0,0.2,1,spr_gamepad_icons, 0);
 gamepad_help_text = ui_create_label(0.2,0,1,1, "");
@@ -321,6 +322,7 @@ ds_map_destroy(msgbox_body);
   draw_set_valign(fa_top);
 }
 
+/*
 if (is_using_gamepad){
   gamepad_help[? "visible"] = false;
   if (interact_inst != -1){
@@ -336,6 +338,7 @@ if (is_using_gamepad){
   draw_set_font(ft_ui);
   ui_draw(gamepad_help);
 }
+*/
 
 if (messagebox != -1 &amp;&amp; interface[? "menu"] == "0"){
   draw_set_font(ft_ui);
@@ -377,19 +380,28 @@ if (messagebox != -1 &amp;&amp; interface[? "menu"] == "0"){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (is_using_gamepad){
+            <string>//if (is_using_gamepad){
   if (interact_inst != -1){
     var ent = interact_inst;
     draw_set_color(c_lime);
     draw_rectangle(ent.bbox_left, ent.bbox_top, ent.bbox_right, ent.bbox_bottom, true);
   }
-  if (player_pawn.pickup != -1){
-    var pickup = player_pawn.pickup;
-    col = c_red;
-    if (can_putdown){
-      col = c_lime;
-    }
+//}
+
+if (player_pawn.pickup != -1){
+  var pickup = player_pawn.pickup;
+  col = c_red;
+  if (can_putdown){
+    col = c_lime;
+  }
+  if (interact_inst == -1){
     draw_sprite_ext(pickup.sprite_index, pickup.image_index, putdown_x,putdown_y, 1, 1, 0, col, 0.3);
+  }else{
+    if (pickup.object_index == obj_gp_laser_redirector){
+      if (gameplay_object_have_tag(pickup.src_map[? "id"], "laser")){
+        draw_sprite_ext(spr_ui_laser_link, 0, interact_inst.bbox_left, interact_inst.bbox_top, 0.5, 0.5, 0, c_white, 1);
+      }
+    }
   }
 }
 </string>

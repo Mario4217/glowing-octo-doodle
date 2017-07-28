@@ -32,6 +32,147 @@ if (attr[? ATTRIBUTE.start_active]){
 }else{
   active = false;
 }
+
+color = make_color_hsv(attr[? ATTRIBUTE.hue], 255, 255);
+
+carry_x = x + 16;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+
+if (carry != -1){
+  if (active){
+    if (gameplay_object_have_tag(carry.src_map[? "id"], "laser")){
+      carry.laser = color;
+    }
+  }else{
+    carry.laser = -1;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///actions
+switch (input[? "action"]){
+  case ACTION.activate:
+    if (!active){
+      active = true;
+    }
+  break;
+  case ACTION.deactivate:
+    if (active){
+      active = false;
+    }
+  break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="73">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (active){
+  if (carry != -1){
+    if (gameplay_object_have_tag(carry.src_map[? "id"], "laser")){
+      draw_set_color(color);
+      var node = carry;
+      while (node.link != -1){
+        
+        var x1 = node.focus_x;
+        var y1 = node.focus_y;
+        var x2 = node.link.focus_x;
+        var y2 = node.link.focus_y;
+      
+        if (collision_line(x1, y1, x2, y2, obj_clip_laser, 0, 0)){
+          
+          var dis = point_distance(x1, y1, x2, y2);
+          
+          for (var i=0; i&lt;dis-16; i+=16){
+            var xx = (x2-x1)*(i/dis)+x1;
+            var yy = (y2-y1)*(i/dis)+y1;
+            var xn = (x2-x1)*((i+16)/dis)+x1;
+            var yn = (y2-y1)*((i+16)/dis)+y1;
+            if (!collision_line(xx, yy, xn, yn, obj_clip_laser, 0, 0)){
+              draw_set_alpha(0.5);
+              draw_line_width(xx, yy, xn, yn, 3);
+              draw_set_alpha(1)
+              draw_line_width(xx, yy, xn, yn, 1);
+            }else{
+              break;
+            }
+          };
+          break;
+        }
+      
+        draw_sprite_ext(spr_glow, 0, node.focus_x, node.focus_y, 0.5, 0.5, 0, color, 1);
+        draw_set_alpha(0.5);
+        draw_line_width(node.focus_x, node.focus_y, node.link.focus_x, node.link.focus_y, 3);
+        draw_set_alpha(1)
+        draw_line_width(node.focus_x, node.focus_y, node.link.focus_x, node.link.focus_y, 1);
+        node = node.link;
+        if (node.object_index == obj_gp_laser_catcher){
+          node.link = -1;
+        }
+        
+      }
+    }
+  }
+}
 </string>
           </argument>
         </arguments>
@@ -54,10 +195,10 @@ if (attr[? ATTRIBUTE.start_active]){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>event_inherited();
+
 if (active){
-  var col = make_color_hsv(attr[? ATTRIBUTE.hue], 255, 255);
-  draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, col, 1);
+  draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 1);
 }
 </string>
           </argument>

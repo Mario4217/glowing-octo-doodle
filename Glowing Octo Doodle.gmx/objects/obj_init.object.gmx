@@ -80,8 +80,8 @@ bind_add("interact", "G", gp_shoulderr);
 bind_add("player_swap", "K", vk_tab);
 bind_add("player_swap","G", gp_face3);
 
-bind_add("putdown", "M", mb_left);
-bind_add("putdown", "G", gp_shoulderr);
+bind_add("putdown", "M", mb_right);
+bind_add("putdown", "G", gp_shoulderl);
 
 </string>
           </argument>
@@ -342,18 +342,30 @@ gameplay_object_add_output(20, EVENT.onState1);
 gameplay_object_add_output(20, EVENT.onState2);
 gameplay_object_add_input(20, ACTION.state1);
 gameplay_object_add_input(20, ACTION.state2);
+gameplay_object_add_tag(20, "interact");
 
 register_gameplay_object(21, "{gp.laser_emitter}", obj_gp_laser_emitter);
 gameplay_object_add_attribute(21, ATTRIBUTE.hue, 0, ATTR_TYPE.slider_u8, 0, 255);
 gameplay_object_add_attribute(21, ATTRIBUTE.start_active, 1, ATTR_TYPE.bool, 0, 1);
-gameplay_object_set_depth_anchor(21, YANCHOR.onwall);
+gameplay_object_set_depth_anchor(21, YANCHOR.floor1);
 gameplay_object_add_input(21, ACTION.activate);
 gameplay_object_add_input(21, ACTION.deactivate);
+gameplay_object_add_tag(21, "carrier");
+gameplay_object_add_tag(21, "clip");
+
+register_gameplay_object(22, "{gp.laser_redirector}", obj_gp_laser_redirector);
+gameplay_object_add_tag(22, "clip");
+gameplay_object_add_tag(22, "laser");
+gameplay_object_make_pickup(22, 20);
+
+register_gameplay_object(23, "{gp.laser_catcher}", obj_gp_laser_catcher);
+gameplay_object_set_depth_anchor(23, YANCHOR.onwall);
+gameplay_object_add_tag(23, "laser");
 
 //make the objects in the ingame editor accesesable
 ds_list_add(gp_editor, "{editor.group.general}", 2, 6, 1, 10, 20, 5, 4, 3, 15);
 ds_list_add(gp_editor, "{editor.group.rails}", 12, 13, 16);
-ds_list_add(gp_editor, "{editor.group.laser}", 21);
+ds_list_add(gp_editor, "{editor.group.laser}", 21, 22, 23);
 ds_list_add(gp_editor, "{editor.group.logic}", 7, 8, 11, 14, 19);
 ds_list_add(gp_editor, "{editor.group.story}", 17, 18);
 </string>

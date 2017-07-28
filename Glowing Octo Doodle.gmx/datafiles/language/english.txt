@@ -181,6 +181,8 @@ gp.trigger_zone:				Trigger Zone
 gp.logic_memory:				Logic Memory
 gp.lever:						Lever
 gp.laser_emitter:				Laser Emitter
+gp.laser_redirector:			Laser Redirector
+gp.laser_catcher:				Laser Catcher
 
 key.add:						Add
 key.alt:						Alt

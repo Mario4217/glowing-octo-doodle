@@ -422,6 +422,8 @@
       <sprite>sprites\spr_gp_lever_state2</sprite>
       <sprite>sprites\spr_gp_lever_state1</sprite>
       <sprite>sprites\spr_gp_laser_emitter</sprite>
+      <sprite>sprites\spr_gp_laser_redirector</sprite>
+      <sprite>sprites\spr_gp_laser_catcher</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -457,6 +459,7 @@
     <sprite>sprites\spr_icon</sprite>
     <sprite>sprites\spr_wall_projector_particles</sprite>
     <sprite>sprites\spr_glow</sprite>
+    <sprite>sprites\spr_ui_laser_link</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_test</background>
@@ -719,6 +722,7 @@
     <object>objects\obj_world</object>
     <object>objects\obj_editor_ent</object>
     <object>objects\obj_clip</object>
+    <object>objects\obj_clip_laser</object>
     <object>objects\obj_controller</object>
     <object>objects\obj_pack_editor</object>
     <object>objects\obj_shadows</object>
@@ -728,6 +732,7 @@
       <object>objects\obj_gp_trigger</object>
       <object>objects\obj_gp_goalzone</object>
       <object>objects\obj_gp_cube</object>
+      <object>objects\obj_gp_laser_redirector</object>
       <object>objects\obj_gp_spawn</object>
       <object>objects\obj_gp_wall</object>
       <object>objects\obj_gp_light_wall</object>
@@ -745,6 +750,7 @@
       <object>objects\obj_gp_rail_detector</object>
       <object>objects\obj_gp_message</object>
       <object>objects\obj_gp_laser_emitter</object>
+      <object>objects\obj_gp_laser_catcher</object>
     </objects>
   </objects>
   <rooms name="rooms">
