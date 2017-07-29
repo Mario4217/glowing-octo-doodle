@@ -356,6 +356,7 @@ gameplay_object_add_tag(21, "clip");
 register_gameplay_object(22, "{gp.laser_redirector}", obj_gp_laser_redirector);
 gameplay_object_add_tag(22, "clip");
 gameplay_object_add_tag(22, "laser");
+gameplay_object_add_tag(22, "interact");
 gameplay_object_make_pickup(22, 20);
 
 register_gameplay_object(23, "{gp.laser_catcher}", obj_gp_laser_catcher);

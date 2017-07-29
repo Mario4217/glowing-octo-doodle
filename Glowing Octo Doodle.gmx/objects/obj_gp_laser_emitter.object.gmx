@@ -131,8 +131,15 @@ switch (input[? "action"]){
     if (gameplay_object_have_tag(carry.src_map[? "id"], "laser")){
       draw_set_color(color);
       var node = carry;
+
       while (node.link != -1){
         
+        if (node.is_lasered == false){
+          node.is_lasered = true;
+        }else{
+          break;
+        }
+      
         var x1 = node.focus_x;
         var y1 = node.focus_y;
         var x2 = node.link.focus_x;

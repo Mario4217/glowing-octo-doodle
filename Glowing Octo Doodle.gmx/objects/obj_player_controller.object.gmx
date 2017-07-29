@@ -398,7 +398,7 @@ if (player_pawn.pickup != -1){
     draw_sprite_ext(pickup.sprite_index, pickup.image_index, putdown_x,putdown_y, 1, 1, 0, col, 0.3);
   }else{
     if (pickup.object_index == obj_gp_laser_redirector){
-      if (gameplay_object_have_tag(pickup.src_map[? "id"], "laser")){
+      if (gameplay_object_have_tag(interact_inst.src_map[? "id"], "laser")){
         draw_sprite_ext(spr_ui_laser_link, 0, interact_inst.bbox_left, interact_inst.bbox_top, 0.5, 0.5, 0, c_white, 1);
       }
     }

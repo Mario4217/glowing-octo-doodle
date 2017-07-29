@@ -139,6 +139,33 @@ init = true;
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (init){
+  if (gameplay_object_have_tag(src_map[? "id"], "laser")){
+    is_lasered = false;
+  }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -177,24 +204,30 @@ init = true;
 
   var pawn = obj_player_controller.player_pawn; //own pawn of the current player you are controlling
   
-  if ((gameplay_object_have_tag(src_map[? "id"],"interact") || gameplay_object_have_tag(src_map[? "id"],"carrier") || gameplay_object_have_tag(src_map[? "id"],"pickup") &amp;&amp; obj_player_controller.is_using_gamepad)){
-    var dist = point_distance(x, y, pawn.center_x, pawn.center_y);
-    if (dist &lt; obj_player_controller.pickup_distance){
-      var angle = point_direction(x, y, pawn.center_x, pawn.center_y);
-      if (
-        (pawn.dir == 2 &amp;&amp; (angle &lt; 45  || angle &gt; 315)) ||
-        (pawn.dir == 3 &amp;&amp; (angle &gt; 45  &amp;&amp; angle &lt; 135)) ||
-        (pawn.dir == 0 &amp;&amp; (angle &gt; 135 &amp;&amp; angle &lt; 225)) ||
-        (pawn.dir == 1 &amp;&amp; (angle &gt; 225 &amp;&amp; angle &lt; 315))
-      ){
-        if (obj_player_controller.interact_inst != -1){
-          var cur = obj_player_controller.interact_inst;
-          if (dist &lt; point_distance(pawn.center_x, pawn.center_y, cur.x, cur.y)){
+  if (gameplay_object_have_tag(src_map[? "id"],"interact") || gameplay_object_have_tag(src_map[? "id"],"carrier") || gameplay_object_have_tag(src_map[? "id"],"pickup")){
+    if (obj_player_controller.is_using_gamepad){
+      var dist = point_distance(x, y, pawn.center_x, pawn.center_y);
+      if (dist &lt; obj_player_controller.pickup_distance){
+        var angle = point_direction(x, y, pawn.center_x, pawn.center_y);
+        if (
+          (pawn.dir == 2 &amp;&amp; (angle &lt; 45  || angle &gt; 315)) ||
+          (pawn.dir == 3 &amp;&amp; (angle &gt; 45  &amp;&amp; angle &lt; 135)) ||
+          (pawn.dir == 0 &amp;&amp; (angle &gt; 135 &amp;&amp; angle &lt; 225)) ||
+          (pawn.dir == 1 &amp;&amp; (angle &gt; 225 &amp;&amp; angle &lt; 315))
+        ){
+          if (obj_player_controller.interact_inst != -1){
+            var cur = obj_player_controller.interact_inst;
+            if (dist &lt; point_distance(pawn.center_x, pawn.center_y, cur.x, cur.y)){
+              obj_player_controller.interact_inst = id;
+            }
+          }else{
             obj_player_controller.interact_inst = id;
           }
-        }else{
-          obj_player_controller.interact_inst = id;
         }
+      }
+    }else{
+      if (mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom)){
+        obj_player_controller.interact_inst = id;
       }
     }
   }
