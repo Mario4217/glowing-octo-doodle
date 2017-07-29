@@ -27,10 +27,47 @@
             <kind>1</kind>
             <string>event_inherited();
 
-col = -1;
+color = make_color_hsv(attr[? ATTRIBUTE.hue], 255, 255);
 
 focus_x = x+16;
 focus_y = y+16;
+
+powered = false;
+
+ring_angle = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+
+if (is_lasered &amp;&amp; laser_color == color){
+  if (!powered){
+    event_trigger(EVENT.onPowered);
+    powered = true;
+  }
+}else if(powered){
+  event_trigger(EVENT.onUnpowered);
+  powered = false;
+}
 </string>
           </argument>
         </arguments>
@@ -55,8 +92,10 @@ focus_y = y+16;
             <kind>1</kind>
             <string>draw_self();
 
-if (col != -1){
-  draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, col, 1);
+draw_sprite_ext(spr_gp_laser_catcher_ring, 0, x+16, y+16, 1, 1, ring_angle, color, 1);
+if (powered){
+  ring_angle += 1;
+  draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 1);
 }
 </string>
           </argument>

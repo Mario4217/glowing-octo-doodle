@@ -131,12 +131,16 @@ switch (input[? "action"]){
     if (gameplay_object_have_tag(carry.src_map[? "id"], "laser")){
       draw_set_color(color);
       var node = carry;
+      node.laser_color = color;
+      node.is_lasered = true;
 
       while (node.link != -1){
         
-        if (node.is_lasered == false){
-          node.is_lasered = true;
+        if (node.link.is_lasered == false){
+          node.link.laser_color = color;
+          node.link.is_lasered = true;
         }else{
+          //node.laser_blocked = room_speed;
           break;
         }
       
@@ -206,6 +210,8 @@ switch (input[? "action"]){
 
 if (active){
   draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 1);
+}else{
+  draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 0.1);
 }
 </string>
           </argument>

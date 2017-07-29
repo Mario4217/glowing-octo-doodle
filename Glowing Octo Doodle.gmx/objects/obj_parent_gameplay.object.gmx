@@ -130,6 +130,10 @@ if (gameplay_object_have_tag(src_map[? "id"], "carrier")){
   carry_x = x;
   carry_y = y;
 }
+if (gameplay_object_have_tag(src_map[? "id"], "laser")){
+  laser_color = -1;
+  is_lasered = false;
+}
 
 ds_map_destroy(overwrite_attr);
 
@@ -139,7 +143,7 @@ init = true;
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
+    <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
         <id>603</id>

@@ -13,7 +13,7 @@ for (var i=0; i<ds_map_size(src_attr); i+=1){
   }else if(map[? "type"] == ATTR_TYPE.bool){
     var element = ui_create_toggle(line, i*0.2, 1, i*0.2+0.2, ""); 
   }else if(map[? "type"] == ATTR_TYPE.slider_u8 || map[? "type"] == ATTR_TYPE.slider_u16){
-    var element = ui_create_slider(line,i*0.2,1,i*0.2+0.2,"",map[? "min"],map[? "max"],1); 
+    var element = ui_create_slider(line,i*0.2,1,i*0.2+0.2,"[1]",map[? "min"],map[? "max"],1); 
   }
   ui_set_event(element,"onchange", "editor_update_ent " + string(key) + " !value");
   ui_set_value(element, attr[? key]);

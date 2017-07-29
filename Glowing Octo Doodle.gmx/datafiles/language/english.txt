@@ -151,6 +151,8 @@ editor.event.onFirst:			OnFirst
 editor.event.onNotFirst:		OnNotFirst
 editor.event.onState1:			OnState1
 editor.event.onState2:			OnState2
+editor.event.OnPowered:			OnPowered
+editor.event.OnUnpowered:		OnUnpowered
 
 editor.tileset.enviroment:		Enviroment
 editor.tileset.mark:			Mark

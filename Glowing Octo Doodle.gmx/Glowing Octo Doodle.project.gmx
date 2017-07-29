@@ -424,6 +424,7 @@
       <sprite>sprites\spr_gp_laser_emitter</sprite>
       <sprite>sprites\spr_gp_laser_redirector</sprite>
       <sprite>sprites\spr_gp_laser_catcher</sprite>
+      <sprite>sprites\spr_gp_laser_catcher_ring</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
