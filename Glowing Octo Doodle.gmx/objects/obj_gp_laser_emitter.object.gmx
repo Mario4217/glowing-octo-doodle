@@ -60,13 +60,15 @@ carry_x = x + 16;
             <kind>1</kind>
             <string>event_inherited();
 
-if (carry != -1){
-  if (active){
-    if (gameplay_object_have_tag(carry.src_map[? "id"], "laser")){
-      carry.laser = color;
+if (init){
+  if (carry != -1){
+    if (active){
+      if (gameplay_object_have_tag(carry.src_map[? "id"], "laser")){
+        carry.laser = color;
+      }
+    }else{
+      carry.laser = -1;
     }
-  }else{
-    carry.laser = -1;
   }
 }
 </string>
@@ -126,60 +128,62 @@ switch (input[? "action"]){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (active){
-  if (carry != -1){
-    if (gameplay_object_have_tag(carry.src_map[? "id"], "laser")){
-      draw_set_color(color);
-      var node = carry;
-      node.laser_color = color;
-      node.is_lasered = true;
-
-      while (node.link != -1){
+            <string>if (init){
+  if (active){
+    if (carry != -1){
+      if (gameplay_object_have_tag(carry.src_map[? "id"], "laser")){
+        draw_set_color(color);
+        var node = carry;
+        node.laser_color = color;
+        node.is_lasered = true;
+  
+        while (node.link != -1){
         
-        if (node.link.is_lasered == false){
-          node.link.laser_color = color;
-          node.link.is_lasered = true;
-        }else{
-          //node.laser_blocked = room_speed;
-          break;
-        }
-      
-        var x1 = node.focus_x;
-        var y1 = node.focus_y;
-        var x2 = node.link.focus_x;
-        var y2 = node.link.focus_y;
-      
-        if (collision_line(x1, y1, x2, y2, obj_clip_laser, 0, 0)){
-          
-          var dis = point_distance(x1, y1, x2, y2);
-          
-          for (var i=0; i&lt;dis-16; i+=16){
-            var xx = (x2-x1)*(i/dis)+x1;
-            var yy = (y2-y1)*(i/dis)+y1;
-            var xn = (x2-x1)*((i+16)/dis)+x1;
-            var yn = (y2-y1)*((i+16)/dis)+y1;
-            if (!collision_line(xx, yy, xn, yn, obj_clip_laser, 0, 0)){
-              draw_set_alpha(0.5);
-              draw_line_width(xx, yy, xn, yn, 3);
-              draw_set_alpha(1)
-              draw_line_width(xx, yy, xn, yn, 1);
-            }else{
-              break;
-            }
-          };
-          break;
-        }
-      
-        draw_sprite_ext(spr_glow, 0, node.focus_x, node.focus_y, 0.5, 0.5, 0, color, 1);
-        draw_set_alpha(0.5);
-        draw_line_width(node.focus_x, node.focus_y, node.link.focus_x, node.link.focus_y, 3);
-        draw_set_alpha(1)
-        draw_line_width(node.focus_x, node.focus_y, node.link.focus_x, node.link.focus_y, 1);
-        node = node.link;
-        if (node.object_index == obj_gp_laser_catcher){
-          node.link = -1;
-        }
+          var x1 = node.focus_x;
+          var y1 = node.focus_y;
+          var x2 = node.link.focus_x;
+          var y2 = node.link.focus_y;
         
+          if (collision_line(x1, y1, x2, y2, obj_clip_laser, 0, 0)){
+            
+            var dis = point_distance(x1, y1, x2, y2);
+            
+            for (var i=0; i&lt;dis-16; i+=16){
+              var xx = (x2-x1)*(i/dis)+x1;
+              var yy = (y2-y1)*(i/dis)+y1;
+              var xn = (x2-x1)*((i+16)/dis)+x1;
+              var yn = (y2-y1)*((i+16)/dis)+y1;
+              if (!collision_line(xx, yy, xn, yn, obj_clip_laser, 0, 0)){
+                draw_set_alpha(0.5);
+                draw_line_width(xx, yy, xn, yn, 3);
+                draw_set_alpha(1)
+                draw_line_width(xx, yy, xn, yn, 1);
+              }else{
+                break;
+              }
+            };
+            break;
+          }
+          
+          if (node.link.is_lasered == false){
+            node.link.laser_color = color;
+            node.link.is_lasered = true;
+          }else{
+            //node.laser_blocked = room_speed;
+            break;
+          }
+        
+          draw_sprite_ext(spr_glow, 0, node.focus_x, node.focus_y, 0.5, 0.5, 0, color, 1);
+          draw_set_alpha(0.5);
+          draw_line_width(node.focus_x, node.focus_y, node.link.focus_x, node.link.focus_y, 3);
+          draw_set_alpha(1)
+          draw_line_width(node.focus_x, node.focus_y, node.link.focus_x, node.link.focus_y, 1);
+          node = node.link;
+          if (node.object_index == obj_gp_laser_catcher){
+            node.link = -1;
+          }
+          
+        }
       }
     }
   }
@@ -208,10 +212,12 @@ switch (input[? "action"]){
             <kind>1</kind>
             <string>event_inherited();
 
-if (active){
-  draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 1);
-}else{
-  draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 0.1);
+if (init){
+  if (active){
+    draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 1);
+  }else{
+    draw_sprite_ext(spr_gp_laser_emitter_color, 0, x, y, 1, 1, 0, color, 1);
+  }
 }
 </string>
           </argument>

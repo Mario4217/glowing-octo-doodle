@@ -496,7 +496,7 @@ register_gameplay_object(23, "{gp.laser_catcher}", obj_gp_laser_catcher);
 gameplay_object_add_attribute(23, ATTRIBUTE.hue, 0, ATTR_TYPE.slider_u8, 0, 255);
 gameplay_object_set_depth_anchor(23, YANCHOR.floor1);
 gameplay_object_add_tag(23, "laser");
-gameplay_object_add_tag(23, "clip");
+//gameplay_object_add_tag(23, "clip");
 gameplay_object_add_tag(23, "interact");
 gameplay_object_add_output(23, EVENT.onPowered);
 gameplay_object_add_output(23, EVENT.onUnpowered);

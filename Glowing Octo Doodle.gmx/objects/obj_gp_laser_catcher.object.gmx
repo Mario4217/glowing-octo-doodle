@@ -59,14 +59,16 @@ ring_angle = 0;
             <kind>1</kind>
             <string>event_inherited();
 
-if (is_lasered &amp;&amp; laser_color == color){
-  if (!powered){
-    event_trigger(EVENT.onPowered);
-    powered = true;
+if (init){
+  if (is_lasered &amp;&amp; laser_color == color){
+    if (!powered){
+      event_trigger(EVENT.onPowered);
+      powered = true;
+    }
+  }else if(powered){
+    event_trigger(EVENT.onUnpowered);
+    powered = false;
   }
-}else if(powered){
-  event_trigger(EVENT.onUnpowered);
-  powered = false;
 }
 </string>
           </argument>
@@ -92,10 +94,12 @@ if (is_lasered &amp;&amp; laser_color == color){
             <kind>1</kind>
             <string>draw_self();
 
-draw_sprite_ext(spr_gp_laser_catcher_ring, 0, x+16, y+16, 1, 1, ring_angle, color, 1);
-if (powered){
-  ring_angle += 1;
-  draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 1);
+if (init){
+  draw_sprite_ext(spr_gp_laser_catcher_ring, 0, x+16, y+16, 1, 1, ring_angle, color, 1);
+  if (powered){
+    ring_angle += 1;
+    draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, color, 1);
+  }
 }
 </string>
           </argument>
