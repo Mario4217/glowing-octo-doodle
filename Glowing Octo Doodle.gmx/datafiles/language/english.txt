@@ -32,6 +32,8 @@ menu.play.new:					New Game
 menu.play.load:					Load a saved game
 menu.play.join:					Join a game
 menu.play.play_pack:			Play Pack
+menu.play.continue:				Continue
+menu.play.savegame:				[1] Level: [2]
 menu.editor.new_map:			New Map
 menu.editor.new_pack:			New Pack
 menu.editor.edit_map:			Edit Map

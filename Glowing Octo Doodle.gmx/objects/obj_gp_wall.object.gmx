@@ -27,8 +27,10 @@
             <kind>1</kind>
             <string>event_inherited();
 
-with (clip_laser){
-  instance_destroy();
+if (init){
+  with (clip_laser){
+    instance_destroy();
+  }
 }
 </string>
           </argument>
@@ -99,8 +101,6 @@ clip_laser.image_yscale = (attr[? ATTRIBUTE.height]-64) / 32;
   if (instance_position(x+width+1, y+height+8,obj_gp_wall)){
     draw_sprite_ext(spr_wall_ao, 0, x+width, y+height-64, -1, 1, 0, c_white, 1);
   }
-  
-  
 }
 </string>
           </argument>

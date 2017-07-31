@@ -7,6 +7,9 @@ if (current_pack != -1){
       var map = maps[| index];
       current_pack[? "current_map_index"] = index;
       world_load(map[? "name"]);
+      if (is_server){
+        current_pack_save();
+      }
     }else{
       pack_end();
     }

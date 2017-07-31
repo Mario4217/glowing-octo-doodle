@@ -392,6 +392,28 @@
   </sounds>
   <sprites name="sprites">
     <sprites name="gameplay">
+      <sprites name="rails">
+        <sprite>sprites\spr_gp_rail_v</sprite>
+        <sprite>sprites\spr_gp_rail_cross</sprite>
+        <sprite>sprites\spr_gp_rail_h</sprite>
+        <sprite>sprites\spr_gp_cart_h</sprite>
+        <sprite>sprites\spr_gp_rail_detector_h</sprite>
+        <sprite>sprites\spr_cart_v</sprite>
+      </sprites>
+      <sprites name="laser">
+        <sprite>sprites\spr_gp_laser_redirector</sprite>
+        <sprite>sprites\spr_gp_laser_catcher</sprite>
+        <sprite>sprites\spr_gp_laser_emitter_color</sprite>
+        <sprite>sprites\spr_gp_laser_emitter</sprite>
+        <sprite>sprites\spr_gp_laser_catcher_ring</sprite>
+      </sprites>
+      <sprites name="logic">
+        <sprite>sprites\spr_gp_logic_and</sprite>
+        <sprite>sprites\spr_gp_logic_memory</sprite>
+        <sprite>sprites\spr_gp_logic_relay</sprite>
+        <sprite>sprites\spr_gp_logic_delay</sprite>
+        <sprite>sprites\spr_gp_logic_or</sprite>
+      </sprites>
       <sprite>sprites\spr_gp_floor_button</sprite>
       <sprite>sprites\spr_gp_spawn</sprite>
       <sprite>sprites\spr_gp_wall</sprite>
@@ -403,29 +425,14 @@
       <sprite>sprites\spr_gp_barricade</sprite>
       <sprite>sprites\spr_gp_carry_blocker</sprite>
       <sprite>sprites\spr_gp_goalzone</sprite>
-      <sprite>sprites\spr_gp_logic_or</sprite>
-      <sprite>sprites\spr_gp_logic_and</sprite>
       <sprite>sprites\spr_gp_button_inactive</sprite>
       <sprite>sprites\spr_gp_button_active</sprite>
-      <sprite>sprites\spr_gp_logic_relay</sprite>
-      <sprite>sprites\spr_gp_rail_h</sprite>
-      <sprite>sprites\spr_gp_rail_v</sprite>
-      <sprite>sprites\spr_gp_rail_cross</sprite>
-      <sprite>sprites\spr_gp_cart_h</sprite>
-      <sprite>sprites\spr_cart_v</sprite>
-      <sprite>sprites\spr_gp_logic_delay</sprite>
       <sprite>sprites\spr_gp_carry_blocker_v</sprite>
-      <sprite>sprites\spr_gp_rail_detector_h</sprite>
       <sprite>sprites\spr_gp_message</sprite>
       <sprite>sprites\spr_gp_trigger</sprite>
-      <sprite>sprites\spr_gp_logic_memory</sprite>
       <sprite>sprites\spr_gp_lever_state2</sprite>
       <sprite>sprites\spr_gp_lever_state1</sprite>
-      <sprite>sprites\spr_gp_laser_emitter</sprite>
-      <sprite>sprites\spr_gp_laser_emitter_color</sprite>
-      <sprite>sprites\spr_gp_laser_redirector</sprite>
-      <sprite>sprites\spr_gp_laser_catcher</sprite>
-      <sprite>sprites\spr_gp_laser_catcher_ring</sprite>
+      <sprite>sprites\spr_wall_top</sprite>
     </sprites>
     <sprites name="ui">
       <sprite>sprites\spr_white</sprite>
@@ -455,12 +462,11 @@
       <sprite>sprites\spr_rotatable</sprite>
     </sprites>
     <sprite>sprites\spr_player</sprite>
-    <sprite>sprites\spr_wall_top</sprite>
     <sprite>sprites\spr_clip</sprite>
     <sprite>sprites\spr_tiles</sprite>
     <sprite>sprites\spr_wall_ao</sprite>
-    <sprite>sprites\spr_icon</sprite>
     <sprite>sprites\spr_wall_projector_particles</sprite>
+    <sprite>sprites\spr_icon</sprite>
     <sprite>sprites\spr_glow</sprite>
   </sprites>
   <backgrounds name="background">
@@ -654,8 +660,6 @@
       <script>scripts\gp_putdown.gml</script>
     </scripts>
     <scripts name="editor">
-      <script>scripts\refresh_editor_level.gml</script>
-      <script>scripts\refresh_packs.gml</script>
       <script>scripts\editor_ent_send_to_ui.gml</script>
       <script>scripts\editor_ent_update_ui.gml</script>
       <script>scripts\editor_save.gml</script>
@@ -685,6 +689,9 @@
       <script>scripts\world_update_region.gml</script>
       <script>scripts\world_resize.gml</script>
     </scripts>
+    <script>scripts\refresh_editor_level.gml</script>
+    <script>scripts\refresh_packs.gml</script>
+    <script>scripts\refresh_saves.gml</script>
     <script>scripts\current_pack_goto_level.gml</script>
     <script>scripts\pack_start.gml</script>
     <script>scripts\pack_end.gml</script>
@@ -704,6 +711,7 @@
     <script>scripts\draw_sprite_area.gml</script>
     <script>scripts\shadow_line.gml</script>
     <script>scripts\shadow_line_sun.gml</script>
+    <script>scripts\current_pack_save.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_console</font>
