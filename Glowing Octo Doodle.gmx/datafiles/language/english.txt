@@ -4,7 +4,7 @@ menu.settings:					Settings
 menu.editor:					Editor
 menu.quit:						Quit
 menu.back:						Back
-menu.main:						Yay! A cool game :D
+menu.main:						Glowing Octo Doodle
 menu.delete:					Delete
 menu.profile.color:				Color
 menu.profile.red:				Red
@@ -34,6 +34,7 @@ menu.play.join:					Join a game
 menu.play.play_pack:			Play Pack
 menu.play.continue:				Continue
 menu.play.savegame:				[1] Level: [2]
+menu.play.new_note:				Warning: Starting a new pack will overwrite the progress you have already made on that pack!
 menu.editor.new_map:			New Map
 menu.editor.new_pack:			New Pack
 menu.editor.edit_map:			Edit Map
@@ -257,5 +258,8 @@ story.ss.chamber4_great:		Great!
 story.ss.chamber7:				Seems like you are not as stupid as you look
 story.ss.chamber7b:				You are a robot
 story.ss.chamber7c:				You should know a bit on mathmatics
-story.ss.chamber8:				Let's see... What is the strength of a Human created machine?
-story.ss.chamber8b:				Oh yes, simple binary task that can only be solved on 10 ways!
+story.ss.chamber8:				Let's see... What is the strength of a by human created machine?
+story.ss.chamber8b:				Oh yes, simple binary task that can only be solved in 10 ways!
+story.ss.chamber13:				Humans are so stupid
+story.ss.chamber14:				Let's put you in an enviroment you are more familiar with.
+story.ss.chamber_e1:			The Earth
