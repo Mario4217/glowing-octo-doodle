@@ -667,6 +667,7 @@
       <script>scripts\pack_load.gml</script>
       <script>scripts\pack_editor_reload_maps.gml</script>
       <script>scripts\editor_show_info.gml</script>
+      <script>scripts\pack_export.gml</script>
     </scripts>
     <scripts name="networking">
       <script>scripts\nw_broadcast.gml</script>
