@@ -228,6 +228,10 @@ sun_length = 1;
 sun_intensity = 0.8;
 
 zoom_dead_zone = 1;
+zoom_mouse_tx = 0;
+zoom_mouse_ty = 0;
+zoom_mouse_x = 0;
+zoom_mouse_y = 0;
 </string>
           </argument>
         </arguments>
@@ -362,23 +366,40 @@ if (instance_exists(inst_hover)){
             <kind>1</kind>
             <string>///view and UI
 
-view_wview[0] = view_wport[0] / zoom;
-view_hview[0] = view_hport[0] / zoom;
-
 if ((window_mouse_get_x()/view_wport[0]) &lt; zoom_dead_zone){
   if ((mouse_wheel_up() || gamepad_button_check_pressed(0,gp_shoulderrb)) &amp;&amp; tzoom &lt; 16){
     tzoom *= 2;
+    zoom_mouse_x = mouse_x;
+    zoom_mouse_y = mouse_y;
+    zoom_mouse_tx=(mouse_x-view_xview[0])/view_wview[0];
+    zoom_mouse_ty=(mouse_y-view_yview[0])/view_hview[0];
   }
   if ((mouse_wheel_down() || gamepad_button_check_pressed(0,gp_shoulderlb)) &amp;&amp; tzoom &gt; 0.25){
     tzoom /= 2;
+    zoom_mouse_x = mouse_x;
+    zoom_mouse_y = mouse_y;
+    zoom_mouse_tx=(mouse_x-view_xview[0])/view_wview[0];
+    zoom_mouse_ty=(mouse_y-view_yview[0])/view_hview[0];
   }
-  zoom += (tzoom-zoom)/4;
+  
+  if (abs(zoom - tzoom) &gt; 0.01){
+    zoom += (tzoom-zoom)/4;
+    
+    view_wview[0] = view_wport[0] / zoom;
+    view_hview[0] = view_hport[0] / zoom;
+    
+    view_xview=zoom_mouse_x-view_wview[0]*zoom_mouse_tx;
+    view_yview=zoom_mouse_y-view_hview[0]*zoom_mouse_ty;
+  }
 }
+
+view_wview[0] = view_wport[0] / zoom;
+view_hview[0] = view_hport[0] / zoom;
 
 var px = x;
 var py = y;
-x = clamp(x+gamepad_axis_value(0,gp_axisrh)*10/zoom,0,world_width*32);
-y = clamp(y+gamepad_axis_value(0,gp_axisrv)*10/zoom,0,world_height*32);
+view_xview[0] = clamp(view_xview[0]+gamepad_axis_value(0,gp_axisrh)*10/zoom,-view_wview[0]/2,world_width*32-view_wview[0]/2);
+view_yview[0] = clamp(view_yview[0]+gamepad_axis_value(0,gp_axisrv)*10/zoom,-view_hview[0]/2,world_height*32-view_hview[0]/2);
 if (x != px || y != py){
   place_x = x;
   place_y = y;
@@ -386,19 +407,19 @@ if (x != px || y != py){
 
 if (mouse_check_button_pressed(mb_middle)){
   drag = true;
-  drag_x = mouse_x + view_wview[0] / 2;
-  drag_y = mouse_y + view_hview[0] / 2;
+  drag_x = mouse_x;
+  drag_y = mouse_y;
 }
 if (drag){
-  x = round(clamp(drag_x - (mouse_x - view_xview[0]),0,world_width*32));
-  y = round(clamp(drag_y - (mouse_y - view_yview[0]),0,world_height*32));
+  view_xview[0] = round(clamp(drag_x - (mouse_x - view_xview[0]),-view_wview[0]/2,world_width*32-view_wview[0]/2));
+  view_yview[0] = round(clamp(drag_y - (mouse_y - view_yview[0]),-view_hview[0]/2,world_height*32-view_hview[0]/2));
   if (mouse_check_button_released(mb_middle)){
     drag = false;
   }
 }
 
-view_xview[0] = x - view_wview[0]/2;
-view_yview[0] = y - view_hview[0]/2;
+//view_xview[0] = x - view_wview[0]/2;
+//view_yview[0] = y - view_hview[0]/2;
 
 ui_set_position(menu_container,ui_interpolate(1,menu_container[? "u1"], -0.3+menu_is_open*0.3, 0.3),0.05);
 ui_set_position(maps_container,ui_interpolate(1,maps_container[? "u1"], 1-(interface[? "editor_menu"] == "1")*0.3, 0.3),0.05);
