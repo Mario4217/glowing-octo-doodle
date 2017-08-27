@@ -249,7 +249,7 @@ ui_set_value(set_outer_deadzone, settings_map[? "outer_deadzone"]);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ui_set_position(menu_main,ui_interpolate(1, menu_main[? "u1"],-1+real(interface[? "menu"]=="1"), 0.3),0);
+            <string>ui_set_position(menu_main,ui_interpolate(1, menu_main[? "u1"],-1+(interface[? "menu"]=="1"), 0.3),0);
 ui_set_position(menu_play,ui_interpolate(1, menu_play[? "u1"], -1+(interface[? "menu"]=="2"), 0.3),0);
 ui_set_position(menu_profile,ui_interpolate(1, menu_profile[? "u1"], -1+(interface[? "menu"]=="3"), 0.3),0);
 ui_set_position(menu_settings,ui_interpolate(1, menu_settings[? "u1"], -1+(interface[? "menu"]=="4"), 0.3),0);

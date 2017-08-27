@@ -401,10 +401,10 @@ view_xview[0] = x - view_wview[0]/2;
 view_yview[0] = y - view_hview[0]/2;
 
 ui_set_position(menu_container,ui_interpolate(1,menu_container[? "u1"], -0.3+menu_is_open*0.3, 0.3),0.05);
-ui_set_position(maps_container,ui_interpolate(1,maps_container[? "u1"], 1-real(interface[? "editor_menu"] == "1")*0.3, 0.3),0.05);
-ui_set_position(objects_container,ui_interpolate(1,objects_container[? "u1"], 1-real(interface[? "editor_menu"] == "2")*0.2, 0.3),0.05);
-ui_set_position(tiles_container,ui_interpolate(1,tiles_container[? "u1"], 1-real(interface[? "editor_menu"] == "3")*0.2, 0.3),0.05);
-ui_set_position(floors_container,ui_interpolate(1,floors_container[? "u1"], 1-real(interface[? "editor_menu"] == "4")*0.2, 0.3),0.05);
+ui_set_position(maps_container,ui_interpolate(1,maps_container[? "u1"], 1-(interface[? "editor_menu"] == "1")*0.3, 0.3),0.05);
+ui_set_position(objects_container,ui_interpolate(1,objects_container[? "u1"], 1-(interface[? "editor_menu"] == "2")*0.2, 0.3),0.05);
+ui_set_position(tiles_container,ui_interpolate(1,tiles_container[? "u1"], 1-(interface[? "editor_menu"] == "3")*0.2, 0.3),0.05);
+ui_set_position(floors_container,ui_interpolate(1,floors_container[? "u1"], 1-(interface[? "editor_menu"] == "4")*0.2, 0.3),0.05);
 maps_container[? "visible"] = (maps_container[? "u1"]&lt;0.99);
 objects_container[? "visible"] = (objects_container[? "u1"]&lt;0.99);
 tiles_container[? "visible"] = (tiles_container[? "u1"]&lt;0.99);

@@ -43,9 +43,9 @@ if (element[? "visible"]){
     element[? "pressed"] = false;
   }
   if (ui_gamepad_active){
-    var hover = real(element == ui_gamepad_position);
+    var hover = (element == ui_gamepad_position);
   }else{
-    var hover = real(element == ui_hover);
+    var hover = (element == ui_hover);
   }
   var pressed = false;
   var click_start = false;
