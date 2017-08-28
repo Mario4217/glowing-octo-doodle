@@ -54,7 +54,7 @@ link = -1;
 
 link = -1;
 focus_x = x;
-focus_y = y-10;
+focus_y = y - 10;
 </string>
           </argument>
         </arguments>

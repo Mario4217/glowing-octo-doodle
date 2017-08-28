@@ -206,9 +206,20 @@ if (obj_editor.inst_selected == id){
   }
   if (ui_hover &gt; 100000 &amp;&amp; mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom)){
     if (mouse_check_button_pressed(mb_left)){
-      drag = true;
+      obj_editor.drag_mx = mouse_x;
+      obj_editor.drag_my = mouse_y;
       drag_x = x - mouse_x;
       drag_y = y - mouse_y;
+      if (keyboard_check(vk_shift)){ //copy object if shift is pressed
+        var inst = instance_create(x, y, obj_editor_ent);
+        inst.gp_obj_index = gp_obj_index;
+        ds_map_copy(inst.overwrite_attr, attr);
+      }
+    }
+    if (mouse_check_button(mb_left) &amp;&amp; !drag){
+      if (point_distance(obj_editor.drag_mx, obj_editor.drag_my, mouse_x, mouse_y) &gt; obj_editor.drag_zone){
+        drag = true;
+      }
     }
   }
 }
@@ -304,180 +315,182 @@ if (drag &amp;&amp; obj_editor.inst_selected == id){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var hov = (ui_hover &gt; 100000 &amp;&amp; mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) &amp;&amp; obj_editor.inst_selected == id);
-
-if (attr[? ATTRIBUTE.skin] != undefined){
-  image_index = attr[? ATTRIBUTE.skin];
-}
-
-switch (gp_obj_index){
-  case 3: //wall
-    var width = attr[? ATTRIBUTE.width];
-    var height = attr[? ATTRIBUTE.height];
-    var yy = height + y - 64;
-    for (var i=0; i&lt;floor(width/64); i+=1){
-      draw_sprite(sprite_index, image_index, x+i*64, yy);
-    };
-    draw_sprite_part(sprite_index, image_index, 0, 0, width mod 64, sprite_height, x+i*64, yy);
-    
-    draw_sprite_area(spr_wall_top, image_index, x, y, x+width, yy);
-    
-    image_xscale = width / 64;
-    image_yscale = height / 64;
-  break;
+            <string>if (init){
+  var hov = (ui_hover &gt; 100000 &amp;&amp; mouse_over(bbox_left, bbox_top, bbox_right, bbox_bottom) &amp;&amp; obj_editor.inst_selected == id);
   
-  case 4: //light wall
-    if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
-      image_xscale = attr[? ATTRIBUTE.size] / 64;
-      image_yscale = 1;
-      draw_sprite_area(spr_gp_barricade, image_index, x, y, x+attr[? ATTRIBUTE.size], y+64);
-      draw_sprite(spr_gp_barricade_left, image_index, x, y);
-      draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
-    }else{ //vertical
-      image_yscale = attr[? ATTRIBUTE.size] / 64;
-      image_xscale = 0.5;
-      draw_sprite(spr_gp_barricade_top, image_index, x, y);
-      draw_sprite_area(spr_gp_barricade, image_index, x+4, y+4, x+12, y+attr[? ATTRIBUTE.size]);
-      draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
-    }
-  break;
+  if (attr[? ATTRIBUTE.skin] != undefined){
+    image_index = attr[? ATTRIBUTE.skin];
+  }
   
-  case 9: //tile
-    image_xscale = attr[? ATTRIBUTE.width] / 32;
-    image_yscale = attr[? ATTRIBUTE.height] / 32;
-    draw_sprite_part(spr_tiles, image_index, attr[? ATTRIBUTE.left], attr[? ATTRIBUTE.top], attr[? ATTRIBUTE.width], attr[? ATTRIBUTE.height], x, y);
-  break;
-  
-  case 12: //rail
-    if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
-      image_xscale = attr[? ATTRIBUTE.size] / 32;
-      image_yscale = 1;
-      draw_sprite_area(spr_gp_rail_h, image_index, x, y, x+attr[? ATTRIBUTE.size], y+32);
-      
-      //intersections (horizontal)
-      for (var i=0; i&lt;floor(attr[? ATTRIBUTE.size] / 32)-1; i+=1){
-        var c = collision_line(x+i*32+16, y+16,x+i*32+48, y+16, object_index, 0, 1);
-        if (c){
-          if (c.gp_obj_index == gp_obj_index)
-            draw_sprite(spr_gp_rail_cross, 0, c.x, y);
-        }
+  switch (gp_obj_index){
+    case 3: //wall
+      var width = attr[? ATTRIBUTE.width];
+      var height = attr[? ATTRIBUTE.height];
+      var yy = height + y - 64;
+      for (var i=0; i&lt;floor(width/64); i+=1){
+        draw_sprite(sprite_index, image_index, x+i*64, yy);
       };
+      draw_sprite_part(sprite_index, image_index, 0, 0, width mod 64, sprite_height, x+i*64, yy);
       
-    }else{ //vertical
-      image_yscale = attr[? ATTRIBUTE.size] / 32;
-      image_xscale = 1;
-      draw_sprite_area(spr_gp_rail_v, image_index, x, y, x+32, y+attr[? ATTRIBUTE.size]);
+      draw_sprite_area(spr_wall_top, image_index, x, y, x+width, yy);
       
-      //intersections (vertical)
-      for (var i=0; i&lt;floor(attr[? ATTRIBUTE.size] / 32)-1; i+=1){
-        var c = collision_line(x+16, y+16+32*i, x+16, y+48+32*i, object_index, 0, 1);
-        if (c){
-          if (c.gp_obj_index == gp_obj_index)
-            draw_sprite(spr_gp_rail_cross, 0, x, c.y);
-        }
-      };
-    }
-  break;
-  
-  case 15: //carry blocker
-    if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
-      image_xscale = attr[? ATTRIBUTE.size] / 64;
-      image_yscale = 1;
-      draw_sprite_area(sprite_index, image_index, x, y, x+attr[? ATTRIBUTE.size], y+64);
-      draw_sprite(spr_gp_barricade_left, image_index, x, y);
-      draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
-    }else{ //vertical
-      image_yscale = attr[? ATTRIBUTE.size] / 64;
-      image_xscale = 0.5;
-      draw_sprite(spr_gp_barricade_top, image_index, x, y);
-      draw_sprite_area(spr_gp_carry_blocker_v, image_index, x+4, y+4, x+12, y+attr[? ATTRIBUTE.size]);
-      draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
-    }
-  break;
-  
-  case 18:
-    width = attr[? ATTRIBUTE.width];
-    height = attr[? ATTRIBUTE.height];
-    draw_sprite_area(spr_gp_trigger, image_index, x, y, x+width, y+height);
-    image_xscale = attr[? ATTRIBUTE.width] / 64;
-    image_yscale = attr[? ATTRIBUTE.height] / 64;
-  break;
-  
-  case 21:
-    draw_self();
-    var col = make_color_hsv(attr[? ATTRIBUTE.hue], 255, 255);
-    draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, col, 1);
-  break;
-  
-  default:
-    draw_self();
-}
-
-//2-Dimension size helper
-if (attr[? ATTRIBUTE.width] != undefined &amp;&amp; attr[? ATTRIBUTE.height] != undefined &amp;&amp; gp_obj_index != 9){
-  var ho = (point_in_triangle(mouse_x, mouse_y, bbox_right, bbox_bottom, bbox_right, bbox_bottom-32, bbox_right-32, bbox_bottom) &amp;&amp; hov);//(mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; hov);
-  if (obj_editor.inst_selected == id){
-    var o = min(32, attr[? ATTRIBUTE.width]);
-    draw_sprite_part(spr_scaleable, ho, 0, 0, o, attr[? ATTRIBUTE.height], bbox_right-o, bbox_bottom-32);
+      image_xscale = width / 64;
+      image_yscale = height / 64;
+    break;
+    
+    case 4: //light wall
+      if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
+        image_xscale = attr[? ATTRIBUTE.size] / 64;
+        image_yscale = 1;
+        draw_sprite_area(spr_gp_barricade, image_index, x, y, x+attr[? ATTRIBUTE.size], y+64);
+        draw_sprite(spr_gp_barricade_left, image_index, x, y);
+        draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
+      }else{ //vertical
+        image_yscale = attr[? ATTRIBUTE.size] / 64;
+        image_xscale = 0.5;
+        draw_sprite(spr_gp_barricade_top, image_index, x, y);
+        draw_sprite_area(spr_gp_barricade, image_index, x+4, y+4, x+12, y+attr[? ATTRIBUTE.size]);
+        draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
+      }
+    break;
+    
+    case 9: //tile
+      image_xscale = attr[? ATTRIBUTE.width] / 32;
+      image_yscale = attr[? ATTRIBUTE.height] / 32;
+      draw_sprite_part(spr_tiles, image_index, attr[? ATTRIBUTE.left], attr[? ATTRIBUTE.top], attr[? ATTRIBUTE.width], attr[? ATTRIBUTE.height], x, y);
+    break;
+    
+    case 12: //rail
+      if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
+        image_xscale = attr[? ATTRIBUTE.size] / 32;
+        image_yscale = 1;
+        draw_sprite_area(spr_gp_rail_h, image_index, x, y, x+attr[? ATTRIBUTE.size], y+32);
+        
+        //intersections (horizontal)
+        for (var i=0; i&lt;floor(attr[? ATTRIBUTE.size] / 32)-1; i+=1){
+          var c = collision_line(x+i*32+16, y+16,x+i*32+48, y+16, object_index, 0, 1);
+          if (c){
+            if (c.gp_obj_index == gp_obj_index)
+              draw_sprite(spr_gp_rail_cross, 0, c.x, y);
+          }
+        };
+        
+      }else{ //vertical
+        image_yscale = attr[? ATTRIBUTE.size] / 32;
+        image_xscale = 1;
+        draw_sprite_area(spr_gp_rail_v, image_index, x, y, x+32, y+attr[? ATTRIBUTE.size]);
+        
+        //intersections (vertical)
+        for (var i=0; i&lt;floor(attr[? ATTRIBUTE.size] / 32)-1; i+=1){
+          var c = collision_line(x+16, y+16+32*i, x+16, y+48+32*i, object_index, 0, 1);
+          if (c){
+            if (c.gp_obj_index == gp_obj_index)
+              draw_sprite(spr_gp_rail_cross, 0, x, c.y);
+          }
+        };
+      }
+    break;
+    
+    case 15: //carry blocker
+      if (attr[? ATTRIBUTE.orientation] == 0){ //horizontal
+        image_xscale = attr[? ATTRIBUTE.size] / 64;
+        image_yscale = 1;
+        draw_sprite_area(sprite_index, image_index, x, y, x+attr[? ATTRIBUTE.size], y+64);
+        draw_sprite(spr_gp_barricade_left, image_index, x, y);
+        draw_sprite_ext(spr_gp_barricade_left, image_index, x+attr[? ATTRIBUTE.size], y,-1,1,0,c_white,1);      
+      }else{ //vertical
+        image_yscale = attr[? ATTRIBUTE.size] / 64;
+        image_xscale = 0.5;
+        draw_sprite(spr_gp_barricade_top, image_index, x, y);
+        draw_sprite_area(spr_gp_carry_blocker_v, image_index, x+4, y+4, x+12, y+attr[? ATTRIBUTE.size]);
+        draw_sprite(spr_gp_barricade_bottom, image_index, x, y+attr[? ATTRIBUTE.size]-64);
+      }
+    break;
+    
+    case 18: //trigger
+      width = attr[? ATTRIBUTE.width];
+      height = attr[? ATTRIBUTE.height];
+      draw_sprite_area(spr_gp_trigger, image_index, x, y, x+width, y+height);
+      image_xscale = attr[? ATTRIBUTE.width] / 64;
+      image_yscale = attr[? ATTRIBUTE.height] / 64;
+    break;
+    
+    case 21: //something with lasers
+      draw_self();
+      var col = make_color_hsv(attr[? ATTRIBUTE.hue], 255, 255);
+      draw_sprite_ext(spr_glow, 0, x+16, y+16, 1, 1, 0, col, 1);
+    break;
+    
+    default:
+      draw_self();
   }
-  if (ho){
-    if (mouse_check_button_pressed(mb_left) &amp;&amp; !yet_selected){
-      drag = false;
-      size_drag = true;
-      size_drag_x = attr[? ATTRIBUTE.width] - mouse_x;
-      size_drag_y = attr[? ATTRIBUTE.height] - mouse_y;
+  
+  //2-Dimension size helper
+  if (attr[? ATTRIBUTE.width] != undefined &amp;&amp; attr[? ATTRIBUTE.height] != undefined &amp;&amp; gp_obj_index != 9){
+    var ho = (point_in_triangle(mouse_x, mouse_y, bbox_right, bbox_bottom, bbox_right, bbox_bottom-32, bbox_right-32, bbox_bottom) &amp;&amp; hov);//(mouse_over(bbox_right-32, bbox_bottom-32, bbox_right, bbox_bottom) &amp;&amp; hov);
+    if (obj_editor.inst_selected == id){
+      var o = min(32, attr[? ATTRIBUTE.width]);
+      draw_sprite_part(spr_scaleable, ho, 0, 0, o, attr[? ATTRIBUTE.height], bbox_right-o, bbox_bottom-32);
     }
-  }
-  if (size_drag){
-    obj_editor.show_grid = true;
-    attr[? ATTRIBUTE.width] = round(clamp(size_drag_x + mouse_x,16,1024)/16)*16;
-    attr[? ATTRIBUTE.height] = round(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
-    if (mouse_check_button_released(mb_left)){
-      size_drag = false;
-      editor_ent_update_ui();
-    }
-    world_update_region(bbox_left,bbox_top,bbox_right,bbox_bottom);
-  }
-}
-
-//Size helper
-if (attr[? ATTRIBUTE.size] != undefined &amp;&amp; attr[? ATTRIBUTE.orientation] != undefined){
-  var ho = (point_in_triangle(mouse_x, mouse_y, bbox_right, bbox_bottom, bbox_right, bbox_bottom-32, bbox_right-32, bbox_bottom) &amp;&amp; hov);
-  if (obj_editor.inst_selected == id){
-    draw_sprite_part(spr_scaleable, ho, 0, 0, min(32, attr[? ATTRIBUTE.size]), 32, bbox_right-32, bbox_bottom-32,);
-    if (mouse_check_button_pressed(mb_left) &amp;&amp; ho &amp;&amp; !yet_selected){
-      drag = false;
-      size_drag = true;
-      if (attr[? ATTRIBUTE.orientation] == 1){
-        size_drag_y = attr[? ATTRIBUTE.size] - mouse_y;
-      }else{
-        size_drag_x = attr[? ATTRIBUTE.size] - mouse_x;
+    if (ho){
+      if (mouse_check_button_pressed(mb_left) &amp;&amp; !yet_selected){
+        drag = false;
+        size_drag = true;
+        size_drag_x = attr[? ATTRIBUTE.width] - mouse_x;
+        size_drag_y = attr[? ATTRIBUTE.height] - mouse_y;
       }
     }
     if (size_drag){
       obj_editor.show_grid = true;
-      if (attr[? ATTRIBUTE.orientation] == 1){ 
-        attr[? ATTRIBUTE.size] = round(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
-      }else{
-        attr[? ATTRIBUTE.size] = round(clamp(size_drag_x + mouse_x,64,1024)/16)*16;
-      }
+      attr[? ATTRIBUTE.width] = round(clamp(size_drag_x + mouse_x,16,1024)/16)*16;
+      attr[? ATTRIBUTE.height] = round(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
       if (mouse_check_button_released(mb_left)){
         size_drag = false;
         editor_ent_update_ui();
       }
+      world_update_region(bbox_left,bbox_top,bbox_right,bbox_bottom);
     }
   }
-}
-
-//Rotation helper
-if (attr[? ATTRIBUTE.orientation] != undefined){
-  if (obj_editor.inst_selected == id){
-    var ho = (point_in_circle(mouse_x, mouse_y, x+16, y+16, 16) &amp;&amp; hov);
-    draw_sprite(spr_rotatable, ho, x, y);
-    if (mouse_check_button_pressed(mb_left) &amp;&amp; ho &amp;&amp; !yet_selected){
-      attr[? ATTRIBUTE.orientation] = 1-attr[? ATTRIBUTE.orientation];
-      editor_ent_update_ui();
-      drag = false;
+  
+  //Size helper
+  if (attr[? ATTRIBUTE.size] != undefined &amp;&amp; attr[? ATTRIBUTE.orientation] != undefined){
+    var ho = (point_in_triangle(mouse_x, mouse_y, bbox_right, bbox_bottom, bbox_right, bbox_bottom-32, bbox_right-32, bbox_bottom) &amp;&amp; hov);
+    if (obj_editor.inst_selected == id){
+      draw_sprite_part(spr_scaleable, ho, 0, 0, min(32, attr[? ATTRIBUTE.size]), 32, bbox_right-32, bbox_bottom-32,);
+      if (mouse_check_button_pressed(mb_left) &amp;&amp; ho &amp;&amp; !yet_selected){
+        drag = false;
+        size_drag = true;
+        if (attr[? ATTRIBUTE.orientation] == 1){
+          size_drag_y = attr[? ATTRIBUTE.size] - mouse_y;
+        }else{
+          size_drag_x = attr[? ATTRIBUTE.size] - mouse_x;
+        }
+      }
+      if (size_drag){
+        obj_editor.show_grid = true;
+        if (attr[? ATTRIBUTE.orientation] == 1){ 
+          attr[? ATTRIBUTE.size] = round(clamp(size_drag_y + mouse_y,64,1024)/16)*16;
+        }else{
+          attr[? ATTRIBUTE.size] = round(clamp(size_drag_x + mouse_x,64,1024)/16)*16;
+        }
+        if (mouse_check_button_released(mb_left)){
+          size_drag = false;
+          editor_ent_update_ui();
+        }
+      }
+    }
+  }
+  
+  //Rotation helper
+  if (attr[? ATTRIBUTE.orientation] != undefined){
+    if (obj_editor.inst_selected == id){
+      var ho = (point_in_circle(mouse_x, mouse_y, x+16, y+16, 16) &amp;&amp; hov);
+      draw_sprite(spr_rotatable, ho, x, y);
+      if (mouse_check_button_pressed(mb_left) &amp;&amp; ho &amp;&amp; !yet_selected){
+        attr[? ATTRIBUTE.orientation] = 1-attr[? ATTRIBUTE.orientation];
+        editor_ent_update_ui();
+        drag = false;
+      }
     }
   }
 }
