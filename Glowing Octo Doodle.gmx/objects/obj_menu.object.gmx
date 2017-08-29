@@ -308,7 +308,7 @@ if (room == rm_game){
         interface[? "menu"] = "0";
       }else{
         if(real(interface[? "menu"]) &gt; 2){
-          ui_gamepad_position = ds_list_find_value(menu_main[? "children"],real(interface[? "menu"])-1);
+          ui_gamepad_position = ds_list_find_value(menu_main[? "children"], real(interface[? "menu"]) - 1);
         }
         interface[? "menu"] = "1";
       }
