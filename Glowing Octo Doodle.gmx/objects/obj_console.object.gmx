@@ -77,6 +77,7 @@ console_command_add("floor_clear",cmd_floor_clear,0,"Frees all prerendered world
 console_command_add("current_pack",cmd_current_pack,0,"Gives information about the current levelpack");
 console_command_add("current_pack_end",cmd_pack_end,0,"Ends the current levelpack and sends you back into the title screen");
 console_command_add("show_collisions",cmd_show_collisions,1,"Show or hides the collisions","show_collisions &lt;0/1&gt;");
+console_command_add("pack_export",cmd_pack_export,0,"Exports the current pack");
 </string>
           </argument>
         </arguments>

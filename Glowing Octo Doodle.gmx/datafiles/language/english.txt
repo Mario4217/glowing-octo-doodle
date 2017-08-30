@@ -85,6 +85,7 @@ editor.choose_tile:				Choose Tile
 editor.saving:					Saving...
 editor.saved:					Saved!
 editor.save_failed:				Save failed!
+editor.export:					Export
 
 editor.group.logic:				Logic
 editor.group.general:			General

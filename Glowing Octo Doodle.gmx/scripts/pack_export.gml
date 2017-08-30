@@ -16,14 +16,19 @@ if (room == rm_pack_editor){
   buffer_write(buff, buffer_u8, 2);
   buffer_write(buff, buffer_string, description);
   buffer_write(buff, buffer_u8, 3);
-  buffer_write(buff, buffer_string, players);
+  buffer_write(buff, buffer_u8, players);
   for (var i=0; i<ds_list_size(obj_pack_editor.maps); i+=1){
     var map = obj_pack_editor.maps[| i];
     buffer_write(buff, buffer_u8, 4);
-    var mapbuff = buffer_load("maps/"+string(base64_encode(map))+".puz");
-    buffer_write(buff, buffer_u32, buffer_get_size(mapbuff)) //the size of the map in bytes is written before the map data
+    var mapbuff = buffer_load("maps/"+string(map[? "filename"]));
+    var size = buffer_get_size(mapbuff)
+    buffer_write(buff, buffer_u32, size) //the size of the map in bytes is written before the map data
     buffer_copy(mapbuff, 0, buffer_get_size(mapbuff), buff, buffer_tell(buff));
     buffer_delete(mapbuff);
+    buffer_seek(buff, buffer_seek_relative, size);
   };
+  //buffer_resize(buff, buffer_tell(buff)+1); //remove the nulls at the end of the buffer
   buffer_save(buff, path);
+  return path;
 }
+return false;
