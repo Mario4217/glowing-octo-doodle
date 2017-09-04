@@ -255,11 +255,11 @@ ui_set_position(menu_profile,ui_interpolate(1, menu_profile[? "u1"], -1+(interfa
 ui_set_position(menu_settings,ui_interpolate(1, menu_settings[? "u1"], -1+(interface[? "menu"]=="4"), 0.3),0);
 ui_set_position(menu_editor,ui_interpolate(1, menu_editor[? "u1"], -1+(interface[? "menu"]=="5"), 0.3),0);
 
-menu_main[? "visible"] =  (menu_main[? "u1"] &gt; -0.2);
-menu_play[? "visible"] =  (menu_play[? "u1"] &gt; -0.2);
-menu_profile[? "visible"] =  (menu_profile[? "u1"] &gt; -0.2);
-menu_settings[? "visible"] =  (menu_settings[? "u1"] &gt; -0.2);
-menu_editor[? "visible"] =  (menu_editor[? "u1"] &gt; -0.2);
+menu_main[? "visible"] =  (menu_main[? "u1"] &gt; -0.9);
+menu_play[? "visible"] =  (menu_play[? "u1"] &gt; -0.9);
+menu_profile[? "visible"] =  (menu_profile[? "u1"] &gt; -0.9);
+menu_settings[? "visible"] =  (menu_settings[? "u1"] &gt; -0.9);
+menu_editor[? "visible"] =  (menu_editor[? "u1"] &gt; -0.9);
 
 menu_play_packs[? "visible"] = (interface[? "menu"] == "2" &amp;&amp; interface[? "submenu"] == 1);
 menu_play_saves[? "visible"] = (interface[? "menu"] == "2" &amp;&amp; interface[? "submenu"] == 3);

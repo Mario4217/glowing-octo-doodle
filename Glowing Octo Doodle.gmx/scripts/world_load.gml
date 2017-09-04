@@ -2,9 +2,18 @@
 var path = "maps/"+string(base64_encode(argument0))+".puz";
 global.current_map_path = path;
 
+if (!file_exists(path)){
+  var path = "maps/pack/"+string(base64_encode(argument0))+".puz";
+  if (!file_exists(path)){
+    console_print("The map: "+string(argument0)+" does not exist!", c_red);
+    return false;
+  }
+}
+
 if (file_exists(path)){
   var buff = buffer_load(path);
   
+  //when in main menu world
   if (path == "maps/dGl0bGU=.puz"){
     interface[? "menu"] = "1";
     ui_gamepad_position = obj_menu.btn_play;
