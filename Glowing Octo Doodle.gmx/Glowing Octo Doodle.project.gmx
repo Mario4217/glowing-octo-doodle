@@ -618,6 +618,7 @@
       <script>scripts\cmd_pack_end.gml</script>
       <script>scripts\cmd_show_collisions.gml</script>
       <script>scripts\cmd_pack_export.gml</script>
+      <script>scripts\cmd_pack_import.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\statistic_add.gml</script>
@@ -666,6 +667,7 @@
       <script>scripts\editor_save.gml</script>
       <script>scripts\pack_save.gml</script>
       <script>scripts\pack_load.gml</script>
+      <script>scripts\pack_import.gml</script>
       <script>scripts\pack_editor_reload_maps.gml</script>
       <script>scripts\pack_export.gml</script>
       <script>scripts\editor_show_info.gml</script>

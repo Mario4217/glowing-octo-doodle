@@ -78,6 +78,7 @@ console_command_add("current_pack",cmd_current_pack,0,"Gives information about t
 console_command_add("current_pack_end",cmd_pack_end,0,"Ends the current levelpack and sends you back into the title screen");
 console_command_add("show_collisions",cmd_show_collisions,1,"Show or hides the collisions","show_collisions &lt;0/1&gt;");
 console_command_add("pack_export",cmd_pack_export,0,"Exports the current pack");
+console_command_add("pack_import",cmd_pack_import,1,"Imports a pack","pack_import &lt;packname&gt;");
 </string>
           </argument>
         </arguments>
